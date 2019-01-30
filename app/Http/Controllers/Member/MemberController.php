@@ -19,11 +19,6 @@ class MemberController extends Controller
         return view('church.member.home', compact('members'));
     }
 
-    public function birth()
-    {
-        return view('church.birth.home');
-    }
-
     public function create()
     {
         $states = State::get();
@@ -145,4 +140,54 @@ class MemberController extends Controller
     {
         //
     }
+
+    public function birth()
+    {
+        $month = date('m');
+
+        $date_month = $month;
+
+        $members = User::whereMonth('birth', $month)->where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isMember', '=', true)->get();
+
+        return view('church.birth.home', compact('members', 'date_month'));
+    }
+
+    public function birth_month(Request $request)
+    {
+        if (!isset($request->month)) {
+            $request->month = date('m');
+        }
+
+        $date_month = $request->month;
+
+        $members = User::whereMonth('birth', $request->month)->where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isMember', '=', true)->get();
+
+        return view('church.birth.home', compact('members', 'date_month'));
+    }
+
+    
+
+
+
+
+
+
+    //PDF
+
+    public function member_pdf()
+    {
+  
+        $members = User::where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isMember', '=', true)->get();
+    
+        return \PDF::loadView('church.member.pdf.members', compact('members'))->setPaper('a4', 'landscape')->stream();
+    }
+
+    public function birth_pdf($month)
+    {
+  
+        $members = User::whereMonth('birth', $month)->where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isMember', '=', true)->get();
+    
+        return \PDF::loadView('church.birth.pdf.birthdays', compact('members'))->stream();
+    }
+
 }

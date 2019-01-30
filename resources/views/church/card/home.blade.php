@@ -18,6 +18,26 @@
     @include('includes.alerts')
 </div>
 
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <a target="_blank" href="{{ route('card.pdf') }}" class='btn btn-success'>Gerar carteirinhas</a>
+            </div>
+            
+            <div class="box-body">
+
+            </div>
+
+        </div>
+
+    </div>    
+
+</div>
+
             
 
 @endsection

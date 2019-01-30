@@ -52,6 +52,14 @@ $this->group(['middleware' => 'auth'], function(){
         $this->post('/member/add', 'Member\MemberController@store')->name('member.store');
         $this->get('/member/edit/{id_member}', 'Member\MemberController@edit')->name('member.edit');
         $this->post('/member/edit/{id_member}', 'Member\MemberController@update')->name('member.update');
+        $this->get('/member/pdf', 'Member\MemberController@member_pdf')->name('member.pdf');
+
+        //BITH
+        $this->post('/birth', 'Member\MemberController@birth_month')->name('birth.month');
+        $this->get('/birth/pdf/{month}', 'Member\MemberController@birth_pdf')->name('birth.pdf');
+
+        //CARD
+        $this->get('/card/pdf', 'Card\CardController@card_pdf')->name('card.pdf');
     });
 
 

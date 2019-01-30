@@ -25,6 +25,7 @@
         <div class="box box-primary">
             <div class="box-header with-border">
                 <a href="{{ route('member.create') }}" class='btn btn-success'>Novo membro</a>
+                <a target="_blank" href="{{ route('member.pdf') }}" class='btn btn-success'>Gerar PDF com todos os membros</a>
             </div>
             
             <div class="box-body">
@@ -51,7 +52,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="200">Nenhum membr cadastrado!</td>
+                            <td colspan="200">Nenhum membro cadastrado!</td>
                         </tr>
                     @endforelse
                     </tbody>
