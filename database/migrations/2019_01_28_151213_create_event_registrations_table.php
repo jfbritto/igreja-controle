@@ -18,6 +18,8 @@ class CreateEventRegistrationsTable extends Migration
 
             $table->integer('idChurch_fk');
             $table->integer('idEvent_fk');
+            $table->integer('idCity_fk');
+            $table->integer('idState_fk');
 
             $table->boolean('isActive')->default(true);
             $table->boolean('isDeleted')->default(false);

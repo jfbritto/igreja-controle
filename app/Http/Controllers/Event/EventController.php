@@ -55,8 +55,10 @@ class EventController extends Controller
             $request['haveInscription'] = false;
         }
 
-        $request['value'] = str_replace('.', '', $request->value);
-        $request['value'] = str_replace(',', '.', $request['value']);
+        if(isset($request->value)){
+            $request['value'] = str_replace('.', '', $request->value);
+            $request['value'] = str_replace(',', '.', $request['value']);
+        }
 
 
         $request['idChurch_fk'] = auth()->user()->idChurch_fk;

@@ -53,6 +53,11 @@ $this->group(['middleware' => 'auth'], function(){
         $this->get('/event/show/{id_event}', 'Event\EventController@show')->name('event.show');
         $this->get('/event/destroy/{id_event}', 'Event\EventController@destroy')->name('event.destroy');
 
+        //INSCRIÇÕES
+        $this->get('/inscription/show/{id_event}', 'Inscription\InscriptionController@show')->name('inscription.show');
+        $this->get('/inscription/add/{id_event}', 'Inscription\InscriptionController@create')->name('inscription.create');
+        $this->post('/inscription/add/{id_event}', 'Inscription\InscriptionController@store')->name('inscription.store');
+
         //MEMBROS
         $this->get('/member/show/{id_member}', 'Member\MemberController@show')->name('member.show');
         $this->get('/member/add', 'Member\MemberController@create')->name('member.create');
