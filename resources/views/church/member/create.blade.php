@@ -30,76 +30,100 @@
             @csrf
               <div class="box-body">
 
-                <div class="form-group responsavel">
-                    <label for='name'>Nome</label> 
+                <div class='row'>
+                    <div class='col-md-6'>
 
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-user"></i>
+                        <div class="form-group responsavel">
+                            <label for='name'>Nome</label> 
+
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <input id='name' name='name' type="text" class="form-control" required>
+                            </div>
                         </div>
-                        <input id='name' name='name' type="text" class="form-control" required>
+
+                    </div>
+                    <div class='col-md-6'>
+
+                        <div class="form-group responsavel">
+                            <label for='email'>E-mail</label> 
+
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-envelope"></i>
+                                </div>
+                                <input id='email' name='email' type="email" class="form-control" required>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+                <div class='row'>
+                    <div class='col-md-6'>
+                    
+                        <div class="form-group">
+                            <label for='birth'>Nascimento</label>  
 
-                <div class="form-group responsavel">
-                    <label for='email'>E-mail</label> 
-
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-envelope"></i>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input id='birth' name='birth' type="date" class="form-control" required>
+                            </div>
                         </div>
-                        <input id='email' name='email' type="email" class="form-control" required>
+
+                    </div>
+                    <div class='col-md-6'>
+
+                        <div class="form-group responsavel">
+                            <label for='cpf'>CPF</label> 
+
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-address-card-o"></i>
+                                </div>
+                                <input id='cpf' name='cpf' type="text" class="form-control" required>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+                <div class='row'>
+                    <div class='col-md-6'>
+                
+                        <div class="form-group responsavel">
+                            <label for='sex'>Sexo</label> 
 
-                <div class="form-group">
-                    <label for='birth'>Nascimento</label>  
-
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-transgender"></i>
+                                </div>
+                                <select id='sex' name='sex' class="form-control" required>
+                                    <option>-- Selecione --</option>
+                                    <option value='masculino'>Masculino</option>
+                                    <option value='feminino'>Feminino</option>
+                                </select>
+                            </div>
                         </div>
-                        <input id='birth' name='birth' type="date" class="form-control" required>
+
+                    </div>
+                    <div class='col-md-6'>
+
+                        <div class="form-group responsavel">
+                            <label for='phone'>Telefone</label> 
+
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                <input id='phone' name='phone' type="text" class="form-control" required >
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-
-                <div class="form-group responsavel">
-                    <label for='cpf'>CPF</label> 
-
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-address-card-o"></i>
-                        </div>
-                        <input id='cpf' name='cpf' type="text" class="form-control" required>
-                    </div>
-                </div>
-
-                <div class="form-group responsavel">
-                    <label for='sex'>Sexo</label> 
-
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-transgender"></i>
-                        </div>
-                        <select id='sex' name='sex' class="form-control" required>
-                            <option>-- Selecione --</option>
-                            <option value='masculino'>Masculino</option>
-                            <option value='feminino'>Feminino</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group responsavel">
-                    <label for='phone'>Telefone</label> 
-
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-phone"></i>
-                        </div>
-                        <input id='phone' name='phone' type="text" class="form-control" required >
-                    </div>
-                </div>
-
               </div>
               <!-- /.box-body -->
   
@@ -121,76 +145,102 @@
             @csrf
               <div class="box-body">
 
-                <div class="form-group responsavel">
-                    <label for="cep">CEP</label>
+                <div class='row'>
+                    <div class='col-md-6'>
 
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-home"></i>
+                        <div class="form-group responsavel">
+                            <label for="cep">CEP</label>
+
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-home"></i>
+                                </div>
+                                <input type='text' name="cep" id="cep" class="form-control">
+                            </div>
                         </div>
-                        <input type='text' name="cep" id="cep" class="form-control">
+
+                    </div>
+                    <div class='col-md-6'>
+
+                        <div class="form-group">
+                            <label for="idState_fk">Estado</label> 
+
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-home"></i>
+                                </div>
+                                <select name="idState_fk" id="idState_fk" onchange="changeState(this)" class="form-control" required>
+                                    <option>Selecione o estado</option>
+                                    @foreach($states as $state)
+                                        <option value="{{$state->id}}">{{$state->nome}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="idState_fk">Estado</label> 
+                <div class='row'>
+                    <div class='col-md-6'>
 
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-home"></i>
+                        <div class="form-group responsavel">
+                            <label for="idCity_fk">Cidade</label>
+
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-home"></i>
+                                </div>
+                                <select name="idCity_fk" id="idCity_fk" class="form-control" required>
+                                </select>
+                            </div>
                         </div>
-                        <select name="idState_fk" id="idState_fk" onchange="changeState(this)" class="form-control">
-                            <option>Selecione o estado</option>
-                            @foreach($states as $state)
-                                <option value="{{$state->id}}">{{$state->nome}}</option>
-                            @endforeach
-                        </select>
+
+                    </div>
+                    <div class='col-md-6'>
+
+                        <div class="form-group responsavel">
+                            <label for="address">Endereço</label>
+
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-home"></i>
+                                </div>
+                                <input type='text' name="address" id="address" class="form-control">
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
+                <div class='row'>
+                    <div class='col-md-6'>
 
-                <div class="form-group responsavel">
-                    <label for="idCity_fk">Cidade</label>
+                        <div class="form-group responsavel">
+                            <label for="number">Número</label>
 
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-home"></i>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-home"></i>
+                                </div>
+                                <input type='text' name="number" id="number" class="form-control">
+                            </div>
                         </div>
-                        <select name="idCity_fk" id="idCity_fk" class="form-control">
-                        </select>
+
                     </div>
-                </div>
+                    <div class='col-md-6'>
 
-                <div class="form-group responsavel">
-                    <label for="address">Endereço</label>
+                        <div class="form-group responsavel">
+                            <label for="neighborhood">Bairro</label>
 
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-home"></i>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-home"></i>
+                                </div>
+                                <input type='text' name="neighborhood" id="neighborhood" class="form-control">
+                            </div>
                         </div>
-                        <input type='text' name="address" id="address" class="form-control">
-                    </div>
-                </div>
 
-                <div class="form-group responsavel">
-                    <label for="number">Número</label>
-
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-home"></i>
-                        </div>
-                        <input type='text' name="number" id="number" class="form-control">
-                    </div>
-                </div>
-
-                <div class="form-group responsavel">
-                    <label for="neighborhood">Bairro</label>
-
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-home"></i>
-                        </div>
-                        <input type='text' name="neighborhood" id="neighborhood" class="form-control">
                     </div>
                 </div>
 
