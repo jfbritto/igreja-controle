@@ -14,7 +14,7 @@ class MemberController extends Controller
 
     public function index()
     {
-        $members = User::where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isMember', '=', true)->get();
+        $members = User::where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isMember', '=', true)->where('isActive', '=', true)->get();
 
         return view('church.member.home', compact('members'));
     }
@@ -68,13 +68,24 @@ class MemberController extends Controller
 
     public function show($id)
     {
-        //
+        $member = User::where('id', '=', $id)->where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isActive', '=', true)->get()->first();
+        
+        if(!$member)
+            return redirect()
+                        ->route('member')
+                        ->with('error', 'Membro não encontrado!');
+
+        $address = Address::find($member->idAddress_fk);
+        $states = State::get();
+        $cities = City::where('idEstado', '=', $address->idState_fk)->get();
+
+        return view('church.member.show', compact('member', 'states', 'cities', 'address'));
     }
 
     public function edit($id)
     {
 
-        $member = User::where('id', '=', $id)->where('idChurch_fk', '=', auth()->user()->idChurch_fk)->get()->first();
+        $member = User::where('id', '=', $id)->where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isActive', '=', true)->get()->first();
         
         if(!$member)
             return redirect()
@@ -90,7 +101,7 @@ class MemberController extends Controller
 
     public function update(Request $request, $id)
     {
-        $member = User::where('id', '=', $id)->where('idChurch_fk', '=', auth()->user()->idChurch_fk)->get()->first();
+        $member = User::where('id', '=', $id)->where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isActive', '=', true)->get()->first();
         
         $address = Address::find($member->idAddress_fk);
         
@@ -138,8 +149,29 @@ class MemberController extends Controller
 
     public function destroy($id)
     {
-        //
+        $member = User::where('id', '=', $id)->where('idChurch_fk', '=', auth()->user()->idChurch_fk)->get()->first();
+        
+        if(!$member)
+            return redirect()
+                        ->route('member')
+                        ->with('error', 'Membro não encontrado!');
+
+        $updates = ['isActive' => false];                    
+        $result = $member->update($updates);
+
+        if(!$result)
+            return redirect()
+                        ->back()
+                        ->with('error', 'Erro ao deletar membro!');
+        else
+            return redirect()
+                        ->route('member')
+                        ->with('success', 'Membro deletado com sucesso!');
+
     }
+
+
+    //BIRTHDAY
 
     public function birth()
     {
@@ -147,7 +179,7 @@ class MemberController extends Controller
 
         $date_month = $month;
 
-        $members = User::whereMonth('birth', $month)->where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isMember', '=', true)->get();
+        $members = User::whereMonth('birth', $month)->where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isMember', '=', true)->where('isActive', '=', true)->get();
 
         return view('church.birth.home', compact('members', 'date_month'));
     }
@@ -160,7 +192,7 @@ class MemberController extends Controller
 
         $date_month = $request->month;
 
-        $members = User::whereMonth('birth', $request->month)->where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isMember', '=', true)->get();
+        $members = User::whereMonth('birth', $request->month)->where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isMember', '=', true)->where('isActive', '=', true)->get();
 
         return view('church.birth.home', compact('members', 'date_month'));
     }
@@ -170,14 +202,12 @@ class MemberController extends Controller
 
 
 
-
-
     //PDF
 
     public function member_pdf()
     {
   
-        $members = User::where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isMember', '=', true)->get();
+        $members = User::where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isMember', '=', true)->where('isActive', '=', true)->get();
     
         return \PDF::loadView('church.member.pdf.members', compact('members'))->setPaper('a4', 'landscape')->stream();
     }
@@ -185,7 +215,7 @@ class MemberController extends Controller
     public function birth_pdf($month)
     {
   
-        $members = User::whereMonth('birth', $month)->where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isMember', '=', true)->get();
+        $members = User::whereMonth('birth', $month)->where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isMember', '=', true)->where('isActive', '=', true)->get();
     
         return \PDF::loadView('church.birth.pdf.birthdays', compact('members'))->stream();
     }

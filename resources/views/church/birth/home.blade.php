@@ -3,10 +3,10 @@
 @section('title', 'Igreja Controle - Aniversariantes')
 
 @section('content_header')
-    <h1>Aniversariantes</h1>
+    <h1><i class="fa fa-gift" aria-hidden="true"></i> Aniversariantes</h1>
 
     <ol class="breadcrumb">
-        <li><a href="{{route('home')}}">Home</a></li>
+        <li><a href="{{route('dashboard')}}">Dashboard</a></li>
         <li><a href="{{route('birth')}}">Aniversariantes</a></li>
     </ol>
 @stop
@@ -71,7 +71,7 @@
                         <tr>
                             <td>{{ $member->name }}</td>
                             <td>{{ $member->email }}</td>
-                            <td>{{ $member->birth }}</td>
+                            <td>{{ date('d/m/Y', strtotime($member->birth)) }}</td>
                             <td>{{ $member->cpf }}</td>
                             <td>{{ $member->phone }}</td>
                         </tr>

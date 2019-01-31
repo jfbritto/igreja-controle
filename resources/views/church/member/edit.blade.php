@@ -6,7 +6,7 @@
     <h1>Editar Membro</h1>
 
     <ol class="breadcrumb">
-        <li><a href="{{route('home')}}">Home</a></li>
+        <li><a href="{{route('dashboard')}}">Dashboard</a></li>
         <li><a href="{{route('member')}}">Membros</a></li>
         <li><a href="#">Editar</a></li>
         <li><a href="#">{{$member->name}}</a></li>
@@ -26,106 +26,108 @@
     <div class="col-md-12">
 
         <div class="box box-primary">
-            <!-- form start -->
+            <div class="box-header with-border">
+                <a href="{{ route('member') }}" class='btn btn-default'>Cancelar</a>
+            </div>  
+            <div class="box-body">
+
             <form role="form" method="POST" action="{{ route('member.update', $member->id) }}">
             @csrf
-              <div class="box-body">
+            <div class='row'>
+                <div class='col-md-6'>
 
-                <div class='row'>
-                    <div class='col-md-6'>
+                    <div class="form-group responsavel">
+                        <label for='name'>Nome</label> 
 
-                        <div class="form-group responsavel">
-                            <label for='name'>Nome</label> 
-
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-user"></i>
-                                </div>
-                                <input id='name' name='name' type="text" class="form-control" required value='{{$member->name}}'>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-user"></i>
                             </div>
+                            <input id='name' name='name' type="text" class="form-control" required value='{{$member->name}}'>
                         </div>
-
                     </div>
-                    <div class='col-md-6'>
-                
-                        <div class="form-group responsavel">
-                            <label for='email'>E-mail</label> 
 
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-envelope"></i>
-                                </div>
-                                <input id='email' name='email' type="email" class="form-control" required value='{{$member->email}}'>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
-                <div class='row'>
-                    <div class='col-md-6'>
+                <div class='col-md-6'>
+            
+                    <div class="form-group responsavel">
+                        <label for='email'>E-mail</label> 
 
-                        <div class="form-group">
-                            <label for='birth'>Nascimento</label>  
-
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                <input id='birth' name='birth' type="date" class="form-control" required value='{{$member->birth}}'>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-envelope"></i>
                             </div>
+                            <input id='email' name='email' type="email" class="form-control" required value='{{$member->email}}'>
                         </div>
-
                     </div>
-                    <div class='col-md-6'>
 
-                        <div class="form-group responsavel">
-                            <label for='cpf'>CPF</label> 
-
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-address-card-o"></i>
-                                </div>
-                                <input id='cpf' name='cpf' type="text" class="form-control" required value='{{$member->cpf}}'>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
-                <div class='row'>
-                    <div class='col-md-6'>
-                
-                        <div class="form-group responsavel">
-                            <label for='sex'>Sexo</label> 
+            </div>
+            <div class='row'>
+                <div class='col-md-6'>
 
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-transgender"></i>
-                                </div>
-                                <select id='sex' name='sex' class="form-control" required>
-                                    <option>-- Selecione --</option>
-                                    <option value='masculino' @if($member->sex == 'masculino') selected='selected' @endif>Masculino</option>
-                                    <option value='feminino' @if($member->sex == 'feminino') selected='selected' @endif>Feminino</option>
-                                </select>
+                    <div class="form-group">
+                        <label for='birth'>Nascimento</label>  
+
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
                             </div>
+                            <input id='birth' name='birth' type="date" class="form-control" required value='{{$member->birth}}'>
                         </div>
-
                     </div>
-                    <div class='col-md-6'>
 
-                        <div class="form-group responsavel">
-                            <label for='phone'>Telefone</label> 
-
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-phone"></i>
-                                </div>
-                                <input id='phone' name='phone' type="text" class="form-control" required value='{{$member->phone}}'>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
-              </div>
+                <div class='col-md-6'>
+
+                    <div class="form-group responsavel">
+                        <label for='cpf'>CPF</label> 
+
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-address-card-o"></i>
+                            </div>
+                            <input id='cpf' name='cpf' type="text" class="form-control" required value='{{$member->cpf}}'>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-6'>
+            
+                    <div class="form-group responsavel">
+                        <label for='sex'>Sexo</label> 
+
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-transgender"></i>
+                            </div>
+                            <select id='sex' name='sex' class="form-control" required>
+                                <option>-- Selecione --</option>
+                                <option value='masculino' @if($member->sex == 'masculino') selected='selected' @endif>Masculino</option>
+                                <option value='feminino' @if($member->sex == 'feminino') selected='selected' @endif>Feminino</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class='col-md-6'>
+
+                    <div class="form-group responsavel">
+                        <label for='phone'>Telefone</label> 
+
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <input id='phone' name='phone' type="text" class="form-control" required value='{{$member->phone}}'>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            </div>
               
           </div>
 

@@ -124,9 +124,9 @@ return [
 
         //CHURCH
         [
-            'text'        => 'Home',
-            'url'         => 'church',
-            'icon'        => 'home',
+            'text'        => 'Dashboard',
+            'url'         => 'church/dashboard',
+            'icon'        => 'dashboard',
             'label_color' => 'success',
             'can'  => 'church',
         ],
@@ -176,6 +176,13 @@ return [
             'text'        => 'Suporte',
             'url'         => 'church/support',
             'icon'        => 'comments-o',
+            'label_color' => 'success',
+            'can'  => 'church',
+        ],
+        [
+            'text'        => 'Configurações',
+            'url'         => 'church/config',
+            'icon'        => 'cog',
             'label_color' => 'success',
             'can'  => 'church',
         ],

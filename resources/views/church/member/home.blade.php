@@ -3,10 +3,10 @@
 @section('title', 'Igreja Controle - Membros')
 
 @section('content_header')
-    <h1>Membros</h1>
+    <h1><i class="fa fa-users" aria-hidden="true"></i> Membros</h1>
 
     <ol class="breadcrumb">
-    <li><a href="{{route('home')}}">Home</a></li>
+        <li><a href="{{route('dashboard')}}">Dashboard</a></li>
         <li><a href="{{route('member')}}">Membros</a></li>
     </ol>
 @stop
@@ -33,10 +33,9 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Email</th>
-                            <th>Nascimento</th>
-                            <th>CPF</th>
-                            <th>Telefone</th>
+                            <th class='hidden-xs'>Email</th>
+                            <th class='hidden-xs'>Nascimento</th>
+                            <th class='hidden-xs'>Telefone</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -44,11 +43,14 @@
                     @forelse($members as $member)
                         <tr>
                             <td>{{ $member->name }}</td>
-                            <td>{{ $member->email }}</td>
-                            <td>{{ $member->birth }}</td>
-                            <td>{{ $member->cpf }}</td>
-                            <td>{{ $member->phone }}</td>
-                            <td class='text-right'><a href="{{ url('church/member/edit', $member->id) }}" class='btn btn-warning'>Editar</a></td>
+                            <td class='hidden-xs'>{{ $member->email }}</td>
+                            <td class='hidden-xs'>{{ date('d/m/Y', strtotime($member->birth)) }}</td>
+                            <td class='hidden-xs'>{{ $member->phone }}</td>
+                            <td class='text-right'>
+                                <a href="{{ url('church/member/destroy', $member->id) }}" class='btn btn-danger'>Deletar</a>
+                                <a href="{{ url('church/member/edit', $member->id) }}" class='btn btn-warning'>Editar</a>
+                                <a href="{{ url('church/member/show', $member->id) }}" class='btn btn-primary'>Visualizar</a>
+                            </td>
                         </tr>
                     @empty
                         <tr>

@@ -3,10 +3,10 @@
 @section('title', 'Igreja Controle - Eventos')
 
 @section('content_header')
-    <h1>Eventos</h1>
+    <h1><i class="fa fa-calendar" aria-hidden="true"></i> Eventos</h1>
 
     <ol class="breadcrumb">
-    <li><a href="{{route('home')}}">Home</a></li>
+    <li><a href="{{route('dashboard')}}">Dashboard</a></li>
         <li><a href="{{route('event')}}">Eventos</a></li>
     </ol>
 @stop
@@ -32,15 +32,28 @@
             <form role="form" method="POST" action="{{ route('event.store') }}">
             @csrf
               <div class="box-body">
-              <div class="form-group">
-                    <label for='title'>Título</label>                                    
-                    <input id='title' name='title' type="text" class="form-control" required>
-                </div>
-                
+
                 <div class="form-group">
-                    <label for='description'>Descrição</label>                                    
-                    <textarea id='description' name='description' class="form-control"></textarea>
-                </div>
+                    <label for='title'>Título</label>  
+
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-tag"></i>
+                        </div>
+                        <input id='title' name='title' type="text" class="form-control" required>
+                    </div>
+                </div>    
+
+                <div class="form-group">
+                    <label for='description'>Descrição</label> 
+
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-align-center"></i>
+                        </div>
+                        <textarea id='description' name='description' class="form-control"></textarea>
+                    </div>
+                </div>  
 
                 <div class="form-group">
                     <label for='location'>Local</label>  

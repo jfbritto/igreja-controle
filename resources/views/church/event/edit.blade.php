@@ -1,13 +1,14 @@
 @extends('adminlte::page')
 
-@section('title', 'Igreja Controle - Eventos')
+@section('title', 'Igreja Controle - Editar Evento')
 
 @section('content_header')
-    <h1>{{$event->title}}</h1>
+    <h1>Editar {{$event->title}}</h1>
 
     <ol class="breadcrumb">
     <li><a href="{{route('dashboard')}}">Dashboard</a></li>
         <li><a href="{{route('event')}}">Eventos</a></li>
+        <li><a href="#">Editar</a></li>
         <li><a href="#">{{$event->title}}</a></li>
     </ol>
 @stop
@@ -27,14 +28,15 @@
 
         <div class="box box-primary">
             <div class="box-header with-border">
-                <a href="{{ url('church/event/edit', $event->id) }}" class='btn btn-warning'>Editar</a>
-                <a href="{{ url('church/event/destroy', $event->id) }}" class='btn btn-danger'>Deletar</a>
+                <a href="{{ route('event.show', $event->id) }}" class='btn btn-default'>Cancelar</a>
             </div>
-
             <div class="box-body">
 
                 <div class="row">
                     <div class="col-md-12">
+
+                    <form role="form" method="POST" action="{{ route('event.update', $event->id) }}">
+                        @csrf
 
                         <div class="form-group">
                             <label for='title'>Título</label>  
@@ -43,7 +45,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-tag"></i>
                                 </div>
-                                <input id='title' name='title' type="text" class="form-control" value='{{$event->title}}' readonly>
+                                <input id='title' name='title' type="text" class="form-control" value='{{$event->title}}'>
                             </div>
                         </div> 
 
@@ -54,7 +56,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-align-center"></i>
                                 </div>
-                                <textarea id='description' name='description' class="form-control" readonly>{{$event->description}}</textarea>
+                                <textarea id='description' name='description' class="form-control">{{$event->description}}</textarea>
                             </div>
                         </div> 
                     
@@ -70,7 +72,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-map-marker"></i>
                                 </div>
-                                <input id='location' name='location' type="text" class="form-control" value='{{$event->location}}' readonly>
+                                <input id='location' name='location' type="text" class="form-control" value='{{$event->location}}'>
                             </div>
                         </div>
 
@@ -84,7 +86,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                <input id='startDate' name='startDate' type="date" class="form-control" value='{{$event->startDate}}' readonly>
+                                <input id='startDate' name='startDate' type="date" class="form-control" value='{{$event->startDate}}'>
                             </div>
                         </div>
 
@@ -98,7 +100,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                <input id='endDate' name='endDate' type="date" class="form-control" value='{{$event->endDate}}' readonly>
+                                <input id='endDate' name='endDate' type="date" class="form-control" value='{{$event->endDate}}'>
                             </div>
                         </div>
                     
@@ -117,7 +119,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-user"></i>
                                 </div>
-                                <input id='nameResponsable' name='nameResponsable' type="text" class="form-control" value='{{$event->nameResponsable}}' readonly>
+                                <input id='nameResponsable' name='nameResponsable' type="text" class="form-control" value='{{$event->nameResponsable}}'>
                             </div>
                         </div>
 
@@ -131,7 +133,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-phone"></i>
                                 </div>
-                                <input id='phoneResponsable' name='phoneResponsable' type="text" class="form-control" value='{{$event->phoneResponsable}}' readonly>
+                                <input id='phoneResponsable' name='phoneResponsable' type="text" class="form-control" value='{{$event->phoneResponsable}}'>
                             </div>
                         </div>
 
@@ -145,7 +147,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-usd"></i>
                                 </div>
-                                <input id='value' name='value' type="text" class="form-control" value='{{$event->value}}' readonly>
+                                <input id='value' name='value' type="text" class="form-control" value='{{$event->value}}'>
                             </div>
                         </div>
                     
@@ -155,40 +157,53 @@
                 @endif
 
             </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+            </form>
         </div>   
-
     </div>
 </div>
-
-
-@if($event->haveInscription)
-
-<h2>Inscritos</h2>
-
-<div class="row">
-
-    <div class="col-md-12">
-
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <a href="" class='btn btn-success'>Cadastrar inscrição</a>
-            </div>
-
-            <div class="box-body">
-
-
-            </div>
-        </div>   
-
-    </div>
-</div>
-
-@endif
 
 
 
 @endsection
 
+
+@section('js')
+
+<script>
+
+  $(function() {
+
+
+    $("#radio-sim, #radio-nao").change(function () {
+
+        if ($("#radio-sim").is(":checked")) {
+            $('.responsavel').show();
+        }
+        else{
+            $('.responsavel').hide();
+        }
+    });
+
+    var SPMaskBehavior = function (val) {
+        return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+    },
+    spOptions = {
+        onKeyPress: function(val, e, field, options) {
+            field.mask(SPMaskBehavior.apply({}, arguments), options);
+        }
+    };
+
+    $('#phoneResponsable').mask(SPMaskBehavior, spOptions);
+
+    $('#value').mask('#.##0,00', {reverse: true});
+
+  });
+
+</script>
+@stop
 
 
 

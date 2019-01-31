@@ -3,10 +3,10 @@
 @section('title', 'Igreja Controle - Suporte')
 
 @section('content_header')
-    <h1>Suporte</h1>
+    <h1><i class="fa fa-comments" aria-hidden="true"></i> Suporte</h1>
 
     <ol class="breadcrumb">
-    <li><a href="{{route('home')}}">Home</a></li>
+        <li><a href="{{route('dashboard')}}">Dashboard</a></li>
         <li><a href="{{route('support')}}">Suporte</a></li>
     </ol>
 @stop
@@ -21,4 +21,3 @@
             
 
 @endsection
- 

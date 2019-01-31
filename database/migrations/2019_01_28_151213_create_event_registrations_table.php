@@ -15,6 +15,20 @@ class CreateEventRegistrationsTable extends Migration
     {
         Schema::create('event_registrations', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->integer('idChurch_fk');
+            $table->integer('idEvent_fk');
+
+            $table->boolean('isActive')->default(true);
+            $table->boolean('isDeleted')->default(false);
+            $table->boolean('isPaid')->default(false);
+
+            $table->string('name', 50);
+            $table->date('birth')->nullable();
+            $table->string('sex', 20)->nullable();
+            $table->string('email', 50)->unique();
+            $table->string('phone', 50)->nullable();
+
             $table->timestamps();
         });
     }

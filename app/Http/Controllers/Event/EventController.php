@@ -14,7 +14,7 @@ class EventController extends Controller
     public function index()
     {
         $events = [];
-        $data = Event::where('idChurch_fk', '=', auth()->user()->idChurch_fk)->get();
+        $data = Event::where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isActive', '=', true)->get();
 
         if($data->count()) {
             foreach ($data as $key => $value) {
@@ -103,17 +103,97 @@ class EventController extends Controller
 
     public function edit($id)
     {
-        //
+        $event = Event::find($id);
+
+        if(!$event)
+            return redirect()
+                        ->route('event')
+                        ->with('error', 'Evento não encontrado!');
+
+        $church = Church::find($event->idChurch_fk);
+
+        if(!$church)
+            return redirect()
+                        ->route('event')
+                        ->with('error', 'Igreja não encontrada!');                
+
+        if($church->id != auth()->user()->idChurch_fk)
+            return redirect()
+                        ->route('event')
+                        ->with('error', 'Evento não encontrado!');  
+
+        return view('church.event.edit', compact('event'));
     }
 
 
     public function update(Request $request, $id)
     {
-        //
+        $event = Event::find($id);
+
+        if(!$event)
+            return redirect()
+                        ->route('event')
+                        ->with('error', 'Evento não encontrado!');
+
+        $church = Church::find($event->idChurch_fk);
+
+        if(!$church)
+            return redirect()
+                        ->route('event')
+                        ->with('error', 'Igreja não encontrada!');                
+
+        if($church->id != auth()->user()->idChurch_fk)
+            return redirect()
+                        ->route('event')
+                        ->with('error', 'Evento não encontrado!'); 
+
+        $request['value'] = str_replace('.', '', $request->value);
+        $request['value'] = str_replace(',', '.', $request['value']);
+
+        $result = $event->update($request->all());
+
+        if(!$result)
+            return redirect()
+                        ->back()
+                        ->with('error', 'Erro ao editar evento!');
+        else
+            return redirect()
+                        ->route('event.show', $event->id)
+                        ->with('success', 'Evento editado com sucesso!'); 
+
     }
 
     public function destroy($id)
     {
-        //
+        $event = Event::find($id);
+
+        if(!$event)
+            return redirect()
+                        ->route('event')
+                        ->with('error', 'Evento não encontrado!');
+
+        $church = Church::find($event->idChurch_fk);
+
+        if(!$church)
+            return redirect()
+                        ->route('event')
+                        ->with('error', 'Igreja não encontrada!');                
+
+        if($church->id != auth()->user()->idChurch_fk)
+            return redirect()
+                        ->route('event')
+                        ->with('error', 'Evento não encontrado!'); 
+
+        $updates = ['isActive' => false];                    
+        $result = $event->update($updates);
+
+        if(!$result)
+            return redirect()
+                        ->back()
+                        ->with('error', 'Erro ao deletar evento!');
+        else
+            return redirect()
+                        ->route('event')
+                        ->with('success', 'Evento deletado com sucesso!');                
     }
 }

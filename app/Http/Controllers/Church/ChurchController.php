@@ -11,4 +11,11 @@ class ChurchController extends Controller
     {
         return view('church.home');
     }
+
+    public function config()
+    {
+        return view('church.config.home');
+    }
+
+
 }

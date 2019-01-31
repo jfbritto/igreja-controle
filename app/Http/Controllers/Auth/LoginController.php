@@ -83,7 +83,7 @@ class LoginController extends Controller
                     return redirect()->route('admin.home');
 
                 if(!is_null(auth()->user()->idChurch_fk))
-                    return redirect()->route('home');
+                    return redirect()->route('dashboard');
                 
                 
             }

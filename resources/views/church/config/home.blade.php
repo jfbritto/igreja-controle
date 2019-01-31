@@ -3,10 +3,10 @@
 @section('title', 'Igreja Controle - Configurações')
 
 @section('content_header')
-    <h1>Configurações</h1>
+    <h1><i class="fa fa-cog" aria-hidden="true"></i> Configurações</h1>
 
     <ol class="breadcrumb">
-    <li><a href="{{route('home')}}">Home</a></li>
+        <li><a href="{{route('dashboard')}}">Dashboard</a></li>
         <li><a href="{{route('config')}}">Configurações</a></li>
     </ol>
 @stop
