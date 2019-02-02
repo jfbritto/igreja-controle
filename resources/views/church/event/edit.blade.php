@@ -3,7 +3,7 @@
 @section('title', 'Igreja Controle - Editar Evento')
 
 @section('content_header')
-    <h1>Editar {{$event->title}}</h1>
+    <h1>Editar Evento | {{$event->title}}</h1>
 
     <ol class="breadcrumb">
     <li><a href="{{route('dashboard')}}">Dashboard</a></li>
@@ -28,7 +28,7 @@
 
         <div class="box box-primary">
             <div class="box-header with-border">
-                <a href="{{ route('event.show', $event->id) }}" class='btn btn-default'>Cancelar</a>
+                <a href="{{ route('event.show', $event->id) }}" class='btn btn-default'><i class="fa fa-close" aria-hidden="true"></i>&nbsp; Cancelar</a>
             </div>
             <div class="box-body">
 
@@ -158,7 +158,7 @@
 
             </div>
             <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Salvar</button>
             </div>
             </form>
         </div>   

@@ -25,7 +25,7 @@
 
         <div class="box box-primary">
             <div class="box-header with-border">
-                <a target="_blank" href="{{ route('card.pdf') }}" class='btn btn-success'>Gerar carteirinhas</a>
+                <a target="_blank" href="{{ route('card.pdf') }}" class='btn btn-danger'><i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp; Gerar carteirinhas</a>
             </div>
             
             <div class="box-body">

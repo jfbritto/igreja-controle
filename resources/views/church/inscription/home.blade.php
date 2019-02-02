@@ -26,10 +26,11 @@
         <div class="box box-primary">
            
             <div class="box-body">
-                <table class='table table-hover table-striped' id='table'>
+                <table class='table table-hover table-striped table-condensed' id='table'>
                     <thead>
                         <tr>
                             <th>Evento</th>
+                            <th>Local</th>
                             <th>Periodo</th>
                             <th></th>
                         </tr>
@@ -37,17 +38,16 @@
                     <tbody>
                     @forelse($events as $event)
                         <tr>
-                            <td>{{ $event->title }}</td>
-                            <td>{{ date('d/m/Y', strtotime($event->startDate)) }} à {{ date('d/m/Y', strtotime($event->endDate)) }}</td>
-                            <td class='text-right'>
-                                <a href="" class='btn btn-danger'>Deletar</a>
-                                <a href="" class='btn btn-danger'>Desativar</a>
-                                <a href="{{ url('church/inscription/show', $event->id) }}" class='btn btn-primary'>Visualizar</a>
+                            <td style='vertical-align:middle'>{{ $event->title }}</td>
+                            <td style='vertical-align:middle'>{{ $event->location }}</td>
+                            <td style='vertical-align:middle'>{{ date('d/m/Y', strtotime($event->startDate)) }} à {{ date('d/m/Y', strtotime($event->endDate)) }}</td>
+                            <td style='vertical-align:middle' class='text-right'>
+                                <a href="{{ url('church/event/show', $event->id) }}" class='btn btn-primary'><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; Visualizar</a>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="200">Nenhum evento com inscrição cadastrado!</td>
+                            <td style='vertical-align:middle' colspan="200">Nenhum evento com inscrição cadastrado!</td>
                         </tr>
                     @endforelse
                     </tbody>

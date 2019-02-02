@@ -7,18 +7,19 @@ use App\Http\Controllers\Controller;
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 use App\Models\Event;
 use App\Models\Church;
+use App\Models\EventRegistration;
 
 class EventController extends Controller
 {
 
     public function index()
     {
-        $events = [];
-        $data = Event::where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isActive', '=', true)->get();
+        $events_array = [];
+        $events = Event::where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isActive', '=', true)->where('isDeleted', '=', false)->get();
 
-        if($data->count()) {
-            foreach ($data as $key => $value) {
-                $events[] = Calendar::event(
+        if($events->count()) {
+            foreach ($events as $key => $value) {
+                $events_array[] = Calendar::event(
                     $value->title,
                     true,
                     new \DateTime($value->startDate),
@@ -33,10 +34,10 @@ class EventController extends Controller
             }
         }
 
-        $calendar = Calendar::addEvents($events);
+        $calendar = Calendar::addEvents($events_array);
         $church = Church::find(auth()->user()->idChurch_fk);
 
-        return view('church.event.home', compact('calendar', 'church'));
+        return view('church.event.home', compact('calendar', 'church', 'events'));
     }
 
 
@@ -99,7 +100,9 @@ class EventController extends Controller
                         ->route('event')
                         ->with('error', 'Evento não encontrado!');  
 
-        return view('church.event.show', compact('event'));
+        $inscriptions = EventRegistration::where('idChurch_fk', '=', $church->id)->where('idEvent_fk', '=', $event->id)->get();
+
+        return view('church.event.show', compact('event', 'inscriptions'));
     }
 
 
@@ -186,7 +189,7 @@ class EventController extends Controller
                         ->route('event')
                         ->with('error', 'Evento não encontrado!'); 
 
-        $updates = ['isActive' => false];                    
+        $updates = ['isActive' => false, 'isDeleted' => true];                     
         $result = $event->update($updates);
 
         if(!$result)

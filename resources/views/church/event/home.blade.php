@@ -142,7 +142,7 @@
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Cadastrar</button>
               </div>
             </form>
           </div>
@@ -150,7 +150,7 @@
     </div>    
     <div class="col-md-9">
 
-    <div class="box box-primary">
+        <div class="box box-primary">
             <div class="box-body no-padding">
                 {!! $calendar->calendar() !!}
                 {!! $calendar->script() !!}
@@ -159,6 +159,49 @@
 
     </div>
 
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <h3>Listagem</h3>
+        <div class="box box-primary">
+            <div class="box-body">
+                <table class='table table-hover table-striped table-condensed' id='table'>
+                    <thead>
+                        <tr>
+                            <th>Evento</th>
+                            <th>Local</th>
+                            <th>Periodo</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @forelse($events as $event)
+                        <tr>
+                            <td style='vertical-align:middle'>{{ $event->title }}</td>
+                            <td style='vertical-align:middle'>{{ $event->location }}</td>
+                            <td style='vertical-align:middle'>{{ date('d/m/Y', strtotime($event->startDate)) }} à {{ date('d/m/Y', strtotime($event->endDate)) }}</td>
+                            <td style='vertical-align:middle' class='text-right'>
+                                <a href="{{ url('church/event/edit', $event->id) }}" class='btn btn-warning'><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Editar</a>
+                                <a href="{{ url('church/event/destroy', $event->id) }}" class='btn btn-danger'><i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Deletar</a>
+                                <a href="{{ url('church/event/show', $event->id) }}" class='btn btn-primary'><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; Visualizar</a>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="200">Nenhum evento com inscrição cadastrado!</td>
+                        </tr>
+                    @endforelse
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>    
 
 </div>
 

@@ -3,7 +3,7 @@
 @section('title', 'Igreja Controle - Suporte')
 
 @section('content_header')
-    <h1><i class="fa fa-comments" aria-hidden="true"></i> Suporte</h1>
+    <h1><i class="fa fa-life-ring" aria-hidden="true"></i> Suporte</h1>
 
     <ol class="breadcrumb">
         <li><a href="{{route('dashboard')}}">Dashboard</a></li>

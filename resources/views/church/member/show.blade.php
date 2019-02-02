@@ -3,7 +3,7 @@
 @section('title', 'Igreja Controle - Visualizar Membro')
 
 @section('content_header')
-    <h1>Visualizar Membro</h1>
+    <h1>Visualizar Membro | {{$member->name}}</h1>
 
     <ol class="breadcrumb">
         <li><a href="{{route('dashboard')}}">Dashboard</a></li>
@@ -26,8 +26,16 @@
     <div class="col-md-12">
 
         <div class="box box-primary">
-
-              <div class="box-body">
+            <div class="box-header with-border">
+                @if($member->isActive) 
+                    <a href="{{ url('church/member/inactivate', $member->id) }}" class='btn btn-danger'><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp; Inativar</a>
+                @else 
+                    <a href="{{ url('church/member/activate', $member->id) }}" class='btn btn-success'><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp; Ativar</a>
+                @endif
+                <a href="{{ url('church/member/destroy', $member->id) }}" class='btn btn-danger'><i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Deletar</a>
+                <a href="{{ url('church/member/edit', $member->id) }}" class='btn btn-warning'><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Editar</a>
+            </div>    
+            <div class="box-body">
 
                 <div class='row'>
                     <div class='col-md-6'>
@@ -123,9 +131,9 @@
 
                     </div>
                 </div>
-              </div>
+            </div>
               
-          </div>
+        </div>
 
     </div>    
 

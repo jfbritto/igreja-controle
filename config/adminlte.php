@@ -175,7 +175,7 @@ return [
         [
             'text'        => 'Suporte',
             'url'         => 'church/support',
-            'icon'        => 'comments-o',
+            'icon'        => 'life-ring',
             'label_color' => 'success',
             'can'  => 'church',
         ],

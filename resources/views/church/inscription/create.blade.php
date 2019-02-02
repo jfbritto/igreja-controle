@@ -3,7 +3,7 @@
 @section('title', 'Igreja Controle - Cadastrar Inscrição')
 
 @section('content_header')
-    <h1>Cadastrar Inscrição</h1>
+    <h1>Cadastrar Inscrição | {{$event->title}}</h1>
 
     <ol class="breadcrumb">
         <li><a href="{{route('dashboard')}}">Dashboard</a></li>
@@ -26,7 +26,7 @@
     <div class="col-md-12">
         <div class="box box-primary">
                 <div class="box-header with-border">
-                    <a href="{{ route('inscription.show', $event->id) }}" class='btn btn-default'>Cancelar</a>
+                    <a href="{{ route('event.show', $event->id) }}" class='btn btn-default'><i class="fa fa-close" aria-hidden="true"></i>&nbsp; Cancelar</a>
                 </div>
                 <div class="box-body">
                     <!-- form start -->
@@ -169,7 +169,7 @@
                 </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Cadastrar</button>
               </div>
   
           </div>

@@ -58,23 +58,13 @@ class InscriptionController extends Controller
                         ->with('error', 'Erro ao cadastrar inscrição!');
         else
             return redirect()
-                        ->route('inscription.show', $event->id)
+                        ->route('event.show', $event->id)
                         ->with('success', 'Inscrição efetuada com sucesso!');
     }
 
     public function show($id)
     {
-        $event = Event::where('id', '=', $id)->where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('haveInscription', '=', true)->get()->first();
-        $church = Church::find(auth()->user()->idChurch_fk);
-
-        if(!$event)
-            return redirect()
-                        ->route('inscription')
-                        ->with('error', 'Evento não encontrado!');
-
-        $inscriptions = EventRegistration::where('idChurch_fk', '=', $church->id)->where('idEvent_fk', '=', $event->id)->get();
-
-        return view('church.inscription.show', compact('church', 'event', 'inscriptions'));
+        //
     }
 
     public function edit($id)
@@ -90,5 +80,63 @@ class InscriptionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function report_payment($id)
+    {
+        $inscript = EventRegistration::find($id);
+
+        if(!$inscript)
+            return redirect()
+                        ->route('event')
+                        ->with('error', 'Inscrito não encontrado!');
+
+        $church = Church::find($inscript->idChurch_fk);
+
+        if(!$church)
+            return redirect()
+                        ->route('event')
+                        ->with('error', 'Igreja não encontrada!');
+
+        $event = Event::find($inscript->idEvent_fk);
+
+        if(!$event)
+            return redirect()
+                        ->route('event')
+                        ->with('error', 'Evento não encontrado!');                
+
+
+        if( ($inscript->idChurch_fk != $event->idChurch_fk) or ($inscript->idChurch_fk != auth()->user()->idChurch_fk) or ($event->idChurch_fk != auth()->user()->idChurch_fk) )
+            return redirect()
+                        ->route('event')
+                        ->with('error', 'Evento não encontrado!'); 
+
+        $updates = ['isPaid' => true]; 
+        $result = $inscript->update($updates);
+
+        if(!$result)
+            return redirect()
+                        ->back()
+                        ->with('error', 'Erro ao informar o pagamento!');
+        else
+            return redirect()
+                        ->route('event.show', $event->id)
+                        ->with('success', 'Pagamento informado com sucesso!'); 
+    }
+
+    //PDF
+
+    public function inscription_pdf($id)
+    {
+        $event = Event::find($id);
+
+        if(!$event)
+            return redirect()
+                        ->route('event')
+                        ->with('error', 'Evento não encontrado!'); 
+
+        $inscripts = EventRegistration::where('idEvent_fk', '=', $event->id)->where('idChurch_fk', '=', auth()->user()->idChurch_fk)->get();
+    
+        return \PDF::loadView('church.inscription.pdf.inscriptions', compact('inscripts'))->setPaper('a4', 'landscape')->stream();
     }
 }

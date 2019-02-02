@@ -57,6 +57,8 @@ $this->group(['middleware' => 'auth'], function(){
         $this->get('/inscription/show/{id_event}', 'Inscription\InscriptionController@show')->name('inscription.show');
         $this->get('/inscription/add/{id_event}', 'Inscription\InscriptionController@create')->name('inscription.create');
         $this->post('/inscription/add/{id_event}', 'Inscription\InscriptionController@store')->name('inscription.store');
+        $this->get('/inscription/report-payment/{id_inscript}', 'Inscription\InscriptionController@report_payment')->name('inscription.report_payment');
+        $this->get('/inscription/pdf/{id_event}', 'Inscription\InscriptionController@inscription_pdf')->name('inscription.pdf');
 
         //MEMBROS
         $this->get('/member/show/{id_member}', 'Member\MemberController@show')->name('member.show');
@@ -66,6 +68,8 @@ $this->group(['middleware' => 'auth'], function(){
         $this->post('/member/edit/{id_member}', 'Member\MemberController@update')->name('member.update');
         $this->get('/member/pdf', 'Member\MemberController@member_pdf')->name('member.pdf');
         $this->get('/member/destroy/{id_member}', 'Member\MemberController@destroy')->name('member.destroy');
+        $this->get('/member/inactivate/{id_member}', 'Member\MemberController@inactivate')->name('member.inactivate');
+        $this->get('/member/activate/{id_member}', 'Member\MemberController@activate')->name('member.activate');
 
         //BITH
         $this->post('/birth', 'Member\MemberController@birth_month')->name('birth.month');
