@@ -30,7 +30,7 @@
                 <a href="{{ url('church/event/edit', $event->id) }}" class='btn btn-warning'><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Editar</a>
                 <a href="{{ url('church/event/destroy', $event->id) }}" class='btn btn-danger'><i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Deletar</a>
                 @if($event->haveInscription)
-                    <a href="{{ url('church/inscription/add', $event->id) }}" class='btn btn-success'><i class="fa fa-check" aria-hidden="true"></i>&nbsp; Cadastrar inscrição</a>
+                    <a href="{{ url('church/inscription/add', $event->id) }}" class='btn btn-success'><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Cadastrar inscrição</a>
                 @endif
             </div>
 

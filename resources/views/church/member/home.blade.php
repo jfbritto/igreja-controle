@@ -24,7 +24,7 @@
 
         <div class="box box-primary">
             <div class="box-header with-border">
-                <a href="{{ route('member.create') }}" class='btn btn-success'><i class="fa fa-check" aria-hidden="true"></i>&nbsp; Novo membro</a>
+                <a href="{{ route('member.create') }}" class='btn btn-success'><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Novo membro</a>
                 <a target="_blank" href="{{ route('member.pdf') }}" class='btn btn-danger'><i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp; Gerar PDF com todos os membros</a>
             </div>
             

@@ -9,17 +9,18 @@ use App\Models\Church;
 use App\Models\State;
 use App\Models\City;
 use App\Models\EventRegistration;
+use Carbon\Carbon;
 
 class InscriptionController extends Controller
 {
 
     public function index()
     {   
-        $events = Event::where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isActive', '=', true)->where('haveInscription', '=', true)->get();
+        $past_events = Event::where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isActive', '=', true)->where('haveInscription', '=', true)->where('endDate', '<', now())->get();
+        $future_events = Event::where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isActive', '=', true)->where('haveInscription', '=', true)->where('endDate', '>', now())->get();
         $church = Church::find(auth()->user()->idChurch_fk);
-
-
-        return view('church.inscription.home', compact('events', 'church'));
+    
+        return view('church.inscription.home', compact('past_events', 'future_events', 'church'));
     }
 
     public function create($id)
