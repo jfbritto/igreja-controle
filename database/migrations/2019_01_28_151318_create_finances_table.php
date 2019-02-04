@@ -23,6 +23,7 @@ class CreateFinancesTable extends Migration
             $table->text('comments')->nullable();
             $table->string('type', 50);
             $table->decimal('value', 10,2)->nullable();
+            $table->date('movimentationDate')->nullable();
             
             $table->timestamps();
         });

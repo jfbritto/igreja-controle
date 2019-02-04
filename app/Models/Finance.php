@@ -18,6 +18,6 @@ class Finance extends Model
         'comments',
         'type',
         'value',
-        'registrationDate'
+        'movimentationDate'
   ];
 }

@@ -81,11 +81,9 @@
                                 </div>
                                 <select id='type' name='type' class="form-control" readonly>
                                     <option>-- Selecione o tipo --</option>
-                                    <option @if($message->type == 'bug') selected='selected' @endif value='bug'>Erro no sistema</option>
-                                    <option @if($message->type == 'question') selected='selected' @endif value='question'>Dúvida</option>
-                                    <option @if($message->type == 'suggestion') selected='selected' @endif value='suggestion'>Sugestão</option>
-                                    <option @if($message->type == 'payment') selected='selected' @endif value='payment'>Pagamento</option>
-                                    <option @if($message->type == 'other') selected='selected' @endif value='other'>Outro</option>
+                                    @foreach($types as $type)
+                                        <option value='{{$type->id}}' @if($message->type == $type->id) selected='selected' @endif>{{ $type->value }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

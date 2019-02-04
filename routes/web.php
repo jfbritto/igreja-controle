@@ -81,6 +81,13 @@ $this->group(['middleware' => 'auth'], function(){
         //SUPPORT
         $this->post('/support/add', 'Support\SupportController@store')->name('support.store');
         $this->get('/support/show/{id_message}', 'Support\SupportController@show')->name('support.show');
+
+        //FINANÇAS
+        $this->get('/finance/add', 'Finance\FinanceController@create')->name('finance.create');
+        $this->post('/finance/add', 'Finance\FinanceController@store')->name('finance.store');
+        $this->post('/finance', 'Finance\FinanceController@index_month')->name('finance.month');
+        $this->get('/finance/pdf/{year}/{month}', 'Finance\FinanceController@balance_pdf')->name('finance.pdf');
+
     });
 
 

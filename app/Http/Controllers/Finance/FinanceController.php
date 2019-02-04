@@ -4,82 +4,203 @@ namespace App\Http\Controllers\Finance;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Finance;
+use App\Models\Parameter;
+use DB;
 
 class FinanceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        return view('church.finance.home');
+        $month  = date('m');
+        $year   = date('Y');
+
+        $years = Finance::where('idChurch_fk', '=',auth()->user()->idChurch_fk)
+                                ->select(DB::raw('YEAR(movimentationDate) year'))
+                                ->groupBy('year')
+                                ->get();
+
+        $movimentations = Finance::whereYear('movimentationDate', $year)
+                                            ->whereMonth('movimentationDate', $month)
+                                            ->where('idChurch_fk', '=',auth()->user()->idChurch_fk)
+                                            ->join('parameters', 'parameters.id', '=', 'finances.idAction_fk')
+                                            ->select('finances.*', 'parameters.value as action')
+                                            ->get();
+
+        $total_entries = Finance::where('idChurch_fk', '=',auth()->user()->idChurch_fk)
+                                        ->where('type', '=', 'I')->sum('value');
+
+        $total_outputs = Finance::where('idChurch_fk', '=',auth()->user()->idChurch_fk)
+                                        ->where('type', '=', 'O')->sum('value');
+
+        $total_box = $total_entries - $total_outputs;
+        
+        $total_month_entries = Finance::whereYear('movimentationDate', $year)
+                                                ->whereMonth('movimentationDate', $month)
+                                                ->where('idChurch_fk', '=',auth()->user()->idChurch_fk)
+                                                ->where('type', '=', 'I')
+                                                ->sum('value');
+
+        $total_month_outputs = Finance::whereYear('movimentationDate', $year)
+                                                ->whereMonth('movimentationDate', $month)
+                                                ->where('idChurch_fk', '=',auth()->user()->idChurch_fk)
+                                                ->where('type', '=', 'O')
+                                                ->sum('value');
+
+        $total_month_box = $total_month_entries - $total_month_outputs;
+
+        return view('church.finance.home', compact('movimentations', 'total_box', 'total_month_entries', 'total_month_outputs', 'total_month_box', 'month', 'year', 'years'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function index_month(Request $request)
+    {
+        if (isset($request->month) && isset($request->year)) {
+            $month  = $request->month;
+            $year   = $request->year;
+        }else{
+            $month  = date('m');
+            $year   = date('Y');
+        }
+
+        $date_month = $month;
+
+        $years = Finance::where('idChurch_fk', '=',auth()->user()->idChurch_fk)
+                                ->select(DB::raw('YEAR(movimentationDate) year'))
+                                ->groupBy('year')
+                                ->get();
+
+        $movimentations = Finance::whereYear('movimentationDate', $year)
+                                            ->whereMonth('movimentationDate', $month)
+                                            ->where('idChurch_fk', '=',auth()->user()->idChurch_fk)
+                                            ->join('parameters', 'parameters.id', '=', 'finances.idAction_fk')
+                                            ->select('finances.*', 'parameters.value as action')
+                                            ->get();
+
+        $total_entries = Finance::where('idChurch_fk', '=',auth()->user()->idChurch_fk)
+                                        ->where('type', '=', 'I')
+                                        ->sum('value');
+
+        $total_outputs = Finance::where('idChurch_fk', '=',auth()->user()->idChurch_fk)
+                                        ->where('type', '=', 'O')
+                                        ->sum('value');
+
+        $total_box = $total_entries - $total_outputs;
+        
+        $total_month_entries = Finance::whereYear('movimentationDate', $year)
+                                                ->whereMonth('movimentationDate', $month)
+                                                ->where('idChurch_fk', '=',auth()->user()->idChurch_fk)
+                                                ->where('type', '=', 'I')
+                                                ->sum('value');
+
+        $total_month_outputs = Finance::whereYear('movimentationDate', $year)
+                                                ->whereMonth('movimentationDate', $month)
+                                                ->where('idChurch_fk', '=',auth()->user()->idChurch_fk)
+                                                ->where('type', '=', 'O')
+                                                ->sum('value');
+
+        $total_month_box = $total_month_entries - $total_month_outputs;
+
+        return view('church.finance.home', compact('movimentations', 'total_box', 'total_month_entries', 'total_month_outputs', 'total_month_box', 'month', 'year', 'years'));
+    }
+
+
     public function create()
     {
-        //
+        $actions = Parameter::where('operation', '=', 'finances')->where('attribute', '=', 'action')->get();
+
+        return view('church.finance.create', compact('actions'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        
+        $request['value'] = str_replace('.', '', $request->value);
+        $request['value'] = str_replace(',', '.', $request['value']);
+        
+        $request['idChurch_fk'] = auth()->user()->idChurch_fk;
+        
+        $request['idUser_fk'] = auth()->user()->id;
+
+        if ($request->type == 'O') {
+            $request['idAction_fk'] = 4;
+        }
+        
+        $result = Finance::create($request->all());
+
+        if(!$result)
+            return redirect()
+                        ->back()
+                        ->with('error', 'Erro ao cadastrar movimentação!');
+        else
+            return redirect()
+                        ->route('finance')
+                        ->with('success', 'Movimentação cadastrada com sucesso!'); 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         //
+    }
+
+
+
+
+    //PDF
+
+    public function balance_pdf($year, $month)
+    {
+        $inputs         = Finance::join('parameters', 'parameters.id', '=', 'finances.idAction_fk')
+                                            ->select('finances.*', 'parameters.value as action')
+                                            ->whereYear('finances.movimentationDate', $year)
+                                            ->whereMonth('finances.movimentationDate', $month)
+                                            ->where('finances.idChurch_fk', '=',auth()->user()->idChurch_fk)
+                                            ->where('finances.type', '=', 'I')
+                                            ->groupBy('finances.idAction_fk')
+                                            ->get();
+
+        $outputs        = Finance::whereYear('movimentationDate', $year)
+                                            ->whereMonth('movimentationDate', $month)
+                                            ->where('idChurch_fk', '=',auth()->user()->idChurch_fk)
+                                            ->where('type', '=', 'O')
+                                            ->get();
+
+        $inputs_sum     = Finance::whereYear('movimentationDate', $year)
+                                            ->whereMonth('movimentationDate', $month)
+                                            ->where('idChurch_fk', '=',auth()->user()->idChurch_fk)
+                                            ->where('type', '=', 'I')
+                                            ->sum('value');  
+
+        $outputs_sum    = Finance::whereYear('movimentationDate', $year)
+                                            ->whereMonth('movimentationDate', $month)
+                                            ->where('idChurch_fk', '=',auth()->user()->idChurch_fk)
+                                            ->where('type', '=', 'O')
+                                            ->sum('value');
+
+        
+        $next_month     = $inputs_sum - $outputs_sum;
+
+    
+        return \PDF::loadView('church.finance.pdf.balance', compact('inputs', 'outputs', 'inputs_sum', 'outputs_sum', 'next_month'))->stream();
     }
 }
