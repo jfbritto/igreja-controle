@@ -57,6 +57,7 @@
                                 <option>-- Selecione o tipo --</option>
                                 <option value='bug'>Erro no sistema</option>
                                 <option value='question'>Dúvida</option>
+                                <option value='suggestion'>Sugestão</option>
                                 <option value='payment'>Pagamento</option>
                                 <option value='other'>Outro</option>
                             </select>
@@ -117,6 +118,7 @@
                             <td style='vertical-align:middle' class='hidden-xs'>
                                 @if($message->type == 'bug') Erro no sistema @endif
                                 @if($message->type == 'question') Dúvida @endif
+                                @if($message->type == 'suggestion') Sugestão @endif
                                 @if($message->type == 'payment') Pagamento @endif
                                 @if($message->type == 'other') Outro @endif
                             </td>

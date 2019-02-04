@@ -28,7 +28,7 @@
             <div class="box-body">
 
                 <div class='row'>
-                    <div class='col-md-12'>
+                    <div class='col-md-6'>
 
                         <div class="form-group">
                             <label for='answerDate'>Data envio</label> 
@@ -38,6 +38,20 @@
                                     <i class="fa fa-calendar"></i>
                                 </div>
                                 <input id='answerDate' name='answerDate' type="text" class="form-control" value="{{date('d/m/Y H:i:s', strtotime($message->created_at)) }}" readonly>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class='col-md-6'>
+
+                        <div class="form-group">
+                            <label for='situation'>Situação</label> 
+
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-exclamation"></i>
+                                </div>
+                                <input id='situation' name='situation' type="text" class="form-control" value="@if($message->isOpen) Aberta @else Finalizada @endif" readonly>
                             </div>
                         </div>
 
@@ -69,6 +83,7 @@
                                     <option>-- Selecione o tipo --</option>
                                     <option @if($message->type == 'bug') selected='selected' @endif value='bug'>Erro no sistema</option>
                                     <option @if($message->type == 'question') selected='selected' @endif value='question'>Dúvida</option>
+                                    <option @if($message->type == 'suggestion') selected='selected' @endif value='suggestion'>Sugestão</option>
                                     <option @if($message->type == 'payment') selected='selected' @endif value='payment'>Pagamento</option>
                                     <option @if($message->type == 'other') selected='selected' @endif value='other'>Outro</option>
                                 </select>
@@ -102,6 +117,8 @@
 </div>
 
 
+@if(!$message->isOpen)  
+
 <div class="row">
 
     <div class="col-md-12">
@@ -119,7 +136,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                <input id='answerDate' name='answerDate' type="text" class="form-control" value="{{date('d/m/Y H:i:s', strtotime($message->answerDate)) }}" readonly>
+                                <input id='answerDate' name='answerDate' type="text" class="form-control" value="@if(!is_null($message->answerDate)) {{date('d/m/Y H:i:s', strtotime($message->answerDate)) }} @endif" readonly>
                             </div>
                         </div>
 
@@ -148,5 +165,7 @@
     </div>    
 
 </div>
+
+@endif
 
 @endsection
