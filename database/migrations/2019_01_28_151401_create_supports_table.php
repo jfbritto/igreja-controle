@@ -15,6 +15,17 @@ class CreateSupportsTable extends Migration
     {
         Schema::create('supports', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->integer('idChurch_fk');
+            $table->integer('idUser_fk');
+            $table->integer('isOpen')->default(true);
+            
+            $table->string('subject', 100)->nullable();
+            $table->text('message')->nullable();
+            $table->string('type', 50);
+            $table->text('answer')->nullable();
+            $table->dateTime('answerDate')->nullable();
+
             $table->timestamps();
         });
     }

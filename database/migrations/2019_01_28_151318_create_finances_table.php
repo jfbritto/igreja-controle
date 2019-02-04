@@ -15,6 +15,16 @@ class CreateFinancesTable extends Migration
     {
         Schema::create('finances', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->integer('idChurch_fk');
+            $table->integer('idUser_fk');
+            $table->integer('idAction_fk');
+
+            $table->text('comments')->nullable();
+            $table->string('type', 50);
+            $table->decimal('value', 10,2)->nullable();
+            $table->dateTime('registrationDate')->nullable();
+
             $table->timestamps();
         });
     }

@@ -33,7 +33,7 @@
                 <div class='row'>
                     <div class='col-md-4'>
 
-                        <div class="form-group responsavel">
+                        <div class="form-group">
                             <label for='name'>Nome</label> 
 
                             <div class="input-group">
@@ -47,7 +47,7 @@
                     </div>
                     <div class='col-md-4'>
                 
-                        <div class="form-group responsavel">
+                        <div class="form-group">
                             <label for='sex'>Sexo</label> 
 
                             <div class="input-group">
@@ -83,7 +83,7 @@
                     
                     <div class='col-md-4'>
 
-                        <div class="form-group responsavel">
+                        <div class="form-group">
                             <label for='email'>E-mail</label> 
 
                             <div class="input-group">
@@ -97,7 +97,7 @@
                     </div>
                     <div class='col-md-4'>
 
-                        <div class="form-group responsavel">
+                        <div class="form-group">
                             <label for='cpf'>CPF</label> 
 
                             <div class="input-group">
@@ -111,7 +111,7 @@
                     </div>
                     <div class='col-md-4'>
 
-                        <div class="form-group responsavel">
+                        <div class="form-group">
                             <label for='phone'>Telefone</label> 
 
                             <div class="input-group">
@@ -148,7 +148,7 @@
                 <div class='row'>
                     <div class='col-md-4'>
 
-                        <div class="form-group responsavel">
+                        <div class="form-group">
                             <label for="cep">CEP</label>
 
                             <div class="input-group">
@@ -182,7 +182,7 @@
 
                     <div class='col-md-4'>
 
-                        <div class="form-group responsavel">
+                        <div class="form-group">
                             <label for="idCity_fk">Cidade</label>
 
                             <div class="input-group">
@@ -202,7 +202,7 @@
 
                     <div class='col-md-4'>
 
-                        <div class="form-group responsavel">
+                        <div class="form-group">
                             <label for="address">Endereço</label>
 
                             <div class="input-group">
@@ -216,7 +216,7 @@
                     </div>
                     <div class='col-md-2'>
 
-                        <div class="form-group responsavel">
+                        <div class="form-group">
                             <label for="number">Número</label>
 
                             <div class="input-group">
@@ -230,7 +230,7 @@
                     </div>
                     <div class='col-md-3'>
 
-                        <div class="form-group responsavel">
+                        <div class="form-group">
                             <label for="neighborhood">Bairro</label>
 
                             <div class="input-group">
@@ -245,7 +245,7 @@
                     
                     <div class='col-md-3'>
                     
-                        <div class="form-group responsavel">
+                        <div class="form-group">
                             <label for="complement">Complemento</label>
 
                             <div class="input-group">

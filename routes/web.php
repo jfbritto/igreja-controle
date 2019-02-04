@@ -77,6 +77,10 @@ $this->group(['middleware' => 'auth'], function(){
 
         //CARD
         $this->get('/card/pdf', 'Card\CardController@card_pdf')->name('card.pdf');
+
+        //SUPPORT
+        $this->post('/support/add', 'Support\SupportController@store')->name('support.store');
+        $this->get('/support/show/{id_message}', 'Support\SupportController@show')->name('support.show');
     });
 
 
