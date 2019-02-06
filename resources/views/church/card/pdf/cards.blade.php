@@ -20,9 +20,15 @@
         }
 
         .member-name {
-            float: right;
-            margin-top: 15px;
-            margin-right: 30px;
+            float: left;
+            margin-top: 170px;
+            margin-left: 15px;
+        }
+
+        .member-avatar {
+            float: left;
+            margin-top: 50px;
+            margin-left: 15px;
         }
 
         </style>
@@ -38,6 +44,13 @@
 
         <div class="card">
             <div class="member-name" title="member">{{$member->name}}</div>
+            <div class='member-avatar'>
+                @if($member->avatar != null)
+                <img class="img img-circle" src="{{ url('storage/members/'.$member->avatar) }}" width='100'>
+                @else 
+                <img class="img img-circle" src="{{ url('storage/members/default.jpg') }}" width='100'>
+                @endif
+            </div>
         </div>
 
 

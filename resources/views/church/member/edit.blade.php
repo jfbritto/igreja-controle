@@ -31,7 +31,7 @@
             </div>  
             <div class="box-body">
 
-            <form role="form" method="POST" action="{{ route('member.update', $member->id) }}">
+            <form role="form" method="POST" action="{{ route('member.update', $member->id) }}" enctype="multipart/form-data">
             @csrf
                 <div class='row'>
                     <div class='col-md-4'>
@@ -126,6 +126,47 @@
                         </div>
 
                     </div>
+
+                </div>
+
+            </div>
+              
+        </div>
+
+    </div>    
+
+</div>
+
+
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="box box-primary">
+
+            <div class="box-body">
+
+                <div class='row'>
+
+                    <div class='col-md-2'>
+
+                        <div class="form-group">
+                            <label for='avatar'>Imagem</label> 
+
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-picture-o"></i>
+                                </div>
+                                <input id='avatar' name='avatar' type="file" class="form-control">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class='col-md-4'>
+                        <img src="@if(!is_null($member->avatar)){{ url('storage/members/'.$member->avatar) }} @else {{ url('storage/members/default.jpg') }} @endif" class='img img-circle' width='80'>
+                    </div>
+
                 </div>
 
             </div>

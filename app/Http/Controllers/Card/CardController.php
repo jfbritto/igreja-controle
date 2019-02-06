@@ -17,7 +17,11 @@ class CardController extends Controller
     public function card_pdf()
     {
   
-        $members = User::where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isMember', '=', true)->get();
+        $members = User::where('idChurch_fk', '=', auth()->user()->idChurch_fk)
+                            ->where('isMember', '=', true)
+                            ->where('isActive', '=', true)
+                            ->where('isDeleted', '=', false)
+                            ->get();
     
         return \PDF::loadView('church.card.pdf.cards', compact('members'))->stream();
     }

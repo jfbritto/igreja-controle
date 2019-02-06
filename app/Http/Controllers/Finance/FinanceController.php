@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Finance;
 use App\Models\Parameter;
+use App\Models\Church;
 use DB;
 
 class FinanceController extends Controller
@@ -171,7 +172,7 @@ class FinanceController extends Controller
     public function balance_pdf($year, $month)
     {
         $inputs         = Finance::join('parameters', 'parameters.id', '=', 'finances.idAction_fk')
-                                            ->select('finances.*', 'parameters.value as action')
+                                            ->select('finances.*', 'parameters.value as action', DB::raw('SUM(finances.value) as total'))
                                             ->whereYear('finances.movimentationDate', $year)
                                             ->whereMonth('finances.movimentationDate', $month)
                                             ->where('finances.idChurch_fk', '=',auth()->user()->idChurch_fk)
@@ -197,10 +198,28 @@ class FinanceController extends Controller
                                             ->where('type', '=', 'O')
                                             ->sum('value');
 
+        //balanço do mes anterior
+        $anomontado = $year.'-'.$month.'-01';
+
+        $inputs_sum_before     = Finance::where('movimentationDate', '<', $anomontado)
+                                            ->where('idChurch_fk', '=',auth()->user()->idChurch_fk)
+                                            ->where('type', '=', 'I')
+                                            ->sum('value');  
+
+        $outputs_sum_before    = Finance::where('movimentationDate', '<', $anomontado)
+                                            ->where('idChurch_fk', '=',auth()->user()->idChurch_fk)
+                                            ->where('type', '=', 'O')
+                                            ->sum('value');
         
+        $before_months     = $inputs_sum_before - $outputs_sum_before;
+        //balanço do mes anterior   
+        
+        $inputs_sum = $inputs_sum + $before_months;
+
         $next_month     = $inputs_sum - $outputs_sum;
 
-    
-        return \PDF::loadView('church.finance.pdf.balance', compact('inputs', 'outputs', 'inputs_sum', 'outputs_sum', 'next_month'))->stream();
+        $church = Church::find(auth()->user()->idChurch_fk);
+
+        return \PDF::loadView('church.finance.pdf.balance', compact('year', 'month', 'church', 'inputs', 'outputs', 'inputs_sum', 'outputs_sum', 'next_month', 'before_months'))->stream();
     }
 }

@@ -32,6 +32,7 @@
                 <table class='table table-hover table-striped table-condensed' id='table'>
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Nome</th>
                             <th class='hidden-xs'>Email</th>
                             <th class='hidden-xs'>Nascimento</th>
@@ -43,6 +44,7 @@
                     <tbody>
                     @forelse($members as $member)
                         <tr class='@if(!$member->isActive) danger @endif'>
+                            <td style='vertical-align:middle'><img src="@if(!is_null($member->avatar)){{ url('storage/members/'.$member->avatar) }} @else {{ url('storage/members/default.jpg') }} @endif" class='img img-circle' width='80'></td>
                             <td style='vertical-align:middle'>{{ $member->name }}</td>
                             <td style='vertical-align:middle' class='hidden-xs'>{{ $member->email }}</td>
                             <td style='vertical-align:middle' class='hidden-xs'>{{ date('d/m/Y', strtotime($member->birth)) }}</td>
