@@ -29,9 +29,6 @@
             <div class="box-header with-border">
                 <a href="{{ url('church/event/edit', $event->id) }}" class='btn btn-warning'><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Editar</a>
                 <a href="{{ url('church/event/destroy', $event->id) }}" class='btn btn-danger'><i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Deletar</a>
-                @if($event->haveInscription)
-                    <a href="{{ url('church/inscription/add', $event->id) }}" class='btn btn-success'><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Cadastrar inscrição</a>
-                @endif
             </div>
 
             <div class="box-body">
@@ -171,6 +168,9 @@
         <h3>Iscritos</h3>
         <div class="box box-primary">
             <div class="box-header with-border">
+                @if($event->haveInscription)
+                    <a href="{{ url('church/inscription/add', $event->id) }}" class='btn btn-success'><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Cadastrar inscrição</a>
+                @endif
                 <a target="_blank" href="{{ url('church/inscription/pdf', $event->id) }}" class='btn btn-danger'><i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp; Gerar PDF com todos os inscritos</a>
             </div>
             <div class="box-body">

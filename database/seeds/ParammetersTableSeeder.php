@@ -19,14 +19,14 @@ class ParammetersTableSeeder extends Seeder
                 'id' => 1,
                 'operation' => 'finances',
                 'attribute' => 'action',
-                'value' => 'Dízimo'
+                'value' => 'Dízimos'
             ),
             1 => 
             array (
                 'id' => 2,
                 'operation' => 'finances',
                 'attribute' => 'action',
-                'value' => 'Oferta'
+                'value' => 'Ofertas'
             ),
             2 => 
             array (

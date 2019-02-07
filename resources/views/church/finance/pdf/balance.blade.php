@@ -38,7 +38,7 @@
             </tr>
             @endforeach
             <tr>
-                <td>TOTAL DO MÊS ANTERIOR</td>
+                <td>SALDO DO MÊS ANTERIOR</td>
                 <td class='green'>R$ {{number_format($before_months, 2, ',', '.')}}</td>
             </tr>
             <tr>
