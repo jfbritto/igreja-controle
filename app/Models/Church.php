@@ -18,6 +18,7 @@ class Church extends Model
         'email',
         'cnpj',
         'phone',
-        'avatar'
+        'avatar',
+        'hash'
     ];
 }

@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\State;
 use App\Models\City;
 use App\Models\Address;
+use App\Models\Church;
 
 class MemberController extends Controller
 {
@@ -20,7 +21,9 @@ class MemberController extends Controller
                             ->where('isDeleted', '=', false)
                             ->get();
 
-        return view('church.member.home', compact('members'));
+        $church = Church::where('id', auth()->user()->idChurch_fk)->first();                    
+
+        return view('church.member.home', compact('members', 'church'));
     }
 
     public function create()
@@ -74,7 +77,6 @@ class MemberController extends Controller
     {
         $member = User::where('id', '=', $id)
                             ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
-                            ->where('isActive', '=', true)
                             ->get()
                             ->first();
         
@@ -280,6 +282,32 @@ class MemberController extends Controller
     }
 
 
+    public function validate_member($id)
+    {
+        $member = User::where('id', '=', $id)
+                            ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
+                            ->get()
+                            ->first();
+        
+        if(!$member)
+            return redirect()
+                        ->route('member')
+                        ->with('error', 'Membro não encontrado!');
+
+        $updates = ['isActive' => true, 'isPendent' => false];                    
+        $result = $member->update($updates);
+
+        if(!$result)
+            return redirect()
+                        ->back()
+                        ->with('error', 'Erro ao validar membro!');
+        else
+            return redirect()
+                        ->route('member')
+                        ->with('success', 'Membro validado com sucesso!');
+    }
+
+
     //BIRTHDAY
 
     public function birth()
@@ -348,5 +376,79 @@ class MemberController extends Controller
         return \PDF::loadView('church.birth.pdf.birthdays', compact('members'))->stream();
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function invite_create($hash)
+    {
+        $church = Church::where('hash', $hash)->first();
+
+        $states = State::get();
+
+        return view('church.member.invite.create', compact('hash', 'church', 'states'));
+    }
+
+    public function invite_store(Request $request, $hash)
+    {
+        
+        // $validator = validator($request, [
+        //     'name' => 'required',
+        //     'email' => 'required|email',
+        //     'complement' => 'nullable'
+        // ]);
+
+        // if($validator->fails())
+
+        $church = Church::where('hash', $hash)->first();
+
+        $request_address = [
+            'cep'           => $request->cep,
+            'idState_fk'    => $request->idState_fk,
+            'idCity_fk'     => $request->idCity_fk,
+            'address'       => $request->address,
+            'number'        => $request->number,
+            'neighborhood'  => $request->neighborhood,
+            'complement'    => $request->complement,
+        ];
+
+        $address = Address::create($request_address);
+        
+        $request_user = [
+            'name'          => $request->name,
+            'email'         => $request->email,
+            'birth'         => $request->birth,
+            'cpf'           => $request->cpf,
+            'sex'           => $request->sex,
+            'phone'         => $request->phone,
+            'idChurch_fk'   => $church->id,
+            'isMember'      => true,
+            'idAddress_fk'  => $address->id,
+            'isActive'      => false,
+            'isPendent'     => true
+        ];
+
+
+        $result = User::create($request_user);
+
+        if(!$result)
+            return redirect()
+                        ->back()
+                        ->with('error', 'Erro ao cadastrar membro!');
+        else
+            return redirect()
+                        ->back()
+                        ->with('success', 'Membro cadastrado com sucesso!');
+    }
 }
 

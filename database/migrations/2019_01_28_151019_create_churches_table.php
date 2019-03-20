@@ -24,6 +24,7 @@ class CreateChurchesTable extends Migration
             $table->string('cnpj', 30);
             $table->string('phone', 50)->nullable();
             $table->string('avatar', 100)->nullable();
+            $table->string('hash', 100)->nullable();
 
             $table->timestamps();
         });

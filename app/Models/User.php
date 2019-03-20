@@ -28,7 +28,8 @@ class User extends Authenticatable
         'email',
         'cpf',
         'phone',
-        'avatar'
+        'avatar',
+        'isPendent'
     ];
 
     /**

@@ -33,96 +33,131 @@
 
             <form role="form" method="POST" action="{{ route('member.update', $member->id) }}" enctype="multipart/form-data">
             @csrf
-                <div class='row'>
-                    <div class='col-md-4'>
-
-                        <div class="form-group">
-                            <label for='name'>Nome</label> 
-
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-user"></i>
-                                </div>
-                                <input id='name' name='name' type="text" class="form-control" required value='{{$member->name}}'>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class='col-md-4'>
                 
-                        <div class="form-group">
-                            <label for='sex'>Sexo</label> 
+                <div class="row">
 
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-transgender"></i>
+                    <div class="col-md-2">
+
+                        <div class="row">
+
+                            <div class="col-md-12 text-center">
+
+
+                                <img src="@if(!is_null($member->avatar)){{ url('storage/members/'.$member->avatar) }} @else {{ url('storage/members/default.jpg') }} @endif" class='img img-circle' width='80'>
+
+                                <div class="form-group">
+                                    <label for='avatar'>Imagem</label> 
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-picture-o"></i>
+                                        </div>
+                                        <input id='avatar' name='avatar' type="file" class="form-control">
+                                    </div>
                                 </div>
-                                <select id='sex' name='sex' class="form-control" required>
-                                    <option>-- Selecione --</option>
-                                    <option value='masculino' @if($member->sex == 'masculino') selected='selected' @endif>Masculino</option>
-                                    <option value='feminino' @if($member->sex == 'feminino') selected='selected' @endif>Feminino</option>
-                                </select>
-                            </div>
+
+
+                            </div>    
+
                         </div>
 
                     </div>
-                    <div class='col-md-4'>
+                    <div class="col-md-10">
 
-                        <div class="form-group">
-                            <label for='birth'>Nascimento</label>  
+                        <div class='row'>
+                            <div class='col-md-4'>
 
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
+                                <div class="form-group">
+                                    <label for='name'>Nome</label> 
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input id='name' name='name' type="text" class="form-control" required value='{{$member->name}}'>
+                                    </div>
                                 </div>
-                                <input id='birth' name='birth' type="date" class="form-control" required value='{{$member->birth}}'>
+
                             </div>
+                            <div class='col-md-4'>
+                        
+                                <div class="form-group">
+                                    <label for='sex'>Sexo</label> 
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-transgender"></i>
+                                        </div>
+                                        <select id='sex' name='sex' class="form-control" required>
+                                            <option>-- Selecione --</option>
+                                            <option value='masculino' @if($member->sex == 'masculino') selected='selected' @endif>Masculino</option>
+                                            <option value='feminino' @if($member->sex == 'feminino') selected='selected' @endif>Feminino</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class='col-md-4'>
+
+                                <div class="form-group">
+                                    <label for='birth'>Nascimento</label>  
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input id='birth' name='birth' type="date" class="form-control" required value='{{$member->birth}}'>
+                                    </div>
+                                </div>
+
+                            </div>
+
                         </div>
+                        <div class='row'>
+                            
+                            <div class='col-md-4'>
+                            
+                                <div class="form-group">
+                                    <label for='email'>E-mail</label> 
 
-                    </div>
-
-                </div>
-                <div class='row'>
-                    
-                    <div class='col-md-4'>
-                    
-                        <div class="form-group">
-                            <label for='email'>E-mail</label> 
-
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-envelope"></i>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-envelope"></i>
+                                        </div>
+                                        <input id='email' name='email' type="email" class="form-control" required value='{{$member->email}}'>
+                                    </div>
                                 </div>
-                                <input id='email' name='email' type="email" class="form-control" required value='{{$member->email}}'>
+
                             </div>
-                        </div>
+                            <div class='col-md-4'>
 
-                    </div>
-                    <div class='col-md-4'>
+                                <div class="form-group">
+                                    <label for='cpf'>CPF</label> 
 
-                        <div class="form-group">
-                            <label for='cpf'>CPF</label> 
-
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-address-card-o"></i>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-address-card-o"></i>
+                                        </div>
+                                        <input id='cpf' name='cpf' type="text" class="form-control" required value='{{$member->cpf}}'>
+                                    </div>
                                 </div>
-                                <input id='cpf' name='cpf' type="text" class="form-control" required value='{{$member->cpf}}'>
+
                             </div>
-                        </div>
+                            <div class='col-md-4'>
 
-                    </div>
-                    <div class='col-md-4'>
+                                <div class="form-group">
+                                    <label for='phone'>Telefone</label> 
 
-                        <div class="form-group">
-                            <label for='phone'>Telefone</label> 
-
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-phone"></i>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-phone"></i>
+                                        </div>
+                                        <input id='phone' name='phone' type="text" class="form-control" required value='{{$member->phone}}'>
+                                    </div>
                                 </div>
-                                <input id='phone' name='phone' type="text" class="form-control" required value='{{$member->phone}}'>
+
                             </div>
+
                         </div>
 
                     </div>
@@ -137,45 +172,6 @@
 
 </div>
 
-
-
-<div class="row">
-
-    <div class="col-md-12">
-
-        <div class="box box-primary">
-
-            <div class="box-body">
-
-                <div class='row'>
-
-                    <div class='col-md-2'>
-
-                        <div class="form-group">
-                            <label for='avatar'>Imagem</label> 
-
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-picture-o"></i>
-                                </div>
-                                <input id='avatar' name='avatar' type="file" class="form-control">
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class='col-md-4'>
-                        <img src="@if(!is_null($member->avatar)){{ url('storage/members/'.$member->avatar) }} @else {{ url('storage/members/default.jpg') }} @endif" class='img img-circle' width='80'>
-                    </div>
-
-                </div>
-
-            </div>
-              
-        </div>
-
-    </div>    
-
-</div>
         
 
 <div class="row">

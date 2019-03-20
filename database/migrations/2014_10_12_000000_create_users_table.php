@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->boolean('isMember')->default(false);
             $table->boolean('isActive')->default(true);
             $table->boolean('isDeleted')->default(false);
+            $table->boolean('isPendent')->default(false);
 
             $table->string('name', 50);
             $table->date('birth')->nullable();
@@ -32,6 +33,7 @@ class CreateUsersTable extends Migration
             $table->string('cpf', 20);
             $table->string('phone', 50)->nullable();
             $table->string('avatar', 100)->nullable();
+
 
             $table->string('remember_token', 100)->nullable();
             $table->timestamps();

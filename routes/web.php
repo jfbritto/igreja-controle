@@ -70,6 +70,7 @@ $this->group(['middleware' => 'auth'], function(){
         $this->get('/member/destroy/{id_member}', 'Member\MemberController@destroy')->name('member.destroy');
         $this->get('/member/inactivate/{id_member}', 'Member\MemberController@inactivate')->name('member.inactivate');
         $this->get('/member/activate/{id_member}', 'Member\MemberController@activate')->name('member.activate');
+        $this->get('/member/validate/{id_member}', 'Member\MemberController@validate_member')->name('member.validate');
 
         //BITH
         $this->post('/birth', 'Member\MemberController@birth_month')->name('birth.month');
@@ -99,3 +100,10 @@ $this->group(['middleware' => 'auth'], function(){
 * SEARCH *
 **********/
 $this->get('/search/city/{id_estado}', 'Search\SearchController@autocomplete');
+
+
+
+//CADASTRO EXTERNO
+
+$this->get('/invite/{hash}', 'Member\MemberController@invite_create')->name('member.invite.create');
+$this->post('/invite/{hash}', 'Member\MemberController@invite_store')->name('member.invite.store');
