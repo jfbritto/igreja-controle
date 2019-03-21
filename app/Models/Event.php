@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model 
+class Event extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -25,5 +25,10 @@ class Event extends Model
         'phoneResponsable',
         'value',
         'color'
-  ];
+    ];
+
+    public function church()
+    {
+        return $this->hasOne(\App\Models\Church::class, 'id', 'idChurch_fk');
+    }
 }

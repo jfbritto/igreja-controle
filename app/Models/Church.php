@@ -21,4 +21,24 @@ class Church extends Model
         'avatar',
         'hash'
     ];
+
+    public function members()
+    {
+        return $this->hasMany(\App\Models\User::class, 'idChurch_fk', 'id');
+    }
+
+    public function supports()
+    {
+        return $this->hasMany(\App\Models\Support::class, 'idChurch_fk', 'id');
+    }
+
+    public function events()
+    {
+        return $this->hasMany(\App\Models\Event::class, 'idChurch_fk', 'id');
+    }
+
+    public function events_registration()
+    {
+        return $this->hasMany(\App\Models\EventRegistration::class, 'idChurch_fk', 'id');
+    }
 }

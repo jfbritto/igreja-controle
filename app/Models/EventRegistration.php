@@ -24,5 +24,25 @@ class EventRegistration extends Model
         'sex',
         'email',
         'phone'
-  ];
+    ];
+
+    public function church()
+    {
+        return $this->hasOne(\App\Models\Church::class, 'id', 'idChurch_fk');
+    }
+
+    public function event()
+    {
+        return $this->hasOne(\App\Models\Event::class, 'id', 'idEvent_fk');
+    }
+
+    public function city()
+    {
+        return $this->hasOne(\App\Models\City::class, 'id', 'idCity_fk');
+    }
+
+    public function state()
+    {
+        return $this->hasOne(\App\Models\State::class, 'id', 'idState_fk');
+    }
 }

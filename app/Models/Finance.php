@@ -19,5 +19,15 @@ class Finance extends Model
         'type',
         'value',
         'movimentationDate'
-  ];
+    ];
+
+    public function church()
+    {
+        return $this->hasOne(\App\Models\Church::class, 'id', 'idChurch_fk');
+    }
+
+    public function user()
+    {
+        return $this->hasOne(\App\Models\User::class, 'id', 'idUser_fk');
+    }
 }

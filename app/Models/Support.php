@@ -21,4 +21,14 @@ class Support extends Model
         'answer',
         'answerDate'
     ];
+
+    public function church()
+    {
+        return $this->hasOne(\App\Models\Church::class, 'id', 'idChurch_fk');
+    }
+
+    public function user()
+    {
+        return $this->hasOne(\App\Models\User::class, 'id', 'idUser_fk');
+    }
 }

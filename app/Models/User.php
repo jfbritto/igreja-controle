@@ -40,4 +40,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function church()
+    {
+        return $this->hasOne(\App\Models\Church::class, 'id', 'idChurch_fk');
+    }
+
+    public function address()
+    {
+        return $this->hasOne(\App\Models\Address::class, 'id', 'idAddress_fk');
+    }
+
+    public function supports()
+    {
+        return $this->hasMany(\App\Models\Support::class, 'idUser_fk', 'id');
+    }
 }

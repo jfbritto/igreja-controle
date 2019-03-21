@@ -15,6 +15,7 @@ Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 $this->get('/', 'Site\SiteController@index');
 
 
+$this->get('/test', 'TesteController@test');
 
 
 
@@ -25,14 +26,14 @@ $this->group(['middleware' => 'auth'], function(){
 
     //ADMINISTRADOR
     $this->group(['middleware' => 'admin', 'prefix' => 'admin', 'namespace' => 'Admin'], function(){
-    
+
         $this->get('/', 'AdminController@index')->name('admin.home');
 
     });
 
-    //IGREJA    
+    //IGREJA
     $this->group(['middleware' => 'church', 'prefix' => 'church'], function(){
-    
+
         $this->get('/', 'Church\ChurchController@index')->name('home');
 
         //MENU LATERAL
