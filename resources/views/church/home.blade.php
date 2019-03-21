@@ -16,7 +16,7 @@
 <div class="messages">
     @include('includes.alerts')
 </div>
-
+<!-- 
 <div class="row">
     <div class="col-md-6">
         <div class="box box-primary">
@@ -48,9 +48,9 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
-<div class="row">
+<!-- div class="row">
     <div class="col-md-6">
         <div class="box box-primary">
             <div class="box-header with-border">
@@ -81,13 +81,13 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
             
 
 @endsection
 
-@section('js')
+<!-- @section('js')
 <script>
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
@@ -210,4 +210,4 @@ var chart = new Chart(ctx4, {
     options: {}
 });
 </script>
-@stop
+@stop -->
