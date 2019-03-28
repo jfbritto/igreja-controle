@@ -106,7 +106,13 @@ $this->get('/search/city/{id_estado}', 'Search\SearchController@autocomplete');
 
 
 
-//CADASTRO EXTERNO
+//CADASTRO MEMBRO EXTERNO
 
 $this->get('/invite/{hash}', 'Member\MemberController@invite_create')->name('member.invite.create');
 $this->post('/invite/{hash}', 'Member\MemberController@invite_store')->name('member.invite.store');
+
+
+//CADASTRO EVENTO EXTERNO
+
+$this->get('/event/invite/{hash}', 'Inscription\InscriptionController@invite_create')->name('inscription.invite.create');
+$this->post('/event/invite/{hash}', 'Inscription\InscriptionController@invite_store')->name('inscription.invite.store');
