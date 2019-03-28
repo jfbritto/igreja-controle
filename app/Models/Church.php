@@ -41,4 +41,15 @@ class Church extends Model
     {
         return $this->hasMany(\App\Models\EventRegistration::class, 'idChurch_fk', 'id');
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        Church::created(function($church){
+            $church->update([
+                'hash' => md5($church->id),
+            ]);
+        });
+    }
 }
