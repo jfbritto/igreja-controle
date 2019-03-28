@@ -32,6 +32,8 @@ class CreateEventsTable extends Migration
             $table->string('phoneResponsable', 50)->nullable();
             $table->decimal('value', 10,2)->nullable();
 
+            $table->string('hash', 50)->nullable();
+
             $table->timestamps();
         });
     }

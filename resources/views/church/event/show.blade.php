@@ -165,13 +165,14 @@
 <div class="row">
     <div class="col-md-12">
 
-        <h3>Iscritos</h3>
+        <h3>Inscritos</h3>
         <div class="box box-primary">
             <div class="box-header with-border">
                 @if($event->haveInscription)
                     <a href="{{ url('church/inscription/add', $event->id) }}" class='btn btn-success'><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Cadastrar inscrição</a>
                 @endif
                 <a target="_blank" href="{{ url('church/inscription/pdf', $event->id) }}" class='btn btn-danger'><i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp; Gerar PDF com todos os inscritos</a>
+                <a target="_blank" href="{{ env('APP_URL').'/event/invite/'.$event->hash }}" class='btn btn-default'><i class="fa fa-link" aria-hidden="true"></i>&nbsp; {{ env('APP_URL').'/event/invite/'.$event->hash }}</a>
             </div>
             <div class="box-body">
 

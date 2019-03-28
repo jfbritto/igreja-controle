@@ -24,11 +24,23 @@ class Event extends Model
         'nameResponsable',
         'phoneResponsable',
         'value',
-        'color'
+        'color',
+        'hash'
     ];
 
     public function church()
     {
         return $this->hasOne(\App\Models\Church::class, 'id', 'idChurch_fk');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        Event::created(function($event){
+            $event->update([
+                'hash' => md5($event->id),
+            ]);
+        });
     }
 }
