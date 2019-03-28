@@ -26,7 +26,7 @@
             <div class="box-header with-border">
                 <a href="{{ route('member.create') }}" class='btn btn-success'><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Novo membro</a>
                 <a target="_blank" href="{{ route('member.pdf') }}" class='btn btn-danger'><i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp; Gerar PDF com todos os membros</a>
-                <a target="_blank" href="{{ env('APP_URL').'invite/'.$church->hash }}" class='btn btn-default'><i class="fa fa-link" aria-hidden="true"></i>&nbsp; {{ env('APP_URL').'invite/'.$church->hash }}</a>
+                <a target="_blank" href="{{ env('APP_URL').'/invite/'.$church->hash }}" class='btn btn-default'><i class="fa fa-link" aria-hidden="true"></i>&nbsp; {{ env('APP_URL').'/invite/'.$church->hash }}</a>
             </div>
             
             <div class="box-body">

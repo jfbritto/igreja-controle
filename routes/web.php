@@ -90,6 +90,8 @@ $this->group(['middleware' => 'auth'], function(){
         $this->post('/finance', 'Finance\FinanceController@index_month')->name('finance.month');
         $this->get('/finance/pdf/{year}/{month}', 'Finance\FinanceController@balance_pdf')->name('finance.pdf');
 
+        //CONFIG
+        $this->post('/config/edit', 'Church\ChurchController@update')->name('config.update');
     });
 
 
