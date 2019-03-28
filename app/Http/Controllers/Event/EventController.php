@@ -201,4 +201,8 @@ class EventController extends Controller
                         ->route('event')
                         ->with('success', 'Evento deletado com sucesso!');                
     }
+
+
+
+
 }

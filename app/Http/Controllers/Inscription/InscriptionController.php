@@ -140,4 +140,50 @@ class InscriptionController extends Controller
     
         return \PDF::loadView('church.inscription.pdf.inscriptions', compact('inscripts'))->setPaper('a4', 'landscape')->stream();
     }
+
+
+
+
+
+
+
+
+
+    public function invite_create($hash)
+    {
+        $event = Event::where('hash', $hash)->first();
+
+        $church = $event->church;
+
+        $states = State::get();
+
+        return view('church.inscription.invite.create', compact('hash', 'church', 'states', 'event'));
+    }
+
+    public function invite_store(Request $request, $hash)
+    {
+        $event = Event::where('hash', $hash)->first();
+
+        if(!$event)
+            return redirect()
+                        ->back()
+                        ->with('error', 'Evento não encontrado!');
+        
+        $request['idEvent_fk'] = $event->id;
+        $request['idChurch_fk'] = $event->church->id;
+
+        $result = EventRegistration::create($request->all()); 
+        
+
+        if(!$result)
+            return redirect()
+                        ->back()
+                        ->with('error', 'Erro na inscrição!');
+        else
+            return redirect()
+                        ->back()
+                        ->with('success', 'Participante cadastrado com sucesso!');
+    }
+
+
 }
