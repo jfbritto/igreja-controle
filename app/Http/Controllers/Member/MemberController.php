@@ -129,7 +129,7 @@ class MemberController extends Controller
                             ->first();
         
         $address = Address::find($member->idAddress_fk);
-        
+    
         if(!$member)
             return redirect()
                     ->route('member')
@@ -198,7 +198,7 @@ class MemberController extends Controller
         if(!$result2)
             return redirect()
                         ->back()
-                        ->with('error', 'Erro ao editado membro!');
+                        ->with('error', 'Erro ao editar o membro!');
         else
             return redirect()
                         ->route('member')
