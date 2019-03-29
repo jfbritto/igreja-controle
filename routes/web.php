@@ -25,9 +25,25 @@ $this->get('/test', 'TesteController@test');
 $this->group(['middleware' => 'auth'], function(){
 
     //ADMINISTRADOR
-    $this->group(['middleware' => 'admin', 'prefix' => 'admin', 'namespace' => 'Admin'], function(){
+    $this->group(['middleware' => 'admin', 'prefix' => 'admin'], function(){
 
-        $this->get('/', 'AdminController@index')->name('admin.home');
+        $this->get('/', 'Admin\AdminController@index')->name('home');
+
+        //MENU LATERAL
+        $this->get('/dashboard', 'Admin\AdminController@index')->name('dashboard');
+        $this->get('/church', 'Church\ChurchController@index')->name('church');
+
+        //IGREJA
+        $this->get('/church/show/{id_church}', 'Church\ChurchController@show')->name('church.show');
+        $this->get('/church/add', 'Church\ChurchController@create')->name('church.create');
+        $this->post('/church/add', 'Church\ChurchController@store')->name('church.store');
+        $this->get('/church/edit/{id_church}', 'Church\ChurchController@edit')->name('church.edit');
+        $this->post('/church/edit/{id_church}', 'Church\ChurchController@update')->name('church.update');
+
+        $this->get('/church/pdf', 'Church\ChurchController@Church_pdf')->name('church.pdf');
+        $this->get('/church/destroy/{id_church}', 'Church\ChurchController@destroy')->name('church.destroy');
+        $this->get('/church/inactivate/{id_church}', 'Church\ChurchController@inactivate')->name('church.inactivate');
+        $this->get('/church/activate/{id_church}', 'Church\ChurchController@activate')->name('church.activate');
 
     });
 

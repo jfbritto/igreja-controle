@@ -191,7 +191,7 @@ class MemberController extends Controller
         if(!$result)
             return redirect()
                         ->back()
-                        ->with('error', 'Erro ao editado endereço!');
+                        ->with('error', 'Erro ao editar endereço!');
 
         $result2 = $member->update($request_user);  
         

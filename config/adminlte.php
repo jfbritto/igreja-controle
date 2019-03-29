@@ -113,7 +113,14 @@ return [
         //ADMIN
         [
             'text'        => 'Home',
-            'url'         => 'admin',
+            'url'         => 'admin/dashboard',
+            'icon'        => 'home',
+            'label_color' => 'success',
+            'can'  => 'admin',
+        ],
+        [
+            'text'        => 'Igrejas',
+            'url'         => 'admin/church',
             'icon'        => 'home',
             'label_color' => 'success',
             'can'  => 'admin',

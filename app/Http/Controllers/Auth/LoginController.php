@@ -80,7 +80,7 @@ class LoginController extends Controller
             if(auth()->attempt($credentials))
             {
                 if(auth()->user()->isAdmin)
-                    return redirect()->route('admin.home');
+                    return redirect()->route('dashboard');
 
                 if(!is_null(auth()->user()->idChurch_fk))
                     return redirect()->route('dashboard');
