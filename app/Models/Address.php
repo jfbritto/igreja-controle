@@ -26,6 +26,11 @@ class Address extends Model
         return $this->hasOne(\App\Models\User::class, 'idAddress_fk', 'id');
     }
 
+    public function address()
+    {
+        return $this->hasOne(\App\Models\Address::class, 'idAddress_fk', 'id');
+    }
+
     public function state()
     {
         return $this->hasOne(\App\Models\State::class, 'id', 'idState_fk');

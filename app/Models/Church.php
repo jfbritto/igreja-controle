@@ -19,7 +19,8 @@ class Church extends Model
         'cnpj',
         'phone',
         'avatar',
-        'hash'
+        'hash',
+        'idAddress_fk'
     ];
 
     public function members()
@@ -40,6 +41,11 @@ class Church extends Model
     public function events_registration()
     {
         return $this->hasMany(\App\Models\EventRegistration::class, 'idChurch_fk', 'id');
+    }
+
+    public function address()
+    {
+        return $this->hasOne(\App\Models\Address::class, 'id', 'idAddress_fk');
     }
 
     public static function boot()

@@ -6,7 +6,7 @@
     <h1>Você está logado!</h1>
 
     <ol class="breadcrumb">
-        <li><a href="#">Home</a></li>
+        <li><a href="#">Dashboard</a></li>
     </ol>
 @stop
 
