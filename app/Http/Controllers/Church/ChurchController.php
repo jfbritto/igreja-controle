@@ -18,6 +18,13 @@ class ChurchController extends Controller
         return view('admin.church.home', compact('churches'));
     }
 
+    public function home()
+    {
+        $churches = Church::where('isDeleted', false)->get();
+
+        return view('church.home', compact('churches'));
+    }
+
     public function create(){
 
         $states = State::get();
