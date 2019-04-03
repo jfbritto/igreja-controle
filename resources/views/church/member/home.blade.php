@@ -24,8 +24,8 @@
 
         <div class="box box-primary">
             <div class="box-header with-border">
-                <a href="{{ route('member.create') }}" class='btn btn-success'><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Novo membro</a>
-                <a target="_blank" href="{{ route('member.pdf') }}" class='btn btn-danger'><i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp; Gerar PDF com todos os membros</a>
+                <a href="{{ route('member.create') }}" class='btn btn-success' title="Novo membro"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                <a target="_blank" href="{{ route('member.pdf') }}" class='btn btn-danger' title="Gerar PDF com todos os membros"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                 <a target="_blank" href="{{ env('APP_URL').'/invite/'.$church->hash }}" class='btn btn-default'><i class="fa fa-link" aria-hidden="true"></i>&nbsp; {{ env('APP_URL').'/invite/'.$church->hash }}</a>
             </div>
             
@@ -55,19 +55,19 @@
                             </td>
                             <td style='vertical-align:middle' class='text-right'>
                                 @if($member->isPendent) 
-                                    <a href="{{ url('church/member/validate', $member->id) }}" class='btn btn-info'><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp; Validar</a>
+                                    <a href="{{ url('church/member/validate', $member->id) }}" class='btn btn-info' title="Validar membro"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                                 @else
 
                                     @if($member->isActive) 
-                                        <a href="{{ url('church/member/inactivate', $member->id) }}" class='btn btn-danger'><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp; Inativar</a>
+                                        <a href="{{ url('church/member/inactivate', $member->id) }}" class='btn btn-danger' title="Inativar membro"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                                     @else 
-                                        <a href="{{ url('church/member/activate', $member->id) }}" class='btn btn-success'><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp; Ativar</a>
+                                        <a href="{{ url('church/member/activate', $member->id) }}" class='btn btn-success' title="Ativar membro"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                                     @endif
 
                                 @endif
-                                <a href="{{ url('church/member/destroy', $member->id) }}" class='btn btn-danger'><i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Deletar</a>
-                                <a href="{{ url('church/member/edit', $member->id) }}" class='btn btn-warning'><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Editar</a>
-                                <a href="{{ url('church/member/show', $member->id) }}" class='btn btn-primary'><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; Visualizar</a>
+                                <a href="{{ url('church/member/destroy', $member->id) }}" class='btn btn-danger' title="Deletar membro"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                <a href="{{ url('church/member/edit', $member->id) }}" class='btn btn-warning' title="Editar membro"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                <a href="{{ url('church/member/show', $member->id) }}" class='btn btn-primary' title="Visualizar membro"><i class="fa fa-eye" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                     @empty

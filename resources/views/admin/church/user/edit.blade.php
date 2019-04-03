@@ -57,6 +57,10 @@
                                 </div>
 
 
+                                @laracropCss(true)
+                                @laracrop(name=desktop | aspectratio=1 | minsize=[300, 300] | bgcolor=black | bgopacity=0.7)
+                                @laracropJs(true)
+
                             </div>    
 
                         </div>
