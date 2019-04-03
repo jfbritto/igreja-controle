@@ -28,6 +28,11 @@ class Church extends Model
         return $this->hasMany(\App\Models\User::class, 'idChurch_fk', 'id');
     }
 
+    public function admins()
+    {
+        return $this->members()->where('isMember', false)->get();
+    }
+
     public function supports()
     {
         return $this->hasMany(\App\Models\Support::class, 'idChurch_fk', 'id');

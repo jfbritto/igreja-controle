@@ -3,12 +3,13 @@
 @section('title', 'Igreja Controle - Igrejas')
 
 @section('content_header')
-    <h1><i class="fa fa-home" aria-hidden="true"></i> Igrejas</h1>
+    <h1><i class="fa fa-home" aria-hidden="true"></i> {{$church->name}} - Adicionar usuário</h1>
 
     <ol class="breadcrumb">
         <li><a href="{{route('dashboard')}}">Dashboard</a></li>
         <li><a href="{{route('church')}}">Igrejas</a></li>
-        <li><a href="#">{{$church->name}}</a></li>
+        <li><a href="{{route('church.show', $church->id)}}">{{$church->name}}</a></li>
+        <li><a href="#">Add usuário</a></li>
     </ol>
 @stop
 
@@ -25,25 +26,63 @@
     <div class="col-md-12">
 
         <div class="box box-primary">
-
+            <!-- form start -->
+            <form role="form" method="POST" action="{{ route('church.user.store') }}">
+            @csrf
               <div class="box-body">
 
                 <div class='row'>
-                    <div class='col-md-3'>
+                    <div class='col-md-4'>
 
                         <div class="form-group">
                             <label for='name'>Nome</label> 
 
                             <div class="input-group">
                                 <div class="input-group-addon">
-                                    <i class="fa fa-home"></i>
+                                    <i class="fa fa-user"></i>
                                 </div>
-                                <input id='name' name='name' type="text" class="form-control" readonly value="{{$church->name}}">
+                                <input id='name' name='name' type="text" class="form-control" required>
                             </div>
                         </div>
 
-                    </div>                    
-                    <div class='col-md-3'>
+                    </div>
+                    <div class='col-md-4'>
+                
+                        <div class="form-group">
+                            <label for='sex'>Sexo</label> 
+
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-transgender"></i>
+                                </div>
+                                <select id='sex' name='sex' class="form-control" required>
+                                    <option>-- Selecione --</option>
+                                    <option value='masculino'>Masculino</option>
+                                    <option value='feminino'>Feminino</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class='col-md-4'>
+                    
+                        <div class="form-group">
+                            <label for='birth'>Nascimento</label>  
+
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input id='birth' name='birth' type="date" class="form-control" required>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                </div>
+                <div class='row'>
+                    
+                    <div class='col-md-4'>
 
                         <div class="form-group">
                             <label for='email'>E-mail</label> 
@@ -52,26 +91,26 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-envelope"></i>
                                 </div>
-                                <input id='email' name='email' type="email" class="form-control" readonly value="{{$church->email}}">
+                                <input id='email' name='email' type="email" class="form-control" required>
                             </div>
                         </div>
 
                     </div>
-                    <div class='col-md-3'>
+                    <div class='col-md-4'>
 
                         <div class="form-group">
-                            <label for='cnpj'>CNPJ</label> 
+                            <label for='cpf'>CPF</label> 
 
                             <div class="input-group">
                                 <div class="input-group-addon">
                                     <i class="fa fa-address-card-o"></i>
                                 </div>
-                                <input id='cnpj' name='cnpj' type="text" class="form-control" readonly value="{{$church->cnpj}}">
+                                <input id='cpf' name='cpf' type="text" class="form-control" required>
                             </div>
                         </div>
 
                     </div>
-                    <div class='col-md-3'>
+                    <div class='col-md-4'>
 
                         <div class="form-group">
                             <label for='phone'>Telefone</label> 
@@ -80,7 +119,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-phone"></i>
                                 </div>
-                                <input id='phone' name='phone' type="text" class="form-control" readonly value="{{$church->phone}}">
+                                <input id='phone' name='phone' type="text" class="form-control" required >
                             </div>
                         </div>
 
@@ -103,7 +142,8 @@
 
         <div class="box box-primary">
             <!-- form start -->
-
+            <form role="form" method="POST" action="{{ route('member.store') }}">
+            @csrf
               <div class="box-body">
 
                 <div class='row'>
@@ -116,7 +156,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="cep" id="cep" class="form-control" value="{{$church->address->cep}}" readonly>
+                                <input type='text' name="cep" id="cep" class="form-control">
                             </div>
                         </div>
 
@@ -130,10 +170,10 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <select name="idState_fk" id="idState_fk" onchange="changeState(this)" class="form-control" readonly>
+                                <select name="idState_fk" id="idState_fk" onchange="changeState(this)" class="form-control" required>
                                     <option>Selecione o estado</option>
                                     @foreach($states as $state)
-                                        <option value="{{$state->id}}" @if($state->id == $church->address->idState_fk) selected='selected' @endif >{{$state->nome}}</option>
+                                        <option value="{{$state->id}}">{{$state->nome}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -150,10 +190,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <select name="idCity_fk" id="idCity_fk" class="form-control" readonly>
-                                    @foreach($cities as $city)
-                                        <option value="{{$city->id}}" @if($city->id == $church->address->idCity_fk) selected='selected' @endif>{{$city->nome}}</option>
-                                    @endforeach
+                                <select name="idCity_fk" id="idCity_fk" class="form-control" required>
                                 </select>
                             </div>
                         </div>
@@ -173,7 +210,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="address" id="address" class="form-control" readonly value="{{$church->address->address}}">
+                                <input type='text' name="address" id="address" class="form-control">
                             </div>
                         </div>
 
@@ -187,7 +224,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="number" id="number" class="form-control" readonly value="{{$church->address->number}}">
+                                <input type='text' name="number" id="number" class="form-control">
                             </div>
                         </div>
 
@@ -201,7 +238,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="neighborhood" id="neighborhood" class="form-control" readonly value="{{$church->address->neighborhood}}">
+                                <input type='text' name="neighborhood" id="neighborhood" class="form-control">
                             </div>
                         </div>
 
@@ -216,7 +253,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="complement" id="complement" class="form-control" readonly value="{{$church->address->complement}}">
+                                <input type='text' name="complement" id="complement" class="form-control">
                             </div>
                         </div>
                     
@@ -228,81 +265,18 @@
               </div>
               <!-- /.box-body -->
 
+              <input type="hidden" name="id_church" value="{{$church->id}}">
+              <input type="hidden" name="form" value="">
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Cadastrar</button>
+              </div>
+            </form>
           </div>
 
     </div>    
 
 </div>
-
-
-<div class="row">
-
-    <div class="col-md-12">
-
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <a href="{{ route('church.user.create', $church->id) }}" class='btn btn-success'><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Novo usuário</a>
-                <a target="_blank" href="{{ route('church.user.pdf') }}" class='btn btn-danger'><i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp; Gerar PDF com todos os usuários</a>
-            </div>
-            
-            <div class="box-body">
-                <table class='table table-hover table-striped table-condensed' id='table'>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Nome</th>
-                            <th class='hidden-xs'>Email</th>
-                            <th class='hidden-xs'>Telefone</th>
-                            <th class='hidden-xs'>Status</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @forelse($church->admins() as $user)
-                        <tr class="{{ $user->isPendent ? 'info' : (!$user->isActive ? 'danger' : '') }} ">
-                            <td style='vertical-align:middle'><img src="@if(!is_null($user->avatar)){{ url('storage/members/'.$user->avatar) }} @else {{ url('storage/members/default.jpg') }} @endif" class='img img-circle' width='40'></td>
-                            <td style='vertical-align:middle'>{{ $user->name }}</td>
-                            <td style='vertical-align:middle' class='hidden-xs'>{{ $user->email }}</td>
-                            <td style='vertical-align:middle' class='hidden-xs'>{{ $user->phone }}</td>
-                            <td style='vertical-align:middle' class='hidden-xs'>
-                                @if($user->isActive) Ativo @else Inativo @endif
-                            </td>
-                            <td style='vertical-align:middle' class='text-right'>
-                                
-                                @if($user->isDeleted)
-                                    Deletado
-                                @else 
-
-                                    @if($user->isActive) 
-                                        <a href="{{ url('admin/church/user/inactivate', $user->id) }}" class='btn btn-danger'><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp; Inativar</a>
-                                    @else 
-                                        <a href="{{ url('admin/church/user/activate', $user->id) }}" class='btn btn-success'><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp; Ativar</a>
-                                    @endif
-
-                                    <a href="{{ url('admin/church/user/destroy', $user->id) }}" class='btn btn-danger'><i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Deletar</a>
-                                    <a href="{{ url('admin/church/user/edit', $user->id) }}" class='btn btn-warning'><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Editar</a>
-                                    <a href="{{ url('admin/church/user/show', $user->id) }}" class='btn btn-primary'><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; Visualizar</a>
-                            
-                                @endif
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td style='vertical-align:middle' colspan="200">Nenhum usuário cadastrado!</td>
-                        </tr>
-                    @endforelse
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-
-    </div>    
-
-</div>
-
-
-
 
 @endsection
 @section('js')
