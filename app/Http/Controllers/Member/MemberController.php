@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Member;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -10,6 +11,7 @@ use App\Models\State;
 use App\Models\City;
 use App\Models\Address;
 use App\Models\Church;
+use Arisharyanto\Laracrop\Laracrop;
 
 class MemberController extends Controller
 {
@@ -128,6 +130,7 @@ class MemberController extends Controller
 
     public function update(Request $request, $id)
     {
+
         $member = User::where('id', '=', $id)
                             ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
                             ->where('isActive', '=', true)
@@ -146,6 +149,7 @@ class MemberController extends Controller
                     ->route('member')
                     ->with('error', 'Endereço não encontrado!');
 
+<<<<<<< HEAD
         $nameFile = $member->avatar;
         if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
 
@@ -159,6 +163,22 @@ class MemberController extends Controller
                 return redirect()
                         ->back()
                         ->with('error', 'Falha ao fazer upload da imagem!');
+=======
+            $nameFile = Laracrop::cropImage($request->input('avatar'));
+            // $nameFile = $member->id.kebab_case($member->name).".".$request->avatar->extension();;
+
+            Storage::delete("members/{$member->avatar}");
+
+            File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/members/{$nameFile}"));
+
+            //$upload = $request->avatar->storeAs('members', $nameFile);
+
+            // if(!$upload)
+            //     return redirect()
+            //             ->back()
+            //             ->with('error', 'Falha ao fazer upload da imagem!');
+
+>>>>>>> feature/laracrop
 
         }
 
@@ -191,7 +211,10 @@ class MemberController extends Controller
                         ->back()
                         ->with('error', 'Erro ao editar endereço!');
 
+
         $result2 = $member->update($request_user);
+
+        Laracrop::cleanCropTemp();
 
         if(!$result2)
             return redirect()
