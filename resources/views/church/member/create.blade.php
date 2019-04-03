@@ -264,6 +264,8 @@
               </div>
               <!-- /.box-body -->
 
+              <input type="hidden" name="form" value="church">
+              
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Cadastrar</button>
               </div>

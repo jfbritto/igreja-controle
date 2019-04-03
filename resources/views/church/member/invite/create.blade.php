@@ -37,6 +37,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
     <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script>
+
+    <meta property="og:url" content="" />
+    <meta property="type" content="article" />
+    <meta property="og:title" content="CADASTRO DE MEMBROS">
+    <meta property="og:description" content="Faça seu cadastro para entrar na lista de membros da Igreja {{ $church->name }}">
+    <meta property="og:image" content="">
     
 
 </head>

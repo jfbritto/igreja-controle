@@ -27,33 +27,43 @@ $this->group(['middleware' => 'auth'], function(){
     //ADMINISTRADOR
     $this->group(['middleware' => 'admin', 'prefix' => 'admin'], function(){
 
-        $this->get('/', 'Admin\AdminController@index')->name('home');
+        $this->get('/', 'Admin\AdminController@index2')->name('home');
 
         //MENU LATERAL
         $this->get('/dashboard', 'Admin\AdminController@index')->name('dashboard');
         $this->get('/church', 'Church\ChurchController@index')->name('church');
 
         //IGREJA
-        $this->get('/church/show/{id_church}', 'Church\ChurchController@show')->name('church.show');
         $this->get('/church/add', 'Church\ChurchController@create')->name('church.create');
         $this->post('/church/add', 'Church\ChurchController@store')->name('church.store');
         $this->get('/church/edit/{id_church}', 'Church\ChurchController@edit')->name('church.edit');
         $this->post('/church/edit/{id_church}', 'Church\ChurchController@update')->name('church.update');
-
+        $this->get('/church/show/{id_church}', 'Church\ChurchController@show')->name('church.show');
         $this->get('/church/pdf', 'Church\ChurchController@Church_pdf')->name('church.pdf');
         $this->get('/church/destroy/{id_church}', 'Church\ChurchController@destroy')->name('church.destroy');
         $this->get('/church/inactivate/{id_church}', 'Church\ChurchController@inactivate')->name('church.inactivate');
         $this->get('/church/activate/{id_church}', 'Church\ChurchController@activate')->name('church.activate');
 
+        //IGREJA USUARIOS
+        $this->get('/church/user/add/{id}', 'Member\MemberController@create_admin')->name('church.user.create');
+        $this->post('/church/user/add', 'Member\MemberController@store_admin')->name('church.user.store');
+        $this->get('/church/user/edit/{id_user}', 'Member\MemberController@edit_admin')->name('church.user.edit');
+        $this->post('/church/user/edit/{id_user}', 'Member\MemberController@update_admin')->name('church.user.update');
+        $this->get('/church/user/show/{id_user}', 'Member\MemberController@show_admin')->name('church.user.show');
+
+        $this->get('/church/user/pdf', 'Member\MemberController@Church_pdf')->name('church.user.pdf');
+        $this->get('/church/user/inactivate/{id_user}', 'Member\MemberController@inactivate_admin')->name('church.user.inactivate');
+        $this->get('/church/user/activate/{id_user}', 'Member\MemberController@activate_admin')->name('church.user.activate');
+        $this->get('/church/user/destroy/{id_user}', 'Member\MemberController@destroy_admin')->name('church.user.destroy');
     });
 
     //IGREJA
     $this->group(['middleware' => 'church', 'prefix' => 'church'], function(){
 
-        $this->get('/', 'Church\ChurchController@index')->name('home');
+        $this->get('/', 'Church\ChurchController@home')->name('home');
 
         //MENU LATERAL
-        $this->get('/dashboard', 'Church\ChurchController@index')->name('dashboard');
+        $this->get('/dashboard', 'Church\ChurchController@home')->name('dashboard');
         $this->get('/member', 'Member\MemberController@index')->name('member');
         $this->get('/birth', 'Member\MemberController@birth')->name('birth');
         $this->get('/card', 'Card\CardController@index')->name('card');
@@ -124,11 +134,11 @@ $this->get('/search/city/{id_estado}', 'Search\SearchController@autocomplete');
 
 //CADASTRO MEMBRO EXTERNO
 
-$this->get('/invite/{hash}', 'Member\MemberController@invite_create')->name('member.invite.create');
-$this->post('/invite/{hash}', 'Member\MemberController@invite_store')->name('member.invite.store');
+$this->get('/invite/{hash}', 'Member\MemberController@create_invite')->name('member.invite.create');
+$this->post('/invite/{hash}', 'Member\MemberController@store_invite')->name('member.invite.store');
 
 
 //CADASTRO EVENTO EXTERNO
 
-$this->get('/event/invite/{hash}', 'Inscription\InscriptionController@invite_create')->name('inscription.invite.create');
-$this->post('/event/invite/{hash}', 'Inscription\InscriptionController@invite_store')->name('inscription.invite.store');
+$this->get('/event/invite/{hash}', 'Inscription\InscriptionController@create_invite')->name('inscription.invite.create');
+$this->post('/event/invite/{hash}', 'Inscription\InscriptionController@store_invite')->name('inscription.invite.store');
