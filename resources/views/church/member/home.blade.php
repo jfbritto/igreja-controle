@@ -45,7 +45,7 @@
                     <tbody>
                     @forelse($members as $member)
                         <tr class="{{ $member->isPendent ? 'info' : (!$member->isActive ? 'danger' : '') }} ">
-                            <td style='vertical-align:middle'><img src="@if(!is_null($member->avatar)){{ url('storage/members/'.$member->avatar) }} @else {{ url('storage/members/default.jpg') }} @endif" class='img img-circle' width='80'></td>
+                            <td style='vertical-align:middle'><img src="@if(!is_null($member->avatar)){{ url('storage/members/'.$member->avatar) }} @else {{ url('storage/members/default.jpg') }} @endif" class='img img-circle' width='40'></td>
                             <td style='vertical-align:middle'>{{ $member->name }}</td>
                             <td style='vertical-align:middle' class='hidden-xs'>{{ $member->email }}</td>
                             <td style='vertical-align:middle' class='hidden-xs'>{{ date('d/m/Y', strtotime($member->birth)) }}</td>
