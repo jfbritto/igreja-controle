@@ -21,7 +21,7 @@ class MemberController extends Controller
                             ->where('isDeleted', '=', false)
                             ->get();
 
-        $church = Church::where('id', auth()->user()->idChurch_fk)->first();                    
+        $church = Church::where('id', auth()->user()->idChurch_fk)->first();
 
         return view('church.member.home', compact('members', 'church'));
     }
@@ -36,7 +36,7 @@ class MemberController extends Controller
 
     public function store(Request $request)
     {
-        
+
         $request_address = [
             'cep'           => $request->cep,
             'idState_fk'    => $request->idState_fk,
@@ -48,7 +48,7 @@ class MemberController extends Controller
         ];
 
         $address = Address::create($request_address);
-        
+
         $request_user = [
             'name'          => $request->name,
             'email'         => $request->email,
@@ -75,8 +75,8 @@ class MemberController extends Controller
                         ->route('member')
                         ->with('success', 'Membro cadastrado com sucesso!');
 
-        
-        
+
+
     }
 
     public function show($id)
@@ -85,7 +85,7 @@ class MemberController extends Controller
                             ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
                             ->get()
                             ->first();
-        
+
         if(!$member)
             return redirect()
                         ->route('member')
@@ -106,7 +106,7 @@ class MemberController extends Controller
                             ->where('isActive', '=', true)
                             ->get()
                             ->first();
-        
+
         if(!$member)
             return redirect()
                         ->route('member')
@@ -133,9 +133,9 @@ class MemberController extends Controller
                             ->where('isActive', '=', true)
                             ->get()
                             ->first();
-        
+
         $address = Address::find($member->idAddress_fk);
-    
+
         if(!$member)
             return redirect()
                     ->route('member')
@@ -144,28 +144,17 @@ class MemberController extends Controller
         if(!$address)
             return redirect()
                     ->route('member')
-                    ->with('error', 'Endereço não encontrado!');        
-        
-        //$request['avatar'] = $member->avatar;
-        $nameFile = $member->avatar;          
+                    ->with('error', 'Endereço não encontrado!');
+
+        $nameFile = $member->avatar;
         if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
-            
-            if ($member->avatar) 
-                $name = $member->avatar;
-            else
-                $name = $member->id.kebab_case($member->name).".".$request->avatar->extension();
 
-            //$extension = $request->avatar->extension();
-            $nameFile = $name;
+            $nameFile = $member->id.kebab_case($member->name).".".$request->avatar->extension();;
 
-            //dd($nameFile);
-
-            //$request['avatar'] = $nameFile;
-
-            Storage::delete("members/{$member->avatar}");    
+            Storage::delete("members/{$member->avatar}");
 
             $upload = $request->avatar->storeAs('members', $nameFile);
-            
+
             if(!$upload)
                 return redirect()
                         ->back()
@@ -182,7 +171,7 @@ class MemberController extends Controller
             'neighborhood'  => $request->neighborhood,
             'complement'    => $request->complement,
         ];
-        
+
         $request_user = [
             'name'          => $request->name,
             'email'         => $request->email,
@@ -190,7 +179,7 @@ class MemberController extends Controller
             'cpf'           => $request->cpf,
             'sex'           => $request->sex,
             'phone'         => $request->phone,
-            'avatar'        => $request->avatar,
+            'avatar'        => $nameFile,
         ];
 
 
@@ -202,8 +191,8 @@ class MemberController extends Controller
                         ->back()
                         ->with('error', 'Erro ao editar endereço!');
 
-        $result2 = $member->update($request_user);  
-        
+        $result2 = $member->update($request_user);
+
         if(!$result2)
             return redirect()
                         ->back()
@@ -220,13 +209,13 @@ class MemberController extends Controller
                             ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
                             ->get()
                             ->first();
-        
+
         if(!$member)
             return redirect()
                         ->route('member')
                         ->with('error', 'Membro não encontrado!');
 
-        $updates = ['isActive' => false, 'isDeleted' => true];                    
+        $updates = ['isActive' => false, 'isDeleted' => true];
         $result = $member->update($updates);
 
         if(!$result)
@@ -244,15 +233,15 @@ class MemberController extends Controller
     {
         $member = User::where('id', '=', $id)
                             ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
-                            ->get() 
+                            ->get()
                             ->first();
-        
+
         if(!$member)
             return redirect()
                         ->route('member')
                         ->with('error', 'Membro não encontrado!');
 
-        $updates = ['isActive' => false];                    
+        $updates = ['isActive' => false];
         $result = $member->update($updates);
 
         if(!$result)
@@ -271,13 +260,13 @@ class MemberController extends Controller
                             ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
                             ->get()
                             ->first();
-        
+
         if(!$member)
             return redirect()
                         ->route('member')
                         ->with('error', 'Membro não encontrado!');
 
-        $updates = ['isActive' => true];                    
+        $updates = ['isActive' => true];
         $result = $member->update($updates);
 
         if(!$result)
@@ -297,13 +286,13 @@ class MemberController extends Controller
                             ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
                             ->get()
                             ->first();
-        
+
         if(!$member)
             return redirect()
                         ->route('member')
                         ->with('error', 'Membro não encontrado!');
 
-        $updates = ['isActive' => true, 'isPendent' => false];                    
+        $updates = ['isActive' => true, 'isPendent' => false];
         $result = $member->update($updates);
 
         if(!$result)
@@ -337,7 +326,7 @@ class MemberController extends Controller
 
     public function store_admin(Request $request)
     {
-        
+
         $request_address = [
             'cep'           => $request->cep,
             'idState_fk'    => $request->idState_fk,
@@ -349,7 +338,7 @@ class MemberController extends Controller
         ];
 
         $address = Address::create($request_address);
-        
+
         $request_user = [
             'name'          => $request->name,
             'email'         => $request->email,
@@ -375,8 +364,8 @@ class MemberController extends Controller
             return redirect()
                             ->route('church.show', $request->id_church)
                             ->with('success', 'Usuário cadastrado com sucesso!');
-        
-        
+
+
     }
 
 
@@ -384,7 +373,7 @@ class MemberController extends Controller
     public function show_admin($id_user)
     {
         $user = User::find($id_user);
-        
+
         $address = Address::find($user->idAddress_fk);
         $states = State::get();
         $cities = City::where('idEstado', '=', $address->idState_fk)->get();
@@ -411,26 +400,18 @@ class MemberController extends Controller
     public function update_admin(Request $request, $id_user)
     {
         $user = User::find($id_user);
-        
-        $address = Address::find($user->idAddress_fk);    
-        
-        $request['avatar'] = $user->avatar;
+
+        $address = Address::find($user->idAddress_fk);
+
+        $nameFile = $user->avatar;
         if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
-            
-            if ($user->avatar) 
-                $name = $user->avatar;
-            else
-                $name = $user->id.kebab_case($user->name).".".$request->avatar->extension();
 
-            //$extension = $request->avatar->extension();
-            $nameFile = $name;
+            $nameFile = $user->id.kebab_case($user->name).".".$request->avatar->extension();;
 
-            $request['avatar'] = $nameFile;
-
-            //Storage::delete("members/{$member->avatar}");    
+            Storage::delete("members/{$user->avatar}");
 
             $upload = $request->avatar->storeAs('members', $nameFile);
-            
+
             if(!$upload)
                 return redirect()
                         ->back()
@@ -438,7 +419,6 @@ class MemberController extends Controller
 
         }
 
-        dd($request->avatar);
 
         $request_address = [
             'cep'           => $request->cep,
@@ -449,7 +429,7 @@ class MemberController extends Controller
             'neighborhood'  => $request->neighborhood,
             'complement'    => $request->complement,
         ];
-        
+
         $request_user = [
             'name'          => $request->name,
             'email'         => $request->email,
@@ -457,7 +437,7 @@ class MemberController extends Controller
             'cpf'           => $request->cpf,
             'sex'           => $request->sex,
             'phone'         => $request->phone,
-            'avatar'        => $request->avatar,
+            'avatar'        => $nameFile,
         ];
 
 
@@ -469,8 +449,8 @@ class MemberController extends Controller
                         ->back()
                         ->with('error', 'Erro ao editar endereço!');
 
-        $result2 = $user->update($request_user);  
-        
+        $result2 = $user->update($request_user);
+
         if(!$result2)
             return redirect()
                         ->back()
@@ -486,8 +466,8 @@ class MemberController extends Controller
     public function inactivate_admin($id_user)
     {
         $user = User::find($id_user);
-        
-        $updates = ['isActive' => false];                    
+
+        $updates = ['isActive' => false];
         $result = $user->update($updates);
 
         if(!$result)
@@ -503,8 +483,8 @@ class MemberController extends Controller
     public function activate_admin($id_user)
     {
         $user = User::find($id_user);
-        
-        $updates = ['isActive' => true];                    
+
+        $updates = ['isActive' => true];
         $result = $user->update($updates);
 
         if(!$result)
@@ -521,8 +501,8 @@ class MemberController extends Controller
     public function destroy_admin($id_user)
     {
         $user = User::find($id_user);
-        
-        $updates = ['isActive' => false, 'isDeleted' => true];                       
+
+        $updates = ['isActive' => false, 'isDeleted' => true];
         $result = $user->update($updates);
 
         if(!$result)
@@ -624,26 +604,26 @@ class MemberController extends Controller
 
     public function member_pdf()
     {
-  
+
         $members = User::where('idChurch_fk', '=', auth()->user()->idChurch_fk)
                                 ->where('isMember', '=', true)
                                 ->where('isActive', '=', true)
                                 ->where('isDeleted', '=', false)
                                 ->get();
-    
+
         return \PDF::loadView('church.member.pdf.members', compact('members'))->setPaper('a4', 'landscape')->stream();
     }
 
     public function birth_pdf($month)
     {
-  
+
         $members = User::whereMonth('birth', $month)
                                 ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
                                 ->where('isMember', '=', true)
                                 ->where('isActive', '=', true)
                                 ->where('isDeleted', '=', false)
                                 ->get();
-    
+
         return \PDF::loadView('church.birth.pdf.birthdays', compact('members'))->stream();
     }
 
@@ -668,7 +648,7 @@ class MemberController extends Controller
 
     public function store_invite(Request $request, $hash)
     {
-        
+
         // $validator = validator($request, [
         //     'name' => 'required',
         //     'email' => 'required|email',
@@ -690,7 +670,7 @@ class MemberController extends Controller
         ];
 
         $address = Address::create($request_address);
-        
+
         $request_user = [
             'name'          => $request->name,
             'email'         => $request->email,
