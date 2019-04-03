@@ -50,10 +50,10 @@ $this->group(['middleware' => 'auth'], function(){
     //IGREJA
     $this->group(['middleware' => 'church', 'prefix' => 'church'], function(){
 
-        $this->get('/', 'Church\ChurchController@index')->name('home');
+        $this->get('/', 'Church\ChurchController@home')->name('home');
 
         //MENU LATERAL
-        $this->get('/dashboard', 'Church\ChurchController@index')->name('dashboard');
+        $this->get('/dashboard', 'Church\ChurchController@home')->name('dashboard');
         $this->get('/member', 'Member\MemberController@index')->name('member');
         $this->get('/birth', 'Member\MemberController@birth')->name('birth');
         $this->get('/card', 'Card\CardController@index')->name('card');

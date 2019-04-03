@@ -140,7 +140,8 @@ class MemberController extends Controller
                     ->route('member')
                     ->with('error', 'Endereço não encontrado!');        
         
-        $request['avatar'] = $member->avatar;
+        //$request['avatar'] = $member->avatar;
+        $nameFile = $member->avatar;          
         if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
             
             if ($member->avatar) 
@@ -151,9 +152,11 @@ class MemberController extends Controller
             //$extension = $request->avatar->extension();
             $nameFile = $name;
 
-            $request['avatar'] = $nameFile;
+            //dd($nameFile);
 
-            //Storage::delete("members/{$member->avatar}");    
+            //$request['avatar'] = $nameFile;
+
+            Storage::delete("members/{$member->avatar}");    
 
             $upload = $request->avatar->storeAs('members', $nameFile);
             
