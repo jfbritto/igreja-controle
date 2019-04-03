@@ -146,20 +146,12 @@ class MemberController extends Controller
                     ->route('member')
                     ->with('error', 'Endereço não encontrado!');        
         
-        $request['avatar'] = $member->avatar;
+        $nameFile = $member->avatar;
         if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
             
-            if ($member->avatar) 
-                $name = $member->avatar;
-            else
-                $name = $member->id.kebab_case($member->name).".".$request->avatar->extension();
+            $nameFile = $member->id.kebab_case($member->name).".".$request->avatar->extension();;
 
-            //$extension = $request->avatar->extension();
-            $nameFile = $name;
-
-            $request['avatar'] = $nameFile;
-
-            //Storage::delete("members/{$member->avatar}");    
+            Storage::delete("members/{$member->avatar}");    
 
             $upload = $request->avatar->storeAs('members', $nameFile);
             
@@ -187,7 +179,7 @@ class MemberController extends Controller
             'cpf'           => $request->cpf,
             'sex'           => $request->sex,
             'phone'         => $request->phone,
-            'avatar'        => $request->avatar,
+            'avatar'        => $nameFile,
         ];
 
 
@@ -411,20 +403,12 @@ class MemberController extends Controller
         
         $address = Address::find($user->idAddress_fk);    
         
-        $request['avatar'] = $user->avatar;
+        $nameFile = $user->avatar;
         if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
             
-            if ($user->avatar) 
-                $name = $user->avatar;
-            else
-                $name = $user->id.kebab_case($user->name).".".$request->avatar->extension();
+            $nameFile = $user->id.kebab_case($user->name).".".$request->avatar->extension();;
 
-            //$extension = $request->avatar->extension();
-            $nameFile = $name;
-
-            $request['avatar'] = $nameFile;
-
-            //Storage::delete("members/{$member->avatar}");    
+            Storage::delete("members/{$user->avatar}");    
 
             $upload = $request->avatar->storeAs('members', $nameFile);
             
@@ -435,7 +419,6 @@ class MemberController extends Controller
 
         }
 
-        dd($request->avatar);
 
         $request_address = [
             'cep'           => $request->cep,
@@ -454,7 +437,7 @@ class MemberController extends Controller
             'cpf'           => $request->cpf,
             'sex'           => $request->sex,
             'phone'         => $request->phone,
-            'avatar'        => $request->avatar,
+            'avatar'        => $nameFile,
         ];
 
 
