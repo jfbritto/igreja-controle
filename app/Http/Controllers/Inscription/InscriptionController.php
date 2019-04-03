@@ -149,7 +149,7 @@ class InscriptionController extends Controller
 
 
 
-    public function invite_create($hash)
+    public function create_invite($hash)
     {
         $event = Event::where('hash', $hash)->first();
 
@@ -160,7 +160,7 @@ class InscriptionController extends Controller
         return view('church.inscription.invite.create', compact('hash', 'church', 'states', 'event'));
     }
 
-    public function invite_store(Request $request, $hash)
+    public function store_invite(Request $request, $hash)
     {
         $event = Event::where('hash', $hash)->first();
 
