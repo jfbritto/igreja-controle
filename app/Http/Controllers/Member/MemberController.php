@@ -149,21 +149,8 @@ class MemberController extends Controller
                     ->route('member')
                     ->with('error', 'Endereço não encontrado!');
 
-<<<<<<< HEAD
         $nameFile = $member->avatar;
         if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
-
-            $nameFile = $member->id.kebab_case($member->name).".".$request->avatar->extension();;
-
-            Storage::delete("members/{$member->avatar}");
-
-            $upload = $request->avatar->storeAs('members', $nameFile);
-
-            if(!$upload)
-                return redirect()
-                        ->back()
-                        ->with('error', 'Falha ao fazer upload da imagem!');
-=======
             $nameFile = Laracrop::cropImage($request->input('avatar'));
             // $nameFile = $member->id.kebab_case($member->name).".".$request->avatar->extension();;
 
@@ -178,7 +165,6 @@ class MemberController extends Controller
             //             ->back()
             //             ->with('error', 'Falha ao fazer upload da imagem!');
 
->>>>>>> feature/laracrop
 
         }
 
