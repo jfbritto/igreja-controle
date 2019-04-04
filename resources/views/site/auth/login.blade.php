@@ -15,6 +15,9 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-8 col-md-offset-2">
+					<div class="messages">
+					    @include('includes.alerts')
+					</div>
 					<form method="POST" action="{{ route('login.post') }}">
                     @csrf
 						<input name="email" style="background-color: white;" type="email" id="email" class="col-lg-12 " placeholder="Digite seu email" required autofocus>

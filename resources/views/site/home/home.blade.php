@@ -23,7 +23,7 @@
 						 	<h1>Todo as informações de sua igreja na palma das suas mãos</h1>
 						</div>
 						<br/>
-						<a href="#" class="buttoncolor animated fadeInRightBig"><i class="fa fa-link"></i>&nbsp; Fazer pedido</a>
+						<a class="buttoncolor animated fadeInRightBig sscroll" href="#Section-3">Entrar</a>
 					</div>
 				</div>
 				<div class="item" id="slide_3">
@@ -49,7 +49,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="page-header text-center col-sm-12 col-lg-12 color-white animated fade">
-				<h1>Informações</h1>
+				<h1>Serviços</h1>
 				<p class="lead">
 				</p>
 			</div>
@@ -57,50 +57,47 @@
 		<div class="row color-white">
 			<div class="col-md-12">
 				<div class="boxservice">
-					<i class="fa fa-info"></i>
-					<h3>Entenda o LAI</h3>
+					<i class="fa fa-users"></i>
+					<h4>Controle de membros</h4>
 					<p>
-            			Conheça os principais aspectos relacionados à LAI: abrangência, objetivos e quem pode pedir.
-						abrangência, objetivos e quem pode pedir.
+            			Cadastre ou simplesmente envie o link para os próprios membros preencherem seus dados, tornando todo o controle mais fácil.
 					</p>
 				</div>
 				<div class="boxservice">
-					<i class="fa fa-bullhorn"></i>
-					<h3>Peça uma informação</h3>
+					<i class="fa fa-gift"></i>
+					<h4>Aniversariantes do mês</h4>
 					<p>
-            			Confira os procedimentos para solicitar acesso a informações pela internet ou por um SIC físico.
+            			Não perca nenhuma data especial! Agora você saberá quais membros estão comemorando mais um ano de vida!
 					</p>
 				</div>
 				<div class="boxservice rightb">
-					<i class="fa fa-thumbs-down"></i>
-					<h3>Registre uma reclamação</h3>
+					<i class="fa fa-calendar"></i>
+					<h4>Carteirinhas</h4>
 					<p>
-            			Saiba o que fazer se o órgão não responder o pedido de informação dentro dos prazos legais.
+            			Você poderá passar uma imagem de organização para seus membros.
 					</p>
 				</div>
 				<div class="boxservice bottomb">
-					<i class="fa fa-sitemap"></i>
-					<h3>Recursos passo-a-passo</h3>
+					<i class="fa fa-calendar"></i>
+					<h4>Agenda de eventos</h4>
 					<p>
-            			Saiba o que fazer (prazos, processos e instâncias a recorrer) após um órgão negar acesso.
+            			Saiba quando, onde e em qual horário serão os próximos compromissos!.
 					</p>
 				</div>
 				<div class="boxservice bottomb">
 					<i class="fa fa-sign-in"></i>
-					<h3>Saiba como se cadastrar</h3>
+					<h4>Inscrição de eventos</h4>
 					<p>
-						Saiba como se cadastrar para usufluir de todos os recursos do e-sic.
-						SIC para solicitar a informação desejada.
+						Abandone o papel e caneta! com apenas um link todos os participantes poderão realizar suas inscrições nos retiros e caravanas!
 					</p>
 				</div>
 				<div class="boxservice rightb bottomb">
-					<i class="fa fa-users"></i>
-					<h3>SIC Físico</h3>
+					<i class="fa fa-usd"></i>
+					<h4>Controle de caixa</h4>
 					<p>
-            			Para fazer um pedido por meio do SIC, dirija-se à unidade física do SIC para solicitar a informação desejada. 
+            			Organize as finanças de sua igreja mais facilmente. Deixe que a gente te mostre o quanto está saindo e entrando em cada mês! 
 					</p>
 				</div>
-			</div>
 		</div>
 	</div>
 </section>
@@ -191,6 +188,9 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-8 col-md-offset-2">
+					<div class="messages">
+					    @include('includes.alerts')
+					</div>
 					<form method="POST" action="{{ route('login.post') }}">
                     @csrf
 						<input name="email" style="background-color: white;" type="email" id="email" class="col-lg-12 " placeholder="Digite seu email" required autofocus>

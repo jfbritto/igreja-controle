@@ -99,6 +99,6 @@ class LoginController extends Controller
     {
         auth()->logout();
         session()->flush();
-        return redirect('/login');
+        return redirect('/');
     }
 }
