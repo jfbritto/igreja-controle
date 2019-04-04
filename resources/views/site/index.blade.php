@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
 
@@ -8,11 +8,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <meta property="og:url" content="" />
-    <meta property="type" content="article" />
+    <meta property="og:url" content="http://www.igrejacontrole.com.br/" />
+    <meta property="type" content="website" />
     <meta property="og:title" content="IGREJA CONTROLE">
     <meta property="og:description" content="Sistema de controle e organização de igrejas">
     <meta property="og:image" content="{{asset("img/background-reduce.jpg")}}">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:image:type" content="image/jpg">
+    <meta property="og:image:width" content="640">
+    <meta property="og:image:height" content="480">
 
     <link rel="icon" href="img/cross.png">
 
