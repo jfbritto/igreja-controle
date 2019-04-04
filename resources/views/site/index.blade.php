@@ -60,9 +60,9 @@
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#login">Login</a>
           </li>
-          <li class="nav-item">
+<!--           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#signup">Contato</a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
@@ -188,65 +188,22 @@
   </section>
 
   <!-- Login Section -->
-  <section id="login" class="login-section bg-black">
+  <section id="login" class="signup-section d-flex">
     <div class="container my-auto">
-
-      <div class="row">
-
-        <div class="col-md-6 mx-auto mb-3 mt-3 text-center">
-        
-        <!-- <h2 class="text-white mb-5">Login</h2> -->
-      
-          <div class="card">
-            <div class="card-body text-center">
-
-                <div class="messages">
-                    @include('includes.alerts')
-                </div>
-
-                <form method="POST" action="{{ route('login.post') }}">
-                    @csrf
-                    <div align="center" class="form-group">
-                        <img id="animate" src="img/animation/debut.JPG" alt="">
-                    </div>
-                    <div class="col-10 offset-1">
-                        <div class="form-group">
-                            <label for="">E-mail</label>
-                            <input type="text" id="email" name="email" class="form-control" maxlength="46">
-                        </div>
-                        <div class="form-group">
-                            <label for="">Senha</label>
-                            <input type="password" name="password" id="password" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-info btn-lg btn-block">Entrar</button>
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-          </div>
-        </div>
-
-      </div> 
-
-
-    </div>
-  </section>
-
-  <!-- Signup Section -->
-  <section id="signup" class="signup-section">
-    <div class="container">
       <div class="row">
         <div class="col-md-10 col-lg-8 mx-auto text-center">
 
-          <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
-          <h2 class="text-white mb-5">Subscribe to receive updates!</h2>
+            <h2 class="text-white-50 mx-auto mt-2 mb-5">Login</h2>
 
-          <form class="form-inline d-flex">
-            <input type="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" placeholder="Enter email address...">
-            <button type="submit" class="btn btn-primary mx-auto">Subscribe</button>
-          </form>
+            <div class="messages">
+                @include('includes.alerts')
+            </div>
+            <form method="POST" action="{{ route('login.post') }}" class="form-inline d-flex">
+                @csrf
+                <input type="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" name="email" placeholder="Informe seu email" style="text-transform: none;">
+                <input type="password" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" name="password" placeholder="Informe a senha" style="text-transform: none;">
+                <button type="submit" class="btn btn-primary mx-auto">Entrar</button>
+            </form>
 
         </div>
       </div>

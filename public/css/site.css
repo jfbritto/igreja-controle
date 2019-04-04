@@ -1,10 +1,18 @@
-.login-section{
+.signup-section{
 	height: calc(100vh - 70px)
 }
 
 
 .masthead{
 	background: linear-gradient(to bottom,rgba(22,22,22,.3) 0,rgba(22,22,22,.7) 75%,#161616 100%),url(../img/background.jpg) !important;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-size: cover;
+}
+
+.signup-section{
+	background: linear-gradient(to bottom,rgba(10,10,10,.3) 0,rgba(10,10,10,.7) 75%,#161616 100%),url(../img/login.jpg) !important;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-attachment: scroll;
