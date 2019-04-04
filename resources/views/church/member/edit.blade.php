@@ -20,19 +20,6 @@
     @include('includes.alerts')
 </div>
 
-
-<div class="row">
-
-    <div class="col-md-12">
-
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <a href="{{ route('member.show', $member->id) }}" class='btn btn-default'><i class="fa fa-close" aria-hidden="true"></i>&nbsp; Cancelar</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 <form role="form" method="POST" action="{{ route('member.update', $member->id) }}" enctype="multipart/form-data">
 @csrf
 
@@ -182,7 +169,7 @@
         <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close fechar-modal" data-dismiss="modal">&times;</button>
-              
+              Selecione a imagem
             </div>
             <div class="modal-body">
 
@@ -333,7 +320,8 @@
               </div>
               <!-- /.box-body -->
 
-              <div class="box-footer">
+              <div class="box-footer text-right">
+                <a href="{{ url()->previous() }}" class='btn btn-default'><i class="fa fa-close" aria-hidden="true"></i>&nbsp; Cancelar</a>
                 <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Salvar</button>
               </div>
             </form>

@@ -64,10 +64,10 @@
                                         <a href="{{ url('church/member/activate', $member->id) }}" class='btn btn-success' title="Ativar membro"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                                     @endif
 
-                                @endif
                                 <a href="{{ url('church/member/destroy', $member->id) }}" class='btn btn-danger' title="Deletar membro"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                 <a href="{{ url('church/member/edit', $member->id) }}" class='btn btn-warning' title="Editar membro"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                 <a href="{{ url('church/member/show', $member->id) }}" class='btn btn-primary' title="Visualizar membro"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                @endif
                             </td>
                         </tr>
                     @empty

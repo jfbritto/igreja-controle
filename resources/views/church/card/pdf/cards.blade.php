@@ -4,8 +4,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>Carteirinhas</title>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-
         <style type="text/css">
         
         .card {
@@ -17,6 +15,7 @@
             border: 1px solid grey;
             border-radius: 10px;
             margin-bottom: 10px;
+            position: relative;
         }
 
         .member-name {
@@ -26,9 +25,9 @@
         }
 
         .member-avatar {
-            float: left;
-            margin-top: 50px;
-            margin-left: 15px;
+            position: absolute;
+            top: 5px;
+            left: 5px;
         }
 
         </style>
@@ -44,13 +43,13 @@
 
         <div class="card">
             <div class="member-name" title="member">{{$member->name}}</div>
-            <div class='member-avatar'>
+            
                 @if($member->avatar != null)
-                <img class="img img-circle" src="{{ url('storage/members/'.$member->avatar) }}" width='100'>
+                <img class="member-avatar" src="{{ url('storage/members/'.$member->avatar) }}" width='100'>
                 @else 
-                <img class="img img-circle" src="{{ url('storage/members/default.jpg') }}" width='100'>
+                <img class="member-avatar" src="{{ url('storage/members/default.jpg') }}" width='100'>
                 @endif
-            </div>
+            
         </div>
 
 

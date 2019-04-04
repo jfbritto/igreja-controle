@@ -117,7 +117,7 @@ $this->group(['middleware' => 'auth'], function(){
         $this->get('/finance/pdf/{year}/{month}', 'Finance\FinanceController@balance_pdf')->name('finance.pdf');
 
         //CONFIG
-        $this->post('/config/edit', 'Church\ChurchController@update')->name('config.update');
+        $this->post('/config/edit', 'Church\ChurchController@update_avatar')->name('config.update');
     });
 
 

@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Church;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Church;
 use App\Models\State;
 use App\Models\Address;
 use App\Models\City;
+use Arisharyanto\Laracrop\Laracrop;
 
 class ChurchController extends Controller
 {
@@ -227,35 +230,24 @@ class ChurchController extends Controller
     {
         $church = Church::find(auth()->user()->idChurch_fk);
 
-        $request['avatar'] = $church->avatar;
+        $nameFile = $church->avatar;
         if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
             
-            if ($church->avatar) 
-                $name = $church->avatar;
-            else
-                $name = $church->id.kebab_case($church->name).".".$request->avatar->extension();
+            $nameFile = Laracrop::cropImage($request->input('avatar'));
 
-            //$extension = $request->avatar->extension();
-            $nameFile = $name;
+            Storage::delete("churches/{$church->avatar}");
 
-            $request['avatar'] = $nameFile;
-
-            //Storage::delete("members/{$member->avatar}");    
-
-            $upload = $request->avatar->storeAs('churches', $nameFile);
-            
-            if(!$upload)
-                return redirect()
-                        ->back()
-                        ->with('error', 'Falha ao fazer upload da imagem!');
+            File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/churches/{$nameFile}"));
 
         }
 
         $request_church = [
-            'avater' => $request->avatar,
+            'avatar' => $nameFile,
         ];
 
         $result = $church->update($request_church);
+
+        Laracrop::cleanCropTemp();
 
         if(!$result)
             return redirect()

@@ -152,19 +152,10 @@ class MemberController extends Controller
         $nameFile = $member->avatar;
         if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
             $nameFile = Laracrop::cropImage($request->input('avatar'));
-            // $nameFile = $member->id.kebab_case($member->name).".".$request->avatar->extension();;
 
             Storage::delete("members/{$member->avatar}");
 
             File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/members/{$nameFile}"));
-
-            //$upload = $request->avatar->storeAs('members', $nameFile);
-
-            // if(!$upload)
-            //     return redirect()
-            //             ->back()
-            //             ->with('error', 'Falha ao fazer upload da imagem!');
-
 
         }
 
