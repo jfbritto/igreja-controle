@@ -3,10 +3,16 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <meta property="og:url" content="" />
+    <meta property="type" content="article" />
+    <meta property="og:title" content="IGREJA CONTROLE">
+    <meta property="og:description" content="Sistema de controle e organização de igrejas">
+    <meta property="og:image" content="">
 
   <title>Igreja Controle</title>
 
@@ -23,6 +29,7 @@
 
   <!-- Site css -->
   <link href="css/site.css" rel="stylesheet">
+
 
 </head>
 
