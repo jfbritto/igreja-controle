@@ -12,7 +12,9 @@
     <meta property="type" content="article" />
     <meta property="og:title" content="IGREJA CONTROLE">
     <meta property="og:description" content="Sistema de controle e organização de igrejas">
-    <meta property="og:image" content="https://www.heirsofthefather.com/wp-content/uploads/2018/12/PRAISE.png">
+    <meta property="og:image" content="{{asset("img/background-reduce.jpg")}}">
+
+    <link rel="icon" href="img/cross.png">
 
   <title>Igreja Controle</title>
 
