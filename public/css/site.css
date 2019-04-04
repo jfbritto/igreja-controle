@@ -2,6 +2,10 @@
 	height: calc(100vh - 70px)
 }
 
+.about-section{
+	height: calc(100vh - 70px)
+}
+
 
 .masthead{
 	background: linear-gradient(to bottom,rgba(22,22,22,.3) 0,rgba(22,22,22,.7) 75%,#161616 100%),url(../img/background.jpg) !important;

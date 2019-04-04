@@ -60,9 +60,9 @@
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#login">Login</a>
           </li>
-<!--           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#signup">Contato</a>
-          </li> -->
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#contact">Contato</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -80,17 +80,17 @@
   </header>
 
   <!-- About Section -->
-  <section id="about" class="about-section text-center">
-    <div class="container">
+  <section id="about" class="about-section text-center d-flex">
+    <div class="container my-auto">
       <div class="row">
-        <div class="col-lg-8 mx-auto">
+        <div class="col-lg-8 mx-auto mx-auto">
           <h2 class="text-white mb-4">FAÇA TUDO EM UM ÚNICO LUGAR</h2>
           <p class="text-white-50">O IGREJA CONTROLE foi criado a partir da necessidade de ter as informações mais organizadas, 
                                     de ter o controle necessário sem ficar dependendo de computadores que poderiam dar problema um dia fazendo com que todos os arquivos e informações fossem perdidos.
                                     Assim surgiu esse sistema, onde tudo fica mais fácil de ser gerenciado.</p>
         </div>
       </div>
-      <img src="img/ipad.png" class="img-fluid" alt="">
+      <!-- <img src="img/ipad.png" class="img-fluid" alt=""> -->
     </div>
   </section>
 
@@ -110,6 +110,8 @@
           </div>
         </div>
       </div> -->
+
+      <h2 class="text-black-50 mx-auto mt-2 mb-5 text-center">Serviços</h2>
 
       <!-- Project One Row -->
       <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
@@ -212,8 +214,10 @@
 
 
   <!-- Contact Section -->
-  <section class="contact-section bg-black">
+  <section id="contact" class="contact-section bg-black">
     <div class="container">
+
+        <h2 class="text-white-50 mx-auto mt-2 mb-5 text-center">Contato</h2>
 
       <div class="row">
 
@@ -221,9 +225,9 @@
           <div class="card py-4 h-100">
             <div class="card-body text-center">
               <i class="fas fa-map-marked-alt text-primary mb-2"></i>
-              <h4 class="text-uppercase m-0">Address</h4>
+              <h4 class="text-uppercase m-0">Endereço</h4>
               <hr class="my-4">
-              <div class="small text-black-50">4923 Market Street, Orlando FL</div>
+              <div class="small text-black-50">Avenida Gov. Carlos Lindemberg, 1121</div>
             </div>
           </div>
         </div>
@@ -235,7 +239,7 @@
               <h4 class="text-uppercase m-0">Email</h4>
               <hr class="my-4">
               <div class="small text-black-50">
-                <a href="#">hello@yourdomain.com</a>
+                <a href="#">jf.britto@teste.com</a>
               </div>
             </div>
           </div>
@@ -245,9 +249,9 @@
           <div class="card py-4 h-100">
             <div class="card-body text-center">
               <i class="fas fa-mobile-alt text-primary mb-2"></i>
-              <h4 class="text-uppercase m-0">Phone</h4>
+              <h4 class="text-uppercase m-0">Telefone</h4>
               <hr class="my-4">
-              <div class="small text-black-50">+1 (555) 902-8832</div>
+              <div class="small text-black-50">(28) 9974-3099</div>
             </div>
           </div>
         </div>
@@ -271,7 +275,7 @@
   <!-- Footer -->
   <footer class="bg-black small text-center text-white-50">
     <div class="container">
-      Copyright &copy; Your Website 2019
+      Copyright &copy; WeBianchi {{date('Y')}}
     </div>
   </footer>
 
