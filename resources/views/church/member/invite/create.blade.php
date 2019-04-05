@@ -3,7 +3,18 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Cadastro</title>
+
+    <meta property="og:url" content="http://www.igrejacontrole.com.br/" />
+    <meta property="type" content="website" />
+    <meta property="og:title" content="{{ $church->name }}">
+    <meta property="og:description" content="Cadastro de membros">
+    <meta property="og:image" content="{{asset("img/background-reduce.jpg")}}">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:image:type" content="image/jpg">
+    <meta property="og:image:width" content="640">
+    <meta property="og:image:height" content="480">
+
+    <title>Cadastro de membro - {{ $church->name }}</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -12,6 +23,8 @@
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/font-awesome/css/font-awesome.min.css') }}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/Ionicons/css/ionicons.min.css') }}">
+
+    <link rel="icon" href="{{asset("img/cross.png")}}">
 
     @if(config('adminlte.plugins.select2'))
         <!-- Select2 -->
@@ -38,12 +51,6 @@
 
     <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script>
 
-    <meta property="og:url" content="" />
-    <meta property="type" content="article" />
-    <meta property="og:title" content="CADASTRO DE MEMBROS">
-    <meta property="og:description" content="Faça seu cadastro para entrar na lista de membros da Igreja {{ $church->name }}">
-    <meta property="og:image" content="">
-    
 
 </head>
 <body class="hold-transition @yield('body_class')">

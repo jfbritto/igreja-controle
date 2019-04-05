@@ -251,7 +251,7 @@
               <i class="fas fa-mobile-alt text-primary mb-2"></i>
               <h4 class="text-uppercase m-0">Telefone</h4>
               <hr class="my-4">
-              <div class="small text-black-50">(28) 9974-3099</div>
+              <div class="small text-black-50">(28) 99974-3099</div>
             </div>
           </div>
         </div>
