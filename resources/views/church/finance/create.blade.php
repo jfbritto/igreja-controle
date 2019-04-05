@@ -112,7 +112,8 @@
                         </div>
                     </div>
                 </div>  
-                <div class="box-footer">
+                <div class="box-footer text-right">
+                    <a href="{{ url()->previous() }}" class='btn btn-default'><i class="fa fa-close" aria-hidden="true"></i>&nbsp; Cancelar</a>
                     <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Cadastrar</button>
                 </div>  
             </form>  

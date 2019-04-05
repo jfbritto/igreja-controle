@@ -26,7 +26,7 @@
         </thead>
         <tbody>
         @forelse($inscripts as $inscript)
-            <tr>
+            <tr class="@if($inscript->isPaid) success @else warning @endif">
                 <td>{{ $inscript->name }}</td>
                 <td>{{ $inscript->email }}</td>
                 <td>{{ date('d/m/Y', strtotime($inscript->birth)) }}</td>

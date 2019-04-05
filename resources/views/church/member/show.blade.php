@@ -38,8 +38,9 @@
                     @endif
 
                 @endif -->
-                <a href="{{ url('church/member/destroy', $member->id) }}" class='btn btn-danger' title="Deletar membro"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                <a href="{{ url()->previous() }}" class='btn btn-default' title="Voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
                 <a href="{{ url('church/member/edit', $member->id) }}" class='btn btn-warning' title="Editar membro"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                <a href="{{ url('church/member/destroy', $member->id) }}" class='btn btn-danger' title="Deletar membro"><i class="fa fa-trash" aria-hidden="true"></i></a>
             </div>    
         </div>
     </div>

@@ -81,7 +81,7 @@
 
     <div class="col-md-12">
 
-        <h3>Relatório Mensal</h3>
+        <h3><i class="fa fa-list-alt" aria-hidden="true"></i> Relatório Mensal</h3>
         <div class="box box-primary">
             <div class="box-header with-border">
                 <form method="POST" action="{{route('finance.month')}}">
@@ -114,9 +114,9 @@
                                 </select>
                             </div>
                         </div>
-                        <div class='col-md-8'>
-                            <a href="{{ route('finance.create') }}" class='btn btn-success'><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Nova movimentação</a>
-                            <a target="_blank" href="{{ route('finance.pdf', [$year, $month]) }}" class='btn btn-danger'><i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp; Gerar PDF com o balanço mensal</a>
+                        <div class='col-md-8 text-right'>
+                            <a href="{{ route('finance.create') }}" class='btn btn-success' title="Inserir nova movimentação"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                            <a target="_blank" href="{{ route('finance.pdf', [$year, $month]) }}" class='btn btn-danger' title="Gerar PDF com o balanço mensal"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                         </div>
                     </div>
 

@@ -166,7 +166,7 @@
 
     <div class="col-md-12">
 
-        <h3>Listagem</h3>
+        <h3><i class="fa fa-calendar" aria-hidden="true"></i> Próximos eventos</h3>
         <div class="box box-primary">
             <div class="box-body">
                 <table class='table table-hover table-striped table-condensed' id='table'>
@@ -179,15 +179,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @forelse($events as $event)
+                    @forelse($events_active as $event)
                         <tr>
                             <td style='vertical-align:middle'>{{ $event->title }}</td>
                             <td style='vertical-align:middle'>{{ $event->location }}</td>
                             <td style='vertical-align:middle'>{{ date('d/m/Y', strtotime($event->startDate)) }} à {{ date('d/m/Y', strtotime($event->endDate)) }}</td>
                             <td style='vertical-align:middle' class='text-right'>
-                                <a href="{{ url('church/event/edit', $event->id) }}" class='btn btn-warning'><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Editar</a>
-                                <a href="{{ url('church/event/destroy', $event->id) }}" class='btn btn-danger'><i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Deletar</a>
-                                <a href="{{ url('church/event/show', $event->id) }}" class='btn btn-primary'><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; Visualizar</a>
+                                <a href="{{ url('church/event/edit', $event->id) }}" class='btn btn-warning' title="Editar evento"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                <a href="{{ url('church/event/destroy', $event->id) }}" class='btn btn-danger' title="Deletar evento"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                <a href="{{ url('church/event/show', $event->id) }}" class='btn btn-primary' title="Visualizar evento"><i class="fa fa-eye" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                     @empty
@@ -270,6 +270,7 @@
             }
             }
     });
+
 
   });
 

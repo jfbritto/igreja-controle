@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Membros</title>
+        <title>Membros - {{auth()->user()->church->name}}</title>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     </head>
@@ -10,7 +10,7 @@
          
  
  
-    <h1>Membros</h1>
+    <h1>Membros - {{auth()->user()->church->name}}</h1>
  
  
     <table class='table table-hover table-striped' id='table'>

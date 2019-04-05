@@ -71,7 +71,7 @@
                         <td style='vertical-align:middle'>{{ $event->location }}</td>
                         <td style='vertical-align:middle'>{{ date('d/m/Y', strtotime($event->startDate)) }} à {{ date('d/m/Y', strtotime($event->endDate)) }}</td>
                         <td style='vertical-align:middle' class='text-right'>
-                            <a href="{{ url('church/event/show', $event->id) }}" class='btn btn-primary'><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; Visualizar</a>
+                            <a href="{{ url('church/event/show', $event->id) }}" class='btn btn-primary' title="Visualizar evento"><i class="fa fa-eye" aria-hidden="true"></i></a>
                         </td>
                     </tr>
                 @empty

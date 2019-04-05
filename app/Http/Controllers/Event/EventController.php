@@ -34,10 +34,16 @@ class EventController extends Controller
             }
         }
 
+        $events_active = Event::where('idChurch_fk', '=', auth()->user()->idChurch_fk)
+                                        ->where('isActive', '=', true)
+                                        ->where('isDeleted', '=', false)
+                                        ->where('endDate', '>', now())
+                                        ->get();
+
         $calendar = Calendar::addEvents($events_array);
         $church = Church::find(auth()->user()->idChurch_fk);
 
-        return view('church.event.home', compact('calendar', 'church', 'events'));
+        return view('church.event.home', compact('calendar', 'church', 'events', 'events_active'));
     }
 
 

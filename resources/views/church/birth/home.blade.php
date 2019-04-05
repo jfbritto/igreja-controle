@@ -46,8 +46,8 @@
                                 </select>
                             </div>
                         </div>
-                        <div class='col-md-8'>
-                            <a target="_blank" href="{{ route('birth.pdf', $date_month) }}" class='btn btn-danger'><i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp; Gerar banner dos aniversariantes do mês</a>
+                        <div class='col-md-8 text-right'>
+                            <a target="_blank" href="{{ route('birth.pdf', $date_month) }}" class='btn btn-danger' title="Gerar banner dos aniversariantes do mês"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                         </div>
                     </div>
 

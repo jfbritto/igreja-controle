@@ -3,7 +3,7 @@
 @section('title', 'Igreja Controle - Eventos')
 
 @section('content_header')
-    <h1>{{$event->title}}</h1>
+    <h1><i class="fa fa-calendar" aria-hidden="true"></i> {{$event->title}} @if($event->endDate < date('Y-m-d'))- Evento encerrado @endif</h1>
 
     <ol class="breadcrumb">
     <li><a href="{{route('dashboard')}}">Dashboard</a></li>
@@ -26,9 +26,14 @@
     
 
         <div class="box box-primary">
-            <div class="box-header with-border">
-                <a href="{{ url('church/event/edit', $event->id) }}" class='btn btn-warning'><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Editar</a>
-                <a href="{{ url('church/event/destroy', $event->id) }}" class='btn btn-danger'><i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Deletar</a>
+            <div class="box-header with-border text-right">
+                <a href="{{ url()->previous() }}" class='btn btn-default' title="Voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+
+                @if($event->endDate > date('Y-m-d'))
+                    <a href="{{ url('church/event/edit', $event->id) }}" class='btn btn-warning' title="Editar evento"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a href="{{ url('church/event/destroy', $event->id) }}" class='btn btn-danger' title="Deletar evento"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                @endif
+
             </div>
 
             <div class="box-body">
@@ -165,14 +170,17 @@
 <div class="row">
     <div class="col-md-12">
 
-        <h3>Inscritos</h3>
+        <h3><i class="fa fa-check-square-o" aria-hidden="true"></i> Inscritos</h3>
         <div class="box box-primary">
-            <div class="box-header with-border">
-                @if($event->haveInscription)
-                    <a href="{{ url('church/inscription/add', $event->id) }}" class='btn btn-success'><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Cadastrar inscrição</a>
+            <div class="box-header with-border form-inline text-right">
+                @if($event->endDate > date('Y-m-d'))
+                    <input class="form-control" id="btn-link-txt" value="{{ env('APP_URL').'/event/invite/'.$event->hash }}" readonly="">
+                    <a href="#" id="btn-link" class="btn btn-default" title="Copiar o link para inscrição no evento"><i class="fa fa-link" aria-hidden="true"></i></a>
                 @endif
-                <a target="_blank" href="{{ url('church/inscription/pdf', $event->id) }}" class='btn btn-danger'><i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp; Gerar PDF com todos os inscritos</a>
-                <a target="_blank" href="{{ env('APP_URL').'/event/invite/'.$event->hash }}" class='btn btn-default'><i class="fa fa-link" aria-hidden="true"></i>&nbsp; {{ env('APP_URL').'/event/invite/'.$event->hash }}</a>
+                <a target="_blank" href="{{ url('church/inscription/pdf', $event->id) }}" class='btn btn-danger' title="Gerar PDF com todos os inscritos"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                @if($event->endDate > date('Y-m-d'))
+                    <a href="{{ url('church/inscription/add', $event->id) }}" class='btn btn-success' title="Cadastrar inscrição"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                @endif
             </div>
             <div class="box-body">
 
@@ -199,7 +207,7 @@
                             </td>
                             <td style='vertical-align:middle' class='text-right'>
                                 @if(!$inscript->isPaid)
-                                <a href="{{url('church/inscription/report-payment', $inscript->id)}}" class='btn btn-warning'><i class="fa fa-usd" aria-hidden="true"></i>&nbsp; Informar pagamento</a>
+                                <a href="{{url('church/inscription/report-payment', $inscript->id)}}" class='btn btn-warning' title="Informar pagamento"><i class="fa fa-usd" aria-hidden="true"></i></a>
                                 @endif
                             </td>
                         </tr>
@@ -259,6 +267,15 @@
     });
 
     $('#value').mask('#.##0,00', {reverse: true});
+
+    $('#btn-link').click(function(){
+            //Visto que o 'copy' copia o texto que estiver selecionado, talvez você queira colocar seu valor em um txt escondido
+        
+        $('#btn-link-txt').select();
+        var ok = document.execCommand('copy');
+        if (ok) { alert('Link copiado para a área de transferência'); }
+
+    });
 
   });
 
