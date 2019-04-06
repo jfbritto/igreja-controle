@@ -74,13 +74,7 @@
 
         </div>
 
-
-
-
-
-<!--         <h2 style="color: white; text-align: center;">Inscrição de evento</h2>
-        <h2 style="color: white; text-align: center;">{{ $church->name }}</h2> -->
-    
+   
         <div class="row">
             <div class="col-md-12">
                 <div class="messages">

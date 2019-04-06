@@ -24,6 +24,8 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/Ionicons/css/ionicons.min.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('css/site.css') }}">
+
     <link rel="icon" href="{{asset("img/cross.png")}}">
 
     @if(config('adminlte.plugins.select2'))
@@ -53,294 +55,296 @@
 
 
 </head>
-<body class="hold-transition @yield('body_class')">
-    
-
-
-
-        <!-- Main Header -->
-        <header class="main-header">
-            <nav>
-                <div class="container-fluid">
-
-                    <!-- Logo -->
-                    <a href="#" class="logo" style="width: 500px; text-align: left;">
-                        <!-- mini logo for sidebar mini 50x50 pixels -->
-                        <span>{{ $church->name }}</span>
-                    </a>
-                </div>
-            </nav>
-        </header>
-
-
-    
+<body class="hold-transition @yield('body_class') masthead">
+       
 
     <div class="container-fluid">
+
+
+
+        <div class="box box-widget widget-user">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-green-active">
+              <h3 class="widget-user-username">{{ $church->name }}</h3>
+              <h5 class="widget-user-desc">Cadastro de membro</h5>
+            </div>
+            <div class="widget-user-image">
+              <img class="img-circle" src="@if(!is_null($church->avatar)){{ url('storage/churches/'.$church->avatar) }} @else {{ url('storage/churches/default.jpg') }} @endif" alt="User Avatar">
+            </div>
+
+        </div>
     
         <div class="row">
-
             <div class="col-md-12">
-                
                 <div class="messages">
                     @include('includes.alerts')
                 </div>
-                
             </div>
-
         </div>        
     
+
         <div class="row">
+            <div class="col-md-6">
+                
+                <div class="row">
 
-            <div class="col-md-12">
+                    <div class="col-md-12">
 
-                <div class="box box-primary">
-                    <!-- form start -->
-                    <form role="form" method="POST" action="{{ route('member.invite.store', $hash) }}">
-                    @csrf
-                      <div class="box-body">
+                        <div class="box box-success box-solid">
+                            <div class="box-header with-border">Formulário de cadastro</div>
+                            <!-- form start -->
+                            <form role="form" method="POST" action="{{ route('member.invite.store', $hash) }}">
+                            @csrf
+                              <div class="box-body">
 
-                        <div class='row'>
-                            <div class='col-md-4'>
+                                <div class='row'>
+                                    <div class='col-md-6'>
 
-                                <div class="form-group">
-                                    <label for='name'>Nome</label> 
+                                        <div class="form-group">
+                                            <label for='name'>Nome</label> 
 
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-user"></i>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-user"></i>
+                                                </div>
+                                                <input id='name' name='name' type="text" class="form-control" required>
+                                            </div>
                                         </div>
-                                        <input id='name' name='name' type="text" class="form-control" required>
+
+                                    </div>
+                                    <div class='col-md-6'>
+                                
+                                        <div class="form-group">
+                                            <label for='sex'>Sexo</label> 
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-transgender"></i>
+                                                </div>
+                                                <select id='sex' name='sex' class="form-control" required>
+                                                    <option>-- Selecione --</option>
+                                                    <option value='masculino'>Masculino</option>
+                                                    <option value='feminino'>Feminino</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    
+                                </div>
+                                <div class='row'>
+                                    
+                                    <div class='col-md-6'>
+                                    
+                                        <div class="form-group">
+                                            <label for='birth'>Nascimento</label>  
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input id='birth' name='birth' type="date" class="form-control" required>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class='col-md-6'>
+
+                                        <div class="form-group">
+                                            <label for='email'>E-mail</label> 
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-envelope"></i>
+                                                </div>
+                                                <input id='email' name='email' type="email" class="form-control" required>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="row">
+
+                                    <div class='col-md-6'>
+
+                                        <div class="form-group">
+                                            <label for='cpf'>CPF</label> 
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-address-card-o"></i>
+                                                </div>
+                                                <input id='cpf' name='cpf' type="text" class="form-control" required>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class='col-md-6'>
+
+                                        <div class="form-group">
+                                            <label for='phone'>Telefone</label> 
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-phone"></i>
+                                                </div>
+                                                <input id='phone' name='phone' type="text" class="form-control" required >
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
 
                             </div>
-                            <div class='col-md-4'>
-                        
-                                <div class="form-group">
-                                    <label for='sex'>Sexo</label> 
-
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-transgender"></i>
-                                        </div>
-                                        <select id='sex' name='sex' class="form-control" required>
-                                            <option>-- Selecione --</option>
-                                            <option value='masculino'>Masculino</option>
-                                            <option value='feminino'>Feminino</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class='col-md-4'>
-                            
-                                <div class="form-group">
-                                    <label for='birth'>Nascimento</label>  
-
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        <input id='birth' name='birth' type="date" class="form-control" required>
-                                    </div>
-                                </div>
-
-                            </div>
-                            
                         </div>
-                        <div class='row'>
-                            
-                            <div class='col-md-4'>
 
-                                <div class="form-group">
-                                    <label for='email'>E-mail</label> 
+                    </div>    
 
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-envelope"></i>
-                                        </div>
-                                        <input id='email' name='email' type="email" class="form-control" required>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class='col-md-4'>
-
-                                <div class="form-group">
-                                    <label for='cpf'>CPF</label> 
-
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-address-card-o"></i>
-                                        </div>
-                                        <input id='cpf' name='cpf' type="text" class="form-control" required>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class='col-md-4'>
-
-                                <div class="form-group">
-                                    <label for='phone'>Telefone</label> 
-
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-phone"></i>
-                                        </div>
-                                        <input id='phone' name='phone' type="text" class="form-control" required >
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                      </div>
-                      <!-- /.box-body -->
-          
-                  </div>
-
-            </div>    
-
-        </div>
+                </div>
                     
+        </div>
+            <div class="col-md-6">
+                
+                <div class="row">
 
+                    <div class="col-md-12">
 
-        <div class="row">
+                        <div class="box box-success box-solid">
+                            <div class="box-header with-border">Endereço</div>
+                            <!-- form start -->
+                              <div class="box-body">
 
-            <div class="col-md-12">
+                                <div class='row'>
+                                    <div class='col-md-6'>
 
-                <div class="box box-primary">
-                    <!-- form start -->
-                    <form role="form" method="POST" action="{{ route('member.store') }}">
-                    @csrf
-                      <div class="box-body">
+                                        <div class="form-group">
+                                            <label for="cep">CEP</label>
 
-                        <div class='row'>
-                            <div class='col-md-4'>
-
-                                <div class="form-group">
-                                    <label for="cep">CEP</label>
-
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-home"></i>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-home"></i>
+                                                </div>
+                                                <input type='text' name="cep" id="cep" class="form-control">
+                                            </div>
                                         </div>
-                                        <input type='text' name="cep" id="cep" class="form-control">
+
+                                    </div>
+                                    <div class='col-md-6'>
+
+                                        <div class="form-group">
+                                            <label for="idState_fk">Estado</label> 
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-home"></i>
+                                                </div>
+                                                <select name="idState_fk" id="idState_fk" onchange="changeState(this)" class="form-control" required>
+                                                    <option>Selecione o estado</option>
+                                                    @foreach($states as $state)
+                                                        <option value="{{$state->id}}">{{$state->nome}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+                                <div class='row'>
+
+                                    <div class='col-md-6'>
+
+                                        <div class="form-group">
+                                            <label for="idCity_fk">Cidade</label>
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-home"></i>
+                                                </div>
+                                                <select name="idCity_fk" id="idCity_fk" class="form-control" required>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class='col-md-6'>
+
+                                        <div class="form-group">
+                                            <label for="address">Endereço</label>
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-home"></i>
+                                                </div>
+                                                <input type='text' name="address" id="address" class="form-control">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class='col-md-4'>
+
+                                        <div class="form-group">
+                                            <label for="number">Número</label>
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-home"></i>
+                                                </div>
+                                                <input type='text' name="number" id="number" class="form-control">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class='col-md-4'>
+
+                                        <div class="form-group">
+                                            <label for="neighborhood">Bairro</label>
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-home"></i>
+                                                </div>
+                                                <input type='text' name="neighborhood" id="neighborhood" class="form-control">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    
+                                    <div class='col-md-4'>
+                                    
+                                        <div class="form-group">
+                                            <label for="complement">Complemento</label>
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-home"></i>
+                                                </div>
+                                                <input type='text' name="complement" id="complement" class="form-control">
+                                            </div>
+                                        </div>
+                                    
                                     </div>
                                 </div>
 
-                            </div>
-                            <div class='col-md-4'>
-
-                                <div class="form-group">
-                                    <label for="idState_fk">Estado</label> 
-
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-home"></i>
-                                        </div>
-                                        <select name="idState_fk" id="idState_fk" onchange="changeState(this)" class="form-control" required>
-                                            <option>Selecione o estado</option>
-                                            @foreach($states as $state)
-                                                <option value="{{$state->id}}">{{$state->nome}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class='col-md-4'>
-
-                                <div class="form-group">
-                                    <label for="idCity_fk">Cidade</label>
-
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-home"></i>
-                                        </div>
-                                        <select name="idCity_fk" id="idCity_fk" class="form-control" required>
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class='row'>
-
-                            <div class='col-md-4'>
-
-                                <div class="form-group">
-                                    <label for="address">Endereço</label>
-
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-home"></i>
-                                        </div>
-                                        <input type='text' name="address" id="address" class="form-control">
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class='col-md-2'>
-
-                                <div class="form-group">
-                                    <label for="number">Número</label>
-
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-home"></i>
-                                        </div>
-                                        <input type='text' name="number" id="number" class="form-control">
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class='col-md-3'>
-
-                                <div class="form-group">
-                                    <label for="neighborhood">Bairro</label>
-
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-home"></i>
-                                        </div>
-                                        <input type='text' name="neighborhood" id="neighborhood" class="form-control">
-                                    </div>
-                                </div>
-
-                            </div>
-                            
-                            <div class='col-md-3'>
-                            
-                                <div class="form-group">
-                                    <label for="complement">Complemento</label>
-
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-home"></i>
-                                        </div>
-                                        <input type='text' name="complement" id="complement" class="form-control">
-                                    </div>
-                                </div>
-                            
-                            </div>
-                        </div>
 
 
+                              </div>
+                              <!-- /.box-body -->
 
-                      </div>
-                      <!-- /.box-body -->
+                              <div class="box-footer text-right">
+                                <button type="submit" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Cadastrar</button>
+                              </div>
+                            </form>
+                          </div>
 
-                      <div class="box-footer">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Cadastrar</button>
-                      </div>
-                    </form>
-                  </div>
+                    </div>    
 
-            </div>    
+                </div>
 
+            </div>
         </div>
 
 
