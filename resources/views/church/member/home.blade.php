@@ -118,9 +118,17 @@
                 
                 $('#btn-link-txt').select();
                 var ok = document.execCommand('copy');
-                if (ok) { alert('Link copiado para a área de transferência'); }
+                if (ok) { 
+                    // alert('Link copiado para a área de transferência'); 
 
+                    Swal.fire(
+                      'Link copiado para a área de transferência!',
+                      '',
+                      'success'
+                    )
+                }
             });
+            
         });
     </script>
 @stop

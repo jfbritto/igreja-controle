@@ -58,22 +58,23 @@
                 <table class='table table-hover table-striped' id='table'>
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Nome</th>
                             <th>Email</th>
                             <th>Nascimento</th>
                             <th>CPF</th>
                             <th>Telefone</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                     @forelse($members as $member)
                         <tr>
-                            <td>{{ $member->name }}</td>
-                            <td>{{ $member->email }}</td>
-                            <td>{{ date('d/m/Y', strtotime($member->birth)) }}</td>
-                            <td>{{ $member->cpf }}</td>
-                            <td>{{ $member->phone }}</td>
+                            <td style='vertical-align:middle'><img src="@if(!is_null($member->avatar)){{ url('storage/members/'.$member->avatar) }} @else {{ url('storage/members/default.jpg') }} @endif" class='img img-circle' width='40'></td>
+                            <td style='vertical-align:middle'>{{ $member->name }}</td>
+                            <td style='vertical-align:middle'>{{ $member->email }}</td>
+                            <td style='vertical-align:middle'>{{ date('d/m/Y', strtotime($member->birth)) }}</td>
+                            <td style='vertical-align:middle'>{{ $member->cpf }}</td>
+                            <td style='vertical-align:middle'>{{ $member->phone }}</td>
                         </tr>
                     @empty
                         <tr>
@@ -93,4 +94,35 @@
             
 
 @endsection
- 
+
+@section('js')
+    <script>
+        $(document).ready(function () {
+            $('#table').dataTable({
+                "language": {
+                    "sEmptyTable":   "Nenhum registro encontrado",
+                    "sProcessing":   "A processar...",
+                    "sLengthMenu":   "Mostrar _MENU_ registos",
+                    "sZeroRecords":  "Não foram encontrados resultados",
+                    "sInfo":         "Mostrando de _START_ até _END_ de _TOTAL_ registos",
+                    "sInfoEmpty":    "Mostrando de 0 até 0 de 0 registos",
+                    "sInfoFiltered": "(filtrado de _MAX_ registos no total)",
+                    "sInfoPostFix":  "",
+                    "sSearch":       "Procurar:",
+                    "sUrl":          "",
+                    "oPaginate": {
+                        "sFirst":    "Primeiro",
+                        "sPrevious": "Anterior",
+                        "sNext":     "Seguinte",
+                        "sLast":     "Último"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": Ordenar colunas de forma ascendente",
+                        "sSortDescending": ": Ordenar colunas de forma descendente"
+                    }
+                  }
+            });
+
+        });
+    </script>
+@stop

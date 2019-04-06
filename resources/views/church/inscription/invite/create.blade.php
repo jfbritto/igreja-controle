@@ -24,6 +24,8 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/Ionicons/css/ionicons.min.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('css/site.css') }}">
+
     <link rel="icon" href="{{asset("img/cross.png")}}">
 
     @if(config('adminlte.plugins.select2'))
@@ -53,43 +55,151 @@
     
 
 </head>
-<body class="hold-transition @yield('body_class')">
+<body class="hold-transition @yield('body_class') masthead">
     
 
-
-
-        <!-- Main Header -->
-        <header class="main-header">
-            <nav>
-                <div class="container-fluid">
-
-                    <!-- Logo -->
-                    <a href="#" class="logo" style="width: 500px; text-align: left;">
-                        <!-- mini logo for sidebar mini 50x50 pixels -->
-                        <span>{{ $church->name }} - {{ $event->title }}</span>
-                    </a>
-                </div>
-            </nav>
-        </header>
-
-
     
+    <div class="container">
 
-    <div class="container-fluid">
+        <h2 style="color: white; text-align: center;">Inscrição de evento</h2>
+        <h2 style="color: white; text-align: center;">{{ $church->name }}</h2>
     
         <div class="row">
-
             <div class="col-md-12">
-                
                 <div class="messages">
                     @include('includes.alerts')
                 </div>
-                
             </div>
-
         </div>        
-        
 
+        <div class="row">
+            <div class="col-md-4">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="box box-primary">
+                    <div class="box-body">
+
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label for='title'>Título</label>  
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-tag"></i>
+                                        </div>
+                                        <input id='title' name='title' type="text" class="form-control" value='{{$event->title}}' readonly>
+                                    </div>
+                                </div> 
+
+                            </div>
+                            <div class="col-md-6">                            
+                                <div class="form-group">
+                                    <label for='description'>Descrição</label> 
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-align-center"></i>
+                                        </div>
+                                        <textarea id='description' name='description' class="form-control" readonly>{{$event->description}}</textarea>
+                                    </div>
+                                </div> 
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                            
+                                <div class="form-group">
+                                    <label for='location'>Local</label>  
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-map-marker"></i>
+                                        </div>
+                                        <input id='location' name='location' type="text" class="form-control" value='{{$event->location}}' readonly>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-8">
+
+                                <div class="form-group">
+                                    <label for='startDate'>Período</label>  
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input id='startDate' name='startDate' type="text" class="form-control" value='De {{date("d/m/Y", strtotime($event->startDate))}} à {{date("d/m/Y", strtotime($event->endDate))}}' readonly>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                        </div>
+
+                        @if($event->haveInscription)
+
+                        <div class="row">
+                            <div class="col-md-4">
+                            
+                                <div class="form-group responsavel">
+                                    <label for='nameResponsable'>Responsável</label> 
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input id='nameResponsable' name='nameResponsable' type="text" class="form-control" value='{{$event->nameResponsable}}' readonly>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+
+                                <div class="form-group responsavel">
+                                    <label for='phoneResponsable'>Tel</label>  
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-phone"></i>
+                                        </div>
+                                        <input id='phoneResponsable' name='phoneResponsable' type="text" class="form-control" value='{{$event->phoneResponsable}}' readonly>
+                                    </div>
+                                </div>
+
+                            </div>  
+                            <div class="col-md-4">
+
+                                <div class="form-group responsavel">
+                                    <label for='value'>Valor</label>      
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-usd"></i>
+                                        </div>
+                                        <input id='value' name='value' type="text" class="form-control" value='{{$event->value}}' readonly>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                        </div>
+
+                        @endif
+
+                    </div>
+                </div>
+
+            </div>    
+
+        </div>
+
+        </div>
+        <div class="col-md-8">
+        
         <div class="row">
 
             <div class="col-md-12">
@@ -235,7 +345,7 @@
 
                         </div>
                       <!-- /.box-body -->
-                      <div class="box-footer">
+                      <div class="box-footer text-right">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Cadastrar</button>
                       </div>
           
@@ -243,6 +353,9 @@
 
             </div>    
 
+        </div>
+
+        </div>
         </div>
 
         

@@ -17,6 +17,8 @@
 
     <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
+
     <link rel="icon" href="{{asset("img/cross.png")}}">
 
     @if(config('adminlte.plugins.select2'))
@@ -43,6 +45,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
     <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script>
+
+    <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
     
 
 </head>
