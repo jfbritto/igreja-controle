@@ -59,10 +59,27 @@
     
 
     
-    <div class="container">
+    <div class="container-fluid">
 
-        <h2 style="color: white; text-align: center;">Inscrição de evento</h2>
-        <h2 style="color: white; text-align: center;">{{ $church->name }}</h2>
+
+        <div class="box box-widget widget-user">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-green-active">
+              <h3 class="widget-user-username">{{ $church->name }}</h3>
+              <h5 class="widget-user-desc">Inscrição de evento</h5>
+            </div>
+            <div class="widget-user-image">
+              <img class="img-circle" src="@if(!is_null($church->avatar)){{ url('storage/churches/'.$church->avatar) }} @else {{ url('storage/churches/default.jpg') }} @endif" alt="User Avatar">
+            </div>
+
+        </div>
+
+
+
+
+
+<!--         <h2 style="color: white; text-align: center;">Inscrição de evento</h2>
+        <h2 style="color: white; text-align: center;">{{ $church->name }}</h2> -->
     
         <div class="row">
             <div class="col-md-12">
@@ -73,19 +90,20 @@
         </div>        
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-5">
 
         <div class="row">
             <div class="col-md-12">
 
-                <div class="box box-primary">
+                <div class="box box-success box-solid">
+                    <div class="box-header with-border">Descrição</div>
                     <div class="box-body">
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
 
                                 <div class="form-group">
-                                    <label for='title'>Título</label>  
+                                    <label for='title'>Evento</label>  
 
                                     <div class="input-group">
                                         <div class="input-group-addon">
@@ -96,9 +114,9 @@
                                 </div> 
 
                             </div>
-                            <div class="col-md-6">                            
+                            <div class="col-md-12">                            
                                 <div class="form-group">
-                                    <label for='description'>Descrição</label> 
+                                    <label for='description'>Info</label> 
 
                                     <div class="input-group">
                                         <div class="input-group-addon">
@@ -111,7 +129,7 @@
 
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                             
                                 <div class="form-group">
                                     <label for='location'>Local</label>  
@@ -139,39 +157,6 @@
                                 </div>
                             
                             </div>
-                        </div>
-
-                        @if($event->haveInscription)
-
-                        <div class="row">
-                            <div class="col-md-4">
-                            
-                                <div class="form-group responsavel">
-                                    <label for='nameResponsable'>Responsável</label> 
-
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-user"></i>
-                                        </div>
-                                        <input id='nameResponsable' name='nameResponsable' type="text" class="form-control" value='{{$event->nameResponsable}}' readonly>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-md-4">
-
-                                <div class="form-group responsavel">
-                                    <label for='phoneResponsable'>Tel</label>  
-
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-phone"></i>
-                                        </div>
-                                        <input id='phoneResponsable' name='phoneResponsable' type="text" class="form-control" value='{{$event->phoneResponsable}}' readonly>
-                                    </div>
-                                </div>
-
-                            </div>  
                             <div class="col-md-4">
 
                                 <div class="form-group responsavel">
@@ -185,10 +170,8 @@
                                     </div>
                                 </div>
                             
-                            </div>
+                            </div>                            
                         </div>
-
-                        @endif
 
                     </div>
                 </div>
@@ -198,12 +181,13 @@
         </div>
 
         </div>
-        <div class="col-md-8">
+        <div class="col-md-7">
         
         <div class="row">
 
             <div class="col-md-12">
-                <div class="box box-primary">
+                <div class="box box-success box-solid">
+                    <div class="box-header with-border">Formulário de inscrição</div>
 
                         <div class="box-body">
                             <!-- form start -->
@@ -211,7 +195,7 @@
                             @csrf
 
                             <div class='row'>
-                                <div class='col-md-4'>
+                                <div class='col-md-6'>
 
                                     <div class="form-group responsavel">
                                         <label for='name'>Nome</label> 
@@ -225,7 +209,7 @@
                                     </div>
 
                                 </div>
-                                <div class='col-md-4'>
+                                <div class='col-md-6'>
 
                                     <div class="form-group responsavel">
                                         <label for='sex'>Sexo</label> 
@@ -244,7 +228,10 @@
 
                                 </div>
 
-                                <div class='col-md-4'>
+                            </div>
+                            <div class='row'>    
+
+                                <div class='col-md-6'>
                                 
                                     <div class="form-group">
                                         <label for='birth'>Nascimento</label>  
@@ -259,24 +246,25 @@
 
                                 </div>
                                 
-                            </div>
-                            <div class='row'>
-                                <div class='col-md-4'>
-                            
+
+                                <div class='col-md-6'>
 
                                     <div class="form-group responsavel">
                                         <label for='email'>E-mail</label> 
-
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-envelope"></i>
                                             </div>
                                             <input id='email' name='email' type="email" class="form-control" required>
                                         </div>
-                                    </div>    
+                                    </div>  
 
                                 </div>
-                                <div class='col-md-4'>
+
+                            </div>
+                            <div class='row'>
+
+                                <div class='col-md-6'>
 
                                     <div class="form-group responsavel">
                                         <label for='phone'>Telefone</label> 
@@ -290,7 +278,7 @@
                                     </div>
 
                                 </div>
-                                <div class='col-md-4'>
+                                <div class='col-md-6'>
 
                                     <div class="form-group responsavel">
                                         <label for='church'>Igreja</label> 
@@ -304,8 +292,10 @@
                                     </div>
 
                                 </div>
+
                             </div>
                             <div class='row'>
+
                                 <div class='col-md-6'>
 
                                     <div class="form-group">
@@ -346,7 +336,7 @@
                         </div>
                       <!-- /.box-body -->
                       <div class="box-footer text-right">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Cadastrar</button>
+                        <button type="submit" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Cadastrar</button>
                       </div>
           
                   </div>
