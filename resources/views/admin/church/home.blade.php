@@ -23,9 +23,9 @@
     <div class="col-md-12">
 
         <div class="box box-primary">
-            <div class="box-header with-border">
-                <a href="{{ route('church.create') }}" class='btn btn-success'><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Nova igreja</a>
-                <a target="_blank" href="{{ route('church.pdf') }}" class='btn btn-danger'><i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp; Gerar PDF com todos as igrejas</a>
+            <div class="box-header with-border text-right">
+                <a href="{{ route('church.create') }}" class='btn btn-success' title="Nova igreja"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                <a target="_blank" href="{{ route('church.pdf') }}" class='btn btn-danger' title="Gerar PDF com todos as igrejas"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
             </div>
             
             <div class="box-body">
@@ -54,14 +54,14 @@
                             </td>
                             <td style='vertical-align:middle' class='text-right'>
                                 @if($church->isActive) 
-                                    <a href="{{ url('admin/church/inactivate', $church->id) }}" class='btn btn-danger'><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp; Inativar</a>
+                                    <a href="{{ url('admin/church/inactivate', $church->id) }}" class='btn btn-danger' title="Inativar igreja"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                                 @else 
-                                    <a href="{{ url('admin/church/activate', $church->id) }}" class='btn btn-success'><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp; Ativar</a>
+                                    <a href="{{ url('admin/church/activate', $church->id) }}" class='btn btn-success' title="Ativar igreja"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                                 @endif
 
-                                <a href="{{ url('admin/church/destroy', $church->id) }}" class='btn btn-danger'><i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Deletar</a>
-                                <a href="{{ url('admin/church/edit', $church->id) }}" class='btn btn-warning'><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Editar</a>
-                                <a href="{{ url('admin/church/show', $church->id) }}" class='btn btn-primary'><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; Visualizar</a>
+                                <a href="{{ url('admin/church/destroy', $church->id) }}" class='btn btn-danger' title="Deletar igreja"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                <a href="{{ url('admin/church/edit', $church->id) }}" class='btn btn-warning' title="Editar igreja"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                <a href="{{ url('admin/church/show', $church->id) }}" class='btn btn-primary' title="Visualizar igreja"><i class="fa fa-eye" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                     @empty

@@ -227,7 +227,8 @@
               </div>
               <!-- /.box-body -->
 
-              <div class="box-footer">
+              <div class="box-footer text-right">
+                <a href="{{ url()->previous() }}" class='btn btn-default'><i class="fa fa-close" aria-hidden="true"></i>&nbsp; Cancelar</a>
                 <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Cadastrar</button>
               </div>
             </form>
@@ -257,7 +258,7 @@
 
         $('#phone').mask(SPMaskBehavior, spOptions);
 
-        $('#cpf').mask('000.000.000-00', {reverse: true});
+        $('#cnpj').mask('00.000.000/0000-00', {reverse: true});
 
         $('#cep').mask('00000-000');
 
