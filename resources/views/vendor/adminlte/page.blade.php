@@ -159,14 +159,14 @@
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <!-- The user image in the navbar-->
-                        <img src="https://www.qualiscare.com/wp-content/uploads/2017/08/default-user.png" class="user-image" alt="User Image">
+                        <img src="@if(!is_null(auth()->user()->avatar)){{ url('storage/members/'.auth()->user()->avatar) }} @else {{ url('storage/members/default.jpg') }} @endif" class="user-image" alt="User Image">
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
                         <span class="hidden-xs">{{auth()->user()->name}}</span>
                         </a>
                         <ul class="dropdown-menu">
                         <!-- The user image in the menu -->
                         <li class="user-header">
-                            <img src="https://www.qualiscare.com/wp-content/uploads/2017/08/default-user.png" class="img-circle" alt="User Image">
+                            <img src="@if(!is_null(auth()->user()->avatar)){{ url('storage/members/'.auth()->user()->avatar) }} @else {{ url('storage/members/default.jpg') }} @endif" class="img-circle" alt="User Image">
 
                             <p>
                             {{auth()->user()->name}}
@@ -176,7 +176,7 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                            <a href="#" class="btn btn-default btn-flat">Perfil</a>
+                            <a href="{{ url('church/member/show', auth()->user()->id) }}" class="btn btn-default btn-flat">Perfil</a>
                             </div>
                             <div class="pull-right">
                                 @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))

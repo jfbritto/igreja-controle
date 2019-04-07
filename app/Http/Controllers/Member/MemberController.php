@@ -19,7 +19,6 @@ class MemberController extends Controller
     public function index()
     {
         $members = User::where('idChurch_fk', '=', auth()->user()->idChurch_fk)
-                            ->where('isMember', '=', true)
                             ->where('isDeleted', '=', false)
                             ->get();
 
@@ -619,7 +618,6 @@ class MemberController extends Controller
     {
 
         $members = User::where('idChurch_fk', '=', auth()->user()->idChurch_fk)
-                                ->where('isMember', '=', true)
                                 ->where('isActive', '=', true)
                                 ->where('isDeleted', '=', false)
                                 ->get();
