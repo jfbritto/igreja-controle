@@ -21,60 +21,48 @@
 
 <div class="row">
     <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>{{number_format($total_box, 2, ',', '.')}}</h3>
-              <p>Caixa total</p>
+        <div class="info-box">
+            <a href="{{route('finance')}}"><span class="info-box-icon bg-yellow"><i class="fa fa-usd"></i></span></a>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Caixa total</span>
+              <span class="info-box-number">{{number_format($total_box, 2, ',', '.')}}</span>
             </div>
-            <div class="icon">
-              <i class="fa fa-usd"></i>
-            </div>
-            <a href="{{route('finance')}}" class="small-box-footer">
-              Mais informações <i class="fa fa-arrow-circle-right"></i>
-            </a>
+            <!-- /.info-box-content -->
         </div>
     </div>
     <!-- /.col -->
     <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="small-box bg-green">
-            <div class="inner">
-              <h3>{{$members}}</h3>
-              <p>Membros ativos</p>
+        <div class="info-box">
+            <a href="{{route('member')}}"><span class="info-box-icon bg-green"><i class="fa fa-users"></i></span></a>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Membros ativos</span>
+              <span class="info-box-number">{{$members}}</span>
             </div>
-            <div class="icon">
-              <i class="fa fa-users"></i>
-            </div>
-            <a href="{{route('member')}}" class="small-box-footer">
-              Mais informações <i class="fa fa-arrow-circle-right"></i>
-            </a>
+            <!-- /.info-box-content -->
         </div>
     </div>
     <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3>{{$events}}</h3>
-              <p>Próximos eventos</p>
+        <div class="info-box">
+            <a href="{{route('event')}}"><span class="info-box-icon bg-aqua"><i class="fa fa-calendar"></i></span></a>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Próximos eventos</span>
+              <span class="info-box-number">{{$events}}</span>
             </div>
-            <div class="icon">
-              <i class="fa fa-calendar"></i>
-            </div>
-            <a href="{{route('event')}}" class="small-box-footer">
-              Mais informações <i class="fa fa-arrow-circle-right"></i>
-            </a>
+            <!-- /.info-box-content -->
         </div>
     </div>
     <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="small-box bg-red">
-            <div class="inner">
-              <h3>{{$births}}</h3>
-              <p>Aniversariantes</p>
+        <div class="info-box">
+            <a href="{{route('birth')}}"><span class="info-box-icon bg-red"><i class="fa fa-gift"></i></span></a>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Aniversariantes</span>
+              <span class="info-box-number">{{$births}}</span>
             </div>
-            <div class="icon">
-              <i class="fa fa-gift"></i>
-            </div>
-            <a href="{{route('birth')}}" class="small-box-footer">
-              Mais informações <i class="fa fa-arrow-circle-right"></i>
-            </a>
+            <!-- /.info-box-content -->
         </div>
     </div>
     <!-- /.col -->

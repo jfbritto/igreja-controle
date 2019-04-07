@@ -3,7 +3,7 @@
 @section('title', 'Igreja Controle - Editar Membro')
 
 @section('content_header')
-    <h1>Editar Membro | {{$member->name}}</h1>
+    <h1><i class="fa fa-user"></i> {{$member->name}} | Editar</h1>
 
     <ol class="breadcrumb">
         <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>

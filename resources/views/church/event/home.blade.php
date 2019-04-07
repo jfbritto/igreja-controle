@@ -23,10 +23,16 @@
 
     <div class="col-md-3">
 
-        <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Criar evento</h3>
-            </div>
+        <div class="box box-primary collapsed-box" id="addEvent">
+              <div class="box-header with-border">
+                <h3 class="box-title">Cadastrar evento</h3>
+
+                <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i id="iconAddEvent" class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.box-header -->
             <!-- /.box-header -->
             <!-- form start -->
             <form role="form" method="POST" action="{{ route('event.store') }}">
@@ -141,7 +147,7 @@
               </div>
               <!-- /.box-body -->
 
-              <div class="box-footer">
+              <div class="box-footer text-right">
                 <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Cadastrar</button>
               </div>
             </form>
@@ -173,8 +179,8 @@
                     <thead>
                         <tr>
                             <th>Evento</th>
-                            <th>Local</th>
-                            <th>Periodo</th>
+                            <th class="hidden-xs hidden-sm">Local</th>
+                            <th class="hidden-xs">Periodo</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -182,12 +188,14 @@
                     @forelse($events_active as $event)
                         <tr>
                             <td style='vertical-align:middle'>{{ $event->title }}</td>
-                            <td style='vertical-align:middle'>{{ $event->location }}</td>
-                            <td style='vertical-align:middle'>{{ date('d/m/Y', strtotime($event->startDate)) }} à {{ date('d/m/Y', strtotime($event->endDate)) }}</td>
-                            <td style='vertical-align:middle' class='text-right'>
-                                <a href="{{ url('church/event/edit', $event->id) }}" class='btn btn-warning' title="Editar evento"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                <a href="{{ url('church/event/destroy', $event->id) }}" class='btn btn-danger' title="Deletar evento"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                <a href="{{ url('church/event/show', $event->id) }}" class='btn btn-primary' title="Visualizar evento"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <td style='vertical-align:middle' class="hidden-xs hidden-sm">{{ $event->location }}</td>
+                            <td style='vertical-align:middle' class="hidden-xs">{{ date('d/m/Y', strtotime($event->startDate)) }} à {{ date('d/m/Y', strtotime($event->endDate)) }}</td>
+                            <td style='vertical-align:middle; width: 113px' class='text-right'>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a href="{{ url('church/event/edit', $event->id) }}" class='btn btn-warning' title="Editar evento"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    <a href="{{ url('church/event/destroy', $event->id) }}" class='btn btn-danger' title="Deletar evento"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                    <a href="{{ url('church/event/show', $event->id) }}" class='btn btn-primary' title="Visualizar evento"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                </div>
                             </td>
                         </tr>
                     @empty
@@ -221,6 +229,15 @@
 
   $(function() {
 
+    if ($(window).width() >= 992) {
+        $("#addEvent").removeClass("collapsed-box")
+        $("#iconAddEvent").removeClass("fa-plus")
+        $("#iconAddEvent").addClass("fa-minus")
+    }else{
+        $("#addEvent").addClass("collapsed-box")
+        $("#iconAddEvent").addClass("fa-plus")
+        $("#iconAddEvent").removeClass("fa-minus")
+    }
 
 
     $("#radio-sim, #radio-nao").change(function () {

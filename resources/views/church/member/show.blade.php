@@ -3,7 +3,7 @@
 @section('title', 'Igreja Controle - Visualizar Membro')
 
 @section('content_header')
-    <h1>Visualizar Membro | {{$member->name}}</h1>
+    <h1><i class="fa fa-user"></i> {{$member->name}}</h1>
 
     <ol class="breadcrumb">
         <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
@@ -26,20 +26,11 @@
 
         <div class="box box-primary">
             <div class="box-header with-border text-right">
-<!--                 @if($member->isPendent) 
-                    <a href="{{ url('church/member/validate', $member->id) }}" class='btn btn-info' title="Validar membro"><i class="fa fa-power-off" aria-hidden="true"></i></a>
-                @else
-
-                    @if($member->isActive) 
-                        <a href="{{ url('church/member/inactivate', $member->id) }}" class='btn btn-danger' title="Inativar membro"><i class="fa fa-power-off" aria-hidden="true"></i></a>
-                    @else 
-                        <a href="{{ url('church/member/activate', $member->id) }}" class='btn btn-success' title="Ativar membro"><i class="fa fa-power-off" aria-hidden="true"></i></a>
-                    @endif
-
-                @endif -->
-                <a href="{{ url()->previous() }}" class='btn btn-default' title="Voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
-                <a href="{{ url('church/member/edit', $member->id) }}" class='btn btn-warning' title="Editar membro"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                <a href="{{ url('church/member/destroy', $member->id) }}" class='btn btn-danger' title="Deletar membro"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a href="{{ url()->previous() }}" class='btn btn-default' title="Voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+                    <a href="{{ url('church/member/edit', $member->id) }}" class='btn btn-warning' title="Editar membro"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a href="{{ url('church/member/destroy', $member->id) }}" class='btn btn-danger' title="Deletar membro"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </div>
             </div>    
         </div>
     </div>

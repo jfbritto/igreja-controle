@@ -19,11 +19,11 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-3 col-xs-6">
+    <div class="col-lg-3 col-sm-6 col-xs-12">
         <!-- small box -->
         <div class="small-box bg-yellow">
         <div class="inner">
-            <h3>{{number_format($total_box, 2, ',', '.')}}</h3>
+            <h3>R$ {{number_format($total_box, 2, ',', '.')}}</h3>
 
             <p>Caixa total</p>
         </div>
@@ -33,11 +33,11 @@
         </div>
     </div>
     <!-- ./col -->
-    <div class="col-lg-3 col-xs-6">
+    <div class="col-lg-3 col-sm-6 col-xs-12">
         <!-- small box -->
         <div class="small-box bg-green">
         <div class="inner">
-            <h3>{{number_format($total_month_entries, 2, ',', '.')}}</h3>
+            <h3>R$ {{number_format($total_month_entries, 2, ',', '.')}}</h3>
 
             <p>Entradas</p>
         </div>
@@ -47,11 +47,11 @@
         </div>
     </div>
     <!-- ./col -->
-    <div class="col-lg-3 col-xs-6">
+    <div class="col-lg-3 col-sm-6 col-xs-12">
         <!-- small box -->
         <div class="small-box bg-red">
         <div class="inner">
-            <h3>{{number_format($total_month_outputs, 2, ',', '.')}}</h3>
+            <h3>R$ {{number_format($total_month_outputs, 2, ',', '.')}}</h3>
 
             <p>Saídas</p>
         </div>
@@ -61,11 +61,11 @@
         </div>
     </div>
     <!-- ./col -->
-    <div class="col-lg-3 col-xs-6">
+    <div class="col-lg-3 col-sm-6 col-xs-12">
         <!-- small box -->
         <div class="small-box bg-aqua">
         <div class="inner">
-            <h3>{{number_format($total_month_box, 2, ',', '.')}}</h3>
+            <h3>R$ {{number_format($total_month_box, 2, ',', '.')}}</h3>
 
             <p>Balanço mensal</p>
         </div>
@@ -115,8 +115,10 @@
                             </div>
                         </div>
                         <div class='col-md-8 text-right'>
-                            <a href="{{ route('finance.create') }}" class='btn btn-success' title="Inserir nova movimentação"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                            <a target="_blank" href="{{ route('finance.pdf', [$year, $month]) }}" class='btn btn-danger' title="Gerar PDF com o balanço mensal"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a href="{{ route('finance.create') }}" class='btn btn-success' title="Inserir nova movimentação"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                <a target="_blank" href="{{ route('finance.pdf', [$year, $month]) }}" class='btn btn-danger' title="Gerar PDF com o balanço mensal"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                            </div>
                         </div>
                     </div>
 
@@ -124,12 +126,12 @@
             </div>
             
             <div class="box-body">
-                <table class='table table-hover table-striped table-condensed' id='table'>
+                <table class='table table-condensed' id='table'>
                     <thead>
                         <tr>
                             <th>Operação</th>
-                            <th>Tipo</th>
-                            <th>Data movimentação</th>
+                            <th class="hidden-xs">Tipo</th>
+                            <th class="hidden-xs">Data movimentação</th>
                             <th>Valor</th>
                             <th></th>
                         </tr>
@@ -138,8 +140,8 @@
                     @forelse($movimentations as $movimentation)
                         <tr class="@if($movimentation->type == 'I') bg-green @else bg-red @endif">
                             <td style='vertical-align:middle'>@if($movimentation->type == 'O') Saída @else Entrada @endif</td>
-                            <td style='vertical-align:middle'>{{ $movimentation->action }}</td>
-                            <td style='vertical-align:middle'>{{ date('d/m/Y', strtotime($movimentation->movimentationDate)) }}</td>
+                            <td style='vertical-align:middle' class="hidden-xs">{{ $movimentation->action }}</td>
+                            <td style='vertical-align:middle' class="hidden-xs">{{ date('d/m/Y', strtotime($movimentation->movimentationDate)) }}</td>
                             <td style='vertical-align:middle'>R$ {{ number_format($movimentation->value, 2, ',', '.') }}</td>
                             <td style='vertical-align:middle' class='text-right'>
                                 <a href="{{ route('finance.show', $movimentation->id) }}" class='btn btn-primary' title="Visualizar movimentação"><i class="fa fa-eye" aria-hidden="true"></i></a>
