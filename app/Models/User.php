@@ -29,7 +29,8 @@ class User extends Authenticatable
         'cpf',
         'phone',
         'avatar',
-        'isPendent'
+        'isPendent',
+        'info'
     ];
 
     /**

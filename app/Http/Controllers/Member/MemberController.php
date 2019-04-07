@@ -69,6 +69,7 @@ class MemberController extends Controller
             'cpf'           => $request->cpf,
             'sex'           => $request->sex,
             'phone'         => $request->phone,
+            'info'          => $request->info,
             'avatar'        => $nameFile,
             'idChurch_fk'   => auth()->user()->idChurch_fk,
             'isMember'      => true,
@@ -189,6 +190,7 @@ class MemberController extends Controller
             'sex'           => $request->sex,
             'phone'         => $request->phone,
             'avatar'        => $nameFile,
+            'info'          => $request->info,
         ];
 
 

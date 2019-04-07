@@ -159,6 +159,31 @@
 </div>     
 
 
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+              <div class="box-body">
+                <div class='row'>
+                    <div class='col-md-12'>
+
+                        <div class="form-group">
+                            <label for="info">Informações adicionais</label>
+
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-align-center"></i>
+                                </div>
+                                <textarea id='info' name='info' class="form-control">{{$member->info}}</textarea>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+
 
 <!-- editar caixa -->
 <div class="modal fade" id="myModal" role="dialog">
