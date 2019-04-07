@@ -53,7 +53,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-home"></i>
                                         </div>
-                                        <input id='name' name='name' type="text" class="form-control" value="{{$church->name}}" readonly>
+                                        <input id='name' name='name' type="text" class="form-control" value="{{$church->name}}" disabled>
                                     </div>
                                 </div>
 
@@ -67,7 +67,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-envelope"></i>
                                         </div>
-                                        <input id='email' name='email' type="text" class="form-control" value="{{$church->email}}" readonly>
+                                        <input id='email' name='email' type="text" class="form-control" value="{{$church->email}}" disabled>
                                     </div>
                                 </div>
 
@@ -85,7 +85,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-address-card-o"></i>
                                         </div>
-                                        <input id='cnpj' name='cnpj' type="text" class="form-control" value="{{$church->cnpj}}" readonly>
+                                        <input id='cnpj' name='cnpj' type="text" class="form-control" value="{{$church->cnpj}}" disabled>
                                     </div>
                                 </div>
 
@@ -100,7 +100,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-phone"></i>
                                         </div>
-                                        <input id='phone' name='phone' type="text" class="form-control" value="{{$church->phone}}" readonly >
+                                        <input id='phone' name='phone' type="text" class="form-control" value="{{$church->phone}}" disabled >
                                     </div>
                                 </div>
 

@@ -10,6 +10,9 @@ use App\Models\Church;
 use App\Models\State;
 use App\Models\Address;
 use App\Models\City;
+use App\Models\Finance;
+use App\Models\User;
+use App\Models\Event;
 use Arisharyanto\Laracrop\Laracrop;
 
 class ChurchController extends Controller
@@ -23,9 +26,32 @@ class ChurchController extends Controller
 
     public function home()
     {
-        $churches = Church::where('isDeleted', false)->get();
 
-        return view('church.home', compact('churches'));
+        $total_entries = Finance::where('idChurch_fk', '=',auth()->user()->idChurch_fk)
+                                        ->where('type', '=', 'I')->sum('value');
+
+        $total_outputs = Finance::where('idChurch_fk', '=',auth()->user()->idChurch_fk)
+                                        ->where('type', '=', 'O')->sum('value');
+
+        $total_box = $total_entries - $total_outputs;
+
+        $members = User::where('idChurch_fk', '=', auth()->user()->idChurch_fk)
+                            ->where('isDeleted', '=', false)
+                            ->count();
+
+        $events = Event::where('idChurch_fk', '=', auth()->user()->idChurch_fk)
+                            ->where('isActive', '=', true)
+                            ->where('isDeleted', '=', false)
+                            ->whereDate('endDate', '>', now())
+                            ->count();                    
+
+        $births = User::whereMonth('birth', date('m'))
+                                    ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
+                                    ->where('isActive', '=', true)
+                                    ->where('isDeleted', '=', false)
+                                    ->count();                    
+
+        return view('church.home', compact('total_box', 'members', 'events', 'births'));
     }
 
     public function create(){

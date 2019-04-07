@@ -85,9 +85,9 @@
       <div class="row">
         <div class="col-lg-8 mx-auto mx-auto">
           <h2 class="text-white mb-4">FAÇA TUDO EM UM ÚNICO LUGAR</h2>
-          <p class="text-white-50">O IGREJA CONTROLE foi criado a partir da necessidade de ter as informações mais organizadas, 
-                                    de ter o controle necessário sem ficar dependendo de computadores que poderiam dar problema um dia fazendo com que todos os arquivos e informações fossem perdidos.
-                                    Assim surgiu esse sistema, onde tudo fica mais fácil de ser gerenciado.</p>
+          <p class="text-white-50 text-justify">O IGREJA CONTROLE foi criado a partir da necessidade de ter as informações mais organizadas, 
+                                    de ter o controle necessário sem ser preciso que os dados ficassem salvos em apenas um computador, limitando a mobilidade e o acesso às informações.
+                                    Assim surgiu nosso sistema, onde tudo fica mais fácil e transparente.</p>
         </div>
       </div>
       <!-- <img src="img/ipad.png" class="img-fluid" alt=""> -->
@@ -123,7 +123,7 @@
             <div class="d-flex h-100">
               <div class="project-text w-100 my-auto text-center text-lg-left">
                 <h4 class="text-white">Controle de membros</h4>
-                <p class="mb-0 text-white-50">Cadastre ou simplesmente envie o link para os próprios membros preencherem seus dados, tornando todo o controle muito mais fácil!</p>
+                <p class="mb-0 text-white-50 text-justify">Cadastre ou simplesmente envie o link para os próprios membros preencherem seus dados, tornando todo o controle muito mais fácil!</p>
                 <hr class="d-none d-lg-block mb-0 ml-0">
               </div>
             </div>
@@ -141,7 +141,7 @@
             <div class="d-flex h-100">
               <div class="project-text w-100 my-auto text-center text-lg-right">
                 <h4 class="text-white">Agenda</h4>
-                <p class="mb-0 text-white-50">Saiba quando, onde e em qual horário serão os próximos compromissos!</p>
+                <p class="mb-0 text-white-50 text-justify">Saiba quando, onde e em qual horário serão os próximos compromissos!</p>
                 <hr class="d-none d-lg-block mb-0 mr-0">
               </div>
             </div>
@@ -159,7 +159,7 @@
             <div class="d-flex h-100">
               <div class="project-text w-100 my-auto text-center text-lg-left">
                 <h4 class="text-white">Eventos</h4>
-                <p class="mb-0 text-white-50">Abandone o papel e caneta! com apenas um link todos os participantes poderão realizar suas inscrições nos retiros e caravanas!</p>
+                <p class="mb-0 text-white-50 text-justify">Abandone o papel e caneta! com apenas um link todos os participantes poderão realizar suas inscrições nos retiros e caravanas!</p>
                 <hr class="d-none d-lg-block mb-0 ml-0">
               </div>
             </div>
@@ -178,7 +178,7 @@
             <div class="d-flex h-100">
               <div class="project-text w-100 my-auto text-center text-lg-right">
                 <h4 class="text-white">Controle de caixa</h4>
-                <p class="mb-0 text-white-50">Organize as finanças de sua igreja mais facilmente. Deixe que a gente te mostre o quanto pode ser simples!</p>
+                <p class="mb-0 text-white-50 text-justify">Organize as finanças de sua igreja mais facilmente. Deixe que a gente te mostre o quanto pode ser simples!</p>
                 <hr class="d-none d-lg-block mb-0 mr-0">
               </div>
             </div>

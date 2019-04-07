@@ -16,6 +16,73 @@
 <div class="messages">
     @include('includes.alerts')
 </div>
+
+
+
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>{{number_format($total_box, 2, ',', '.')}}</h3>
+              <p>Caixa total</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-usd"></i>
+            </div>
+            <a href="{{route('finance')}}" class="small-box-footer">
+              Mais informações <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="small-box bg-green">
+            <div class="inner">
+              <h3>{{$members}}</h3>
+              <p>Membros ativos</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <a href="{{route('member')}}" class="small-box-footer">
+              Mais informações <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>{{$events}}</h3>
+              <p>Próximos eventos</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-calendar"></i>
+            </div>
+            <a href="{{route('event')}}" class="small-box-footer">
+              Mais informações <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="small-box bg-red">
+            <div class="inner">
+              <h3>{{$births}}</h3>
+              <p>Aniversariantes</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-gift"></i>
+            </div>
+            <a href="{{route('birth')}}" class="small-box-footer">
+              Mais informações <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+
+
+
+
 <!-- 
 <div class="row">
     <div class="col-md-6">
