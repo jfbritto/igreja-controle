@@ -4,7 +4,7 @@
 /*****************
 * LOGIN E LOGOUT *
 ******************/
-Route::get('/login', 'Auth\LoginController@get_autenticar')->name('login');
+Route::get('/login', 'Site\SiteController@index')->name('login');
 Route::post('/login', 'Auth\LoginController@post_autenticar')->name('login.post');
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
@@ -12,11 +12,7 @@ Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 /*******
 * SITE *
 ********/
-$this->get('/', 'Site\SiteController@index');
-
-
-$this->get('/test', 'TesteController@test');
-
+$this->get('/', 'Site\SiteController@index')->name('login');
 
 
 //Auth::routes();
@@ -27,10 +23,10 @@ $this->group(['middleware' => 'auth'], function(){
     //ADMINISTRADOR
     $this->group(['middleware' => 'admin', 'prefix' => 'admin'], function(){
 
-        $this->get('/', 'Admin\AdminController@index2')->name('home');
+        $this->get('/', 'Admin\AdminController@index')->name('home');
 
         //MENU LATERAL
-        $this->get('/dashboard', 'Admin\AdminController@index')->name('dashboard');
+        $this->get('/dashboard', 'Admin\AdminController@index')->name('admindash');
         $this->get('/church', 'Church\ChurchController@index')->name('church');
 
         //IGREJA

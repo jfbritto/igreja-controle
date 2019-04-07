@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Church;
 
 class LoginController extends Controller
 {
@@ -27,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -41,18 +42,7 @@ class LoginController extends Controller
 
     public function get_autenticar()
     {
-        return view('site.auth.login',
-        array(
-            "inicio"              => "#top-section",
-            "informacoes"         => "#Section-1",
-            "perguntas"           => "#Section-2",
-            "cadastre"            => "/cidadao/registrar",
-            "entrar"              => "/login",
-            "active_session"      => "active",
-            "active_cadastre"     => "",
-            "active_entrar"       => ""
-        )
-        );
+        return view('site.auth.login');
     }
 
     public function post_autenticar(Request $request)
@@ -60,19 +50,32 @@ class LoginController extends Controller
 
         $user = User::where(['email'=>$request->email],['senha'=>bcrypt($request->password)])->get();
 
-        // dd($request->all());
+        if (!$user->first()->isAdmin) {
+            
+            $church = Church::find($user->first()->idChurch_fk);
+            // dd($church->isActive);
+        }
+
 
         if (!$user->isEmpty()) {
 
+            if (!$user->first()->isAdmin) {
+
+                if ($church->isActive == false)
+                    return redirect()->back()->with('error', 'Igreja inativa! verifique sua situação cadastral com a administração do sistema');
+
+                if ($church->isDeleted == true)
+                    return redirect()->back()->with('error', 'Igreja deletada! verifique sua situação cadastral com a administração do sistema');
+            }
 
             if ($user->first()->isDeleted == true)
-                return redirect()->back()->with('error', 'Usuário deletado! verifique sua situação cadastral com a administração');
+                return redirect()->back()->with('error', 'Usuário deletado! verifique sua situação cadastral com a administração do sistema');
 
             if ($user->first()->isActive == false)
-                return redirect()->back()->with('error', 'Usuário inativo! verifique sua situação cadastral com a administração');
+                return redirect()->back()->with('error', 'Usuário inativo! verifique sua situação cadastral com a administração do sistema');
             
-            if ($user->first()->isMember == true)
-                return redirect()->back()->with('error', 'Para acessar as inforações da sua igreja acesse esse link');    
+            // if ($user->first()->isMember == true)
+            //     return redirect()->back()->with('error', 'Para acessar as inforações da sua igreja acesse esse link');    
 
 
 
@@ -80,7 +83,7 @@ class LoginController extends Controller
             if(auth()->attempt($credentials))
             {
                 if(auth()->user()->isAdmin)
-                    return redirect()->route('dashboard');
+                    return redirect()->route('admindash');
 
                 if(!is_null(auth()->user()->idChurch_fk))
                     return redirect()->route('dashboard');
