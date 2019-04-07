@@ -62,14 +62,14 @@
     <div class="container-fluid">
 
 
-        <div class="box box-widget widget-user">
+        <div class="box box-widget widget-user" style="margin-top: 20px">
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header bg-grey-active">
               <h3 class="widget-user-username">{{ $church->name }}</h3>
               <h5 class="widget-user-desc">Inscrição de evento</h5>
             </div>
             <div class="widget-user-image" style="z-index: 10">
-              <img class="img-circle" src="@if(!is_null($church->avatar)){{ url('storage/churches/'.$church->avatar) }} @else {{ url('storage/churches/default.jpg') }} @endif" alt="User Avatar">
+              <img style="box-shadow: 0.3px 1px 5px 1px" class="img-circle" src="@if(!is_null($church->avatar)){{ url('storage/churches/'.$church->avatar) }} @else {{ url('storage/churches/default.jpg') }} @endif" alt="User Avatar">
             </div>
 
         </div>
@@ -330,7 +330,7 @@
                         </div>
                       <!-- /.box-body -->
                       <div class="box-footer text-right">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Cadastrar</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Cadastrar</button>
                       </div>
           
                   </div>
