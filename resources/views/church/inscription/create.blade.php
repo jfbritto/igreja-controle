@@ -6,7 +6,7 @@
     <h1>Cadastrar Inscrição | {{$event->title}}</h1>
 
     <ol class="breadcrumb">
-        <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+        <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li><a href="{{route('inscription')}}">Inscrições</a></li>
         <li><a href="{{route('inscription.show', $event->id)}}">{{$event->title}}</a></li>
         <li><a href="#">Cadastrar</a></li>

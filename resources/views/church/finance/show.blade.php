@@ -6,7 +6,7 @@
     <h1><i class="fa fa-money" aria-hidden="true"></i> Visualizar Movimentação</h1>
 
     <ol class="breadcrumb">
-        <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+        <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li><a href="{{route('finance')}}">Finanças</a></li>
         <li><a href="#">Visualizar</a></li>
     </ol>

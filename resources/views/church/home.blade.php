@@ -6,7 +6,7 @@
     <h1><i class="fa fa-dashboard" aria-hidden="true"></i> Dashboard</h1>
 
     <ol class="breadcrumb">
-        <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+        <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
     </ol>
 @stop
 

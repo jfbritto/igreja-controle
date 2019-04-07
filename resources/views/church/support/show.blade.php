@@ -6,7 +6,7 @@
     <h1>Visualizar Mensagem</h1>
 
     <ol class="breadcrumb">
-        <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+        <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li><a href="{{route('support')}}">Suporte</a></li>
         <li><a href="#">Visualizar Mensagem</a></li>
     </ol>

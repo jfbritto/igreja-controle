@@ -6,7 +6,7 @@
     <h1><i class="fa fa-cog" aria-hidden="true"></i> Configurações</h1>
 
     <ol class="breadcrumb">
-        <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+        <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li><a href="{{route('config')}}">Configurações</a></li>
     </ol>
 @stop

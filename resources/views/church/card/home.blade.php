@@ -6,7 +6,7 @@
     <h1><i class="fa fa-id-card-o" aria-hidden="true"></i> Carteirinhas</h1>
 
     <ol class="breadcrumb">
-    <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+    <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li><a href="{{route('card')}}">Carteirinhas</a></li>
     </ol>
 @stop

@@ -6,7 +6,7 @@
     <h1><i class="fa fa-gift" aria-hidden="true"></i> Aniversariantes</h1>
 
     <ol class="breadcrumb">
-        <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+        <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li><a href="{{route('birth')}}">Aniversariantes</a></li>
     </ol>
 @stop

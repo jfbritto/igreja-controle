@@ -6,7 +6,7 @@
     <h1><i class="fa fa-life-ring" aria-hidden="true"></i> Suporte</h1>
 
     <ol class="breadcrumb">
-        <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+        <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li><a href="{{route('support')}}">Suporte</a></li>
     </ol>
 @stop

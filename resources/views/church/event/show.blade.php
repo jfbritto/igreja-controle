@@ -6,7 +6,7 @@
     <h1><i class="fa fa-calendar" aria-hidden="true"></i> {{$event->title}} @if($event->endDate < date('Y-m-d'))- Evento encerrado @endif</h1>
 
     <ol class="breadcrumb">
-    <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+    <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li><a href="{{route('event')}}">Eventos</a></li>
         <li><a href="#">{{$event->title}}</a></li>
     </ol>

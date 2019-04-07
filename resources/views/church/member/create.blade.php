@@ -6,7 +6,7 @@
     <h1>Cadastrar Membro</h1>
 
     <ol class="breadcrumb">
-        <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+        <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li><a href="{{route('member')}}">Membros</a></li>
         <li><a href="#">Cadastrar</a></li>
     </ol>

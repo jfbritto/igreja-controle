@@ -6,7 +6,7 @@
     <h1>Editar Evento | {{$event->title}}</h1>
 
     <ol class="breadcrumb">
-    <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+    <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li><a href="{{route('event')}}">Eventos</a></li>
         <li><a href="#">Editar</a></li>
         <li><a href="#">{{$event->title}}</a></li>

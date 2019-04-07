@@ -6,7 +6,7 @@
     <h1>Editar Membro | {{$member->name}}</h1>
 
     <ol class="breadcrumb">
-        <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+        <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li><a href="{{route('member')}}">Membros</a></li>
         <li><a href="#">Editar</a></li>
         <li><a href="#">{{$member->name}}</a></li>
