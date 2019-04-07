@@ -39,6 +39,18 @@ class MemberController extends Controller
     public function store(Request $request)
     {
 
+        // dd($request);
+
+        $nameFile = null;
+        if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
+            $nameFile = Laracrop::cropImage($request->input('avatar'));
+
+            // Storage::delete("members/{$member->avatar}");
+
+            File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/members/{$nameFile}"));
+
+        }
+
         $request_address = [
             'cep'           => $request->cep,
             'idState_fk'    => $request->idState_fk,
@@ -58,6 +70,7 @@ class MemberController extends Controller
             'cpf'           => $request->cpf,
             'sex'           => $request->sex,
             'phone'         => $request->phone,
+            'avatar'        => $nameFile,
             'idChurch_fk'   => auth()->user()->idChurch_fk,
             'isMember'      => true,
             'idAddress_fk'  => $address->id
@@ -66,7 +79,7 @@ class MemberController extends Controller
 
         $result = User::create($request_user);
 
-
+        Laracrop::cleanCropTemp();
 
         if(!$result)
             return redirect()

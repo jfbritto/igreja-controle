@@ -6,11 +6,11 @@ return [
     'path_upload' => "public/filetmp",
     'image_url' => "filetmp",
 
-    'aspectratio' => "1",
+    'aspectratio' => "3",
     'minsize' => "[200, 200]",
-    'maxsize' => "[500, 500]",
+    'maxsize' => "[600, 600]",
     'bgcolor' => "black",
     'bgopacity' => "0.6",
-    'boxwidth' => "600",
-    'boxheight' => "600"
+    'boxwidth' => "400",
+    'boxheight' => "400"
 ];

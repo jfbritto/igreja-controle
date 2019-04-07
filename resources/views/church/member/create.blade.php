@@ -19,120 +19,177 @@
     @include('includes.alerts')
 </div>
 
+<form role="form" method="POST" action="{{ route('member.store') }}">
+@csrf
 
 <div class="row">
+    <div class="col-md-3">
 
-    <div class="col-md-12">
-
-        <div class="box box-primary">
-            <!-- form start -->
-            <form role="form" method="POST" action="{{ route('member.store') }}">
-            @csrf
-              <div class="box-body">
-
-                <div class='row'>
-                    <div class='col-md-4'>
-
-                        <div class="form-group">
-                            <label for='name'>Nome</label> 
-
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-user"></i>
-                                </div>
-                                <input id='name' name='name' type="text" class="form-control" required>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class='col-md-4'>
-                
-                        <div class="form-group">
-                            <label for='sex'>Sexo</label> 
-
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-transgender"></i>
-                                </div>
-                                <select id='sex' name='sex' class="form-control" required>
-                                    <option>-- Selecione --</option>
-                                    <option value='masculino'>Masculino</option>
-                                    <option value='feminino'>Feminino</option>
-                                </select>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class='col-md-4'>
-                    
-                        <div class="form-group">
-                            <label for='birth'>Nascimento</label>  
-
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                <input id='birth' name='birth' type="date" class="form-control" required>
-                            </div>
-                        </div>
-
-                    </div>
-                    
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary" style="padding: 10px">
+                    <i title="Editar imagem" onclick="openModalPhoto()" style="position: absolute; left: 50%; top: 50%; transform: translate(-35%, -40%); color: white; cursor: pointer" class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+                    <img title="Editar imagem" onclick="openModalPhoto()" style="display: block; margin-right: auto; margin-left: auto; cursor: pointer;" src="{{ url('storage/members/default.jpg') }}" class='img img-circle' width='149'>
                 </div>
-                <div class='row'>
+            </div>
+        </div>
                     
-                    <div class='col-md-4'>
+    </div>
+    <div class="col-md-9">
 
-                        <div class="form-group">
-                            <label for='email'>E-mail</label> 
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+         
+                    <div class="box-body">        
+                        
+                        <div class="row">
 
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-envelope"></i>
+                            <div class="col-md-12">
+
+                                <div class='row'>
+                                    <div class='col-md-4'>
+
+                                        <div class="form-group">
+                                            <label for='name'>Nome</label> 
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-user"></i>
+                                                </div>
+                                                <input id='name' name='name' type="text" class="form-control" required>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class='col-md-4'>
+                                
+                                        <div class="form-group">
+                                            <label for='sex'>Sexo</label> 
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-transgender"></i>
+                                                </div>
+                                                <select id='sex' name='sex' class="form-control" required>
+                                                    <option>-- Selecione --</option>
+                                                    <option value='masculino'>Masculino</option>
+                                                    <option value='feminino'>Feminino</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class='col-md-4'>
+
+                                        <div class="form-group">
+                                            <label for='birth'>Nascimento</label>  
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input id='birth' name='birth' type="date" class="form-control" required>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
                                 </div>
-                                <input id='email' name='email' type="email" class="form-control" required>
+                                <div class='row'>
+                                    
+                                    <div class='col-md-4'>
+                                    
+                                        <div class="form-group">
+                                            <label for='email'>E-mail</label> 
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-envelope"></i>
+                                                </div>
+                                                <input id='email' name='email' type="email" class="form-control" required>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class='col-md-4'>
+
+                                        <div class="form-group">
+                                            <label for='cpf'>CPF</label> 
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-address-card-o"></i>
+                                                </div>
+                                                <input id='cpf' name='cpf' type="text" class="form-control" required>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class='col-md-4'>
+
+                                        <div class="form-group">
+                                            <label for='phone'>Telefone</label> 
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-phone"></i>
+                                                </div>
+                                                <input id='phone' name='phone' type="text" class="form-control" required>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
                             </div>
+
                         </div>
 
                     </div>
-                    <div class='col-md-4'>
+                      
+                </div>
 
+            </div>    
+
+        </div>
+
+    </div>
+</div>     
+
+
+
+<!-- editar caixa -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close fechar-modal" data-dismiss="modal">&times;</button>
+              Selecione a imagem
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="form-group">
-                            <label for='cpf'>CPF</label> 
-
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-address-card-o"></i>
-                                </div>
-                                <input id='cpf' name='cpf' type="text" class="form-control" required>
-                            </div>
+<!--                             <label for='avatar'>Imagem</label>  -->
+                            @laracropCss(true)
+                            @laracrop(name=avatar | aspectratio=1/1 | minsize=[100, 100] | maxsize=[400, 400] | bgcolor=black | bgopacity=0.7)
                         </div>
-
                     </div>
-                    <div class='col-md-4'>
-
-                        <div class="form-group">
-                            <label for='phone'>Telefone</label> 
-
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-phone"></i>
-                                </div>
-                                <input id='phone' name='phone' type="text" class="form-control" required >
-                            </div>
-                        </div>
-
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
                     </div>
                 </div>
-              </div>
-              <!-- /.box-body -->
-  
-          </div>
-
-    </div>    
-
+            </div>
+        </div>
+    </div>
 </div>
-            
+
+
 
 
 <div class="row">
@@ -140,9 +197,7 @@
     <div class="col-md-12">
 
         <div class="box box-primary">
-            <!-- form start -->
-            <form role="form" method="POST" action="{{ route('member.store') }}">
-            @csrf
+
               <div class="box-body">
 
                 <div class='row'>
@@ -161,7 +216,7 @@
 
                     </div>
                     <div class='col-md-4'>
-
+                
                         <div class="form-group">
                             <label for="idState_fk">Estado</label> 
 
@@ -179,9 +234,8 @@
                         </div>
 
                     </div>
-
                     <div class='col-md-4'>
-
+                
                         <div class="form-group">
                             <label for="idCity_fk">Cidade</label>
 
@@ -197,11 +251,10 @@
                     </div>
 
                 </div>
-
                 <div class='row'>
 
                     <div class='col-md-4'>
-
+ 
                         <div class="form-group">
                             <label for="address">Endereço</label>
 
@@ -215,7 +268,7 @@
 
                     </div>
                     <div class='col-md-2'>
-
+                        
                         <div class="form-group">
                             <label for="number">Número</label>
 
@@ -229,7 +282,7 @@
 
                     </div>
                     <div class='col-md-3'>
-
+                        
                         <div class="form-group">
                             <label for="neighborhood">Bairro</label>
 
@@ -242,7 +295,6 @@
                         </div>
 
                     </div>
-                    
                     <div class='col-md-3'>
                     
                         <div class="form-group">
@@ -264,19 +316,17 @@
               </div>
               <!-- /.box-body -->
 
-              <input type="hidden" name="form" value="church">
-              
               <div class="box-footer text-right">
                 <a href="{{ url()->previous() }}" class='btn btn-default'><i class="fa fa-close" aria-hidden="true"></i>&nbsp; Cancelar</a>
-                <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Cadastrar</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Salvar</button>
               </div>
-            </form>
           </div>
 
     </div>    
 
 </div>
 
+</form> 
 
 
 
@@ -325,6 +375,10 @@
 		            $("#idCity_fk").html(html)
 		        }
 		    });
+        }
+
+        function openModalPhoto(){
+            $("#myModal").modal('show');
         }
         
     </script>    

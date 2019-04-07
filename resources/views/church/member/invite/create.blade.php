@@ -64,11 +64,11 @@
 
         <div class="box box-widget widget-user">
             <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-green-active">
+            <div class="widget-user-header bg-default-active">
               <h3 class="widget-user-username">{{ $church->name }}</h3>
               <h5 class="widget-user-desc">Cadastro de membro</h5>
             </div>
-            <div class="widget-user-image">
+            <div class="widget-user-image" style="z-index: 10">
               <img class="img-circle" src="@if(!is_null($church->avatar)){{ url('storage/churches/'.$church->avatar) }} @else {{ url('storage/churches/default.jpg') }} @endif" alt="User Avatar">
             </div>
 
@@ -90,7 +90,7 @@
 
                     <div class="col-md-12">
 
-                        <div class="box box-success box-solid">
+                        <div class="box box-default box-solid">
                             <div class="box-header with-border">Formulário de cadastro</div>
                             <!-- form start -->
                             <form role="form" method="POST" action="{{ route('member.invite.store', $hash) }}">
@@ -210,7 +210,7 @@
 
                     <div class="col-md-12">
 
-                        <div class="box box-success box-solid">
+                        <div class="box box-default box-solid">
                             <div class="box-header with-border">Endereço</div>
                             <!-- form start -->
                               <div class="box-body">

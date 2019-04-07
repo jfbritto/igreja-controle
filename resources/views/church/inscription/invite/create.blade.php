@@ -64,11 +64,11 @@
 
         <div class="box box-widget widget-user">
             <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-green-active">
+            <div class="widget-user-header bg-grey-active">
               <h3 class="widget-user-username">{{ $church->name }}</h3>
               <h5 class="widget-user-desc">Inscrição de evento</h5>
             </div>
-            <div class="widget-user-image">
+            <div class="widget-user-image" style="z-index: 10">
               <img class="img-circle" src="@if(!is_null($church->avatar)){{ url('storage/churches/'.$church->avatar) }} @else {{ url('storage/churches/default.jpg') }} @endif" alt="User Avatar">
             </div>
 
@@ -89,7 +89,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                <div class="box box-success box-solid">
+                <div class="box box-default box-solid">
                     <div class="box-header with-border">Descrição</div>
                     <div class="box-body">
 
@@ -180,7 +180,7 @@
         <div class="row">
 
             <div class="col-md-12">
-                <div class="box box-success box-solid">
+                <div class="box box-default box-solid">
                     <div class="box-header with-border">Formulário de inscrição</div>
 
                         <div class="box-body">
