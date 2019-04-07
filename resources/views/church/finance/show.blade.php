@@ -3,12 +3,12 @@
 @section('title', 'Igreja Controle - Finanças')
 
 @section('content_header')
-    <h1><i class="fa fa-money" aria-hidden="true"></i> Adicionar Movimentação</h1>
+    <h1><i class="fa fa-money" aria-hidden="true"></i> Visualizar Movimentação</h1>
 
     <ol class="breadcrumb">
         <li><a href="{{route('dashboard')}}">Dashboard</a></li>
         <li><a href="{{route('finance')}}">Finanças</a></li>
-        <li><a href="#">Adicionar movimentação</a></li>
+        <li><a href="#">Visualizar</a></li>
     </ol>
 @stop
 
@@ -25,9 +25,21 @@
     <div class="col-md-12">
 
         <div class="box box-primary">
+            <div class="box-header with-border text-right">
+                <a href="{{ url()->previous() }}" class='btn btn-default' title="Voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+            </div>    
+        </div>
+    </div>
+</div>        
+
+
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="box box-primary">
             <!-- form start -->
-            <form role="form" method="POST" action="{{ route('finance.store') }}">
-            @csrf
                 <div class="box-body">
 
                     <div class='row'>
@@ -40,10 +52,10 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-circle"></i>
                                     </div>
-                                    <select id='type' name='type' class="form-control" required>
+                                    <select id='type' name='type' class="form-control" disabled>
                                         <option></option>
-                                        <option id='input' value='I'>Entrada</option>
-                                        <option id='output' value='O'>Saída</option>
+                                        <option id='input' value='I' @if($movimentation->type == "I") selected='selected' @endif>Entrada</option>
+                                        <option id='output' value='O' @if($movimentation->type == "O") selected='selected' @endif>Saída</option>
                                     </select>
                                 </div>
                             </div>
@@ -58,10 +70,10 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-circle"></i>
                                     </div>
-                                    <select required id='idAction_fk' name='idAction_fk' class="form-control">
+                                    <select disabled id='idAction_fk' name='idAction_fk' class="form-control">
                                         <option></option>
                                         @foreach($actions as $action)
-                                            <option value='{{$action->id}}'>{{$action->value}}</option>
+                                            <option value='{{$action->id}}' @if($action->id == $movimentation->idAction_fk) selected='selected' @endif>{{$action->value}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -77,7 +89,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-usd"></i>
                                     </div>
-                                    <input id='value' name='value' type="text" class="form-control" required>
+                                    <input id='value' name='value' type="text" class="form-control" value="{{$movimentation->value}}" disabled>
                                 </div>
                             </div>
 
@@ -91,7 +103,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input id='movimentationDate' name='movimentationDate' type="date" value="{{date('Y-m-d')}}" class="form-control" required>
+                                    <input id='movimentationDate' name='movimentationDate' type="date" class="form-control" value="{{$movimentation->movimentationDate}}" disabled>
                                 </div>
                             </div>
 
@@ -105,18 +117,14 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-align-center"></i>
                                     </div>
-                                    <textarea id='comments' name='comments' class="form-control"></textarea>
+                                    <textarea id='comments' name='comments' class="form-control" disabled>{{$movimentation->comments}}</textarea>
                                 </div>
                             </div>
 
                         </div>
                     </div>
                 </div>  
-                <div class="box-footer text-right">
-                    <a href="{{ url()->previous() }}" class='btn btn-default'><i class="fa fa-close" aria-hidden="true"></i>&nbsp; Cancelar</a>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Cadastrar</button>
-                </div>  
-            </form>  
+
         </div>
     </div>    
 </div>

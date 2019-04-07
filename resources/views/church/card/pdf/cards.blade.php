@@ -24,10 +24,18 @@
             margin-left: 15px;
         }
 
+        .church-name {
+            position: absolute;
+            margin-top: 15px;
+            margin-left: 15px;
+        }
+
+
         .member-avatar {
             position: absolute;
-            top: 5px;
-            left: 5px;
+            top: 54px;
+            left: 15px;
+            border-radius: 5px;
         }
 
         </style>
@@ -42,7 +50,9 @@
 
 
         <div class="card">
-            <div class="member-name" title="member">{{$member->name}}</div>
+            <div class="church-name">Igreja {{$member->church->name}}</div>
+            <div class="member-name">{{$member->name}}</div>
+
             
                 @if($member->avatar != null)
                 <img class="member-avatar" src="{{ url('storage/members/'.$member->avatar) }}" width='100'>

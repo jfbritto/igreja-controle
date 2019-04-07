@@ -142,7 +142,7 @@
                             <td style='vertical-align:middle'>{{ date('d/m/Y', strtotime($movimentation->movimentationDate)) }}</td>
                             <td style='vertical-align:middle'>R$ {{ number_format($movimentation->value, 2, ',', '.') }}</td>
                             <td style='vertical-align:middle' class='text-right'>
-                                <a href="#" class='btn btn-primary'><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; Visualizar</a>
+                                <a href="{{ route('finance.show', $movimentation->id) }}" class='btn btn-primary' title="Visualizar movimentação"><i class="fa fa-eye" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                     @empty

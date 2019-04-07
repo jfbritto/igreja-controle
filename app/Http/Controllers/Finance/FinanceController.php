@@ -143,7 +143,16 @@ class FinanceController extends Controller
 
     public function show($id)
     {
-        //
+        $movimentation = Finance::find($id);
+
+        if(!$movimentation)
+            return redirect()
+                        ->back()
+                        ->with('error', 'Movimentação não encontrada!');
+        
+        $actions = Parameter::where('operation', '=', 'finances')->where('attribute', '=', 'action')->get();
+                        
+        return view('church.finance.show', compact('movimentation', 'actions'));
     }
 
 

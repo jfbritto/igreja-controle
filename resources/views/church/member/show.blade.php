@@ -81,7 +81,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-user"></i>
                                                 </div>
-                                                <input id='name' name='name' type="text" class="form-control" required readonly value='{{$member->name}}'>
+                                                <input id='name' name='name' type="text" class="form-control" required disabled value='{{$member->name}}'>
                                             </div>
                                         </div>
 
@@ -95,7 +95,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-transgender"></i>
                                                 </div>
-                                                <select id='sex' name='sex' class="form-control" required readonly>
+                                                <select id='sex' name='sex' class="form-control" required disabled>
                                                     <option>-- Selecione --</option>
                                                     <option value='masculino' @if($member->sex == 'masculino') selected='selected' @endif>Masculino</option>
                                                     <option value='feminino' @if($member->sex == 'feminino') selected='selected' @endif>Feminino</option>
@@ -113,7 +113,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input id='birth' name='birth' type="date" class="form-control" required readonly value='{{$member->birth}}'>
+                                                <input id='birth' name='birth' type="date" class="form-control" required disabled value='{{$member->birth}}'>
                                             </div>
                                         </div>
 
@@ -131,7 +131,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-envelope"></i>
                                                 </div>
-                                                <input id='email' name='email' type="email" class="form-control" required readonly value='{{$member->email}}'>
+                                                <input id='email' name='email' type="email" class="form-control" required disabled value='{{$member->email}}'>
                                             </div>
                                         </div>
 
@@ -145,7 +145,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-address-card-o"></i>
                                                 </div>
-                                                <input id='cpf' name='cpf' type="text" class="form-control" required readonly value='{{$member->cpf}}'>
+                                                <input id='cpf' name='cpf' type="text" class="form-control" required disabled value='{{$member->cpf}}'>
                                             </div>
                                         </div>
 
@@ -159,7 +159,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-phone"></i>
                                                 </div>
-                                                <input id='phone' name='phone' type="text" class="form-control" required readonly value='{{$member->phone}}'>
+                                                <input id='phone' name='phone' type="text" class="form-control" required disabled value='{{$member->phone}}'>
                                             </div>
                                         </div>
 
@@ -200,7 +200,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="cep" id="cep" class="form-control" value='{{$address->cep}}' readonly>
+                                <input type='text' name="cep" id="cep" class="form-control" value='{{$address->cep}}' disabled>
                             </div>
                         </div>
 
@@ -214,7 +214,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <select name="idState_fk" id="idState_fk" onchange="changeState(this)" class="form-control" required readonly>
+                                <select name="idState_fk" id="idState_fk" onchange="changeState(this)" class="form-control" required disabled>
                                     <option>Selecione o estado</option>
                                     @foreach($states as $state)
                                         <option value="{{$state->id}}" @if($state->id == $address->idState_fk) selected='selected' @endif>{{$state->nome}}</option>
@@ -233,7 +233,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <select name="idCity_fk" id="idCity_fk" class="form-control" required readonly>
+                                <select name="idCity_fk" id="idCity_fk" class="form-control" required disabled>
                                     @foreach($cities as $city)
                                         <option value="{{$city->id}}" @if($city->id == $address->idCity_fk) selected='selected' @endif>{{$city->nome}}</option>
                                     @endforeach
@@ -255,7 +255,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input readonly type='text' name="address" id="address" class="form-control" value='{{$address->address}}'>
+                                <input disabled type='text' name="address" id="address" class="form-control" value='{{$address->address}}'>
                             </div>
                         </div>
 
@@ -269,7 +269,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input readonly type='text' name="number" id="number" class="form-control" value='{{$address->number}}'>
+                                <input disabled type='text' name="number" id="number" class="form-control" value='{{$address->number}}'>
                             </div>
                         </div>
 
@@ -283,7 +283,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input readonly type='text' name="neighborhood" id="neighborhood" class="form-control" value='{{$address->neighborhood}}'>
+                                <input disabled type='text' name="neighborhood" id="neighborhood" class="form-control" value='{{$address->neighborhood}}'>
                             </div>
                         </div>
 
@@ -297,7 +297,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input readonly type='text' name="complement" id="complement" class="form-control" value='{{$address->complement}}'>
+                                <input disabled type='text' name="complement" id="complement" class="form-control" value='{{$address->complement}}'>
                             </div>
                         </div>
                     

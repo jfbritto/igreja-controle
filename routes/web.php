@@ -115,6 +115,7 @@ $this->group(['middleware' => 'auth'], function(){
         $this->post('/finance/add', 'Finance\FinanceController@store')->name('finance.store');
         $this->post('/finance', 'Finance\FinanceController@index_month')->name('finance.month');
         $this->get('/finance/pdf/{year}/{month}', 'Finance\FinanceController@balance_pdf')->name('finance.pdf');
+        $this->get('/finance/show/{id_movimentation}', 'Finance\FinanceController@show')->name('finance.show');
 
         //CONFIG
         $this->post('/config/edit', 'Church\ChurchController@update_avatar')->name('config.update');
