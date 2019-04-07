@@ -7,7 +7,7 @@
 
     <ol class="breadcrumb">
         <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a href="{{route('member')}}">Membros</a></li>
+        <li><a href="{{route('member')}}"><i class="fa fa-users"></i> Membros</a></li>
         <li><a href="#">Cadastrar</a></li>
     </ol>
 @stop

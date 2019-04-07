@@ -7,7 +7,7 @@
 
     <ol class="breadcrumb">
         <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a href="{{route('birth')}}">Aniversariantes</a></li>
+        <li><a href="{{route('birth')}}"><i class="fa fa-gift"></i> Aniversariantes</a></li>
     </ol>
 @stop
 

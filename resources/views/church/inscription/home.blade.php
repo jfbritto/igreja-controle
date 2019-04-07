@@ -7,7 +7,7 @@
 
     <ol class="breadcrumb">
         <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a href="{{route('inscription')}}">Inscrições</a></li>
+        <li><a href="{{route('inscription')}}"><i class="fa fa-check-square-o"></i> Inscrições</a></li>
     </ol>
 @stop
 

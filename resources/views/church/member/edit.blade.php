@@ -7,9 +7,8 @@
 
     <ol class="breadcrumb">
         <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a href="{{route('member')}}">Membros</a></li>
-        <li><a href="#">Editar</a></li>
-        <li><a href="#">{{$member->name}}</a></li>
+        <li><a href="{{route('member')}}"><i class="fa fa-users"></i> Membros</a></li>
+        <li><a href="{{route('member.show', $member->id)}}"><i class="fa fa-user"></i> {{$member->name}}</a></li>
     </ol>
 @stop
 

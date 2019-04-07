@@ -7,9 +7,8 @@
 
     <ol class="breadcrumb">
     <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a href="{{route('event')}}">Eventos</a></li>
-        <li><a href="#">Editar</a></li>
-        <li><a href="#">{{$event->title}}</a></li>
+        <li><a href="{{route('event')}}"><i class="fa fa-calendar"></i> Eventos</a></li>
+        <li><a href="{{route('event.show', $event->id)}}"><i class="fa fa-calendar"></i> {{$event->title}}</a></li>
     </ol>
 @stop
 

@@ -7,7 +7,7 @@
 
     <ol class="breadcrumb">
         <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a href="{{route('finance')}}">Finanças</a></li>
+        <li><a href="{{route('finance')}}"><i class="fa fa-money"></i> Finanças</a></li>
         <li><a href="#">Adicionar movimentação</a></li>
     </ol>
 @stop

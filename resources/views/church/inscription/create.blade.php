@@ -3,12 +3,12 @@
 @section('title', 'Igreja Controle - Cadastrar Inscrição')
 
 @section('content_header')
-    <h1>Cadastrar Inscrição | {{$event->title}}</h1>
+    <h1><i class="fa fa-check-square-o" aria-hidden="true"></i> Cadastrar Inscrição | {{$event->title}}</h1>
 
     <ol class="breadcrumb">
         <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a href="{{route('inscription')}}">Inscrições</a></li>
-        <li><a href="{{route('inscription.show', $event->id)}}">{{$event->title}}</a></li>
+        <li><a href="{{route('inscription')}}"><i class="fa fa-check-square-o"></i> Inscrições</a></li>
+        <li><a href="{{route('inscription.show', $event->id)}}"><i class="fa fa-check-square-o"></i> {{$event->title}}</a></li>
         <li><a href="#">Cadastrar</a></li>
     </ol>
 @stop
@@ -25,9 +25,6 @@
 
     <div class="col-md-12">
         <div class="box box-primary">
-                <div class="box-header with-border">
-                    <a href="{{ route('event.show', $event->id) }}" class='btn btn-default'><i class="fa fa-close" aria-hidden="true"></i>&nbsp; Cancelar</a>
-                </div>
                 <div class="box-body">
                     <!-- form start -->
                     <form role="form" method="POST" action="{{ route('inscription.store', $event->id) }}">
@@ -168,7 +165,8 @@
 
                 </div>
               <!-- /.box-body -->
-              <div class="box-footer">
+              <div class="box-footer text-right">
+                <a href="{{ url()->previous() }}" class='btn btn-default'><i class="fa fa-close" aria-hidden="true"></i>&nbsp; Cancelar</a>
                 <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Cadastrar</button>
               </div>
   
