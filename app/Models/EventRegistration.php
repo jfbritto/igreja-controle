@@ -23,7 +23,8 @@ class EventRegistration extends Model
         'birth',
         'sex',
         'email',
-        'phone'
+        'phone',
+        'info'
     ];
 
     public function church()

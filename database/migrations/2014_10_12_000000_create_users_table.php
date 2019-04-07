@@ -33,6 +33,7 @@ class CreateUsersTable extends Migration
             $table->string('cpf', 20);
             $table->string('phone', 50)->nullable();
             $table->string('avatar', 100)->nullable();
+            $table->text('info');
 
 
             $table->string('remember_token', 100)->nullable();

@@ -80,7 +80,8 @@ $this->group(['middleware' => 'auth'], function(){
         $this->get('/inscription/show/{id_event}', 'Inscription\InscriptionController@show')->name('inscription.show');
         $this->get('/inscription/add/{id_event}', 'Inscription\InscriptionController@create')->name('inscription.create');
         $this->post('/inscription/add/{id_event}', 'Inscription\InscriptionController@store')->name('inscription.store');
-        $this->get('/inscription/report-payment/{id_inscript}', 'Inscription\InscriptionController@report_payment')->name('inscription.report_payment');
+        $this->get('/inscription/report-payment/{id_inscript}', 'Inscription\InscriptionController@report_info_payment')->name('inscription.report_info_payment');
+        $this->post('/inscription/report-payment/{id_inscript}', 'Inscription\InscriptionController@report_payment')->name('inscription.report_payment');
         $this->get('/inscription/pdf/{id_event}', 'Inscription\InscriptionController@inscription_pdf')->name('inscription.pdf');
 
         //MEMBROS

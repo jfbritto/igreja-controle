@@ -206,7 +206,10 @@
                             </td>
                             <td style='vertical-align:middle' class='text-right'>
                                 @if(!$inscript->isPaid)
-                                <a href="{{url('church/inscription/report-payment', $inscript->id)}}" class='btn btn-warning' title="Informar pagamento"><i class="fa fa-usd" aria-hidden="true"></i></a>
+                                <a href="{{route('inscription.report_info_payment', $inscript->id)}}" class='btn btn-warning' title="Informar pagamento"><i class="fa fa-usd" aria-hidden="true"></i></a>
+                                @else
+                                <a class='btn btn-success' href="#" data-html="true" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="left" data-content="{{$inscript->info}}"><i class="fa fa-info" aria-hidden="true"></i></a>
+                                
                                 @endif
                             </td>
                         </tr>
@@ -284,6 +287,10 @@
             )
         }
     });
+
+    $(function () {
+      $('[data-toggle="popover"]').popover()
+    })
 
   });
 

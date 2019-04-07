@@ -83,8 +83,37 @@ class InscriptionController extends Controller
         //
     }
 
-    public function report_payment($id)
+
+    public function report_info_payment($id)
     {
+        $inscript = EventRegistration::find($id);
+
+        if(!$inscript)
+            return redirect()
+                        ->route('event')
+                        ->with('error', 'Inscrito não encontrado!');
+
+        $church = Church::find($inscript->idChurch_fk);
+
+        if(!$church)
+            return redirect()
+                        ->route('event')
+                        ->with('error', 'Igreja não encontrada!');
+
+        $event = Event::find($inscript->idEvent_fk);
+
+        if(!$event)
+            return redirect()
+                        ->route('event')
+                        ->with('error', 'Evento não encontrado!');                
+
+
+        return view('church.inscription.report_payment', compact('church', 'event', 'inscript'));                
+    }
+
+    public function report_payment(Request $request, $id)
+    {
+
         $inscript = EventRegistration::find($id);
 
         if(!$inscript)
@@ -112,7 +141,7 @@ class InscriptionController extends Controller
                         ->route('event')
                         ->with('error', 'Evento não encontrado!'); 
 
-        $updates = ['isPaid' => true]; 
+        $updates = ['isPaid' => true, 'info' => $request->info]; 
         $result = $inscript->update($updates);
 
         if(!$result)

@@ -30,6 +30,7 @@ class CreateEventRegistrationsTable extends Migration
             $table->string('sex', 20)->nullable();
             $table->string('email', 50)->unique();
             $table->string('phone', 50)->nullable();
+            $table->text('info');
 
             $table->timestamps();
         });
