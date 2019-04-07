@@ -21,7 +21,6 @@
 <div class="box box-primary">
 
     <div class="box-header with-border form-inline text-right">
-        <input class="form-control" id="btn-link-txt" value="{{ env('APP_URL').'/invite/'.$church->hash }}" readonly="">
         <a href="#" id="btn-link" class="btn btn-default" title="Copiar o link para cadastro de membro"><i class="fa fa-link" aria-hidden="true"></i></a>
         <a target="_blank" href="{{ route('member.pdf') }}" class='btn btn-danger' title="Gerar PDF com todos os membros"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
         <a href="{{ route('member.create') }}" class='btn btn-success' title="Novo membro"><i class="fa fa-plus" aria-hidden="true"></i></a>
@@ -75,6 +74,7 @@
             @endforelse
             </tbody>
         </table>
+        <input class="form-control" id="btn-link-txt" value="{{ env('APP_URL').'/invite/'.$church->hash }}" readonly="">
     </div>
 
 </div>

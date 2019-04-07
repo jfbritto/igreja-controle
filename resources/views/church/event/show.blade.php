@@ -174,7 +174,6 @@
         <div class="box box-primary">
             <div class="box-header with-border form-inline text-right">
                 @if($event->endDate > date('Y-m-d'))
-                    <input class="form-control" id="btn-link-txt" value="{{ env('APP_URL').'/event/invite/'.$event->hash }}" readonly="">
                     <a href="#" id="btn-link" class="btn btn-default" title="Copiar o link para inscrição no evento"><i class="fa fa-link" aria-hidden="true"></i></a>
                 @endif
                 <a target="_blank" href="{{ url('church/inscription/pdf', $event->id) }}" class='btn btn-danger' title="Gerar PDF com todos os inscritos"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
@@ -218,6 +217,8 @@
                     @endforelse
                     </tbody>
                 </table>
+
+                <input class="form-control" id="btn-link-txt" value="{{ env('APP_URL').'/event/invite/'.$event->hash }}" readonly="">
 
             </div>
         </div>   
