@@ -46,4 +46,9 @@ class EventRegistration extends Model
     {
         return $this->hasOne(\App\Models\State::class, 'id', 'idState_fk');
     }
+
+    public function user()
+    {
+        return $this->hasOne(\App\Models\User::class, 'id', 'idUser_fk');
+    }
 }

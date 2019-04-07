@@ -43,7 +43,7 @@
                 <div class="box-body">
 
                     <div class='row'>
-                        <div class='col-md-6'>
+                        <div class='col-md-4'>
                     
                             <div class="form-group">
                                 <label for='type'>Operação</label> 
@@ -61,7 +61,7 @@
                             </div>
 
                         </div>
-                        <div class='col-md-6' id='action-box'>
+                        <div class='col-md-4' id='action-box'>
                     
                             <div class="form-group">
                                 <label for='idAction_fk'>Tipo</label> 
@@ -80,7 +80,7 @@
                             </div>
 
                         </div>
-                        <div class='col-md-6'>
+                        <div class='col-md-4'>
 
                             <div class="form-group responsavel">
                                 <label for='value'>Valor</label>      
@@ -94,6 +94,9 @@
                             </div>
 
                         </div>
+
+                    </div>
+                    <div class='row'>    
                         <div class='col-md-6'>
 
                             <div class="form-group responsavel">
@@ -108,6 +111,22 @@
                             </div>
 
                         </div>
+                        <div class='col-md-6'>
+
+                            <div class="form-group">
+                                <label>Usuário cadastrou</label>      
+
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <input type="text" class="form-control" value="{{$movimentation->user->name}}" disabled>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class='row'>    
                         <div class='col-md-12'>
                         
                             <div class="form-group">
