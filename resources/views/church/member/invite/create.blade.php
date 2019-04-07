@@ -8,7 +8,7 @@
     <meta property="type" content="website" />
     <meta property="og:title" content="{{ $church->name }}">
     <meta property="og:description" content="Cadastro de membros">
-    <meta property="og:image" content="{{asset("img/background-reduce.jpg")}}">
+    <meta property="og:image" content="@if(!is_null($church->avatar)){{ url('storage/churches/'.$church->avatar) }} @else {{asset('img/background-reduce.jpg')}} @endif">
     <meta property="og:locale" content="pt_BR">
     <meta property="og:image:type" content="image/jpg">
     <meta property="og:image:width" content="640">

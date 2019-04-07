@@ -13,7 +13,7 @@ class CardController extends Controller
     public function index()
     {
         $members = User::where('idChurch_fk', '=', auth()->user()->idChurch_fk)
-                            ->where('isMember', '=', true)
+                            ->where('isActive', '=', true)
                             ->where('isDeleted', '=', false)
                             ->get();
 
@@ -26,7 +26,6 @@ class CardController extends Controller
     {
   
         $members = User::where('idChurch_fk', '=', auth()->user()->idChurch_fk)
-                            ->where('isMember', '=', true)
                             ->where('isActive', '=', true)
                             ->where('isDeleted', '=', false)
                             ->get();

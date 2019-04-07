@@ -581,7 +581,6 @@ class MemberController extends Controller
 
         $members = User::whereMonth('birth', $month)
                                     ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
-                                    ->where('isMember', '=', true)
                                     ->where('isActive', '=', true)
                                     ->where('isDeleted', '=', false)
                                     ->get();
