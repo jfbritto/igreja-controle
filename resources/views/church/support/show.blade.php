@@ -3,11 +3,11 @@
 @section('title', 'Igreja Controle - Visualizar Mensagem')
 
 @section('content_header')
-    <h1>Visualizar Mensagem</h1>
+    <h1><i class="fa fa-life-ring" aria-hidden="true"></i> Visualizar Mensagem</h1>
 
     <ol class="breadcrumb">
         <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a href="{{route('support')}}">Suporte</a></li>
+        <li><a href="{{route('support')}}"><i class="fa fa-life-ring"></i> Suporte</a></li>
         <li><a href="#">Visualizar Mensagem</a></li>
     </ol>
 @stop
@@ -18,6 +18,19 @@
 <div class="messages">
     @include('includes.alerts')
 </div>
+
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="box box-primary">
+            <div class="box-header with-border text-right">
+                <a href="{{ url()->previous() }}" class='btn btn-default' title="Voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+            </div>    
+        </div>
+    </div>
+</div>  
 
 
 <div class="row">

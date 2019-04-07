@@ -81,7 +81,7 @@
 
 
             </div>
-            <div class="box-footer">
+            <div class="box-footer text-right">
                 <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp; Enviar</button>
             </div>
             </form>
@@ -111,7 +111,7 @@
                     </thead>
                     <tbody>
                     @forelse($messages as $message)
-                        <tr>
+                        <tr class='@if($message->isOpen) warning @else success @endif'>
                             <td style='vertical-align:middle'>{{ $message->subject }}</td>
                             <td style='vertical-align:middle' class='hidden-xs'>
                                 {{$message->type_name}}
@@ -126,7 +126,7 @@
                                 @if($message->isOpen) Aberta @else Finalizada @endif
                             </td>
                             <td style='vertical-align:middle' class='text-right'>
-                                <a href="{{url('church/support/show', $message->id)}}" class='btn btn-primary'><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; Visualizar</a>
+                                <a href="{{url('church/support/show', $message->id)}}" class='btn btn-primary' title="Visualizar mensagem"><i class="fa fa-eye" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                     @empty
