@@ -17,7 +17,6 @@
 
     <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
 
     <link rel="icon" href="{{asset("img/cross.png")}}">
 
@@ -34,6 +33,8 @@
         <link rel="stylesheet" href="//cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.css">
     @endif
 
+    <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
+    
     @yield('adminlte_css')
 
     <!--[if lt IE 9]>
