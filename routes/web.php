@@ -4,9 +4,9 @@
 /*****************
 * LOGIN E LOGOUT *
 ******************/
-Route::get('/login', 'Site\SiteController@index')->name('login');
+// Route::get('/login', 'Site\SiteController@index')->name('login');
 Route::post('/login', 'Auth\LoginController@post_autenticar')->name('login.post');
-Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+
 
 
 /*******
@@ -20,6 +20,8 @@ $this->get('/', 'Site\SiteController@index')->name('login');
 
 $this->group(['middleware' => 'auth'], function(){
 
+    Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+    
     //ADMINISTRADOR
     $this->group(['middleware' => 'admin', 'prefix' => 'admin'], function(){
 

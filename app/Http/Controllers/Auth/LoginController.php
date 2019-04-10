@@ -42,13 +42,16 @@ class LoginController extends Controller
 
     public function get_autenticar()
     {
-        return view('site.auth.login');
+        return view('site.index');
     }
 
     public function post_autenticar(Request $request)
     {
 
         $user = User::where(['email'=>$request->email],['senha'=>bcrypt($request->password)])->get();
+
+        if(!$user->first())
+           return redirect(route('login').'#login')->with('error', 'E-mail ou senha incorretos!');     
 
         if (!$user->first()->isAdmin) {
             
@@ -62,20 +65,20 @@ class LoginController extends Controller
             if (!$user->first()->isAdmin) {
 
                 if ($church->isActive == false)
-                    return redirect()->back()->with('error', 'Igreja inativa! verifique sua situação cadastral com a administração do sistema');
+                    return redirect(route('login').'#login')->with('error', 'Igreja inativa! verifique sua situação cadastral com a administração do sistema');
 
                 if ($church->isDeleted == true)
-                    return redirect()->back()->with('error', 'Igreja deletada! verifique sua situação cadastral com a administração do sistema');
+                    return redirect(route('login').'#login')->with('error', 'Igreja deletada! verifique sua situação cadastral com a administração do sistema');
             }
 
             if ($user->first()->isDeleted == true)
-                return redirect()->back()->with('error', 'Usuário deletado! verifique sua situação cadastral com a administração do sistema');
+                return redirect(route('login').'#login')->with('error', 'Usuário deletado! verifique sua situação cadastral com a administração do sistema');
 
             if ($user->first()->isActive == false)
-                return redirect()->back()->with('error', 'Usuário inativo! verifique sua situação cadastral com a administração do sistema');
+                return redirect(route('login').'#login')->with('error', 'Usuário inativo! verifique sua situação cadastral com a administração do sistema');
             
             // if ($user->first()->isMember == true)
-            //     return redirect()->back()->with('error', 'Para acessar as inforações da sua igreja acesse esse link');    
+            //     return redirect()->with('error', 'Para acessar as inforações da sua igreja acesse esse link');    
 
 
 
@@ -93,7 +96,7 @@ class LoginController extends Controller
 
         }
 
-        return redirect()->back()->with('error', 'E-mail ou senha incorretos!');
+        return redirect(route('login').'#login')->with('error', 'E-mail ou senha incorretos!');
 
         
     }

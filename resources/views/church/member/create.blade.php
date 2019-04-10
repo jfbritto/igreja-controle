@@ -19,7 +19,7 @@
     @include('includes.alerts')
 </div>
 
-<form role="form" method="POST" action="{{ route('member.store') }}">
+<form role="form" method="POST" action="{{ route('member.store') }}" enctype="multipart/form-data">
 @csrf
 
 <div class="row">
@@ -57,7 +57,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-user"></i>
                                                 </div>
-                                                <input id='name' name='name' type="text" class="form-control" required>
+                                                <input id='name' name='name' type="text" class="form-control" value="{{ old('name') }}" required>
                                             </div>
                                         </div>
 
@@ -73,8 +73,8 @@
                                                 </div>
                                                 <select id='sex' name='sex' class="form-control" required>
                                                     <option>-- Selecione --</option>
-                                                    <option value='masculino'>Masculino</option>
-                                                    <option value='feminino'>Feminino</option>
+                                                    <option value='masculino' {{ old('sex') != 'masculino' ?: 'selected' }} >Masculino</option>
+                                                    <option value='feminino' {{ old('sex') != 'feminino' ?: 'selected' }} >Feminino</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -89,7 +89,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input id='birth' name='birth' type="date" class="form-control" required>
+                                                <input id='birth' name='birth' type="date" class="form-control" value="{{ old('birth') }}" required>
                                             </div>
                                         </div>
 
@@ -107,7 +107,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-envelope"></i>
                                                 </div>
-                                                <input id='email' name='email' type="email" class="form-control" required>
+                                                <input id='email' name='email' type="email" class="form-control" value="{{ old('email') }}" required>
                                             </div>
                                         </div>
 
@@ -121,7 +121,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-address-card-o"></i>
                                                 </div>
-                                                <input id='cpf' name='cpf' type="text" class="form-control" required>
+                                                <input id='cpf' name='cpf' type="text" class="form-control" value="{{ old('cpf') }}" required>
                                             </div>
                                         </div>
 
@@ -135,7 +135,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-phone"></i>
                                                 </div>
-                                                <input id='phone' name='phone' type="text" class="form-control" required>
+                                                <input id='phone' name='phone' type="text" class="form-control" value="{{ old('phone') }}" required>
                                             </div>
                                         </div>
 
@@ -172,7 +172,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-align-center"></i>
                                 </div>
-                                <textarea id='info' name='info' class="form-control"></textarea>
+                                <textarea id='info' name='info' class="form-control">{{ old('info') }}</textarea>
                             </div>
 
                         </div>
@@ -184,7 +184,7 @@
 </div>
 
 
-<!-- editar caixa -->
+
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
 
@@ -201,7 +201,7 @@
                         <div class="form-group">
 <!--                             <label for='avatar'>Imagem</label>  -->
                             @laracropCss(true)
-                            @laracrop(name=avatar | aspectratio=1/1 | minsize=[100, 100] | maxsize=[400, 400] | bgcolor=black | bgopacity=0.7)
+                            @laracrop(name=avatar | aspectratio=1/1 | minsize=[100, 100] | maxsize=[400, 400] | bgcolor=black | bgopacity=0.7 | value=old('avatar'))
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -234,7 +234,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="cep" id="cep" class="form-control">
+                                <input type='text' name="cep" id="cep" class="form-control" value="{{ old('cep') }}">
                             </div>
                         </div>
 
@@ -286,7 +286,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="address" id="address" class="form-control">
+                                <input type='text' name="address" id="address" class="form-control" value="{{ old('address') }}">
                             </div>
                         </div>
 
@@ -300,7 +300,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="number" id="number" class="form-control">
+                                <input type='text' name="number" id="number" class="form-control" value="{{ old('number') }}">
                             </div>
                         </div>
 
@@ -314,7 +314,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="neighborhood" id="neighborhood" class="form-control">
+                                <input type='text' name="neighborhood" id="neighborhood" class="form-control" value="{{ old('neighborhood') }}">
                             </div>
                         </div>
 
@@ -328,7 +328,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="complement" id="complement" class="form-control">
+                                <input type='text' name="complement" id="complement" class="form-control" value="{{ old('complement') }}">
                             </div>
                         </div>
                     

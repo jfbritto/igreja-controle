@@ -57,6 +57,8 @@
 </head>
 <body class="hold-transition @yield('body_class') masthead">
        
+<form role="form" method="POST" action="{{ route('member.invite.store', $hash) }}" enctype="multipart/form-data">
+@csrf
 
     <div class="container-fluid">
 
@@ -81,10 +83,20 @@
                 </div>
             </div>
         </div>        
-    
+        
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-default box-solid">
+                            <div class="box-header with-border" style="margin-bottom: 10px">Selecione uma foto</div>
+                            <img title="Editar imagem" onclick="openModalPhoto()" style="display: block; margin-right: auto; margin-left: auto; margin-bottom: 9px; cursor: pointer;" src="{{ url('storage/members/default.jpg') }}" class='img img-circle' width='149'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
                 
                 <div class="row">
 
@@ -93,12 +105,10 @@
                         <div class="box box-default box-solid">
                             <div class="box-header with-border">Formulário de cadastro</div>
                             <!-- form start -->
-                            <form role="form" method="POST" action="{{ route('member.invite.store', $hash) }}">
-                            @csrf
                               <div class="box-body">
 
                                 <div class='row'>
-                                    <div class='col-md-6'>
+                                    <div class='col-md-4'>
 
                                         <div class="form-group">
                                             <label for='name'>Nome</label> 
@@ -112,7 +122,7 @@
                                         </div>
 
                                     </div>
-                                    <div class='col-md-6'>
+                                    <div class='col-md-4'>
                                 
                                         <div class="form-group">
                                             <label for='sex'>Sexo</label> 
@@ -131,10 +141,8 @@
 
                                     </div>
                                     
-                                </div>
-                                <div class='row'>
                                     
-                                    <div class='col-md-6'>
+                                    <div class='col-md-4'>
                                     
                                         <div class="form-group">
                                             <label for='birth'>Nascimento</label>  
@@ -148,7 +156,11 @@
                                         </div>
 
                                     </div>
-                                    <div class='col-md-6'>
+
+                                </div>
+                                <div class='row'>
+
+                                    <div class='col-md-4'>
 
                                         <div class="form-group">
                                             <label for='email'>E-mail</label> 
@@ -163,10 +175,7 @@
 
                                     </div>
 
-                                </div>
-                                <div class="row">
-
-                                    <div class='col-md-6'>
+                                    <div class='col-md-4'>
 
                                         <div class="form-group">
                                             <label for='cpf'>CPF</label> 
@@ -180,7 +189,7 @@
                                         </div>
 
                                     </div>
-                                    <div class='col-md-6'>
+                                    <div class='col-md-4'>
 
                                         <div class="form-group">
                                             <label for='phone'>Telefone</label> 
@@ -203,8 +212,39 @@
 
                 </div>
                     
-        </div>
-            <div class="col-md-6">
+            </div>
+
+
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close fechar-modal" data-dismiss="modal">&times;</button>
+                          Selecione a imagem
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+            <!--                             <label for='avatar'>Imagem</label>  -->
+                                        @laracropCss(true)
+                                        @laracrop(name=avatar | aspectratio=1/1 | minsize=[100, 100] | maxsize=[400, 400] | bgcolor=black | bgopacity=0.7)
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-12">
                 
                 <div class="row">
 
@@ -337,7 +377,6 @@
                               <div class="box-footer text-right">
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Cadastrar</button>
                               </div>
-                            </form>
                           </div>
 
                     </div>    
@@ -350,9 +389,13 @@
 
     </div>
 
+</form>
+
 <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script>
+@laracropJs(true)
 <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+
 
 @if(config('adminlte.plugins.select2'))
     <!-- Select2 -->
@@ -372,7 +415,7 @@
     <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
 @yield('adminlte_js')
 
-
+    
 
     <script>
         var SPMaskBehavior = function (val) {
@@ -414,6 +457,10 @@
 		            $("#idCity_fk").html(html)
 		        }
 		    });
+        }
+
+        function openModalPhoto(){
+            $("#myModal").modal('show');
         }
         
     </script>    

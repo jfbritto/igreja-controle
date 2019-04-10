@@ -12,6 +12,8 @@ use App\Models\City;
 use App\Models\Address;
 use App\Models\Church;
 use Arisharyanto\Laracrop\Laracrop;
+use DB;
+use Exception;
 
 class MemberController extends Controller
 {
@@ -36,50 +38,95 @@ class MemberController extends Controller
 
 
     public function store(Request $request)
-    {
+    {   
 
-        // dd($request);
+        $validator = validator($request->all(), [
+            'name'          => 'required',
+            'email'         => 'required | email',
+            'birth'         => 'required | date',
+            'cpf'           => 'required | max:14',
+            'sex'           => 'required',
+            'phone'         => 'required',
+            'info'          => 'required',
+            'avatar'        => 'nullable | file | mimes:jpg,png,jpeg,bmp | max:3072',
 
-        $nameFile = null;
-        if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
-            $nameFile = Laracrop::cropImage($request->input('avatar'));
+            'cep'           => 'required | max:9',
+            'idState_fk'    => 'required | exists:states,id',
+            'idCity_fk'     => 'required | exists:cities,id',
+            'address'       => 'required',
+            'number'        => 'nullable',
+            'neighborhood'  => 'nullable',
+            'complement'    => 'nullable',
+        ], [] , [
+                    'name' => 'nome', 
+                    'birth' => 'nascimento',
+                    'sex' => 'sexo',
+                    'phone' => 'telefone',
+                    'info' => 'informações adicionais',
+                    'idState_fk' => 'estado', 
+                    'idCity_fk' => 'cidade', 
+                    'address' => 'endereço',
+                    'number' => 'número',
+                    'neighborhood' => 'bairro',
+                    'complement' => 'complemento',
+                ]);
 
-            // Storage::delete("members/{$member->avatar}");
+        if($validator->fails())
+            return redirect()
+                        ->back()
+                        ->witherrors($validator->errors())
+                        ->withInput();
 
-            File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/members/{$nameFile}"));
+        $result = null;
 
+        DB::beginTransaction();
+        try{
+
+            $nameFile = null;
+            if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
+                $nameFile = Laracrop::cropImage($request->input('avatar'));
+                File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/members/{$nameFile}"));
+            }
+
+            $request_address = [
+                'cep'           => $request->cep,
+                'idState_fk'    => $request->idState_fk,
+                'idCity_fk'     => $request->idCity_fk,
+                'address'       => $request->address,
+                'number'        => $request->number,
+                'neighborhood'  => $request->neighborhood,
+                'complement'    => $request->complement,
+            ];
+
+            $address = Address::create($request_address);
+
+            $request_user = [
+                'name'          => $request->name,
+                'email'         => $request->email,
+                'birth'         => $request->birth,
+                'cpf'           => $request->cpf,
+                'sex'           => $request->sex,
+                'phone'         => $request->phone,
+                'info'          => $request->info,
+                'avatar'        => $nameFile,
+                'idChurch_fk'   => auth()->user()->idChurch_fk,
+                'isMember'      => true,
+                'idAddress_fk'  => $address->id
+            ];
+
+
+            $result = User::create($request_user);
+
+            Laracrop::cleanCropTemp();
+
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+
+            $result = null;
+            
+            abort('500');
         }
-
-        $request_address = [
-            'cep'           => $request->cep,
-            'idState_fk'    => $request->idState_fk,
-            'idCity_fk'     => $request->idCity_fk,
-            'address'       => $request->address,
-            'number'        => $request->number,
-            'neighborhood'  => $request->neighborhood,
-            'complement'    => $request->complement,
-        ];
-
-        $address = Address::create($request_address);
-
-        $request_user = [
-            'name'          => $request->name,
-            'email'         => $request->email,
-            'birth'         => $request->birth,
-            'cpf'           => $request->cpf,
-            'sex'           => $request->sex,
-            'phone'         => $request->phone,
-            'info'          => $request->info,
-            'avatar'        => $nameFile,
-            'idChurch_fk'   => auth()->user()->idChurch_fk,
-            'isMember'      => true,
-            'idAddress_fk'  => $address->id
-        ];
-
-
-        $result = User::create($request_user);
-
-        Laracrop::cleanCropTemp();
 
         if(!$result)
             return redirect()
@@ -545,34 +592,6 @@ class MemberController extends Controller
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //BIRTHDAY
 
     public function birth()
@@ -669,6 +688,20 @@ class MemberController extends Controller
 
         // if($validator->fails())
 
+
+        $nameFile = null;
+        if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
+        // dd($request);
+            $nameFile = Laracrop::cropImage($request->input('avatar'));
+
+            // Storage::delete("members/{$member->avatar}");
+
+            File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/members/{$nameFile}"));
+
+        }
+
+
+
         $church = Church::where('hash', $hash)->first();
 
         $request_address = [
@@ -690,6 +723,7 @@ class MemberController extends Controller
             'cpf'           => $request->cpf,
             'sex'           => $request->sex,
             'phone'         => $request->phone,
+            'avatar'        => $nameFile,
             'idChurch_fk'   => $church->id,
             'isMember'      => true,
             'idAddress_fk'  => $address->id,
@@ -699,6 +733,8 @@ class MemberController extends Controller
 
 
         $result = User::create($request_user);
+
+        Laracrop::cleanCropTemp();
 
         if(!$result)
             return redirect()
