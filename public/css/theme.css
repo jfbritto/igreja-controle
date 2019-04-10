@@ -36,6 +36,7 @@ form{
   height: 30px;
   width: 30px;
   background-color: #eee;
+  border: 1px solid #ccc;
   border-radius: 50%;
 }
 
@@ -63,8 +64,8 @@ form{
 
 /* Style the checkmark/indicator */
 .container_ckb .checkmark:after {
-  left: 11px;
-  top: 9px;
+  left: 10px;
+  top: 8px;
   width: 8px;
   height: 10px;
   border: solid white;
