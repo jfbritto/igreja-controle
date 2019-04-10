@@ -123,7 +123,15 @@
             $(".check_bx").on('change', function(){
                 if(!this.checked)
                     $("#check_all").prop("checked", false)
+
+                if( $('.check_bx').filter(":checked").length == $('.check_bx').length)
+                    $("#check_all").prop("checked", true)
             });
+
+
+             
+
+
             
         });
     </script>
