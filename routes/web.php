@@ -21,7 +21,7 @@ $this->get('/', 'Site\SiteController@index')->name('login');
 $this->group(['middleware' => 'auth'], function(){
 
     Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
-    
+
     //ADMINISTRADOR
     $this->group(['middleware' => 'admin', 'prefix' => 'admin'], function(){
 
@@ -103,7 +103,7 @@ $this->group(['middleware' => 'auth'], function(){
         $this->get('/birth/pdf/{month}', 'Member\MemberController@birth_pdf')->name('birth.pdf');
 
         //CARD
-        $this->get('/card/pdf', 'Card\CardController@card_pdf')->name('card.pdf');
+        $this->post('/card/pdf', 'Card\CardController@card_pdf')->name('card.pdf');
 
         //SUPPORT
         $this->post('/support/add', 'Support\SupportController@store')->name('support.store');

@@ -47,7 +47,7 @@ class MemberController extends Controller
             'cpf'           => 'required | max:14',
             'sex'           => 'required',
             'phone'         => 'required',
-            'info'          => 'required',
+            'info'          => 'nullable',
             'avatar'        => 'nullable | file | mimes:jpg,png,jpeg,bmp | max:3072',
 
             'cep'           => 'required | max:9',
@@ -619,7 +619,6 @@ class MemberController extends Controller
 
         $members = User::whereMonth('birth', $request->month)
                                     ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
-                                    ->where('isMember', '=', true)
                                     ->where('isActive', '=', true)
                                     ->where('isDeleted', '=', false)
                                     ->get();
@@ -650,7 +649,6 @@ class MemberController extends Controller
 
         $members = User::whereMonth('birth', $month)
                                 ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
-                                ->where('isMember', '=', true)
                                 ->where('isActive', '=', true)
                                 ->where('isDeleted', '=', false)
                                 ->get();

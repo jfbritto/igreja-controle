@@ -22,14 +22,15 @@ class CardController extends Controller
         return view('church.card.home', compact('members', 'church'));
     }
 
-    public function card_pdf()
+    public function card_pdf(Request $request)
     {
   
         $members = User::where('idChurch_fk', '=', auth()->user()->idChurch_fk)
                             ->where('isActive', '=', true)
                             ->where('isDeleted', '=', false)
+                            ->whereIn('id', $request->id_users)
                             ->get();
-    
+
         return \PDF::loadView('church.card.pdf.cards', compact('members'))->stream();
     }
 }
