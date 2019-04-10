@@ -190,7 +190,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="cep" id="cep" class="form-control" value='{{$address->cep}}' disabled>
+                                <input type='text' name="cep" id="cep" class="form-control" value='{{$member->address->cep}}' disabled>
                             </div>
                         </div>
 
@@ -207,7 +207,7 @@
                                 <select name="idState_fk" id="idState_fk" onchange="changeState(this)" class="form-control" required disabled>
                                     <option>Selecione o estado</option>
                                     @foreach($states as $state)
-                                        <option value="{{$state->id}}" @if($state->id == $address->idState_fk) selected='selected' @endif>{{$state->nome}}</option>
+                                        <option value="{{$state->id}}" @if($state->id == $member->address->idState_fk) selected='selected' @endif>{{$state->nome}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -224,8 +224,8 @@
                                     <i class="fa fa-home"></i>
                                 </div>
                                 <select name="idCity_fk" id="idCity_fk" class="form-control" required disabled>
-                                    @foreach($cities as $city)
-                                        <option value="{{$city->id}}" @if($city->id == $address->idCity_fk) selected='selected' @endif>{{$city->nome}}</option>
+                                    @foreach($member->address->state->cities as $city)
+                                        <option value="{{$city->id}}" @if($city->id == $member->address->idCity_fk) selected='selected' @endif>{{$city->nome}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -245,7 +245,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input disabled type='text' name="address" id="address" class="form-control" value='{{$address->address}}'>
+                                <input disabled type='text' name="address" id="address" class="form-control" value='{{$member->address->address}}'>
                             </div>
                         </div>
 
@@ -259,7 +259,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input disabled type='text' name="number" id="number" class="form-control" value='{{$address->number}}'>
+                                <input disabled type='text' name="number" id="number" class="form-control" value='{{$member->address->number}}'>
                             </div>
                         </div>
 
@@ -273,7 +273,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input disabled type='text' name="neighborhood" id="neighborhood" class="form-control" value='{{$address->neighborhood}}'>
+                                <input disabled type='text' name="neighborhood" id="neighborhood" class="form-control" value='{{$member->address->neighborhood}}'>
                             </div>
                         </div>
 
@@ -287,7 +287,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input disabled type='text' name="complement" id="complement" class="form-control" value='{{$address->complement}}'>
+                                <input disabled type='text' name="complement" id="complement" class="form-control" value='{{$member->address->complement}}'>
                             </div>
                         </div>
                     

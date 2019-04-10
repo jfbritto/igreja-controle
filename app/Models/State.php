@@ -13,6 +13,11 @@ class State extends Model
         return $this->hasOne(\App\Models\Address::class, 'idState_fk', 'id');
     }
 
+    public function cities()
+    {
+        return $this->hasMany(\App\Models\City::class, 'idEstado', 'id');
+    }
+
     public function events_registration()
     {
         return $this->hasOne(\App\Models\EventRegistration::class, 'idState_fk', 'id');

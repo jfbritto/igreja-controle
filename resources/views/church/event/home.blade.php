@@ -96,14 +96,16 @@
 
                 <label>Habilitar inscrições?</label> 
                 <div class="checkbox">
-                  <label for='radio-sim'>
-                    <input id='radio-sim' type="radio" name="inscricoes" value="sim"> Sim
-                  </label>
+                    <label for='radio-sim' class="container_ckb"> <span style="margin-left: 15px">Sim</span>
+                        <input id='radio-sim' class="check_bx" type="radio" name="inscricoes" value="sim">
+                        <span class="checkmark"></span>
+                    </label>
                 </div>
                 <div class="checkbox">
-                  <label for='radio-nao'>
-                    <input id='radio-nao' type="radio" name="inscricoes" value="nao" checked="checked"> Não
-                  </label>
+                    <label for='radio-nao' class="container_ckb"> <span style="margin-left: 15px">Não</span>
+                        <input id='radio-nao' class="check_bx" type="radio" name="inscricoes" value="nao" checked>
+                        <span class="checkmark"></span>
+                    </label>
                 </div>
 
                 <div class="form-group responsavel" style="display:none">

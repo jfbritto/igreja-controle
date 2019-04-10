@@ -33,7 +33,7 @@ class MemberController extends Controller
     {
         $states = State::get();
 
-        return view('church.member.create', compact('states'));
+        return view('church.member.create', ['states' => $states]);
     }
 
 
@@ -141,45 +141,24 @@ class MemberController extends Controller
 
     }
 
-    public function show($id)
+    public function show(User $user)
     {
-        $member = User::where('id', '=', $id)
-                            ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
-                            ->get()
-                            ->first();
 
-        if(!$member)
-            return redirect()
-                        ->route('member')
-                        ->with('error', 'Membro não encontrado!');
+        if($user->church->id != auth()->user()->idChurch_fk) abort('401');
 
-        $address = Address::find($member->idAddress_fk);
         $states = State::get();
-        $cities = City::where('idEstado', '=', $address->idState_fk)->get();
 
-        return view('church.member.show', compact('member', 'states', 'cities', 'address'));
+        return view('church.member.show', ['member' => $user, 'states' => $states]);
     }
 
-    public function edit($id)
+    public function edit(User $user)
     {
 
-        try{
-    
-            $member = User::where('id', '=', $id)
-                                ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
-                                ->get()
-                                ->first();
-                                
-            $address = $member->address;
-            $states = State::get();
-            $cities = City::where('idEstado', '=', $address->idState_fk)->get();
-        
-        }catch(Exception $e){
-            
-            abort('500');
-        }
+        if($user->church->id != auth()->user()->idChurch_fk) abort('401');
 
-        return view('church.member.edit', compact('member', 'states', 'cities', 'address'));
+        $states = State::get();
+        
+        return view('church.member.edit', ['member' => $user, 'states' => $states]);
     }
 
     public function update(Request $request, $id)

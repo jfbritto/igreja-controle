@@ -88,10 +88,10 @@ $this->group(['middleware' => 'auth'], function(){
         $this->get('/inscription/pdf/{id_event}', 'Inscription\InscriptionController@inscription_pdf')->name('inscription.pdf');
 
         //MEMBROS
-        $this->get('/member/show/{id_member}', 'Member\MemberController@show')->name('member.show');
+        $this->get('/member/show/{user}', 'Member\MemberController@show')->name('member.show');
         $this->get('/member/add', 'Member\MemberController@create')->name('member.create');
         $this->post('/member/add', 'Member\MemberController@store')->name('member.store');
-        $this->get('/member/edit/{id_member}', 'Member\MemberController@edit')->name('member.edit');
+        $this->get('/member/edit/{user}', 'Member\MemberController@edit')->name('member.edit');
         $this->post('/member/edit/{id_member}', 'Member\MemberController@update')->name('member.update');
         $this->get('/member/pdf', 'Member\MemberController@member_pdf')->name('member.pdf');
         $this->get('/member/destroy/{id_member}', 'Member\MemberController@destroy')->name('member.destroy');
