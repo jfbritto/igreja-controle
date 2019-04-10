@@ -24,6 +24,10 @@ class CardController extends Controller
 
     public function card_pdf(Request $request)
     {
+        if(!$request->id_users)
+            return redirect()
+                        ->back()
+                        ->with('error', 'Nenhum membro selecionado!');
   
         $members = User::where('idChurch_fk', '=', auth()->user()->idChurch_fk)
                             ->where('isActive', '=', true)

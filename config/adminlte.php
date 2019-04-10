@@ -173,6 +173,13 @@ return [
             'can'  => 'church',
         ],
         [
+            'text'        => 'Células',
+            'url'         => 'church/cell',
+            'icon'        => 'puzzle-piece',
+            'label_color' => 'success',
+            'can'  => 'church',
+        ],
+        [
             'text'        => 'Finanças',
             'url'         => 'church/finance',
             'icon'        => 'money',

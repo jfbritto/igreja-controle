@@ -163,27 +163,21 @@ class MemberController extends Controller
     public function edit($id)
     {
 
-        $member = User::where('id', '=', $id)
-                            ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
-                            ->where('isActive', '=', true)
-                            ->get()
-                            ->first();
-
-        if(!$member)
-            return redirect()
-                        ->route('member')
-                        ->with('error', 'Membro não encontrado!');
-
-        if(!$member->idAddress_fk)
-            return redirect()
-                        ->route('member')
-                        ->with('error', 'Endereço do membro não encontrado!');
-
-        $address = Address::find($member->idAddress_fk);
-
-
-        $states = State::get();
-        $cities = City::where('idEstado', '=', $address->idState_fk)->get();
+        try{
+    
+            $member = User::where('id', '=', $id)
+                                ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
+                                ->get()
+                                ->first();
+                                
+            $address = $member->address;
+            $states = State::get();
+            $cities = City::where('idEstado', '=', $address->idState_fk)->get();
+        
+        }catch(Exception $e){
+            
+            abort('500');
+        }
 
         return view('church.member.edit', compact('member', 'states', 'cities', 'address'));
     }
@@ -191,70 +185,98 @@ class MemberController extends Controller
     public function update(Request $request, $id)
     {
 
-        $member = User::where('id', '=', $id)
-                            ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
-                            ->where('isActive', '=', true)
-                            ->get()
-                            ->first();
+        $validator = validator($request->all(), [
+            'name'          => 'required',
+            'email'         => 'required | email',
+            'birth'         => 'required | date',
+            'cpf'           => 'required | max:14',
+            'sex'           => 'required',
+            'phone'         => 'required',
+            'info'          => 'nullable',
+            'avatar'        => 'nullable | file | mimes:jpg,png,jpeg,bmp | max:3072',
 
-        $address = Address::find($member->idAddress_fk);
+            'cep'           => 'required | max:9',
+            'idState_fk'    => 'required | exists:states,id',
+            'idCity_fk'     => 'required | exists:cities,id',
+            'address'       => 'required',
+            'number'        => 'nullable',
+            'neighborhood'  => 'nullable',
+            'complement'    => 'nullable',
+        ], [] , [
+                    'name' => 'nome', 
+                    'birth' => 'nascimento',
+                    'sex' => 'sexo',
+                    'phone' => 'telefone',
+                    'info' => 'informações adicionais',
+                    'idState_fk' => 'estado', 
+                    'idCity_fk' => 'cidade', 
+                    'address' => 'endereço',
+                    'number' => 'número',
+                    'neighborhood' => 'bairro',
+                    'complement' => 'complemento',
+                ]);
 
-        if(!$member)
-            return redirect()
-                    ->route('member')
-                    ->with('error', 'Membro não encontrado!');
-
-        if(!$address)
-            return redirect()
-                    ->route('member')
-                    ->with('error', 'Endereço não encontrado!');
-
-        $nameFile = $member->avatar;
-        if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
-            $nameFile = Laracrop::cropImage($request->input('avatar'));
-
-            Storage::delete("members/{$member->avatar}");
-
-            File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/members/{$nameFile}"));
-
-        }
-
-        $request_address = [
-            'cep'           => $request->cep,
-            'idState_fk'    => $request->idState_fk,
-            'idCity_fk'     => $request->idCity_fk,
-            'address'       => $request->address,
-            'number'        => $request->number,
-            'neighborhood'  => $request->neighborhood,
-            'complement'    => $request->complement,
-        ];
-
-        $request_user = [
-            'name'          => $request->name,
-            'email'         => $request->email,
-            'birth'         => $request->birth,
-            'cpf'           => $request->cpf,
-            'sex'           => $request->sex,
-            'phone'         => $request->phone,
-            'avatar'        => $nameFile,
-            'info'          => $request->info,
-        ];
-
-
-
-        $result = $address->update($request_address);
-
-        if(!$result)
+        if($validator->fails())
             return redirect()
                         ->back()
-                        ->with('error', 'Erro ao editar endereço!');
+                        ->witherrors($validator->errors())
+                        ->withInput();
+
+        $result = null;
+
+        DB::beginTransaction();
+        try{
+        
+            $member = User::where('id', '=', $id)
+                                ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
+                                ->get()
+                                ->first();
+
+            $address = $member->address;
+
+            $nameFile = $member->avatar;
+            if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
+                $nameFile = Laracrop::cropImage($request->input('avatar'));
+                Storage::delete("members/{$member->avatar}");
+                File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/members/{$nameFile}"));
+            }
+
+            $request_address = [
+                'cep'           => $request->cep,
+                'idState_fk'    => $request->idState_fk,
+                'idCity_fk'     => $request->idCity_fk,
+                'address'       => $request->address,
+                'number'        => $request->number,
+                'neighborhood'  => $request->neighborhood,
+                'complement'    => $request->complement,
+            ];
+
+            $request_user = [
+                'name'          => $request->name,
+                'email'         => $request->email,
+                'birth'         => $request->birth,
+                'cpf'           => $request->cpf,
+                'sex'           => $request->sex,
+                'phone'         => $request->phone,
+                'avatar'        => $nameFile,
+                'info'          => $request->info,
+            ];
 
 
-        $result2 = $member->update($request_user);
+            $address->update($request_address);
+            $result = $member->update($request_user);
+            Laracrop::cleanCropTemp();
 
-        Laracrop::cleanCropTemp();
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
 
-        if(!$result2)
+            $result = null;
+            
+            abort('500');
+        }
+
+        if(!$result)
             return redirect()
                         ->back()
                         ->with('error', 'Erro ao editar o membro!');
@@ -266,18 +288,28 @@ class MemberController extends Controller
 
     public function destroy($id)
     {
-        $member = User::where('id', '=', $id)
-                            ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
-                            ->get()
-                            ->first();
 
-        if(!$member)
-            return redirect()
-                        ->route('member')
-                        ->with('error', 'Membro não encontrado!');
 
-        $updates = ['isActive' => false, 'isDeleted' => true];
-        $result = $member->update($updates);
+        $result = null;
+
+        DB::beginTransaction();
+        try{
+            $member = User::where('id', '=', $id)
+                                ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
+                                ->get()
+                                ->first();
+
+            $updates = ['isActive' => false, 'isDeleted' => true];
+            $result = $member->update($updates);
+         
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+
+            $result = null;
+            
+            abort('500');
+        }
 
         if(!$result)
             return redirect()
@@ -575,14 +607,6 @@ class MemberController extends Controller
                         ->route('church.show', $user->church->id)
                         ->with('success', 'Usuário deletado com sucesso!');
     }
-
-
-
-
-
-
-
-
 
 
 

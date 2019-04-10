@@ -67,6 +67,7 @@ $this->group(['middleware' => 'auth'], function(){
         $this->get('/card', 'Card\CardController@index')->name('card');
         $this->get('/event', 'Event\EventController@index')->name('event');
         $this->get('/inscription', 'Inscription\InscriptionController@index')->name('inscription');
+        $this->get('/cell', 'Cell\CellController@index')->name('cell');
         $this->get('/finance', 'Finance\FinanceController@index')->name('finance');
         $this->get('/support', 'Support\SupportController@index')->name('support');
         $this->get('/config', 'Church\ChurchController@config')->name('config');
