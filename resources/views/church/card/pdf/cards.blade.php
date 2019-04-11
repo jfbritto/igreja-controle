@@ -7,7 +7,7 @@
         <style type="text/css">
         
         .card {
-            margin: auto;
+            /*margin: auto;*/
             width: 85.60mm;
             height: 53.98mm;
             font: 22px/1 @monospace;
@@ -16,10 +16,11 @@
             border-radius: 10px;
             margin-bottom: 10px;
             position: relative;
+            display: inline-block;
         }
 
         .member-name {
-            float: left;
+            /*float: left;*/
             margin-top: 170px;
             margin-left: 15px;
         }
@@ -38,29 +39,51 @@
             border-radius: 5px;
         }
 
+        .page_break { page-break-before: always; }
+
+        body {
+            padding-top: 25px;
+        }
+
         </style>
 
     </head>
     <body>
          
- 
- 
 
-        @forelse($members as $member)
+        @forelse($members as $key => $member)
 
 
-        <div class="card">
-            <div class="church-name">Igreja {{$member->church->name}}</div>
-            <div class="member-name">{{$member->name}}</div>
+            <div style="width: 100%;">
+                
+                <div class="card">
+                    <div class="church-name">Igreja {{$member->church->name}}</div>
+                    <div class="member-name">{{$member->name}}</div>
 
-            
-                @if($member->avatar != null)
-                <img class="member-avatar" src="{{ url('storage/members/'.$member->avatar) }}" width='100'>
-                @else 
-                <img class="member-avatar" src="{{ url('storage/members/default.jpg') }}" width='100'>
-                @endif
-            
-        </div>
+                    
+                        @if($member->avatar != null)
+                        <img class="member-avatar" src="{{ url('storage/members/'.$member->avatar) }}" width='100'>
+                        @else 
+                        <img class="member-avatar" src="{{ url('storage/members/default.jpg') }}" width='100'>
+                        @endif
+                    
+                </div>
+                <div class="card">
+                    <div class="church-name">Igreja {{$member->church->name}}</div>
+                    <div class="member-name">{{$member->name}}</div>
+
+                    <img class="member-avatar" src="@if(!is_null($member->church->avatar)){{ url('storage/churches/'.$member->church->avatar) }} @else {{ url('storage/churches/default.jpg') }} @endif" width='100'>
+
+                </div>
+
+            </div>
+
+
+            @if( ($key+1) %4 == 0 && ($key+1) < count($members) )
+
+                <div class="page_break"></div>
+
+            @endif
 
 
         @empty

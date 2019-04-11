@@ -1,14 +1,14 @@
 @extends('adminlte::page')
 
-@section('title', 'Igreja Controle - Igrejas')
+@section('title', 'Igreja Controle - {{$church->name}}')
 
 @section('content_header')
-    <h1><i class="fa fa-home" aria-hidden="true"></i> Igrejas</h1>
+    <h1><i class="fa fa-home" aria-hidden="true"></i> {{$church->name}}</h1>
 
     <ol class="breadcrumb">
-        <li><a href="{{route('dashboard')}}">Dashboard</a></li>
-        <li><a href="{{route('church')}}">Igrejas</a></li>
-        <li><a href="#">{{$church->name}}</a></li>
+        <li><a href="{{route('admindash')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li><a href="{{route('church')}}"><i class="fa fa-home"></i> Igrejas</a></li>
+        <li><a href="#"><i class="fa fa-home"></i> {{$church->name}}</a></li>
     </ol>
 @stop
 
@@ -25,75 +25,123 @@
     <div class="col-md-12">
 
         <div class="box box-primary">
-
-              <div class="box-body">
-
-                <div class='row'>
-                    <div class='col-md-3'>
-
-                        <div class="form-group">
-                            <label for='name'>Nome</label> 
-
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-home"></i>
-                                </div>
-                                <input id='name' name='name' type="text" class="form-control" readonly value="{{$church->name}}">
-                            </div>
-                        </div>
-
-                    </div>                    
-                    <div class='col-md-3'>
-
-                        <div class="form-group">
-                            <label for='email'>E-mail</label> 
-
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-envelope"></i>
-                                </div>
-                                <input id='email' name='email' type="email" class="form-control" readonly value="{{$church->email}}">
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class='col-md-3'>
-
-                        <div class="form-group">
-                            <label for='cnpj'>CNPJ</label> 
-
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-address-card-o"></i>
-                                </div>
-                                <input id='cnpj' name='cnpj' type="text" class="form-control" readonly value="{{$church->cnpj}}">
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class='col-md-3'>
-
-                        <div class="form-group">
-                            <label for='phone'>Telefone</label> 
-
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-phone"></i>
-                                </div>
-                                <input id='phone' name='phone' type="text" class="form-control" readonly value="{{$church->phone}}">
-                            </div>
-                        </div>
-
-                    </div>
+            <div class="box-header with-border text-right">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a href="{{ url()->previous() }}" class='btn btn-default' title="Voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+                    <a href="{{ route('church.edit', $church->id) }}" class='btn btn-warning' title="Editar membro"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a href="{{ route('church.destroy', $church->id) }}" class='btn btn-danger' title="Deletar membro"><i class="fa fa-trash" aria-hidden="true"></i></a>
                 </div>
-              </div>
-              <!-- /.box-body -->
-  
-          </div>
+            </div>    
+        </div>
+    </div>
+</div> 
 
-    </div>    
 
-</div>
+<div class="row">
+    <div class="col-md-3">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary" style="padding: 10px">
+                    <i title="Editar imagem" onclick="openModalPhoto()" style="position: absolute; left: 50%; top: 50%; transform: translate(-35%, -40%); color: white; cursor: pointer" class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+                    <img title="Editar imagem" onclick="openModalPhoto()" style="display: block; margin-right: auto; margin-left: auto; cursor: pointer;" src="@if(!is_null($church->avatar)){{ url('storage/churches/'.$church->avatar) }} @else {{ url('storage/churches/default.jpg') }} @endif" class='img img-circle' width='149'>
+                </div>
+            </div>
+        </div>
+                    
+    </div>
+    <div class="col-md-9">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+         
+                    <div class="box-body">        
+                        
+                        <div class="row">
+
+                            <div class="col-md-12">
+
+                                <div class='row'>
+                                    <div class='col-md-6'>
+
+                                        <div class="form-group">
+                                            <label for='name'>Nome</label> 
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-home"></i>
+                                                </div>
+                                                <input id='name' name='name' type="text" class="form-control" disabled value="{{ $church->name }}" autofocus>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class='col-md-6'>
+                                
+                                        <div class="form-group">
+                                            <label for='email'>E-mail</label> 
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-envelope"></i>
+                                                </div>
+                                                <input id='email' name='email' type="email" class="form-control" value="{{ $church->email }}" disabled>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class='row'>
+
+                                    <div class='col-md-6'>
+
+                                        <div class="form-group">
+                                            <label for='cnpj'>CNPJ</label> 
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-address-card-o"></i>
+                                                </div>
+                                                <input id='cnpj' name='cnpj' type="text" class="form-control" value="{{ $church->cnpj }}" disabled>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    
+                                    <div class='col-md-6'>
+                                    
+                                        <div class="form-group">
+                                            <label for='phone'>Telefone</label> 
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-phone"></i>
+                                                </div>
+                                                <input id='phone' name='phone' type="text" class="form-control" value="{{ $church->phone }}" disabled >
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                      
+                </div>
+
+            </div>    
+
+        </div>
+
+    </div>
+</div> 
             
 
 
@@ -116,7 +164,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="cep" id="cep" class="form-control" value="{{$church->address->cep}}" readonly>
+                                <input type='text' name="cep" id="cep" class="form-control" value="{{$church->address->cep}}" disabled>
                             </div>
                         </div>
 
@@ -130,7 +178,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <select name="idState_fk" id="idState_fk" onchange="changeState(this)" class="form-control" readonly>
+                                <select name="idState_fk" id="idState_fk" onchange="changeState(this)" class="form-control" disabled>
                                     <option>Selecione o estado</option>
                                     @foreach($states as $state)
                                         <option value="{{$state->id}}" @if($state->id == $church->address->idState_fk) selected='selected' @endif >{{$state->nome}}</option>
@@ -150,8 +198,8 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <select name="idCity_fk" id="idCity_fk" class="form-control" readonly>
-                                    @foreach($cities as $city)
+                                <select name="idCity_fk" id="idCity_fk" class="form-control" disabled>
+                                    @foreach($church->address->state->cities as $city)
                                         <option value="{{$city->id}}" @if($city->id == $church->address->idCity_fk) selected='selected' @endif>{{$city->nome}}</option>
                                     @endforeach
                                 </select>
@@ -173,7 +221,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="address" id="address" class="form-control" readonly value="{{$church->address->address}}">
+                                <input type='text' name="address" id="address" class="form-control" disabled value="{{$church->address->address}}">
                             </div>
                         </div>
 
@@ -187,7 +235,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="number" id="number" class="form-control" readonly value="{{$church->address->number}}">
+                                <input type='text' name="number" id="number" class="form-control" disabled value="{{$church->address->number}}">
                             </div>
                         </div>
 
@@ -201,7 +249,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="neighborhood" id="neighborhood" class="form-control" readonly value="{{$church->address->neighborhood}}">
+                                <input type='text' name="neighborhood" id="neighborhood" class="form-control" disabled value="{{$church->address->neighborhood}}">
                             </div>
                         </div>
 
@@ -216,7 +264,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="complement" id="complement" class="form-control" readonly value="{{$church->address->complement}}">
+                                <input type='text' name="complement" id="complement" class="form-control" disabled value="{{$church->address->complement}}">
                             </div>
                         </div>
                     
@@ -241,8 +289,10 @@
 
         <div class="box box-primary">
             <div class="box-header with-border text-right">
-                <a href="{{ route('church.user.create', $church->id) }}" class='btn btn-success' title="Novo usuário"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                <a target="_blank" href="{{ route('church.user.pdf') }}" class='btn btn-danger' title="Gerar PDF com todos os usuários"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a target="_blank" href="{{ route('church.user.pdf') }}" class='btn btn-danger' title="Gerar PDF com todos os usuários"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                    <a href="{{ route('church.user.create', $church->id) }}" class='btn btn-success' title="Novo usuário"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                </div>
             </div>
             
             <div class="box-body">
@@ -267,23 +317,25 @@
                             <td style='vertical-align:middle' class='hidden-xs'>
                                 @if($user->isActive) Ativo @else Inativo @endif
                             </td>
-                            <td style='vertical-align:middle' class='text-right'>
+                            <td style='vertical-align:middle; width: 160px' class='text-right'>
+                                <div class="btn-group" role="group" aria-label="Basic example">
                                 
-                                @if($user->isDeleted)
-                                    Deletado
-                                @else 
-
-                                    @if($user->isActive) 
-                                        <a href="{{ url('admin/church/user/inactivate', $user->id) }}" class='btn btn-danger' title="Inativar usuário"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+                                    @if($user->isDeleted)
+                                        Deletado
                                     @else 
-                                        <a href="{{ url('admin/church/user/activate', $user->id) }}" class='btn btn-success' title="Ativar usuário"><i class="fa fa-power-off" aria-hidden="true"></i></a>
-                                    @endif
 
-                                    <a href="{{ url('admin/church/user/destroy', $user->id) }}" class='btn btn-danger' title="Deletar usuário"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                    <a href="{{ url('admin/church/user/edit', $user->id) }}" class='btn btn-warning' title="Editar usuário"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                    <a href="{{ url('admin/church/user/show', $user->id) }}" class='btn btn-primary' title="Visualizar usuário"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                            
-                                @endif
+                                        @if($user->isActive) 
+                                            <a href="{{ url('admin/church/user/inactivate', $user->id) }}" class='btn btn-danger' title="Inativar usuário"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+                                        @else 
+                                            <a href="{{ url('admin/church/user/activate', $user->id) }}" class='btn btn-success' title="Ativar usuário"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+                                        @endif
+
+                                        <a href="{{ url('admin/church/user/destroy', $user->id) }}" class='btn btn-danger' title="Deletar usuário"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                        <a href="{{ url('admin/church/user/edit', $user->id) }}" class='btn btn-warning' title="Editar usuário"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                        <a href="{{ url('admin/church/user/show', $user->id) }}" class='btn btn-primary' title="Visualizar usuário"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                
+                                    @endif
+                                </div>
                             </td>
                         </tr>
                     @empty

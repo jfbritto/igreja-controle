@@ -3,13 +3,13 @@
 @section('title', 'Igreja Controle - Igrejas')
 
 @section('content_header')
-    <h1><i class="fa fa-home" aria-hidden="true"></i> {{$user->church->name}} - Adicionar usuário</h1>
+    <h1><i class="fa fa-home" aria-hidden="true"></i> {{$user->church->name}} | Editar usuário</h1>
 
     <ol class="breadcrumb">
-        <li><a href="{{route('dashboard')}}">Dashboard</a></li>
-        <li><a href="{{route('church')}}">Igrejas</a></li>
-        <li><a href="{{route('church.show', $user->church->id)}}">{{$user->church->name}}</a></li>
-        <li><a href="#">Editar usuário</a></li>
+        <li><a href="{{route('admindash')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li><a href="{{route('church')}}"><i class="fa fa-home"></i> Igrejas</a></li>
+        <li><a href="{{route('church.show', $user->church->id)}}"><i class="fa fa-home"></i> {{$user->church->name}}</a></li>
+        <li><a href="#"><i class="fa fa-user"></i> Editar usuário</a></li>
     </ol>
 @stop
 
@@ -20,144 +20,129 @@
     @include('includes.alerts')
 </div>
 
+<form role="form" method="POST" action="{{ route('church.user.update', $user->id) }}" enctype="multipart/form-data">
+@csrf
+
 
 <div class="row">
+    <div class="col-md-3">
 
-    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary" style="padding: 10px">
+                    <i title="Editar imagem" onclick="openModalPhoto()" style="position: absolute; left: 50%; top: 50%; transform: translate(-35%, -40%); color: white; cursor: pointer" class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+                    <img title="Editar imagem" onclick="openModalPhoto()" style="display: block; margin-right: auto; margin-left: auto; cursor: pointer;" src="@if(!is_null($user->avatar)){{ url('storage/members/'.$user->avatar) }} @else {{ url('storage/members/default.jpg') }} @endif" class='img img-circle' width='149'>
+                </div>
+            </div>
+        </div>
+                    
+    </div>
+    <div class="col-md-9">
 
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <a href="{{ route('church.show', $user->church->id) }}" class='btn btn-default'><i class="fa fa-close" aria-hidden="true"></i>&nbsp; Cancelar</a>
-            </div>  
-            <div class="box-body">
-
-            <form role="form" method="POST" action="{{ route('church.user.update', $user->id) }}" enctype="multipart/form-data">
-            @csrf
-                
-                <div class="row">
-
-                    <div class="col-md-2">
-
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+         
+                    <div class="box-body">        
+                        
                         <div class="row">
 
-                            <div class="col-md-12 text-center">
+                            <div class="col-md-12">
 
+                                <div class='row'>
+                                    <div class='col-md-4'>
 
-                                <img src="@if(!is_null($user->avatar)){{ url('storage/members/'.$user->avatar) }} @else {{ url('storage/members/default.jpg') }} @endif" class='img img-circle' width='80'>
+                                        <div class="form-group">
+                                            <label for='name'>Nome</label> 
 
-                                <div class="form-group">
-                                    <label for='avatar'>Imagem</label> 
-
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-picture-o"></i>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-user"></i>
+                                                </div>
+                                                <input id='name' name='name' type="text" class="form-control" required value='{{$user->name}}'>
+                                            </div>
                                         </div>
-                                        <input id='avatar' name='avatar' type="file" class="form-control">
+
                                     </div>
+                                    <div class='col-md-4'>
+                                
+                                        <div class="form-group">
+                                            <label for='sex'>Sexo</label> 
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-transgender"></i>
+                                                </div>
+                                                <select id='sex' name='sex' class="form-control" required>
+                                                    <option>-- Selecione --</option>
+                                                    <option value='masculino' @if($user->sex == 'masculino') selected='selected' @endif>Masculino</option>
+                                                    <option value='feminino' @if($user->sex == 'feminino') selected='selected' @endif>Feminino</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class='col-md-4'>
+
+                                        <div class="form-group">
+                                            <label for='birth'>Nascimento</label>  
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input id='birth' name='birth' type="date" class="form-control" required value='{{$user->birth}}'>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
                                 </div>
+                                <div class='row'>
+                                    
+                                    <div class='col-md-4'>
+                                    
+                                        <div class="form-group">
+                                            <label for='email'>E-mail</label> 
 
-
-                                @laracropCss(true)
-                                @laracrop(name=desktop | aspectratio=1 | minsize=[300, 300] | bgcolor=black | bgopacity=0.7)
-                                @laracropJs(true)
-
-                            </div>    
-
-                        </div>
-
-                    </div>
-                    <div class="col-md-10">
-
-                        <div class='row'>
-                            <div class='col-md-4'>
-
-                                <div class="form-group">
-                                    <label for='name'>Nome</label> 
-
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-user"></i>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-envelope"></i>
+                                                </div>
+                                                <input id='email' name='email' type="email" class="form-control" required value='{{$user->email}}'>
+                                            </div>
                                         </div>
-                                        <input id='name' name='name' type="text" class="form-control" required value='{{$user->name}}'>
+
                                     </div>
-                                </div>
+                                    <div class='col-md-4'>
 
-                            </div>
-                            <div class='col-md-4'>
-                        
-                                <div class="form-group">
-                                    <label for='sex'>Sexo</label> 
+                                        <div class="form-group">
+                                            <label for='cpf'>CPF</label> 
 
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-transgender"></i>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-address-card-o"></i>
+                                                </div>
+                                                <input id='cpf' name='cpf' type="text" class="form-control" required value='{{$user->cpf}}'>
+                                            </div>
                                         </div>
-                                        <select id='sex' name='sex' class="form-control" required>
-                                            <option>-- Selecione --</option>
-                                            <option value='masculino' @if($user->sex == 'masculino') selected='selected' @endif>Masculino</option>
-                                            <option value='feminino' @if($user->sex == 'feminino') selected='selected' @endif>Feminino</option>
-                                        </select>
+
                                     </div>
-                                </div>
+                                    <div class='col-md-4'>
 
-                            </div>
-                            <div class='col-md-4'>
+                                        <div class="form-group">
+                                            <label for='phone'>Telefone</label> 
 
-                                <div class="form-group">
-                                    <label for='birth'>Nascimento</label>  
-
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-phone"></i>
+                                                </div>
+                                                <input id='phone' name='phone' type="text" class="form-control" required value='{{$user->phone}}'>
+                                            </div>
                                         </div>
-                                        <input id='birth' name='birth' type="date" class="form-control" required value='{{$user->birth}}'>
+
                                     </div>
-                                </div>
 
-                            </div>
-
-                        </div>
-                        <div class='row'>
-                            
-                            <div class='col-md-4'>
-                            
-                                <div class="form-group">
-                                    <label for='email'>E-mail</label> 
-
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-envelope"></i>
-                                        </div>
-                                        <input id='email' name='email' type="email" class="form-control" required value='{{$user->email}}'>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class='col-md-4'>
-
-                                <div class="form-group">
-                                    <label for='cpf'>CPF</label> 
-
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-address-card-o"></i>
-                                        </div>
-                                        <input id='cpf' name='cpf' type="text" class="form-control" required value='{{$user->cpf}}'>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class='col-md-4'>
-
-                                <div class="form-group">
-                                    <label for='phone'>Telefone</label> 
-
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-phone"></i>
-                                        </div>
-                                        <input id='phone' name='phone' type="text" class="form-control" required value='{{$user->phone}}'>
-                                    </div>
                                 </div>
 
                             </div>
@@ -165,18 +150,73 @@
                         </div>
 
                     </div>
-
+                      
                 </div>
 
-            </div>
-              
+            </div>    
+
         </div>
 
-    </div>    
+    </div>
+</div>     
 
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+              <div class="box-body">
+                <div class='row'>
+                    <div class='col-md-12'>
+
+                        <div class="form-group">
+                            <label for="info">Informações adicionais</label>
+
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-align-center"></i>
+                                </div>
+                                <textarea id='info' name='info' class="form-control">{{$user->info}}</textarea>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
 </div>
 
-        
+
+<!-- editar caixa -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close fechar-modal" data-dismiss="modal">&times;</button>
+              Selecione a imagem
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+<!--                             <label for='avatar'>Imagem</label>  -->
+                            @laracrop(name=avatar | aspectratio=1/1 | minsize=[100, 100] | maxsize=[400, 400] | bgcolor=black | bgopacity=0.7)
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>                    
+        </div>
+    </div>    
+</div> 
+
+
+
 
 <div class="row">
 
@@ -196,7 +236,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="cep" id="cep" class="form-control" value='{{$address->cep}}'>
+                                <input type='text' name="cep" id="cep" class="form-control" value='{{$user->address->cep}}'>
                             </div>
                         </div>
 
@@ -213,7 +253,7 @@
                                 <select name="idState_fk" id="idState_fk" onchange="changeState(this)" class="form-control" required>
                                     <option>Selecione o estado</option>
                                     @foreach($states as $state)
-                                        <option value="{{$state->id}}" @if($state->id == $address->idState_fk) selected='selected' @endif>{{$state->nome}}</option>
+                                        <option value="{{$state->id}}" @if($state->id == $user->address->idState_fk) selected='selected' @endif>{{$state->nome}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -230,8 +270,8 @@
                                     <i class="fa fa-home"></i>
                                 </div>
                                 <select name="idCity_fk" id="idCity_fk" class="form-control" required>
-                                    @foreach($cities as $city)
-                                        <option value="{{$city->id}}" @if($city->id == $address->idCity_fk) selected='selected' @endif>{{$city->nome}}</option>
+                                    @foreach($user->address->state->cities as $city)
+                                        <option value="{{$city->id}}" @if($city->id == $user->address->idCity_fk) selected='selected' @endif>{{$city->nome}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -251,7 +291,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="address" id="address" class="form-control" value='{{$address->address}}'>
+                                <input type='text' name="address" id="address" class="form-control" value='{{$user->address->address}}'>
                             </div>
                         </div>
 
@@ -265,7 +305,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="number" id="number" class="form-control" value='{{$address->number}}'>
+                                <input type='text' name="number" id="number" class="form-control" value='{{$user->address->number}}'>
                             </div>
                         </div>
 
@@ -279,7 +319,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="neighborhood" id="neighborhood" class="form-control" value='{{$address->neighborhood}}'>
+                                <input type='text' name="neighborhood" id="neighborhood" class="form-control" value='{{$user->address->neighborhood}}'>
                             </div>
                         </div>
 
@@ -293,7 +333,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </div>
-                                <input type='text' name="complement" id="complement" class="form-control" value='{{$address->complement}}'>
+                                <input type='text' name="complement" id="complement" class="form-control" value='{{$user->address->complement}}'>
                             </div>
                         </div>
                     
@@ -305,17 +345,17 @@
               </div>
               <!-- /.box-body -->
 
-              <input type="hidden" name="id_church" value="{{$user->church->id}}">
-
-              <div class="box-footer">
+              <div class="box-footer text-right">
+                <a href="{{ url()->previous() }}" class='btn btn-default'><i class="fa fa-close" aria-hidden="true"></i>&nbsp; Cancelar</a>
                 <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Salvar</button>
               </div>
-            </form>
           </div>
 
     </div>    
 
 </div>
+
+</form>
 
 @endsection
 @section('js')

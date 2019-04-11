@@ -14,6 +14,8 @@ use App\Models\Finance;
 use App\Models\User;
 use App\Models\Event;
 use Arisharyanto\Laracrop\Laracrop;
+use DB;
+use Exception;
 
 class ChurchController extends Controller
 {
@@ -54,37 +56,92 @@ class ChurchController extends Controller
         return view('church.home', compact('total_box', 'members', 'events', 'births'));
     }
 
-    public function create(){
+    public function create()
+    {
 
         $states = State::get();
 
-        return view('admin.church.create', compact('states'));
+        return view('admin.church.create', ['states' => $states]);
     }
 
-    public function store(Request $request){
-        
-        $request_address = [
-            'cep'           => $request->cep,
-            'idState_fk'    => $request->idState_fk,
-            'idCity_fk'     => $request->idCity_fk,
-            'address'       => $request->address,
-            'number'        => $request->number,
-            'neighborhood'  => $request->neighborhood,
-            'complement'    => $request->complement,
-        ];
+    public function store(Request $request)
+    {
 
-        $address = Address::create($request_address);
-        
-        $request_church = [
-            'name'          => $request->name,
-            'email'         => $request->email,
-            'cnpj'           => $request->cnpj,
-            'phone'         => $request->phone,
-            'idAddress_fk'  => $address->id
-        ];
+        $validator = validator($request->all(), [
+            'name'          => 'required',
+            'email'         => 'required | email',
+            'cnpj'          => 'required | max:18',
+            'phone'         => 'required',
+            'avatar'        => 'nullable | file | mimes:jpg,png,jpeg,bmp | max:3072',
+
+            'cep'           => 'required | max:9',
+            'idState_fk'    => 'required | exists:states,id',
+            'idCity_fk'     => 'required | exists:cities,id',
+            'address'       => 'required',
+            'number'        => 'nullable',
+            'neighborhood'  => 'nullable',
+            'complement'    => 'nullable',
+        ], [] , [
+                    'name' => 'nome', 
+                    'phone' => 'telefone',
+                    'idState_fk' => 'estado', 
+                    'idCity_fk' => 'cidade', 
+                    'address' => 'endereço',
+                    'number' => 'número',
+                    'neighborhood' => 'bairro',
+                    'complement' => 'complemento',
+                ]);
+
+        if($validator->fails())
+            return redirect()
+                        ->back()
+                        ->witherrors($validator->errors())
+                        ->withInput();
+
+        $result = null;
+
+        DB::beginTransaction();
+        try{
+
+            $nameFile = null;
+            if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
+                $nameFile = Laracrop::cropImage($request->input('avatar'));
+                File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/churches/{$nameFile}"));
+            }
+
+            $request_address = [
+                'cep'           => $request->cep,
+                'idState_fk'    => $request->idState_fk,
+                'idCity_fk'     => $request->idCity_fk,
+                'address'       => $request->address,
+                'number'        => $request->number,
+                'neighborhood'  => $request->neighborhood,
+                'complement'    => $request->complement,
+            ];
+
+            $address = Address::create($request_address);
+            
+            $request_church = [
+                'name'          => $request->name,
+                'email'         => $request->email,
+                'cnpj'          => $request->cnpj,
+                'phone'         => $request->phone,
+                'avatar'        => $nameFile,
+                'idAddress_fk'  => $address->id
+            ];
 
 
-        $result = Church::create($request_church);
+            $result = Church::create($request_church);
+
+
+        DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+
+            $result = null;
+            
+            abort('500');
+        }
 
         if(!$result)
             return redirect()
@@ -96,60 +153,102 @@ class ChurchController extends Controller
                         ->with('success', 'Igreja cadastrada com sucesso!');
     }
 
-    public function show($id){
-
-        $church = Church::find($id);
-
-        $states = State::get();
-
-        $cities = City::where('idEstado', '=', $church->address->idState_fk)->get();
-
-        return view('admin.church.show', compact('church', 'states', 'cities'));
-    }
-
-    public function edit($id){
-
-        $church = Church::find($id);
+    public function show(Church $church)
+    {
 
         $states = State::get();
 
-        $cities = City::where('idEstado', '=', $church->address->idState_fk)->get();
-
-        return view('admin.church.edit', compact('church', 'states', 'cities'));
+        return view('admin.church.show', ['church' => $church, 'states' => $states]);
     }
 
-    public function update(Request $request, $id){
-        
-        $church = Church::find($id);
+    public function edit(Church $church)
+    {
 
-        $request_address = [
-            'cep'           => $request->cep,
-            'idState_fk'    => $request->idState_fk,
-            'idCity_fk'     => $request->idCity_fk,
-            'address'       => $request->address,
-            'number'        => $request->number,
-            'neighborhood'  => $request->neighborhood,
-            'complement'    => $request->complement,
-        ];
+        $states = State::get();
 
-        
-        $request_church = [
-            'name'          => $request->name,
-            'email'         => $request->email,
-            'cnpj'           => $request->cnpj,
-            'phone'         => $request->phone
-        ];
+        return view('admin.church.edit', ['church' => $church, 'states' => $states]);
+    }
 
-        $result = $church->address->update($request_address);
+    public function update(Request $request, Church $church)
+    {
 
-        if(!$result)
+        $validator = validator($request->all(), [
+            'name'          => 'required',
+            'email'         => 'required | email',
+            'cnpj'          => 'required | max:18',
+            'phone'         => 'required',
+            'avatar'        => 'nullable | file | mimes:jpg,png,jpeg,bmp | max:3072',
+
+            'cep'           => 'required | max:9',
+            'idState_fk'    => 'required | exists:states,id',
+            'idCity_fk'     => 'required | exists:cities,id',
+            'address'       => 'required',
+            'number'        => 'nullable',
+            'neighborhood'  => 'nullable',
+            'complement'    => 'nullable',
+        ], [] , [
+                    'name' => 'nome', 
+                    'phone' => 'telefone',
+                    'idState_fk' => 'estado', 
+                    'idCity_fk' => 'cidade', 
+                    'address' => 'endereço',
+                    'number' => 'número',
+                    'neighborhood' => 'bairro',
+                    'complement' => 'complemento',
+                ]);
+
+        if($validator->fails())
             return redirect()
                         ->back()
-                        ->with('error', 'Erro ao editar endereço!');
+                        ->witherrors($validator->errors())
+                        ->withInput();
 
-        $result2 = $church->update($request_church); 
         
-        if(!$result2)
+        $result = null;
+
+        DB::beginTransaction();
+        try{
+        
+            $nameFile = $church->avatar;
+            if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
+                $nameFile = Laracrop::cropImage($request->input('avatar'));
+                Storage::delete("churches/{$church->avatar}");
+                File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/churches/{$nameFile}"));
+            }
+
+            $request_address = [
+                'cep'           => $request->cep,
+                'idState_fk'    => $request->idState_fk,
+                'idCity_fk'     => $request->idCity_fk,
+                'address'       => $request->address,
+                'number'        => $request->number,
+                'neighborhood'  => $request->neighborhood,
+                'complement'    => $request->complement,
+            ];
+
+            
+            $request_church = [
+                'name'          => $request->name,
+                'email'         => $request->email,
+                'cnpj'           => $request->cnpj,
+                'phone'         => $request->phone,
+                'avatar'        => $nameFile,
+            ];
+
+            $church->update($request_church); 
+            
+            $result = $church->address->update($request_address);
+
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+
+            $result = null;
+            
+            abort('500');
+        }
+
+        if(!$result)
             return redirect()
                         ->back()
                         ->with('error', 'Erro ao editar igreja!');
@@ -161,17 +260,25 @@ class ChurchController extends Controller
     }
 
 
-    public function destroy($id){
+    public function destroy(Church $church)
+    {
 
-        $church = Church::find($id);
+        $result = null;
 
-        if(!$church)
-            return redirect()
-                        ->back()
-                        ->with('error', 'Igreja não encontrada!');
+        DB::beginTransaction();
+        try{
+    
+            $updates = ['isActive' => false, 'isDeleted' => true];                    
+            $result = $church->update($updates);
+            
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
 
-        $updates = ['isActive' => false, 'isDeleted' => true];                    
-        $result = $church->update($updates);
+            $result = null;
+            
+            abort('500');
+        }
 
         if(!$result)
             return redirect()
@@ -184,17 +291,26 @@ class ChurchController extends Controller
 
     }
 
-    public function inactivate($id){
+    public function inactivate(Church $church)
+    {
 
-        $church = Church::find($id);
+        $result = null;
 
-        if(!$church)
-            return redirect()
-                        ->back()
-                        ->with('error', 'Igreja não encontrada!');
+        DB::beginTransaction();
+        try{
+            
+            $updates = ['isActive' => false];                    
+            $result = $church->update($updates);
+            
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
 
-        $updates = ['isActive' => false];                    
-        $result = $church->update($updates);
+            $result = null;
+            
+            abort('500');
+        }
+
 
         if(!$result)
             return redirect()
@@ -206,7 +322,7 @@ class ChurchController extends Controller
                         ->with('success', 'Igreja desativada com sucesso!');
     }
 
-    public function activate($id){
+    public function activate(Church $church){
 
         $church = Church::find($id);
 

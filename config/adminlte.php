@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'collapse_sidebar' => false,
+    'collapse_sidebar' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -114,7 +114,7 @@ return [
         [
             'text'        => 'Home',
             'url'         => 'admin/dashboard',
-            'icon'        => 'home',
+            'icon'        => 'dashboard',
             'label_color' => 'success',
             'can'  => 'admin',
         ],

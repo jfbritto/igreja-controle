@@ -202,7 +202,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="200">Nenhum evento com inscrição cadastrado!</td>
+                            <td colspan="200">Nenhum encontrado!</td>
                         </tr>
                     @endforelse
                     </tbody>

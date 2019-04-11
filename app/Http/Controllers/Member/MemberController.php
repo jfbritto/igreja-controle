@@ -20,13 +20,11 @@ class MemberController extends Controller
 
     public function index()
     {
-        $members = User::where('idChurch_fk', '=', auth()->user()->idChurch_fk)
-                            ->where('isDeleted', '=', false)
-                            ->get();
+        $users = auth()->user()->church->members()->where('isDeleted', '=', false)->get();
 
-        $church = Church::where('id', auth()->user()->idChurch_fk)->first();
+        $church = auth()->user()->church;
 
-        return view('church.member.home', compact('members', 'church'));
+        return view('church.member.home', ['members' => $users, 'church' => $church]);
     }
 
     public function create()
@@ -77,6 +75,17 @@ class MemberController extends Controller
                         ->witherrors($validator->errors())
                         ->withInput();
 
+        $verify_exists = User::where('email', $request->email)
+                                                        ->where('idChurch_fk', auth()->user()->idChurch_fk)
+                                                        ->where('isDeleted', false)
+                                                        ->count();                
+
+        if($verify_exists)
+            return redirect()
+                        ->back()
+                        ->withInput()
+                        ->with('error', 'Email já está sendo usado por outro membro!');
+
         $result = null;
 
         DB::beginTransaction();
@@ -123,6 +132,8 @@ class MemberController extends Controller
         }catch(Exception $e){
             DB::rollBack();
 
+            // throw new Exception($e->getMessage());
+
             $result = null;
             
             abort('500');
@@ -156,13 +167,17 @@ class MemberController extends Controller
 
         if($user->church->id != auth()->user()->idChurch_fk) abort('401');
 
+        if(!$user->address) abort('401');
+
         $states = State::get();
         
         return view('church.member.edit', ['member' => $user, 'states' => $states]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
+
+        if($user->church->id != auth()->user()->idChurch_fk) abort('401');
 
         $validator = validator($request->all(), [
             'name'          => 'required',
@@ -206,17 +221,12 @@ class MemberController extends Controller
         DB::beginTransaction();
         try{
         
-            $member = User::where('id', '=', $id)
-                                ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
-                                ->get()
-                                ->first();
+            $address = $user->address;
 
-            $address = $member->address;
-
-            $nameFile = $member->avatar;
+            $nameFile = $user->avatar;
             if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
                 $nameFile = Laracrop::cropImage($request->input('avatar'));
-                Storage::delete("members/{$member->avatar}");
+                Storage::delete("members/{$user->avatar}");
                 File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/members/{$nameFile}"));
             }
 
@@ -243,7 +253,7 @@ class MemberController extends Controller
 
 
             $address->update($request_address);
-            $result = $member->update($request_user);
+            $result = $user->update($request_user);
             Laracrop::cleanCropTemp();
 
             DB::commit();
@@ -265,21 +275,18 @@ class MemberController extends Controller
                         ->with('success', 'Membro editado com sucesso!');
     }
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
 
+        if($user->church->id != auth()->user()->idChurch_fk) abort('401');
 
         $result = null;
 
         DB::beginTransaction();
         try{
-            $member = User::where('id', '=', $id)
-                                ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
-                                ->get()
-                                ->first();
 
             $updates = ['isActive' => false, 'isDeleted' => true];
-            $result = $member->update($updates);
+            $result = $user->update($updates);
          
             DB::commit();
         }catch(Exception $e){
@@ -301,20 +308,26 @@ class MemberController extends Controller
 
     }
 
-    public function inactivate($id)
+    public function inactivate(User $user)
     {
-        $member = User::where('id', '=', $id)
-                            ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
-                            ->get()
-                            ->first();
+        if($user->church->id != auth()->user()->idChurch_fk) abort('401');
 
-        if(!$member)
-            return redirect()
-                        ->route('member')
-                        ->with('error', 'Membro não encontrado!');
+        $result = null;
 
-        $updates = ['isActive' => false];
-        $result = $member->update($updates);
+        DB::beginTransaction();
+        try{
+
+            $updates = ['isActive' => false];
+            $result = $user->update($updates);
+
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+
+            $result = null;
+            
+            abort('500');
+        }
 
         if(!$result)
             return redirect()
@@ -326,20 +339,26 @@ class MemberController extends Controller
                         ->with('success', 'Membro desativado com sucesso!');
     }
 
-    public function activate($id)
+    public function activate(User $user)
     {
-        $member = User::where('id', '=', $id)
-                            ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
-                            ->get()
-                            ->first();
+        if($user->church->id != auth()->user()->idChurch_fk) abort('401');
 
-        if(!$member)
-            return redirect()
-                        ->route('member')
-                        ->with('error', 'Membro não encontrado!');
+        $result = null;
 
-        $updates = ['isActive' => true];
-        $result = $member->update($updates);
+        DB::beginTransaction();
+        try{
+
+            $updates = ['isActive' => true];
+            $result = $user->update($updates);
+        
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+
+            $result = null;
+            
+            abort('500');
+        }
 
         if(!$result)
             return redirect()
@@ -352,20 +371,26 @@ class MemberController extends Controller
     }
 
 
-    public function validate_member($id)
+    public function validate_member(User $user)
     {
-        $member = User::where('id', '=', $id)
-                            ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
-                            ->get()
-                            ->first();
+        if($user->church->id != auth()->user()->idChurch_fk) abort('401');
 
-        if(!$member)
-            return redirect()
-                        ->route('member')
-                        ->with('error', 'Membro não encontrado!');
+        $result = null;
 
-        $updates = ['isActive' => true, 'isPendent' => false];
-        $result = $member->update($updates);
+        DB::beginTransaction();
+        try{
+
+            $updates = ['isActive' => true, 'isPendent' => false];
+            $result = $user->update($updates);
+        
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+
+            $result = null;
+            
+            abort('500');
+        }
 
         if(!$result)
             return redirect()
@@ -386,47 +411,116 @@ class MemberController extends Controller
 
 
 
-    public function create_admin($id)
+    public function create_admin(Church $church)
     {
-        $church = Church::find($id);
 
         $states = State::get();
 
-        return view('admin.church.user.create', compact('states', 'church'));
+        return view('admin.church.user.create', ['states' => $states, 'church' => $church]);
     }
 
 
-    public function store_admin(Request $request)
+    public function store_admin(Request $request, Church $church)
     {
 
-        $request_address = [
-            'cep'           => $request->cep,
-            'idState_fk'    => $request->idState_fk,
-            'idCity_fk'     => $request->idCity_fk,
-            'address'       => $request->address,
-            'number'        => $request->number,
-            'neighborhood'  => $request->neighborhood,
-            'complement'    => $request->complement,
-        ];
+        $validator = validator($request->all(), [
+            'name'          => 'required',
+            'email'         => 'required | email',
+            'birth'         => 'required | date',
+            'cpf'           => 'required | max:14',
+            'sex'           => 'required',
+            'phone'         => 'required',
+            'info'          => 'nullable',
+            'avatar'        => 'nullable | file | mimes:jpg,png,jpeg,bmp | max:3072',
 
-        $address = Address::create($request_address);
+            'cep'           => 'required | max:9',
+            'idState_fk'    => 'required | exists:states,id',
+            'idCity_fk'     => 'required | exists:cities,id',
+            'address'       => 'required',
+            'number'        => 'nullable',
+            'neighborhood'  => 'nullable',
+            'complement'    => 'nullable',
+        ], [] , [
+                    'name' => 'nome', 
+                    'birth' => 'nascimento',
+                    'sex' => 'sexo',
+                    'phone' => 'telefone',
+                    'info' => 'informações adicionais',
+                    'idState_fk' => 'estado', 
+                    'idCity_fk' => 'cidade', 
+                    'address' => 'endereço',
+                    'number' => 'número',
+                    'neighborhood' => 'bairro',
+                    'complement' => 'complemento',
+                ]);
 
-        $request_user = [
-            'name'          => $request->name,
-            'email'         => $request->email,
-            'birth'         => $request->birth,
-            'cpf'           => $request->cpf,
-            'sex'           => $request->sex,
-            'phone'         => $request->phone,
-            'idChurch_fk'   => $request->id_church,
-            'isMember'      => false,
-            'idAddress_fk'  => $address->id
-        ];
+        if($validator->fails())
+            return redirect()
+                        ->back()
+                        ->witherrors($validator->errors())
+                        ->withInput();
+
+        $verify_exists = User::where('email', $request->email)
+                                                        ->where('idChurch_fk', $church->id)
+                                                        ->where('isDeleted', false)
+                                                        ->count();                
+
+        if($verify_exists)
+            return redirect()
+                        ->back()
+                        ->withInput()
+                        ->with('error', 'Email já está sendo usado por outro membro!');
+
+        $result = null;
+
+        DB::beginTransaction();
+        try{
+
+            $nameFile = null;
+            if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
+                $nameFile = Laracrop::cropImage($request->input('avatar'));
+                File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/members/{$nameFile}"));
+            }
+
+            $request_address = [
+                'cep'           => $request->cep,
+                'idState_fk'    => $request->idState_fk,
+                'idCity_fk'     => $request->idCity_fk,
+                'address'       => $request->address,
+                'number'        => $request->number,
+                'neighborhood'  => $request->neighborhood,
+                'complement'    => $request->complement,
+            ];
+
+            $address = Address::create($request_address);
+
+            $request_user = [
+                'name'          => $request->name,
+                'email'         => $request->email,
+                'birth'         => $request->birth,
+                'cpf'           => $request->cpf,
+                'sex'           => $request->sex,
+                'phone'         => $request->phone,
+                'info'          => $request->info,
+                'avatar'        => $nameFile,
+                'idChurch_fk'   => $church->id,
+                'isMember'      => false,
+                'idAddress_fk'  => $address->id
+            ];
 
 
-        $result = User::create($request_user);
+            $result = User::create($request_user);
 
+            Laracrop::cleanCropTemp();
 
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+
+            $result = null;
+            
+            abort('500');
+        }
 
         if(!$result)
             return redirect()
@@ -434,7 +528,7 @@ class MemberController extends Controller
                         ->with('error', 'Erro ao cadastrar usuário!');
         else
             return redirect()
-                            ->route('church.show', $request->id_church)
+                            ->route('church.show', $church->id)
                             ->with('success', 'Usuário cadastrado com sucesso!');
 
 
@@ -442,105 +536,145 @@ class MemberController extends Controller
 
 
 
-    public function show_admin($id_user)
+    public function show_admin(User $user)
     {
-        $user = User::find($id_user);
 
-        $address = Address::find($user->idAddress_fk);
         $states = State::get();
-        $cities = City::where('idEstado', '=', $address->idState_fk)->get();
+        $cities = $user->address->state->cities;
 
-        return view('admin.church.user.show', compact('user', 'states', 'cities', 'address'));
+        return view('admin.church.user.show', ['user' => $user, 'states' => $states, 'cities' => $cities, 'address' => $user->address]);
     }
 
 
 
-    public function edit_admin($id_user)
+    public function edit_admin(User $user)
     {
-
-        $user = User::find($id_user);
-
-        $address = Address::find($user->idAddress_fk);
-
 
         $states = State::get();
-        $cities = City::where('idEstado', '=', $address->idState_fk)->get();
-
-        return view('admin.church.user.edit', compact('user', 'states', 'cities', 'address'));
+        
+        return view('admin.church.user.edit', ['user' => $user, 'states' => $states]);
     }
 
-    public function update_admin(Request $request, $id_user)
+    public function update_admin(Request $request, User $user)
     {
-        $user = User::find($id_user);
-
-        $address = Address::find($user->idAddress_fk);
-
-        $nameFile = $user->avatar;
-        if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
-
-            $nameFile = $user->id.kebab_case($user->name).".".$request->avatar->extension();;
-
-            Storage::delete("members/{$user->avatar}");
-
-            $upload = $request->avatar->storeAs('members', $nameFile);
-
-            if(!$upload)
-                return redirect()
-                        ->back()
-                        ->with('error', 'Falha ao fazer upload da imagem!');
-
-        }
 
 
-        $request_address = [
-            'cep'           => $request->cep,
-            'idState_fk'    => $request->idState_fk,
-            'idCity_fk'     => $request->idCity_fk,
-            'address'       => $request->address,
-            'number'        => $request->number,
-            'neighborhood'  => $request->neighborhood,
-            'complement'    => $request->complement,
-        ];
+        $validator = validator($request->all(), [
+            'name'          => 'required',
+            'email'         => 'required | email',
+            'birth'         => 'required | date',
+            'cpf'           => 'required | max:14',
+            'sex'           => 'required',
+            'phone'         => 'required',
+            'info'          => 'nullable',
+            'avatar'        => 'nullable | file | mimes:jpg,png,jpeg,bmp | max:3072',
 
-        $request_user = [
-            'name'          => $request->name,
-            'email'         => $request->email,
-            'birth'         => $request->birth,
-            'cpf'           => $request->cpf,
-            'sex'           => $request->sex,
-            'phone'         => $request->phone,
-            'avatar'        => $nameFile,
-        ];
+            'cep'           => 'required | max:9',
+            'idState_fk'    => 'required | exists:states,id',
+            'idCity_fk'     => 'required | exists:cities,id',
+            'address'       => 'required',
+            'number'        => 'nullable',
+            'neighborhood'  => 'nullable',
+            'complement'    => 'nullable',
+        ], [] , [
+                    'name' => 'nome', 
+                    'birth' => 'nascimento',
+                    'sex' => 'sexo',
+                    'phone' => 'telefone',
+                    'info' => 'informações adicionais',
+                    'idState_fk' => 'estado', 
+                    'idCity_fk' => 'cidade', 
+                    'address' => 'endereço',
+                    'number' => 'número',
+                    'neighborhood' => 'bairro',
+                    'complement' => 'complemento',
+                ]);
 
-
-
-        $result = $address->update($request_address);
-
-        if(!$result)
+        if($validator->fails())
             return redirect()
                         ->back()
-                        ->with('error', 'Erro ao editar endereço!');
+                        ->witherrors($validator->errors())
+                        ->withInput();
 
-        $result2 = $user->update($request_user);
 
-        if(!$result2)
+        $result = null;
+
+        DB::beginTransaction();
+        try{
+            
+            $nameFile = $user->avatar;
+            if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
+                $nameFile = Laracrop::cropImage($request->input('avatar'));
+                Storage::delete("members/{$user->avatar}");
+                File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/members/{$nameFile}"));
+            }
+
+
+            $request_address = [
+                'cep'           => $request->cep,
+                'idState_fk'    => $request->idState_fk,
+                'idCity_fk'     => $request->idCity_fk,
+                'address'       => $request->address,
+                'number'        => $request->number,
+                'neighborhood'  => $request->neighborhood,
+                'complement'    => $request->complement,
+            ];
+
+            $request_user = [
+                'name'          => $request->name,
+                'email'         => $request->email,
+                'birth'         => $request->birth,
+                'cpf'           => $request->cpf,
+                'sex'           => $request->sex,
+                'phone'         => $request->phone,
+                'avatar'        => $nameFile,
+            ];
+
+
+            $user->address->update($request_address);
+            
+            $result = $user->update($request_user);
+
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+
+            $result = null;
+            
+            abort('500');
+        }   
+
+        if(!$result)
             return redirect()
                         ->back()
                         ->with('error', 'Erro ao editar o usuário!');
         else
             return redirect()
-                        ->route('church.show', $request->id_church)
+                        ->route('church.show', $user->church->id)
                         ->with('success', 'Usuário editado com sucesso!');
     }
 
 
 
-    public function inactivate_admin($id_user)
+    public function inactivate_admin(User $user)
     {
-        $user = User::find($id_user);
 
-        $updates = ['isActive' => false];
-        $result = $user->update($updates);
+        $result = null;
+
+        DB::beginTransaction();
+        try{
+
+            $updates = ['isActive' => false];
+            $result = $user->update($updates);
+
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+
+            $result = null;
+            
+            abort('500');
+        }
 
         if(!$result)
             return redirect()
@@ -552,12 +686,25 @@ class MemberController extends Controller
                         ->with('success', 'Usuário desativado com sucesso!');
     }
 
-    public function activate_admin($id_user)
+    public function activate_admin(User $user)
     {
-        $user = User::find($id_user);
 
-        $updates = ['isActive' => true];
-        $result = $user->update($updates);
+        $result = null;
+
+        DB::beginTransaction();
+        try{
+
+            $updates = ['isActive' => true];
+            $result = $user->update($updates);
+
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+
+            $result = null;
+            
+            abort('500');
+        }
 
         if(!$result)
             return redirect()
@@ -570,12 +717,25 @@ class MemberController extends Controller
     }
 
 
-    public function destroy_admin($id_user)
+    public function destroy_admin(User $user)
     {
-        $user = User::find($id_user);
 
-        $updates = ['isActive' => false, 'isDeleted' => true];
-        $result = $user->update($updates);
+        $result = null;
+
+        DB::beginTransaction();
+        try{
+
+            $updates = ['isActive' => false, 'isDeleted' => true];
+            $result = $user->update($updates);
+         
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+
+            $result = null;
+            
+            abort('500');
+        }
 
         if(!$result)
             return redirect()
@@ -628,9 +788,6 @@ class MemberController extends Controller
 
         return view('church.birth.home', compact('members', 'date_month'));
     }
-
-
-
 
 
 

@@ -229,7 +229,6 @@
                     <div class="col-md-12">
                         <div class="form-group">
 <!--                             <label for='avatar'>Imagem</label>  -->
-                            @laracropCss(true)
                             @laracrop(name=avatar | aspectratio=1/1 | minsize=[100, 100] | maxsize=[400, 400] | bgcolor=black | bgopacity=0.7)
                         </div>
                     </div>

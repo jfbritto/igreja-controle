@@ -3,10 +3,10 @@
 @section('title', 'Igreja Controle - Home')
 
 @section('content_header')
-    <h1>Você está logado!</h1>
+    <h1><i class="fa fa-dashboard" aria-hidden="true"></i> Dashboard</h1>
 
     <ol class="breadcrumb">
-        <li><a href="#">Dashboard</a></li>
+        <li><a href="{{route('admindash')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
     </ol>
 @stop
 

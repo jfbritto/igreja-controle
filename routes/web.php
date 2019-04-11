@@ -34,25 +34,25 @@ $this->group(['middleware' => 'auth'], function(){
         //IGREJA
         $this->get('/church/add', 'Church\ChurchController@create')->name('church.create');
         $this->post('/church/add', 'Church\ChurchController@store')->name('church.store');
-        $this->get('/church/edit/{id_church}', 'Church\ChurchController@edit')->name('church.edit');
-        $this->post('/church/edit/{id_church}', 'Church\ChurchController@update')->name('church.update');
-        $this->get('/church/show/{id_church}', 'Church\ChurchController@show')->name('church.show');
+        $this->get('/church/edit/{church}', 'Church\ChurchController@edit')->name('church.edit');
+        $this->post('/church/edit/{church}', 'Church\ChurchController@update')->name('church.update');
+        $this->get('/church/show/{church}', 'Church\ChurchController@show')->name('church.show');
         $this->get('/church/pdf', 'Church\ChurchController@Church_pdf')->name('church.pdf');
-        $this->get('/church/destroy/{id_church}', 'Church\ChurchController@destroy')->name('church.destroy');
-        $this->get('/church/inactivate/{id_church}', 'Church\ChurchController@inactivate')->name('church.inactivate');
-        $this->get('/church/activate/{id_church}', 'Church\ChurchController@activate')->name('church.activate');
+        $this->get('/church/destroy/{church}', 'Church\ChurchController@destroy')->name('church.destroy');
+        $this->get('/church/inactivate/{church}', 'Church\ChurchController@inactivate')->name('church.inactivate');
+        $this->get('/church/activate/{church}', 'Church\ChurchController@activate')->name('church.activate');
 
         //IGREJA USUARIOS
-        $this->get('/church/user/add/{id}', 'Member\MemberController@create_admin')->name('church.user.create');
-        $this->post('/church/user/add', 'Member\MemberController@store_admin')->name('church.user.store');
-        $this->get('/church/user/edit/{id_user}', 'Member\MemberController@edit_admin')->name('church.user.edit');
-        $this->post('/church/user/edit/{id_user}', 'Member\MemberController@update_admin')->name('church.user.update');
-        $this->get('/church/user/show/{id_user}', 'Member\MemberController@show_admin')->name('church.user.show');
+        $this->get('/church/user/add/{church}', 'Member\MemberController@create_admin')->name('church.user.create');
+        $this->post('/church/user/add/{church}', 'Member\MemberController@store_admin')->name('church.user.store');
+        $this->get('/church/user/edit/{user}', 'Member\MemberController@edit_admin')->name('church.user.edit');
+        $this->post('/church/user/edit/{user}', 'Member\MemberController@update_admin')->name('church.user.update');
+        $this->get('/church/user/show/{user}', 'Member\MemberController@show_admin')->name('church.user.show');
 
         $this->get('/church/user/pdf', 'Member\MemberController@Church_pdf')->name('church.user.pdf');
-        $this->get('/church/user/inactivate/{id_user}', 'Member\MemberController@inactivate_admin')->name('church.user.inactivate');
-        $this->get('/church/user/activate/{id_user}', 'Member\MemberController@activate_admin')->name('church.user.activate');
-        $this->get('/church/user/destroy/{id_user}', 'Member\MemberController@destroy_admin')->name('church.user.destroy');
+        $this->get('/church/user/inactivate/{user}', 'Member\MemberController@inactivate_admin')->name('church.user.inactivate');
+        $this->get('/church/user/activate/{user}', 'Member\MemberController@activate_admin')->name('church.user.activate');
+        $this->get('/church/user/destroy/{user}', 'Member\MemberController@destroy_admin')->name('church.user.destroy');
     });
 
     //IGREJA
@@ -92,12 +92,12 @@ $this->group(['middleware' => 'auth'], function(){
         $this->get('/member/add', 'Member\MemberController@create')->name('member.create');
         $this->post('/member/add', 'Member\MemberController@store')->name('member.store');
         $this->get('/member/edit/{user}', 'Member\MemberController@edit')->name('member.edit');
-        $this->post('/member/edit/{id_member}', 'Member\MemberController@update')->name('member.update');
+        $this->post('/member/edit/{user}', 'Member\MemberController@update')->name('member.update');
         $this->get('/member/pdf', 'Member\MemberController@member_pdf')->name('member.pdf');
-        $this->get('/member/destroy/{id_member}', 'Member\MemberController@destroy')->name('member.destroy');
-        $this->get('/member/inactivate/{id_member}', 'Member\MemberController@inactivate')->name('member.inactivate');
-        $this->get('/member/activate/{id_member}', 'Member\MemberController@activate')->name('member.activate');
-        $this->get('/member/validate/{id_member}', 'Member\MemberController@validate_member')->name('member.validate');
+        $this->get('/member/destroy/{user}', 'Member\MemberController@destroy')->name('member.destroy');
+        $this->get('/member/inactivate/{user}', 'Member\MemberController@inactivate')->name('member.inactivate');
+        $this->get('/member/activate/{user}', 'Member\MemberController@activate')->name('member.activate');
+        $this->get('/member/validate/{user}', 'Member\MemberController@validate_member')->name('member.validate');
 
         //BITH
         $this->post('/birth', 'Member\MemberController@birth_month')->name('birth.month');

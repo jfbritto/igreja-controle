@@ -37,7 +37,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        // $this->middleware('guest')->except('logout');
     }
 
     public function get_autenticar()
@@ -49,6 +49,7 @@ class LoginController extends Controller
     {
 
         $user = User::where(['email'=>$request->email],['senha'=>bcrypt($request->password)])->get();
+
 
         if(!$user->first())
            return redirect(route('login').'#login')->with('error', 'E-mail ou senha incorretos!');     

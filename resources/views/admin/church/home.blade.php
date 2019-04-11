@@ -6,8 +6,8 @@
     <h1><i class="fa fa-home" aria-hidden="true"></i> Igrejas</h1>
 
     <ol class="breadcrumb">
-        <li><a href="{{route('dashboard')}}">Dashboard</a></li>
-        <li><a href="{{route('church')}}">Igrejas</a></li>
+        <li><a href="{{route('admindash')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li><a href="{{route('church')}}"><i class="fa fa-home"></i> Igrejas</a></li>
     </ol>
 @stop
 
@@ -24,8 +24,10 @@
 
         <div class="box box-primary">
             <div class="box-header with-border text-right">
-                <a href="{{ route('church.create') }}" class='btn btn-success' title="Nova igreja"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                <a target="_blank" href="{{ route('church.pdf') }}" class='btn btn-danger' title="Gerar PDF com todos as igrejas"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a target="_blank" href="{{ route('church.pdf') }}" class='btn btn-danger' title="Gerar PDF com todos as igrejas"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                    <a href="{{ route('church.create') }}" class='btn btn-success' title="Nova igreja"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                </div>
             </div>
             
             <div class="box-body">
@@ -52,16 +54,18 @@
                             <td style='vertical-align:middle' class='hidden-xs'>
                                 @if($church->isActive) Ativo @else Inativo @endif
                             </td>
-                            <td style='vertical-align:middle' class='text-right'>
-                                @if($church->isActive) 
-                                    <a href="{{ url('admin/church/inactivate', $church->id) }}" class='btn btn-danger' title="Inativar igreja"><i class="fa fa-power-off" aria-hidden="true"></i></a>
-                                @else 
-                                    <a href="{{ url('admin/church/activate', $church->id) }}" class='btn btn-success' title="Ativar igreja"><i class="fa fa-power-off" aria-hidden="true"></i></a>
-                                @endif
+                            <td style='vertical-align:middle; width: 160px' class='text-right'>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    @if($church->isActive) 
+                                        <a href="{{ url('admin/church/inactivate', $church->id) }}" class='btn btn-danger' title="Inativar igreja"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+                                    @else 
+                                        <a href="{{ url('admin/church/activate', $church->id) }}" class='btn btn-success' title="Ativar igreja"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+                                    @endif
 
-                                <a href="{{ url('admin/church/destroy', $church->id) }}" class='btn btn-danger' title="Deletar igreja"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                <a href="{{ url('admin/church/edit', $church->id) }}" class='btn btn-warning' title="Editar igreja"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                <a href="{{ url('admin/church/show', $church->id) }}" class='btn btn-primary' title="Visualizar igreja"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                    <a href="{{ url('admin/church/destroy', $church->id) }}" class='btn btn-danger' title="Deletar igreja"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                    <a href="{{ url('admin/church/edit', $church->id) }}" class='btn btn-warning' title="Editar igreja"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    <a href="{{ url('admin/church/show', $church->id) }}" class='btn btn-primary' title="Visualizar igreja"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                </div>
                             </td>
                         </tr>
                     @empty

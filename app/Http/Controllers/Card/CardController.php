@@ -34,7 +34,7 @@ class CardController extends Controller
                             ->where('isDeleted', '=', false)
                             ->whereIn('id', $request->id_users)
                             ->get();
-
+               
         return \PDF::loadView('church.card.pdf.cards', compact('members'))->stream();
     }
 }
