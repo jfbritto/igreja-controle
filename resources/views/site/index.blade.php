@@ -18,6 +18,9 @@
     <meta property="og:image:width" content="640">
     <meta property="og:image:height" content="480">
 
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#64a19d">
+
     <link rel="icon" href="img/cross.png">
 
   <title>Igreja Controle</title>
@@ -197,21 +200,46 @@
 
 
   <!-- Login Section -->
-  <section id="clients" class="signup-section d-flex">
-    <div class="container my-auto">
+  <section id="clients">
+    <div class="container">
 
       <div class="text-center">
 
         <h2 class="text-white-50 mx-auto mt-2 mb-5">Clientes</h2>
-        
-        <div class="row">
-            <div class="col-md-12">
-            @forelse($churches as $church)
-              <img src="@if(!is_null($church->avatar)){{ url('storage/churches/'.$church->avatar) }} @else {{ url('storage/churches/default.jpg') }} @endif" class='img img-circle' width='200'>
+
+
+
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            @forelse($churches as $key => $church)
+                <li data-target="#myCarousel" data-slide-to="{{$key}}" class=" @if($key == 0) active @endif"></li>
             @empty
             @endforelse
-            </div>
+          </ol>
+
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+            @forelse($churches as $key => $church)
+                <div class="item @if($key == 0) active @endif">
+                    <img src="@if(!is_null($church->avatar)){{ url('storage/churches/'.$church->avatar) }} @else {{ url('storage/churches/default.jpg') }} @endif" alt="{{$church->name}}">
+                </div>
+            @empty
+            @endforelse
+
+          </div>
+
+          <!-- Left and right controls -->
+          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+          </a>
         </div>
+
 
       </div>
 
@@ -312,6 +340,7 @@
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
   <!-- Plugin JavaScript -->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
