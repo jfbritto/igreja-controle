@@ -58,6 +58,9 @@
             <a class="nav-link js-scroll-trigger" href="#projects">Serviços</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#clients">Clientes</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#login">Login</a>
           </li>
           <li class="nav-item">
@@ -188,6 +191,33 @@
 
     </div>
   </section>
+
+
+
+
+
+  <!-- Login Section -->
+  <section id="clients" class="signup-section d-flex">
+    <div class="container my-auto">
+
+      <div class="text-center">
+
+        <h2 class="text-white-50 mx-auto mt-2 mb-5">Clientes</h2>
+        
+        <div class="row">
+            <div class="col-md-12">
+            @forelse($churches as $church)
+              <img src="@if(!is_null($church->avatar)){{ url('storage/churches/'.$church->avatar) }} @else {{ url('storage/churches/default.jpg') }} @endif" class='img img-circle' width='200'>
+            @empty
+            @endforelse
+            </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
 
   <!-- Login Section -->
   <section id="login" class="signup-section d-flex">
