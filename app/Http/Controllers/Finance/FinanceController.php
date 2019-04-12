@@ -119,13 +119,11 @@ class FinanceController extends Controller
 
         $validator = validator($request->all(), [
             'type'              => 'required',
-            'idAction_fk'       => 'required',
             'value'             => 'required',
             'movimentationDate' => 'required | date',
             'comments'          => 'nullable'
         ], [] , [
                     'type' => 'tipo', 
-                    'idAction_fk' => 'ação',
                     'value' => 'valor',
                     'movimentationDate' => 'data movimentação',
                     'comments' => 'comentários'
