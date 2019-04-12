@@ -27,13 +27,14 @@
 
         <div class="box box-primary">
             <div class="box-header with-border text-right">
-                <a href="{{ url()->previous() }}" class='btn btn-default' title="Voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a href="{{ url()->previous() }}" class='btn btn-default' title="Voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
 
-                @if($event->endDate > date('Y-m-d'))
-                    <a href="{{ url('church/event/edit', $event->id) }}" class='btn btn-warning' title="Editar evento"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                    <a href="{{ url('church/event/destroy', $event->id) }}" class='btn btn-danger' title="Deletar evento"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                @endif
-
+                    @if($event->endDate > date('Y-m-d'))
+                        <a href="{{ url('church/event/edit', $event->id) }}" class='btn btn-warning' title="Editar evento"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        <a href="{{ url('church/event/destroy', $event->id) }}" class='btn btn-danger' title="Deletar evento"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    @endif
+                </div>
             </div>
 
             <div class="box-body">
@@ -173,13 +174,15 @@
         <h3><i class="fa fa-check-square-o" aria-hidden="true"></i> Inscritos</h3>
         <div class="box box-primary">
             <div class="box-header with-border form-inline text-right">
-                @if($event->endDate > date('Y-m-d'))
-                    <a href="#" id="btn-link" class="btn btn-default" title="Copiar o link para inscrição no evento"><i class="fa fa-link" aria-hidden="true"></i></a>
-                @endif
-                <a target="_blank" href="{{ url('church/inscription/pdf', $event->id) }}" class='btn btn-danger' title="Gerar PDF com todos os inscritos"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
-                @if($event->endDate > date('Y-m-d'))
-                    <a href="{{ url('church/inscription/add', $event->id) }}" class='btn btn-success' title="Cadastrar inscrição"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                @endif
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    @if($event->endDate > date('Y-m-d'))
+                        <a href="#" id="btn-link" class="btn btn-default" title="Copiar o link para inscrição no evento"><i class="fa fa-link" aria-hidden="true"></i></a>
+                    @endif
+                    <a target="_blank" href="{{ url('church/inscription/pdf', $event->id) }}" class='btn btn-danger' title="Gerar PDF com todos os inscritos"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                    @if($event->endDate > date('Y-m-d'))
+                        <a href="{{ url('church/inscription/add', $event->id) }}" class='btn btn-success' title="Cadastrar inscrição"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                    @endif
+                </div>
             </div>
             <div class="box-body">
 
@@ -195,7 +198,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @forelse($inscriptions as $inscript)
+                    @forelse($event->inscriptions as $inscript)
                         <tr class='@if($inscript->isPaid) success @else warning @endif'>
                             <td style='vertical-align:middle'>{{ $inscript->name }}</td>
                             <td style='vertical-align:middle' class='hidden-xs'>{{ $inscript->email }}</td>

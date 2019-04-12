@@ -116,6 +116,26 @@ class FinanceController extends Controller
 
     public function store(Request $request)
     {
+
+        $validator = validator($request->all(), [
+            'type'              => 'required',
+            'idAction_fk'       => 'required',
+            'value'             => 'required',
+            'movimentationDate' => 'required | date',
+            'comments'          => 'nullable'
+        ], [] , [
+                    'type' => 'tipo', 
+                    'idAction_fk' => 'ação',
+                    'value' => 'valor',
+                    'movimentationDate' => 'data movimentação',
+                    'comments' => 'comentários'
+                ]);
+
+        if($validator->fails())
+            return redirect()
+                        ->back()
+                        ->witherrors($validator->errors())
+                        ->withInput();
         
         $request['value'] = str_replace('.', '', $request->value);
         $request['value'] = str_replace(',', '.', $request['value']);
@@ -127,8 +147,23 @@ class FinanceController extends Controller
         if ($request->type == 'O') {
             $request['idAction_fk'] = 4;
         }
+
+        $result = null;
+
+        DB::beginTransaction();
+        try{
+
+            $result = Finance::create($request->all());
+
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+
+            $result = null;
+            
+            abort('500');
+        }
         
-        $result = Finance::create($request->all());
 
         if(!$result)
             return redirect()
@@ -141,18 +176,12 @@ class FinanceController extends Controller
     }
 
 
-    public function show($id)
+    public function show(Finance $movimentation)
     {
-        $movimentation = Finance::find($id);
-
-        if(!$movimentation)
-            return redirect()
-                        ->back()
-                        ->with('error', 'Movimentação não encontrada!');
         
         $actions = Parameter::where('operation', '=', 'finances')->where('attribute', '=', 'action')->get();
                         
-        return view('church.finance.show', compact('movimentation', 'actions'));
+        return view('church.finance.show', ['movimentation' => $movimentation, 'actions' => $actions]);
     }
 
 

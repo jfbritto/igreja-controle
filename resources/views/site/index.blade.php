@@ -25,8 +25,10 @@
 
   <title>Igreja Controle</title>
 
+
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
 
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
@@ -36,6 +38,8 @@
   <!-- Custom styles for this template -->
   <link href="css/grayscale.min.css" rel="stylesheet">
 
+  <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
+  
   <!-- Site css -->
   <link href="css/site.css" rel="stylesheet">
 
@@ -200,44 +204,25 @@
 
 
   <!-- Login Section -->
-  <section id="clients">
-    <div class="container">
+  <section id="clients" class="clients-section d-flex bg-black">
+    <div class="container my-auto">
 
       <div class="text-center">
 
+        <div class="col-md-10 col-lg-8 mx-auto text-center">
+
         <h2 class="text-white-50 mx-auto mt-2 mb-5">Clientes</h2>
 
+            <div class="owl-carousel" style="padding-bottom: 50px">
+                @forelse($churches as $key => $church)
+                    <a href="http://www.google.com" class="text-center">
+                        <img style="border-radius: 50%; cursor: pointer;" src="@if(!is_null($church->avatar)){{ url('storage/churches/'.$church->avatar) }} @else {{ url('storage/churches/default.jpg') }} @endif" alt="{{$church->name}}" >
+                        <span style="color: white">{{$church->name}}</span>
+                    </a>
+                @empty
+                @endforelse
+            </div>
 
-
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-          <!-- Indicators -->
-          <ol class="carousel-indicators">
-            @forelse($churches as $key => $church)
-                <li data-target="#myCarousel" data-slide-to="{{$key}}" class=" @if($key == 0) active @endif"></li>
-            @empty
-            @endforelse
-          </ol>
-
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner">
-            @forelse($churches as $key => $church)
-                <div class="item @if($key == 0) active @endif">
-                    <img src="@if(!is_null($church->avatar)){{ url('storage/churches/'.$church->avatar) }} @else {{ url('storage/churches/default.jpg') }} @endif" alt="{{$church->name}}">
-                </div>
-            @empty
-            @endforelse
-
-          </div>
-
-          <!-- Left and right controls -->
-          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="right carousel-control" href="#myCarousel" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-            <span class="sr-only">Next</span>
-          </a>
         </div>
 
 
@@ -350,6 +335,27 @@
 
   <!-- Animation login -->
   <script src="js/app-animation.js"></script>
+
+  <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+
+  <script type="text/javascript">
+      
+    $(document).ready(function(){
+        $(document).ready(function(){
+          $(".owl-carousel").owlCarousel({
+            loop:true,
+            margin:50,
+            nav:true,
+            dots:true,
+            autoplay:true,
+            autoplayTimeout:1500,
+            autoplayHoverPause:true,
+            items: 2
+          });
+        });
+    })
+
+  </script>
 
 </body>
 

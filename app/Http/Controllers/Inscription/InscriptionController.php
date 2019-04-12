@@ -10,6 +10,8 @@ use App\Models\State;
 use App\Models\City;
 use App\Models\EventRegistration;
 use Carbon\Carbon;
+use DB;
+use Exception;
 
 class InscriptionController extends Controller
 {
@@ -20,38 +22,47 @@ class InscriptionController extends Controller
         $future_events = Event::where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('isActive', '=', true)->where('haveInscription', '=', true)->where('endDate', '>', now())->get();
         $church = Church::find(auth()->user()->idChurch_fk);
     
-        return view('church.inscription.home', compact('past_events', 'future_events', 'church'));
+        return view('church.inscription.home', ['past_events' => $past_events, 'future_events' => $future_events, 'church' => $church]);
     }
 
-    public function create($id)
+    public function create(Event $event)
     {   
-        $event = Event::where('id', '=', $id)->where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('haveInscription', '=', true)->get()->first();
-        $church = Church::find(auth()->user()->idChurch_fk);
+        if($event->church->id != auth()->user()->idChurch_fk) abort('401');
+
+        if($event->haveInscription != true) abort('401');
+
         $states = State::get();
 
-
-        if(!$event)
-            return redirect()
-                        ->route('inscription')
-                        ->with('error', 'Evento não encontrado!');
-
-        return view('church.inscription.create', compact('church', 'states', 'event'));
+        return view('church.inscription.create', ['states' => $states, 'event' => $event]);
     }
 
-    public function store(Request $request, $id)
+    public function store(Request $request, Event $event)
     {
-        $event = Event::where('id', '=', $id)->where('idChurch_fk', '=', auth()->user()->idChurch_fk)->where('haveInscription', '=', true)->get()->first();
-        $church = Church::find(auth()->user()->idChurch_fk);
 
-        if(!$event)
-            return redirect()
-                        ->route('inscription')
-                        ->with('error', 'Evento não encontrado!');
+        if($event->church->id != auth()->user()->idChurch_fk) abort('401');
+
+        if($event->haveInscription != true) abort('401');
         
         $request['idEvent_fk'] = $event->id;
         $request['idChurch_fk'] = auth()->user()->idChurch_fk;
 
-        $result = EventRegistration::create($request->all()); 
+
+        $result = null;
+
+        DB::beginTransaction();
+        try{
+
+            $result = EventRegistration::create($request->all()); 
+
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+
+            $result = null;
+            
+            abort('500');
+        }
+
         
         if(!$result)
             return redirect()
@@ -84,31 +95,10 @@ class InscriptionController extends Controller
     }
 
 
-    public function report_info_payment($id)
-    {
-        $inscript = EventRegistration::find($id);
+    public function report_info_payment(EventRegistration $inscription)
+    {         
 
-        if(!$inscript)
-            return redirect()
-                        ->route('event')
-                        ->with('error', 'Inscrito não encontrado!');
-
-        $church = Church::find($inscript->idChurch_fk);
-
-        if(!$church)
-            return redirect()
-                        ->route('event')
-                        ->with('error', 'Igreja não encontrada!');
-
-        $event = Event::find($inscript->idEvent_fk);
-
-        if(!$event)
-            return redirect()
-                        ->route('event')
-                        ->with('error', 'Evento não encontrado!');                
-
-
-        return view('church.inscription.report_payment', compact('church', 'event', 'inscript'));                
+        return view('church.inscription.report_payment', ['inscription' => $inscription]);                
     }
 
     public function report_payment(Request $request, $id)

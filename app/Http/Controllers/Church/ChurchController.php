@@ -324,15 +324,22 @@ class ChurchController extends Controller
 
     public function activate(Church $church){
 
-        $church = Church::find($id);
+        $result = null;
 
-        if(!$church)
-            return redirect()
-                        ->back()
-                        ->with('error', 'Igreja não encontrada!');
+        DB::beginTransaction();
+        try{
 
-        $updates = ['isActive' => true];                    
-        $result = $church->update($updates);
+            $updates = ['isActive' => true];                    
+            $result = $church->update($updates);
+
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+
+            $result = null;
+            
+            abort('500');
+        }
 
         if(!$result)
             return redirect()
@@ -359,8 +366,6 @@ class ChurchController extends Controller
 
 
 
-
-
     public function config()
     {
         $church = Church::find(auth()->user()->idChurch_fk);
@@ -370,26 +375,48 @@ class ChurchController extends Controller
 
     public function update_avatar(Request $request)
     {
-        $church = Church::find(auth()->user()->idChurch_fk);
 
-        $nameFile = $church->avatar;
-        if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
+        $validator = validator($request->all(), [
+
+            'avatar' => 'nullable | file | mimes:jpg,png,jpeg,bmp | max:3072',
+
+        ]);
+
+        if($validator->fails())
+            return redirect()
+                        ->back()
+                        ->witherrors($validator->errors())
+                        ->withInput();
+      
+
+        $result = null;
+
+        DB::beginTransaction();
+        try{
+
+            $nameFile = $church->avatar;
+            if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
+                $nameFile = Laracrop::cropImage($request->input('avatar'));
+                Storage::delete("churches/{auth()->user()->church()}");
+                File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/churches/{$nameFile}"));
+            }
+
+            $request_church = [
+                'avatar' => $nameFile,
+            ];
+
+            $result = auth()->user()->church()->update($request_church);
+
+            Laracrop::cleanCropTemp();
+
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+
+            $result = null;
             
-            $nameFile = Laracrop::cropImage($request->input('avatar'));
-
-            Storage::delete("churches/{$church->avatar}");
-
-            File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/churches/{$nameFile}"));
-
+            abort('500');
         }
-
-        $request_church = [
-            'avatar' => $nameFile,
-        ];
-
-        $result = $church->update($request_church);
-
-        Laracrop::cleanCropTemp();
 
         if(!$result)
             return redirect()
@@ -403,3 +430,8 @@ class ChurchController extends Controller
 
     }
 }
+
+
+
+
+

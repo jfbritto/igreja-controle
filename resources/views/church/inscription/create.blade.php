@@ -119,7 +119,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-map-marker"></i>
                                     </div>
-                                    <input id='church' name='church' type="text" class="form-control" required value='{{ $church->name }}'>
+                                    <input id='church' name='church' type="text" class="form-control" required value='{{ $event->church->name }}'>
                                 </div>
                             </div>
 

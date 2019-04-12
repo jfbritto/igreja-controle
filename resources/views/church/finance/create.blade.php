@@ -77,7 +77,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-usd"></i>
                                     </div>
-                                    <input id='value' name='value' type="text" class="form-control" required>
+                                    <input id='value' name='value' type="text" class="form-control" required value="{{ old('value') }}">
                                 </div>
                             </div>
 
@@ -91,7 +91,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input id='movimentationDate' name='movimentationDate' type="date" value="{{date('Y-m-d')}}" class="form-control" required>
+                                    <input id='movimentationDate' name='movimentationDate' type="date" value="{{date('Y-m-d')}}" class="form-control" required value="{{ old('mavimentionDate') }}">
                                 </div>
                             </div>
 
@@ -105,7 +105,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-align-center"></i>
                                     </div>
-                                    <textarea id='comments' name='comments' class="form-control"></textarea>
+                                    <textarea id='comments' name='comments' class="form-control">{{ old('comments') }}</textarea>
                                 </div>
                             </div>
 

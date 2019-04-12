@@ -8,6 +8,8 @@ use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 use App\Models\Event;
 use App\Models\Church;
 use App\Models\EventRegistration;
+use DB;
+use Exception;
 
 class EventController extends Controller
 {
@@ -56,6 +58,34 @@ class EventController extends Controller
     public function store(Request $request)
     {
 
+
+        $validator = validator($request->all(), [
+            'title'             => 'required',
+            'description'       => 'required',
+            'location'          => 'required',
+            'startDate'         => 'required | date',
+            'endDate'           => 'required | date',
+            'nameResponsable'   => 'nullable',
+            'phoneResponsable'  => 'nullable | max:14',
+            'value'             => 'nullable',
+        ], [] , [
+                    'title' => 'título', 
+                    'description' => 'descrição',
+                    'location' => 'local',
+                    'startDate' => 'data inicial',
+                    'endDate' => 'data final',
+                    'nameResponsable' => 'nome responsável', 
+                    'phoneResponsable' => 'telefone responsavel', 
+                    'value' => 'valor'
+                ]);
+
+        if($validator->fails())
+            return redirect()
+                        ->back()
+                        ->witherrors($validator->errors())
+                        ->withInput();
+
+
         if($request->inscricoes == 'sim'){
             $request['haveInscription'] = true;
         }else{
@@ -71,8 +101,23 @@ class EventController extends Controller
         $request['idChurch_fk'] = auth()->user()->idChurch_fk;
         
         $event = $request->all();
+
+        $result = null;
+
         
-        $result = Event::create($event);
+        DB::beginTransaction();
+        try{
+
+            $result = Event::create($event);
+
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+
+            $result = null;
+            
+            abort('500');
+        }
 
         if(!$result)
             return redirect()
@@ -85,83 +130,75 @@ class EventController extends Controller
     }
 
 
-    public function show($id)
-    {
-        $event = Event::find($id);
+    public function show(Event $event)
+    {             
 
-        if(!$event)
-            return redirect()
-                        ->route('event')
-                        ->with('error', 'Evento não encontrado!');
+        if($event->church->id != auth()->user()->idChurch_fk) abort('401');
 
-        $church = Church::find($event->idChurch_fk);
-
-        if(!$church)
-            return redirect()
-                        ->route('event')
-                        ->with('error', 'Igreja não encontrada!');                
-
-        if($church->id != auth()->user()->idChurch_fk)
-            return redirect()
-                        ->route('event')
-                        ->with('error', 'Evento não encontrado!');  
-
-        $inscriptions = EventRegistration::where('idChurch_fk', '=', $church->id)->where('idEvent_fk', '=', $event->id)->get();
-
-        return view('church.event.show', compact('event', 'inscriptions'));
+        return view('church.event.show', ['event' => $event]);
     }
 
 
-    public function edit($id)
+    public function edit(Event $event)
     {
-        $event = Event::find($id);
 
-        if(!$event)
-            return redirect()
-                        ->route('event')
-                        ->with('error', 'Evento não encontrado!');
-
-        $church = Church::find($event->idChurch_fk);
-
-        if(!$church)
-            return redirect()
-                        ->route('event')
-                        ->with('error', 'Igreja não encontrada!');                
-
-        if($church->id != auth()->user()->idChurch_fk)
-            return redirect()
-                        ->route('event')
-                        ->with('error', 'Evento não encontrado!');  
+        if($event->church->id != auth()->user()->idChurch_fk) abort('401');
 
         return view('church.event.edit', compact('event'));
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Event $event)
     {
-        $event = Event::find($id);
 
-        if(!$event)
+        if($event->church->id != auth()->user()->idChurch_fk) abort('401');
+
+        $validator = validator($request->all(), [
+            'title'             => 'required',
+            'description'       => 'required',
+            'location'          => 'required',
+            'startDate'         => 'required | date',
+            'endDate'           => 'required | date',
+            'nameResponsable'   => 'nullable',
+            'phoneResponsable'  => 'nullable | max:14',
+            'value'             => 'nullable',
+        ], [] , [
+                    'title' => 'título', 
+                    'description' => 'descrição',
+                    'location' => 'local',
+                    'startDate' => 'data inicial',
+                    'endDate' => 'data final',
+                    'nameResponsable' => 'nome responsável', 
+                    'phoneResponsable' => 'telefone responsavel', 
+                    'value' => 'valor'
+                ]);
+
+        if($validator->fails())
             return redirect()
-                        ->route('event')
-                        ->with('error', 'Evento não encontrado!');
+                        ->back()
+                        ->witherrors($validator->errors())
+                        ->withInput();
 
-        $church = Church::find($event->idChurch_fk);
-
-        if(!$church)
-            return redirect()
-                        ->route('event')
-                        ->with('error', 'Igreja não encontrada!');                
-
-        if($church->id != auth()->user()->idChurch_fk)
-            return redirect()
-                        ->route('event')
-                        ->with('error', 'Evento não encontrado!'); 
 
         $request['value'] = str_replace('.', '', $request->value);
         $request['value'] = str_replace(',', '.', $request['value']);
 
-        $result = $event->update($request->all());
+        $result = null;
+
+        DB::beginTransaction();
+        try{
+
+            $result = $event->update($request->all());
+
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+
+            $result = null;
+            
+            abort('500');
+        }
+
 
         if(!$result)
             return redirect()
@@ -174,29 +211,29 @@ class EventController extends Controller
 
     }
 
-    public function destroy($id)
+    public function destroy(Event $event)
     {
-        $event = Event::find($id);
 
-        if(!$event)
-            return redirect()
-                        ->route('event')
-                        ->with('error', 'Evento não encontrado!');
-
-        $church = Church::find($event->idChurch_fk);
-
-        if(!$church)
-            return redirect()
-                        ->route('event')
-                        ->with('error', 'Igreja não encontrada!');                
-
-        if($church->id != auth()->user()->idChurch_fk)
-            return redirect()
-                        ->route('event')
-                        ->with('error', 'Evento não encontrado!'); 
+        if($event->church->id != auth()->user()->idChurch_fk) abort('401');
 
         $updates = ['isActive' => false, 'isDeleted' => true];                     
-        $result = $event->update($updates);
+        
+        $result = null;
+
+        DB::beginTransaction();
+        try{
+
+            $result = $event->update($updates);
+
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+
+            $result = null;
+            
+            abort('500');
+        }
+
 
         if(!$result)
             return redirect()

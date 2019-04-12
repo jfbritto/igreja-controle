@@ -74,18 +74,18 @@ $this->group(['middleware' => 'auth'], function(){
 
         //EVENTO
         $this->post('/event/add', 'Event\EventController@store')->name('event.store');
-        $this->get('/event/edit/{id_event}', 'Event\EventController@edit')->name('event.edit');
-        $this->post('/event/update/{id_event}', 'Event\EventController@update')->name('event.update');
-        $this->get('/event/show/{id_event}', 'Event\EventController@show')->name('event.show');
-        $this->get('/event/destroy/{id_event}', 'Event\EventController@destroy')->name('event.destroy');
+        $this->get('/event/edit/{event}', 'Event\EventController@edit')->name('event.edit');
+        $this->post('/event/update/{event}', 'Event\EventController@update')->name('event.update');
+        $this->get('/event/show/{event}', 'Event\EventController@show')->name('event.show');
+        $this->get('/event/destroy/{event}', 'Event\EventController@destroy')->name('event.destroy');
 
         //INSCRIÇÕES
-        $this->get('/inscription/show/{id_event}', 'Inscription\InscriptionController@show')->name('inscription.show');
-        $this->get('/inscription/add/{id_event}', 'Inscription\InscriptionController@create')->name('inscription.create');
-        $this->post('/inscription/add/{id_event}', 'Inscription\InscriptionController@store')->name('inscription.store');
-        $this->get('/inscription/report-payment/{id_inscript}', 'Inscription\InscriptionController@report_info_payment')->name('inscription.report_info_payment');
-        $this->post('/inscription/report-payment/{id_inscript}', 'Inscription\InscriptionController@report_payment')->name('inscription.report_payment');
-        $this->get('/inscription/pdf/{id_event}', 'Inscription\InscriptionController@inscription_pdf')->name('inscription.pdf');
+        $this->get('/inscription/show/{event}', 'Inscription\InscriptionController@show')->name('inscription.show');
+        $this->get('/inscription/add/{event}', 'Inscription\InscriptionController@create')->name('inscription.create');
+        $this->post('/inscription/add/{event}', 'Inscription\InscriptionController@store')->name('inscription.store');
+        $this->get('/inscription/report-payment/{inscription}', 'Inscription\InscriptionController@report_info_payment')->name('inscription.report_info_payment');
+        $this->post('/inscription/report-payment/{inscription}', 'Inscription\InscriptionController@report_payment')->name('inscription.report_payment');
+        $this->get('/inscription/pdf/{event}', 'Inscription\InscriptionController@inscription_pdf')->name('inscription.pdf');
 
         //MEMBROS
         $this->get('/member/show/{user}', 'Member\MemberController@show')->name('member.show');
@@ -115,7 +115,7 @@ $this->group(['middleware' => 'auth'], function(){
         $this->post('/finance/add', 'Finance\FinanceController@store')->name('finance.store');
         $this->post('/finance', 'Finance\FinanceController@index_month')->name('finance.month');
         $this->get('/finance/pdf/{year}/{month}', 'Finance\FinanceController@balance_pdf')->name('finance.pdf');
-        $this->get('/finance/show/{id_movimentation}', 'Finance\FinanceController@show')->name('finance.show');
+        $this->get('/finance/show/{movimentation}', 'Finance\FinanceController@show')->name('finance.show');
 
         //CONFIG
         $this->post('/config/edit', 'Church\ChurchController@update_avatar')->name('config.update');

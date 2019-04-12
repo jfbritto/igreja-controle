@@ -33,6 +33,11 @@ class Event extends Model
         return $this->hasOne(\App\Models\Church::class, 'id', 'idChurch_fk');
     }
 
+    public function inscriptions()
+    {
+        return $this->hasMany(\App\Models\EventRegistration::class, 'idEvent_fk', 'id');
+    }
+
     public static function boot()
     {
         parent::boot();

@@ -12,14 +12,14 @@ class CardController extends Controller
 
     public function index()
     {
-        $members = User::where('idChurch_fk', '=', auth()->user()->idChurch_fk)
+        $members = auth()->user()->church->members()
                             ->where('isActive', '=', true)
                             ->where('isDeleted', '=', false)
                             ->get();
 
-        $church = Church::where('id', auth()->user()->idChurch_fk)->first();
+        $church = auth()->user()->church();
 
-        return view('church.card.home', compact('members', 'church'));
+        return view('church.card.home', ['members' => $members, 'church' => $church]);
     }
 
     public function card_pdf(Request $request)
@@ -35,6 +35,6 @@ class CardController extends Controller
                             ->whereIn('id', $request->id_users)
                             ->get();
                
-        return \PDF::loadView('church.card.pdf.cards', compact('members'))->stream();
+        return \PDF::loadView('church.card.pdf.cards', ['members' => $members])->stream();
     }
 }

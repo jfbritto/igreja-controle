@@ -46,7 +46,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-tag"></i>
                         </div>
-                        <input id='title' name='title' type="text" class="form-control" required>
+                        <input id='title' name='title' type="text" class="form-control" required value="{{ old('title') }}">
                     </div>
                 </div>    
 
@@ -79,7 +79,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        <input id='startDate' name='startDate' type="date" class="form-control" required>
+                        <input id='startDate' name='startDate' type="date" class="form-control" required value="{{ old('startDate') }}">
                     </div>
                 </div>
 
@@ -90,7 +90,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        <input id='endDate' name='endDate' type="date" class="form-control" required>
+                        <input id='endDate' name='endDate' type="date" class="form-control" required value="{{ old('endDate') }}">
                     </div>
                 </div>
 
@@ -115,7 +115,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-user"></i>
                         </div>
-                        <input id='nameResponsable' name='nameResponsable' type="text" class="form-control">
+                        <input id='nameResponsable' name='nameResponsable' type="text" class="form-control" value="{{ old('nameResponsable') }}">
                     </div>
                 </div>
 
@@ -126,7 +126,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-phone"></i>
                         </div>
-                        <input id='phoneResponsable' name='phoneResponsable' type="text" class="form-control">
+                        <input id='phoneResponsable' name='phoneResponsable' type="text" class="form-control" value="{{ old('phoneResponsable') }}">
                     </div>
                 </div>
 
@@ -137,13 +137,13 @@
                         <div class="input-group-addon">
                             <i class="fa fa-usd"></i>
                         </div>
-                        <input id='value' name='value' type="text" class="form-control">
+                        <input id='value' name='value' type="text" class="form-control" value="{{ old('value') }}">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for=''>Escolha a cor do card</label>                                    
-                    <input id='color' name='color' type="color" class="form-control" value='#3c8dbc'>
+                    <input id='color' name='color' type="color" class="form-control" value='#3c8dbc' value="{{ old('color') }}">
                 </div>
 
               </div>
