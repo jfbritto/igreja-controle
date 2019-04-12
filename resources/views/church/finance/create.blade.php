@@ -99,13 +99,13 @@
                         <div class='col-md-12'>
                         
                             <div class="form-group">
-                                <label for='comments'>Comentário</label>  
+                                <label for='comments'>Descrição</label>  
 
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-align-center"></i>
                                     </div>
-                                    <textarea id='comments' name='comments' class="form-control">{{ old('comments') }}</textarea>
+                                    <input type="text" id='comments' name='comments' class="form-control" value="{{ old('comments') }}">
                                 </div>
                             </div>
 
@@ -135,20 +135,40 @@
 
 
     //verifica se o cliente vai pagar ou não
-        $("#type").change(function () {
-            if ($("#input").is(":selected")) {
+    $("#type").change(function () {
+        if ($("#input").is(":selected")) {
 
-                $('#comments').attr('required', false);
-                $('#idAction_fk').attr('required', true);
-                $('#action-box').show();
+            $('#comments').attr('required', false);
+            $('#idAction_fk').attr('required', true);
+            $('#action-box').show();
+        }
+        else {
+            $('#comments').attr('required', true);
+            $('#idAction_fk').attr('required', false);
+            $('#action-box').hide();
+        }
+            
+    });
+
+
+    //completa o campo de endereco
+    $('#comments').on('keyup', function(){
+        var description = $('#comments').val();
+
+
+        $.ajax({
+            url:'/search/description/'+description,
+            type:'GET',
+            dataType:'json',
+            success:function(json){
+
+                $('#comments').autocomplete({
+                    source: json.autocomplete
+                });
             }
-            else {
-                $('#comments').attr('required', true);
-                $('#idAction_fk').attr('required', false);
-                $('#action-box').hide();
-            }
-                
         });
+
+    });
 
 
   });

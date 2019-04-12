@@ -130,7 +130,7 @@
                         <div class='col-md-12'>
                         
                             <div class="form-group">
-                                <label for='comments'>Comentário</label>  
+                                <label for='comments'>Descrição</label>  
 
                                 <div class="input-group">
                                     <div class="input-group-addon">

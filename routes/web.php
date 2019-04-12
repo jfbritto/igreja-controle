@@ -129,7 +129,8 @@ $this->group(['middleware' => 'auth'], function(){
 /*********
 * SEARCH *
 **********/
-$this->get('/search/city/{id_estado}', 'Search\SearchController@autocomplete');
+$this->get('/search/city/{id_estado}', 'Search\SearchController@search_city');
+$this->get('/search/description/{description}', 'Search\SearchController@search_description');
 
 
 
