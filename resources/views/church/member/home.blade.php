@@ -59,12 +59,12 @@
                         @else
 
                             @if($member->isActive) 
-                                <a href="{{ url('church/member/inactivate', $member->id) }}" class='btn btn-danger' title="Inativar membro"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+                                <a data-member='{{$member->id}}' class='btn btn-danger' title="Inativar membro"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                             @else 
                                 <a href="{{ url('church/member/activate', $member->id) }}" class='btn btn-success' title="Ativar membro"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                             @endif
 
-                        <a href="{{ url('church/member/destroy', $member->id) }}" class='btn btn-danger' title="Deletar membro"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <a data-member='{{$member->id}}' class='btn btn-danger deletMember' title="Deletar membro"><i class="fa fa-trash" aria-hidden="true"></i></a>
                         <a href="{{ url('church/member/edit', $member->id) }}" class='btn btn-warning' title="Editar membro"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                         <a href="{{ url('church/member/show', $member->id) }}" class='btn btn-primary' title="Visualizar membro"><i class="fa fa-eye" aria-hidden="true"></i></a>
                         @endif
@@ -132,6 +132,46 @@
                     )
                 }
             });
+
+            $(".deletMember").on('click', function(){
+
+                var member = $(this).attr('data-member');
+
+                Swal.fire({
+                  title: 'Tem certeza?',
+                  text: "",
+                  type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Sim, deletar!',
+                  cancelButtonText: 'não',
+                }).then((result) => {
+                  if (result.value) {
+                        window.location = '/church/member/destroy/'+member;
+                  }
+                })
+            })
+
+            $(".inactivateMember").on('click', function(){
+
+                var member = $(this).attr('data-member');
+
+                Swal.fire({
+                  title: 'Tem certeza?',
+                  text: "",
+                  type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Sim, deletar!',
+                  cancelButtonText: 'não',
+                }).then((result) => {
+                  if (result.value) {
+                        window.location = '/church/member/inactivate/'+member;
+                  }
+                })
+            })
             
         });
     </script>

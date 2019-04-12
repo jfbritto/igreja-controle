@@ -48,15 +48,16 @@
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-    <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script>
-
-    <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
     
 
 </head>
 <body class="hold-transition @yield('body_class')">
 
 @yield('body')
+
+<script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script>
+
+<script src="{{ asset('js/sweetalert2.min.js') }}"></script>
 
 @laracropJs(true)
 
