@@ -3,7 +3,7 @@
 @section('title', 'Igreja Controle - Eventos')
 
 @section('content_header')
-    <h1><i class="fa fa-calendar" aria-hidden="true"></i> {{$event->title}} @if($event->endDate < date('Y-m-d'))- Evento encerrado @endif</h1>
+    <h1><i class="fa fa-calendar" aria-hidden="true"></i> {{$event->title}} @if($event->endDate < date('Y-m-d')) - <span class="label label-danger"> Evento encerrado </span> @endif</h1>
 
     <ol class="breadcrumb">
     <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
@@ -224,7 +224,10 @@
                     </tbody>
                 </table>
 
-                <input class="form-control" id="btn-link-txt" value="{{ env('APP_URL').'/event/invite/'.$event->hash }}" readonly="">
+
+                @if($event->endDate > date('Y-m-d'))
+                    <input class="form-control" id="btn-link-txt" value="{{ env('APP_URL').'/event/invite/'.$event->hash }}" readonly="">
+                @endif
 
             </div>
         </div>   

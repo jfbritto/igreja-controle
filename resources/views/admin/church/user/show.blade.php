@@ -174,6 +174,59 @@
 </div>     
 
 <div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+              <div class="box-body">
+                <div class='row'>
+                    <div class='col-md-6'>
+
+                        <div class="form-group">
+                            <label for='baptismDate'>Data batismo</label>  
+
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input id='baptismDate' name='baptismDate' type="date" class="form-control" value="{{ $user->baptismDate }}" disabled>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class='col-md-6'>
+
+                        <div class="form-group">
+                            <label for='memberSince'>Membro desde</label>  
+
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input id='memberSince' name='memberSince' type="date" class="form-control" value="{{ $user->memberSince }}" disabled>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class='col-md-12'>
+
+                        <div class="form-group">
+                            <label for="info">Informações adicionais</label>
+
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-align-center"></i>
+                                </div>
+                                <textarea id='info' name='info' class="form-control" disabled>{{ $user->info }}</textarea>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+
+<div class="row">
 
     <div class="col-md-12">
 

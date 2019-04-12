@@ -8,7 +8,7 @@
     <ol class="breadcrumb">
         <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li><a href="{{route('inscription')}}"><i class="fa fa-check-square-o"></i> Inscrições</a></li>
-        <li><a href="{{route('inscription.show', $inscription->event->id)}}"><i class="fa fa-check-square-o"></i> {{$inscription->event->title}}</a></li>
+        <li><a href="{{route('event.show', $inscription->event->id)}}"><i class="fa fa-calendar"></i> {{$inscription->event->title}}</a></li>
         <li><a href="#">Informar pagamento</a></li>
     </ol>
 @stop

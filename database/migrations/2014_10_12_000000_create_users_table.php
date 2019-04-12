@@ -34,13 +34,15 @@ class CreateUsersTable extends Migration
             $table->string('phone', 50)->nullable();
             $table->string('avatar', 100)->nullable();
             $table->text('info');
+            $table->date('baptismDate')->nullable();
+            $table->date('memberSince')->nullable();
 
 
             $table->string('remember_token', 100)->nullable();
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      *

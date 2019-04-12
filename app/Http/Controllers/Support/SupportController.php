@@ -44,9 +44,11 @@ class SupportController extends Controller
     }
 
 
-    public function show($id)
+    public function show(Support $message)
     {
-        $message = Support::where('idChurch_fk', '=',auth()->user()->idChurch_fk)->where('id', '=', $id)->get()->first();
+
+        if($message->idChurch_fk != auth()->user()->idChurch_fk) abort('401');
+
         $types = Parameter::where('operation', '=', 'support')->where('attribute', '=', 'type')->get();
 
         if(!$message)
@@ -54,7 +56,7 @@ class SupportController extends Controller
                         ->route('event')
                         ->with('error', 'Mensagem não encontrada!');
 
-        return view('church.support.show', compact('message', 'types'));
+        return view('church.support.show', ['message' => $message, 'types' => $types]);
     }
 
 

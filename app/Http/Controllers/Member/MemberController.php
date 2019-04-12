@@ -117,6 +117,8 @@ class MemberController extends Controller
                 'sex'           => $request->sex,
                 'phone'         => $request->phone,
                 'info'          => $request->info,
+                'baptismDate'   => $request->baptismDate,
+                'memberSince'   => $request->memberSince,
                 'avatar'        => $nameFile,
                 'idChurch_fk'   => auth()->user()->idChurch_fk,
                 'isMember'      => true,
@@ -157,6 +159,8 @@ class MemberController extends Controller
 
         if($user->church->id != auth()->user()->idChurch_fk) abort('401');
 
+        if($user->isDeleted == true) abort('401');
+
         $states = State::get();
 
         return view('church.member.show', ['member' => $user, 'states' => $states]);
@@ -166,6 +170,8 @@ class MemberController extends Controller
     {
 
         if($user->church->id != auth()->user()->idChurch_fk) abort('401');
+
+        if($user->isDeleted == true) abort('401');
 
         if(!$user->address) abort('401');
 
@@ -249,6 +255,8 @@ class MemberController extends Controller
                 'phone'         => $request->phone,
                 'avatar'        => $nameFile,
                 'info'          => $request->info,
+                'baptismDate'   => $request->baptismDate,
+                'memberSince'   => $request->memberSince,
             ];
 
 
@@ -502,6 +510,8 @@ class MemberController extends Controller
                 'sex'           => $request->sex,
                 'phone'         => $request->phone,
                 'info'          => $request->info,
+                'baptismDate'   => $request->baptismDate,
+                'memberSince'   => $request->memberSince,
                 'avatar'        => $nameFile,
                 'idChurch_fk'   => $church->id,
                 'isMember'      => false,
@@ -628,6 +638,9 @@ class MemberController extends Controller
                 'sex'           => $request->sex,
                 'phone'         => $request->phone,
                 'avatar'        => $nameFile,
+                'info'          => $request->info,
+                'baptismDate'   => $request->baptismDate,
+                'memberSince'   => $request->memberSince,
             ];
 
 
@@ -882,6 +895,8 @@ class MemberController extends Controller
             'sex'           => $request->sex,
             'phone'         => $request->phone,
             'avatar'        => $nameFile,
+            'baptismDate'   => $request->baptismDate,
+            'memberSince'   => $request->memberSince,
             'idChurch_fk'   => $church->id,
             'isMember'      => true,
             'idAddress_fk'  => $address->id,

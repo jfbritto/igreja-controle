@@ -108,7 +108,7 @@ $this->group(['middleware' => 'auth'], function(){
 
         //SUPPORT
         $this->post('/support/add', 'Support\SupportController@store')->name('support.store');
-        $this->get('/support/show/{id_message}', 'Support\SupportController@show')->name('support.show');
+        $this->get('/support/show/{message}', 'Support\SupportController@show')->name('support.show');
 
         //FINANÇAS
         $this->get('/finance/add', 'Finance\FinanceController@create')->name('finance.create');

@@ -135,6 +135,8 @@ class EventController extends Controller
 
         if($event->church->id != auth()->user()->idChurch_fk) abort('401');
 
+        if($event->isDeleted == true) abort('401');
+
         return view('church.event.show', ['event' => $event]);
     }
 
@@ -143,6 +145,8 @@ class EventController extends Controller
     {
 
         if($event->church->id != auth()->user()->idChurch_fk) abort('401');
+
+        if($event->isDeleted == true) abort('401');
 
         return view('church.event.edit', compact('event'));
     }

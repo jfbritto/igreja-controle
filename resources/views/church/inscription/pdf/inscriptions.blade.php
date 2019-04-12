@@ -25,7 +25,7 @@
             </tr>
         </thead>
         <tbody>
-        @forelse($inscripts as $inscript)
+        @forelse($inscriptions as $inscript)
             <tr class="@if($inscript->isPaid) success @else warning @endif">
                 <td>{{ $inscript->name }}</td>
                 <td>{{ $inscript->email }}</td>
