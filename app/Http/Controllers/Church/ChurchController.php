@@ -13,6 +13,7 @@ use App\Models\City;
 use App\Models\Finance;
 use App\Models\User;
 use App\Models\Event;
+use App\Models\Cell;
 use Arisharyanto\Laracrop\Laracrop;
 use DB;
 use Exception;
@@ -51,9 +52,14 @@ class ChurchController extends Controller
                                     ->where('idChurch_fk', '=', auth()->user()->idChurch_fk)
                                     ->where('isActive', '=', true)
                                     ->where('isDeleted', '=', false)
-                                    ->count();                    
+                                    ->count();
 
-        return view('church.home', compact('total_box', 'members', 'events', 'births'));
+        $cells = Cell::where('idChurch_fk', '=', auth()->user()->idChurch_fk)
+                                    ->where('isActive', '=', true)
+                                    ->where('isDeleted', '=', false)
+                                    ->count();                                                
+
+        return view('church.home', ['total_box' => $total_box, 'members' => $members, 'events' => $events, 'births' => $births, 'cells' => $cells]);
     }
 
     public function create()

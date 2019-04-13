@@ -144,7 +144,7 @@
                             <td style='vertical-align:middle' class="hidden-xs">{{ $movimentation->action }}</td>
                             <td style='vertical-align:middle' class="hidden-xs">{{ date('d/m/Y', strtotime($movimentation->movimentationDate)) }}</td>
                             <td style='vertical-align:middle'>R$ {{ number_format($movimentation->value, 2, ',', '.') }}</td>
-                            <td style='vertical-align:middle'>@if($movimentation->comments)<btn data-html="true" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="left" data-content="{{$movimentation->comments}}" class='btn btn-default'><i class="fa fa-info" aria-hidden="true"></i></btn>@endif</td>
+                            <td style='vertical-align:middle'>@if($movimentation->comments)<i style="cursor: pointer;" data-html="true" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="left" data-content="{{$movimentation->comments}}" class="fa fa-info-circle fa-2x" aria-hidden="true"></i>@endif</td>
                             <td style='vertical-align:middle' class='text-right'>
                                 <a href="{{ route('finance.show', $movimentation->id) }}" class='btn btn-primary' title="Visualizar movimentação"><i class="fa fa-eye" aria-hidden="true"></i></a>
                             </td>

@@ -65,6 +65,17 @@
             <!-- /.info-box-content -->
         </div>
     </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <a href="{{route('cell')}}"><span class="info-box-icon bg-blue"><i class="fa fa-puzzle-piece"></i></span></a>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Células</span>
+              <span class="info-box-number">{{$cells}}</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </div>
     <!-- /.col -->
 </div>
 

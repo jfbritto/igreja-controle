@@ -32,10 +32,10 @@
                 <tr>
                     <th></th>
                     <th>Nome</th>
-                    <th>Responsável</th>
-                    <th>Telefone</th>
+                    <th class="hidden-xs hidden-sm">Responsável</th>
+                    <th class="hidden-xs hidden-sm">Telefone</th>
                     <th>Mapa</th>
-                    <th>Situação</th>
+                    <th class="hidden-xs hidden-sm">Situação</th>
                     <th></th>
                 </tr>
             </thead>
@@ -44,9 +44,9 @@
                 <tr class="{{ (!$cell->isActive ? 'danger' : '') }} ">
                 	<td style='vertical-align:middle'><img src="@if(!is_null($cell->avatar)){{ url('storage/cells/'.$cell->avatar) }} @else {{ url('storage/cells/default.jpg') }} @endif" class='img img-circle' width='40'></td>
                     <td style='vertical-align:middle'>{{ $cell->title }}</td>
-                    <td style='vertical-align:middle'>{{ $cell->nameResponsable }}</td>
-                    <td style='vertical-align:middle'>{{ $cell->phoneResponsable }}</td>
-                    <td style='vertical-align:middle'><a title="Abrir mapa" target="_blank" href="https://www.google.com/maps?q=loc:{{ $cell->lat }},{{ $cell->long }}"><i class="fa fa-map-marker"></i></a></td>
+                    <td class='hidden-xs hidden-sm' style='vertical-align:middle'>{{ $cell->nameResponsable }}</td>
+                    <td class='hidden-xs hidden-sm' style='vertical-align:middle'>{{ $cell->phoneResponsable }}</td>
+                    <td style='vertical-align:middle'><a title="Abrir mapa" target="_blank" href="https://www.google.com/maps?q=loc:{{ $cell->lat }},{{ $cell->long }}"><i class="fa fa-map-marker fa-2x"></i></a></td>
                     <td style='vertical-align:middle' class='hidden-xs hidden-sm'>
                         @if($cell->isActive) Ativa @else Inativa @endif
                     </td>
