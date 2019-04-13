@@ -29,7 +29,7 @@
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <a href="{{ url()->previous() }}" class='btn btn-default' title="Voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
                     <a href="{{ route('church.edit', $church->id) }}" class='btn btn-warning' title="Editar membro"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                    <a href="{{ route('church.destroy', $church->id) }}" class='btn btn-danger' title="Deletar membro"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    <a data-church='{{$church->id}}' class='btn btn-danger deletChurch' title="Deletar membro"><i class="fa fa-trash" aria-hidden="true"></i></a>
                 </div>
             </div>    
         </div>
@@ -325,12 +325,12 @@
                                     @else 
 
                                         @if($user->isActive) 
-                                            <a href="{{ url('admin/church/user/inactivate', $user->id) }}" class='btn btn-danger' title="Inativar usuário"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+                                            <a data-user='{{$user->id}}' class='btn btn-danger inactiveUser' title="Inativar usuário"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                                         @else 
                                             <a href="{{ url('admin/church/user/activate', $user->id) }}" class='btn btn-success' title="Ativar usuário"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                                         @endif
 
-                                        <a href="{{ url('admin/church/user/destroy', $user->id) }}" class='btn btn-danger' title="Deletar usuário"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                        <a data-user='{{$user->id}}' class='btn btn-danger deletUser' title="Deletar usuário"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                         <a href="{{ url('admin/church/user/edit', $user->id) }}" class='btn btn-warning' title="Editar usuário"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         <a href="{{ url('admin/church/user/show', $user->id) }}" class='btn btn-primary' title="Visualizar usuário"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                 
@@ -400,6 +400,68 @@
                 }
             });
         }
+
+        $(document).ready(function(){
+            $(".deletChurch").on('click', function(){
+
+                var church = $(this).attr('data-church');
+
+                Swal.fire({
+                  title: 'Tem certeza?',
+                  text: "",
+                  type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Sim, deletar!',
+                  cancelButtonText: 'não',
+                }).then((result) => {
+                  if (result.value) {
+                        window.location = '/admin/church/destroy/'+church;
+                  }
+                })
+            })
+
+            $(".deletUser").on('click', function(){
+
+                var user = $(this).attr('data-user');
+
+                Swal.fire({
+                  title: 'Tem certeza?',
+                  text: "",
+                  type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Sim, deletar!',
+                  cancelButtonText: 'não',
+                }).then((result) => {
+                  if (result.value) {
+                        window.location = '/admin/church/user/destroy/'+user;
+                  }
+                })
+            })
+
+            $(".inactiveUser").on('click', function(){
+
+                var user = $(this).attr('data-user');
+
+                Swal.fire({
+                  title: 'Tem certeza?',
+                  text: "",
+                  type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Sim, inativar!',
+                  cancelButtonText: 'não',
+                }).then((result) => {
+                  if (result.value) {
+                        window.location = '/admin/church/user/inactivate/'+user;
+                  }
+                })
+            })
+        })
         
     </script>    
 @stop

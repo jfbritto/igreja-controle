@@ -32,7 +32,7 @@
 
                     @if($event->endDate > date('Y-m-d'))
                         <a href="{{ url('church/event/edit', $event->id) }}" class='btn btn-warning' title="Editar evento"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                        <a href="{{ url('church/event/destroy', $event->id) }}" class='btn btn-danger' title="Deletar evento"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <a data-event='{{$event->id}}' class='btn btn-danger deletEvent' title="Deletar evento"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     @endif
                 </div>
             </div>
@@ -294,8 +294,25 @@
         }
     });
 
-    $(function () {
-      $('[data-toggle="popover"]').popover()
+
+    $(".deletEvent").on('click', function(){
+
+        var event = $(this).attr('data-event');
+
+        Swal.fire({
+          title: 'Tem certeza?',
+          text: "",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sim, deletar!',
+          cancelButtonText: 'não',
+        }).then((result) => {
+          if (result.value) {
+                window.location = '/church/event/destroy/'+event;
+          }
+        })
     })
 
   });

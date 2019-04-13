@@ -57,12 +57,12 @@
                             <td style='vertical-align:middle; width: 160px' class='text-right'>
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     @if($church->isActive) 
-                                        <a href="{{ url('admin/church/inactivate', $church->id) }}" class='btn btn-danger' title="Inativar igreja"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+                                        <a data-church='{{$church->id}}' class='btn btn-danger inactiveChurch' title="Inativar igreja"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                                     @else 
                                         <a href="{{ url('admin/church/activate', $church->id) }}" class='btn btn-success' title="Ativar igreja"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                                     @endif
 
-                                    <a href="{{ url('admin/church/destroy', $church->id) }}" class='btn btn-danger' title="Deletar igreja"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                    <a data-church='{{$church->id}}' class='btn btn-danger deletChurch' title="Deletar igreja"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                     <a href="{{ url('admin/church/edit', $church->id) }}" class='btn btn-warning' title="Editar igreja"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                     <a href="{{ url('admin/church/show', $church->id) }}" class='btn btn-primary' title="Visualizar igreja"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                 </div>
@@ -113,6 +113,46 @@
 				    }
 				  }
             });
+
+            $(".deletChurch").on('click', function(){
+
+                var church = $(this).attr('data-church');
+
+                Swal.fire({
+                  title: 'Tem certeza?',
+                  text: "",
+                  type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Sim, deletar!',
+                  cancelButtonText: 'não',
+                }).then((result) => {
+                  if (result.value) {
+                        window.location = '/admin/church/destroy/'+church;
+                  }
+                })
+            })
+
+            $(".inactiveChurch").on('click', function(){
+
+                var church = $(this).attr('data-church');
+
+                Swal.fire({
+                  title: 'Tem certeza?',
+                  text: "",
+                  type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Sim, inativar!',
+                  cancelButtonText: 'não',
+                }).then((result) => {
+                  if (result.value) {
+                        window.location = '/admin/church/inactivate/'+church;
+                  }
+                })
+            })
         });
     </script>
 @stop

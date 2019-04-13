@@ -59,7 +59,7 @@
                         @else
 
                             @if($member->isActive) 
-                                <a data-member='{{$member->id}}' class='btn btn-danger' title="Inativar membro"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+                                <a data-member='{{$member->id}}' class='btn btn-danger inactivateMember' title="Inativar membro"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                             @else 
                                 <a href="{{ url('church/member/activate', $member->id) }}" class='btn btn-success' title="Ativar membro"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                             @endif
@@ -164,7 +164,7 @@
                   showCancelButton: true,
                   confirmButtonColor: '#3085d6',
                   cancelButtonColor: '#d33',
-                  confirmButtonText: 'Sim, deletar!',
+                  confirmButtonText: 'Sim, inativar!',
                   cancelButtonText: 'não',
                 }).then((result) => {
                   if (result.value) {

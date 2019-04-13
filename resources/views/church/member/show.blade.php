@@ -29,7 +29,7 @@
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <a href="{{ url()->previous() }}" class='btn btn-default' title="Voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
                     <a href="{{ url('church/member/edit', $member->id) }}" class='btn btn-warning' title="Editar membro"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                    <a href="{{ url('church/member/destroy', $member->id) }}" class='btn btn-danger' title="Deletar membro"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    <a data-member="{{$member->id}}" class='btn btn-danger deletMember' title="Deletar membro"><i class="fa fa-trash" aria-hidden="true"></i></a>
                 </div>
             </div>    
         </div>
@@ -360,4 +360,30 @@
 
 @endsection
 
+@section('js')
+    <script>
+        $(document).ready(function(){
+
+            $(".deletMember").on('click', function(){
+
+                var member = $(this).attr('data-member');
+
+                Swal.fire({
+                  title: 'Tem certeza?',
+                  text: "",
+                  type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Sim, deletar!',
+                  cancelButtonText: 'não',
+                }).then((result) => {
+                  if (result.value) {
+                        window.location = '/church/member/destroy/'+member;
+                  }
+                })
+            })
+        })             
+    </script>
+@stop
 

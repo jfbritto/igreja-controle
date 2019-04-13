@@ -20,7 +20,9 @@ class Church extends Model
         'phone',
         'avatar',
         'hash',
-        'idAddress_fk'
+        'idAddress_fk',
+        'lat',
+        'long'
     ];
 
     public function members()

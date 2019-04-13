@@ -20,6 +20,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui-1.10.4.custom.min.css') }}">
 
     <link rel="icon" href="{{asset("img/cross.png")}}">
 
@@ -55,6 +56,7 @@
 
 @yield('body')
 
+
 <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script>
 
 <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
@@ -66,6 +68,8 @@
 <script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
 <script src="{{ asset('js/jquery-ui-1.10.4.custom.min.js') }}"></script>
+
+<script src="{{ asset('js/theme.js') }}"></script>
 
 @if(config('adminlte.plugins.select2'))
     <!-- Select2 -->

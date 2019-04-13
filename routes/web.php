@@ -79,6 +79,14 @@ $this->group(['middleware' => 'auth'], function(){
         $this->get('/event/show/{event}', 'Event\EventController@show')->name('event.show');
         $this->get('/event/destroy/{event}', 'Event\EventController@destroy')->name('event.destroy');
 
+        //CÉLULAS
+        $this->get('/cell/add', 'Cell\CellController@create')->name('cell.create');
+        $this->post('/cell/add', 'Cell\CellController@store')->name('cell.store');
+        $this->get('/cell/edit/{cell}', 'Cell\CellController@edit')->name('cell.edit');
+        $this->post('/cell/update/{cell}', 'Cell\CellController@update')->name('cell.update');
+        $this->get('/cell/show/{cell}', 'Cell\CellController@show')->name('cell.show');
+        $this->get('/cell/destroy/{cell}', 'Cell\CellController@destroy')->name('cell.destroy');
+
         //INSCRIÇÕES
         $this->get('/inscription/show/{event}', 'Inscription\InscriptionController@show')->name('inscription.show');
         $this->get('/inscription/add/{event}', 'Inscription\InscriptionController@create')->name('inscription.create');
