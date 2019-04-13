@@ -127,7 +127,9 @@ class ChurchController extends Controller
                 'cnpj'          => $request->cnpj,
                 'phone'         => $request->phone,
                 'avatar'        => $nameFile,
-                'idAddress_fk'  => $address->id
+                'idAddress_fk'  => $address->id,
+                'lat'           => $address->lat,
+                'long'          => $address->long
             ];
 
 
@@ -230,9 +232,11 @@ class ChurchController extends Controller
             $request_church = [
                 'name'          => $request->name,
                 'email'         => $request->email,
-                'cnpj'           => $request->cnpj,
+                'cnpj'          => $request->cnpj,
                 'phone'         => $request->phone,
                 'avatar'        => $nameFile,
+                'lat'           => $address->lat,
+                'long'          => $address->long
             ];
 
             $church->update($request_church); 

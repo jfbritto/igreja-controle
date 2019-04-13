@@ -49,7 +49,7 @@
                             <div class="col-md-12">
 
                                 <div class='row'>
-                                    <div class='col-md-6'>
+                                    <div class='col-md-4'>
 
                                         <div class="form-group">
                                             <label for='name'>Nome</label> 
@@ -63,7 +63,7 @@
                                         </div>
 
                                     </div>
-                                    <div class='col-md-6'>
+                                    <div class='col-md-4'>
                                 
                                         <div class="form-group">
                                             <label for='email'>E-mail</label> 
@@ -78,10 +78,8 @@
 
                                     </div>
 
-                                </div>
-                                <div class='row'>
 
-                                    <div class='col-md-6'>
+                                    <div class='col-md-4'>
 
                                         <div class="form-group">
                                             <label for='cnpj'>CNPJ</label> 
@@ -96,8 +94,10 @@
 
                                     </div>
 
+                                </div>
+                                <div class='row'>
                                     
-                                    <div class='col-md-6'>
+                                    <div class='col-md-4'>
                                     
                                         <div class="form-group">
                                             <label for='phone'>Telefone</label> 
@@ -107,6 +107,36 @@
                                                     <i class="fa fa-phone"></i>
                                                 </div>
                                                 <input id='phone' name='phone' type="text" class="form-control" value="{{ old('phone') }}" required >
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class='col-md-4'>
+
+                                        <div class="form-group">
+                                            <label for='lat'>Latitude</label> 
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-map-marker"></i>
+                                                </div>
+                                                <input id='lat' name='lat' type="text" class="form-control" value="{{ old('lat') }}" required>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class='col-md-4'>
+
+                                        <div class="form-group">
+                                            <label for='long'>Longitude</label> 
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-map-marker"></i>
+                                                </div>
+                                                <input id='long' name='long' type="text" class="form-control" value="{{ old('long') }}" required>
                                             </div>
                                         </div>
 
