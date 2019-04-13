@@ -219,6 +219,7 @@
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
 
+                @if(!auth()->user()->isAdmin)
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel">
                   <div class="pull-left image">
@@ -231,6 +232,7 @@
                     <a target="_blank" href="https://www.google.com/maps?q=loc:{{ auth()->user()->church->lat }},{{ auth()->user()->church->long }}"><i class="fa fa-map-marker text-success"></i> {{auth()->user()->church->address->city->nome}}</a>
                   </div>
                 </div>
+                @endif
 
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu" data-widget="tree">
