@@ -140,6 +140,7 @@ class ChurchController extends Controller
         }catch(Exception $e){
             DB::rollBack();
 
+            throw new Exception($e->getMessage());
 
             $result = null;
             
@@ -247,7 +248,7 @@ class ChurchController extends Controller
         }catch(Exception $e){
             DB::rollBack();
 
-            throw new Exception($e->getMessage());
+            
 
             $result = null;
             
