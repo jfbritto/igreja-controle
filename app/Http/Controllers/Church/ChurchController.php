@@ -128,8 +128,8 @@ class ChurchController extends Controller
                 'phone'         => $request->phone,
                 'avatar'        => $nameFile,
                 'idAddress_fk'  => $address->id,
-                'lat'           => $address->lat,
-                'long'          => $address->long
+                'lat'           => $request->lat,
+                'long'          => $request->long
             ];
 
 
@@ -139,6 +139,7 @@ class ChurchController extends Controller
         DB::commit();
         }catch(Exception $e){
             DB::rollBack();
+
 
             $result = null;
             
@@ -205,7 +206,6 @@ class ChurchController extends Controller
                         ->witherrors($validator->errors())
                         ->withInput();
 
-        
         $result = null;
 
         DB::beginTransaction();
@@ -235,8 +235,8 @@ class ChurchController extends Controller
                 'cnpj'          => $request->cnpj,
                 'phone'         => $request->phone,
                 'avatar'        => $nameFile,
-                'lat'           => $address->lat,
-                'long'          => $address->long
+                'lat'           => $request->lat,
+                'long'          => $request->long
             ];
 
             $church->update($request_church); 
@@ -246,6 +246,8 @@ class ChurchController extends Controller
             DB::commit();
         }catch(Exception $e){
             DB::rollBack();
+
+            throw new Exception($e->getMessage());
 
             $result = null;
             
