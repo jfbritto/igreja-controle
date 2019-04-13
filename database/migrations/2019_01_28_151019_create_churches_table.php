@@ -16,6 +16,8 @@ class CreateChurchesTable extends Migration
         Schema::create('churches', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->integer('idAddress_fk')->nullable();
+
             $table->boolean('isActive')->default(true);
             $table->boolean('isDeleted')->default(false);
 
