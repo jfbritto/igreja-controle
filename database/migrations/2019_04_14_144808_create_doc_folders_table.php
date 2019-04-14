@@ -22,7 +22,7 @@ class CreateDocFoldersTable extends Migration
             $table->boolean('isDeleted')->default(false);
 
             $table->string('name', 50);
-            $table->text('description');
+            $table->text('description')->nullable();
 
             $table->timestamps();
         });

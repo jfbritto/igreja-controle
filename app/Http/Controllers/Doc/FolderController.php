@@ -71,6 +71,8 @@ class FolderController extends Controller
         }catch(Exception $e){
             DB::rollBack();
 
+            throw new Exception($e->getMessage());
+            
             $result = null;
             
             abort('500');
@@ -188,7 +190,7 @@ class FolderController extends Controller
         }catch(Exception $e){
             DB::rollBack();
 
-            throw new Exception($e->getMessage());
+
 
             $result = null;
             
