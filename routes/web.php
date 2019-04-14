@@ -68,6 +68,7 @@ $this->group(['middleware' => 'auth'], function(){
         $this->get('/event', 'Event\EventController@index')->name('event');
         $this->get('/inscription', 'Inscription\InscriptionController@index')->name('inscription');
         $this->get('/cell', 'Cell\CellController@index')->name('cell');
+        $this->get('/doc', 'Doc\FolderController@index')->name('doc');
         $this->get('/finance', 'Finance\FinanceController@index')->name('finance');
         $this->get('/support', 'Support\SupportController@index')->name('support');
         $this->get('/config', 'Church\ChurchController@config')->name('config');
@@ -127,6 +128,14 @@ $this->group(['middleware' => 'auth'], function(){
 
         //CONFIG
         $this->post('/config/edit', 'Church\ChurchController@update_avatar')->name('config.update');
+
+        //PASTA
+        $this->get('/doc/add', 'Doc\FolderController@create')->name('doc.create');
+        $this->post('/doc/add', 'Doc\FolderController@store')->name('doc.store');
+        $this->get('/doc/edit/{folder}', 'Doc\FolderController@edit')->name('doc.edit');
+        $this->post('/doc/update/{folder}', 'Doc\FolderController@update')->name('doc.update');
+        $this->get('/doc/show/{folder}', 'Doc\FolderController@show')->name('doc.show');
+        $this->get('/folder/destroy/{folder}', 'Doc\FolderController@destroy')->name('doc.destroy');
     });
 
 

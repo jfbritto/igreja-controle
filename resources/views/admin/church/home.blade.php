@@ -70,7 +70,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td style='vertical-align:middle' colspan="200">Nenhum membro cadastrado!</td>
+                            <td style='vertical-align:middle' colspan="200">Nenhuma igreja cadastrada!</td>
                         </tr>
                     @endforelse
                     </tbody>

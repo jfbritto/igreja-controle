@@ -161,6 +161,42 @@
 </div> 
 
 
+<div class="box box-primary">
+    <div class="box-body">
+        <div class="row">
+            <div class='col-md-6'>
+
+                <div class="form-group">
+                    <label for='lat'>Latitude</label> 
+
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-map-marker"></i>
+                        </div>
+                        <input id='lat' name='lat' type="text" class="form-control" value="{{ $church->lat }}">
+                    </div>
+                </div>
+
+            </div>
+            <div class='col-md-6'>
+
+                <div class="form-group">
+                    <label for='long'>Longitude</label> 
+
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-map-marker"></i>
+                        </div>
+                        <input id='long' name='long' type="text" class="form-control" value="{{ $church->long }}">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
 

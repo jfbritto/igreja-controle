@@ -180,6 +180,13 @@ return [
             'can'  => 'church',
         ],
         [
+            'text'        => 'Documentos',
+            'url'         => 'church/doc',
+            'icon'        => 'file',
+            'label_color' => 'success',
+            'can'  => 'church',
+        ],
+        [
             'text'        => 'Finanças',
             'url'         => 'church/finance',
             'icon'        => 'money',

@@ -30,6 +30,11 @@ class Church extends Model
         return $this->hasMany(\App\Models\User::class, 'idChurch_fk', 'id');
     }
 
+    public function folders()
+    {
+        return $this->hasMany(\App\Models\DocFolder::class, 'idChurch_fk', 'id');
+    }
+
     public function admins()
     {
         return $this->members()->where('isMember', false)->get();
