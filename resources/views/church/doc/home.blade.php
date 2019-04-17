@@ -43,9 +43,12 @@
                     <td style='vertical-align:middle; width: 150px' class='text-right'>
                         <div class="btn-group" role="group" aria-label="Basic example">
 
+                            @if(!$folder->files)
 	                        <a data-folder='{{$folder->id}}' class='btn btn-danger deletFolder' title="Deletar pasta"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            @endif
+
 	                        <a href="{{ route('doc.edit', $folder->id) }}" class='btn btn-warning' title="Editar pasta"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-	                        <a href="{{ url('church/folder/show', $folder->id) }}" class='btn btn-primary' title="Abrir pasta"><i class="fa fa-folder-open" aria-hidden="true"></i></a>
+	                        <a href="{{ route('doc.show', $folder->id) }}" class='btn btn-primary' title="Abrir pasta"><i class="fa fa-folder-open" aria-hidden="true"></i></a>
 
                         </div>
                     </td>

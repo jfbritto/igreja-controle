@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class DocFile extends Model
 {
@@ -22,6 +23,16 @@ class DocFile extends Model
 
     public function folder()
     {
-        return $this->hasOne(\App\Models\Church::class, 'id', 'idFolder_fk');
+        return $this->hasOne(\App\Models\DocFolder::class, 'id', 'idFolder_fk');
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        DocFile::deleted(function($file){
+            Storage::delete("docs/{$file->file_name}");
+        });
+    }
+
 }

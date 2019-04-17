@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Doc;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\DocFolder;
+use App\Models\DocFile;
 use DB;
 use Exception;
 
@@ -72,7 +73,7 @@ class FolderController extends Controller
             DB::rollBack();
 
             throw new Exception($e->getMessage());
-            
+
             $result = null;
             
             abort('500');
@@ -94,9 +95,11 @@ class FolderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(DocFolder $folder)
     {
-        //
+        if($folder->church->id != auth()->user()->idChurch_fk) abort('401');
+
+        return view('church.doc.show', ['folder' => $folder]);
     }
 
     /**

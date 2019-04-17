@@ -136,6 +136,10 @@ $this->group(['middleware' => 'auth'], function(){
         $this->post('/doc/update/{folder}', 'Doc\FolderController@update')->name('doc.update');
         $this->get('/doc/show/{folder}', 'Doc\FolderController@show')->name('doc.show');
         $this->get('/folder/destroy/{folder}', 'Doc\FolderController@destroy')->name('doc.destroy');
+
+        //ARQUIVO
+        $this->post('/doc/file/store/{folder}', 'Doc\FileController@store')->name('doc.file.store');
+        $this->get('/file/destroy/{file}', 'Doc\FileController@destroy')->name('doc.file.destroy');
     });
 
 

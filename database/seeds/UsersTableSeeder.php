@@ -41,7 +41,7 @@ class UsersTableSeeder extends Seeder
             //     'name' => 'Cintia Closs',
             //     'birth' => NULL,
             //     'sex' => 'feminino',
-            //     'email' => 'cintia@hotmail.com',
+            //     'email' => 'cintia@gmail.com',
             //     'password' => '$2y$10$1OYGSQJWOw9ORQUVQL0ZGu/JML3G/f6wLVad6NC0ylG7B3OsP4YkO',
             //     'cpf' => '123.321.007-77',
             //     'phone' => NULL,

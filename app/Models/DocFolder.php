@@ -26,6 +26,6 @@ class DocFolder extends Model
 
     public function files()
     {
-        return $this->hasMany(\App\Models\DocFolder::class, 'idFolder_fk', 'id');
+        return $this->hasMany(\App\Models\DocFile::class, 'idFolder_fk', 'id');
     }
 }
