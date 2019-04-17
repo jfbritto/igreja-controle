@@ -161,7 +161,6 @@
         <div class="box box-primary">
             <div class="box-body no-padding">
                 {!! $calendar->calendar() !!}
-                {!! $calendar->script() !!}
             </div>
         </div>
 
@@ -224,12 +223,13 @@
 <script src="{{ asset('assets/fullcalendar-3.10.0/fullcalendar.min.js') }}"></script>
 <script src="{{ asset('assets/fullcalendar-3.10.0/locale/pt-br.js') }}"></script>
 
+{!! $calendar->script() !!}
 
 <link rel="stylesheet" href="{{ asset('assets/fullcalendar-3.10.0/fullcalendar.min.css') }} "/>
 
 <script>
 
-  $(function() {
+  $(document).ready(function () {
 
     if ($(window).width() >= 992) {
         $("#addEvent").removeClass("collapsed-box")

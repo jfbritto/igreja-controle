@@ -66,7 +66,7 @@ class EventController extends Controller
             'startDate'         => 'required | date',
             'endDate'           => 'required | date',
             'nameResponsable'   => 'nullable',
-            'phoneResponsable'  => 'nullable | max:14',
+            'phoneResponsable'  => 'nullable | max:15',
             'value'             => 'nullable',
         ], [] , [
                     'title' => 'título', 
@@ -164,7 +164,7 @@ class EventController extends Controller
             'startDate'         => 'required | date',
             'endDate'           => 'required | date',
             'nameResponsable'   => 'nullable',
-            'phoneResponsable'  => 'nullable | max:14',
+            'phoneResponsable'  => 'nullable | max:15',
             'value'             => 'nullable',
         ], [] , [
                     'title' => 'título', 

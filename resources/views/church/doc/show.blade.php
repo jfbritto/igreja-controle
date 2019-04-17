@@ -49,27 +49,32 @@
 		@forelse($folder->files as $file)
 			<li class="list-group-item">
 				<div class="row">
-					<div class="col-md-10 col-xs-6">
-						<a target="_blank" href="{{ url('storage/docs/'.$file->file_name) }}">
+					<div class="col-md-1 col-xs-2" style="height: 34px; line-height: 20px;">
+						
 							@php $ext = explode('.', $file->file_name) @endphp
 
 							@if($ext[1] == 'pdf')
-								<i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i>
+								<i class="fa fa-file-pdf-o" style="font-size: 34px; color: #c60a0a; opacity: 0.7" aria-hidden="true" title="PDF"></i>
 							@elseif(($ext[1] == 'odt') or ($ext[1] == 'docx'))
-								<i class="fa fa-file-word-o fa-2x" aria-hidden="true"></i> 
+								<i class="fa fa-file-word-o" style="font-size: 34px; color: #2c5796; opacity: 0.7" aria-hidden="true" title="Word"></i> 
 							@elseif(($ext[1] == 'xlsx') or ($ext[1] == 'ods'))
-								<i class="fa fa-file-excel-o fa-2x" aria-hidden="true"></i>
+								<i class="fa fa-file-excel-o" style="font-size: 34px; color: #1f7045; opacity: 0.7" aria-hidden="true" title="Excel"></i>
 							@elseif(($ext[1] == 'pptx') or ($ext[1] == 'odp'))
-								<i class="fa fa-file-powerpoint-o fa-2x" aria-hidden="true"></i>
+								<i class="fa fa-file-powerpoint-o" style="font-size: 34px; color: #c83f22; opacity: 0.7" aria-hidden="true" title="PowerPoint"></i>
 							@else
 								Arquivo
 							@endif
 
-							- {{$file->name}}
-							- {{$file->description}}
-						</a>
 					</div>
-					<div class="col-md-2 col-xs-6 text-right">
+					<div class="col-md-4 col-xs-3" style="height: 34px; line-height: 34px;">
+						{{$file->name}}
+					</div>
+					<div class="col-md-5 col-xs-3" style="height: 34px; line-height: 34px;">
+						{{$file->description}}
+					</div>
+					
+					<div class="col-md-2 col-xs-4 text-right">
+						<a target="_blank" href="{{ url('storage/docs/'.$file->file_name) }}" class="btn btn-primary" title="Baixar arquivo"><i class="fa fa-download" aria-hidden="true"></i></a>
 						<a data-file='{{$file->id}}' href="#" class="btn btn-danger deletFile" title="Deletar arquivo"><i class="fa fa-trash" aria-hidden="true"></i></a>
 					</div>
 				</div>
