@@ -49,10 +49,27 @@
 		@forelse($folder->files as $file)
 			<li class="list-group-item">
 				<div class="row">
-					<div class="col-md-10">
-						<a target="_blank" href="{{ url('storage/docs/'.$file->file_name) }}">{{$file->name}} - {{$file->folder->church->name}}</a>
+					<div class="col-md-10 col-xs-6">
+						<a target="_blank" href="{{ url('storage/docs/'.$file->file_name) }}">
+							@php $ext = explode('.', $file->file_name) @endphp
+
+							@if($ext[1] == 'pdf')
+								<i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i>
+							@elseif(($ext[1] == 'odt') or ($ext[1] == 'docx'))
+								<i class="fa fa-file-word-o fa-2x" aria-hidden="true"></i> 
+							@elseif(($ext[1] == 'xlsx') or ($ext[1] == 'ods'))
+								<i class="fa fa-file-excel-o fa-2x" aria-hidden="true"></i>
+							@elseif(($ext[1] == 'pptx') or ($ext[1] == 'odp'))
+								<i class="fa fa-file-powerpoint-o fa-2x" aria-hidden="true"></i>
+							@else
+								Arquivo
+							@endif
+
+							- {{$file->name}}
+							- {{$file->description}}
+						</a>
 					</div>
-					<div class="col-md-2 text-right">
+					<div class="col-md-2 col-xs-6 text-right">
 						<a data-file='{{$file->id}}' href="#" class="btn btn-danger deletFile" title="Deletar arquivo"><i class="fa fa-trash" aria-hidden="true"></i></a>
 					</div>
 				</div>

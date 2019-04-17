@@ -51,7 +51,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">IGREJA CONTROLE</a>
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">{{$church->name}}</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -65,7 +65,7 @@
             <a class="nav-link js-scroll-trigger" href="#projects">Serviços</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#clients">Clientes</a>
+            <a class="nav-link js-scroll-trigger" href="#clients">Células</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#login">Login</a>
@@ -82,8 +82,8 @@
   <header class="masthead">
     <div class="container d-flex h-100 align-items-center">
       <div class="mx-auto text-center">
-        <h1 class="mx-auto my-0 text-uppercase">IGREJA CONTROLE</h1>
-        <h2 class="text-white-50 mx-auto mt-2 mb-5">Não apenas um sistema. <br >Um novo conceito de organização.</h2>
+        <h1 class="mx-auto my-0 text-uppercase">{{$church->name}}</h1>
+        <h2 class="text-white-50 mx-auto mt-2 mb-5">Não apenas um sistema, mas sim um novo conceito de organização.</h2>
         <a href="#login" class="btn btn-primary js-scroll-trigger">Efetuar login</a>
       </div>
     </div>
@@ -211,13 +211,13 @@
 
         <div class="col-md-10 col-lg-8 mx-auto text-center">
 
-        <h2 class="text-white-50 mx-auto mt-2 mb-5">Clientes</h2>
+        <h2 class="text-white-50 mx-auto mt-2 mb-5">Células</h2>
 
             <div class="owl-carousel" style="padding-bottom: 50px">
-                @forelse($churches as $key => $church)
-                    <a target="_blank" href="https://www.google.com/maps?q=loc:{{ $church->lat }},{{ $church->long }}" class="text-center">
-                        <img style="border-radius: 50%; cursor: pointer;" src="@if(!is_null($church->avatar)){{ url('storage/churches/'.$church->avatar) }} @else {{ url('storage/churches/default.jpg') }} @endif" alt="{{$church->name}}" >
-                        <span style="color: white">{{$church->name}}</span>
+                @forelse($church->cells as $cell)
+                    <a target="_blank" href="https://www.google.com/maps?q=loc:{{ $cell->lat }},{{ $cell->long }}" class="text-center">
+                        <img style="border-radius: 50%; cursor: pointer;" src="@if(!is_null($cell->avatar)){{ url('storage/cells/'.$cell->avatar) }} @else {{ url('storage/cell/default.jpg') }} @endif" alt="{{$cell->title}}" >
+                        <span style="color: white">{{$cell->title}}</span>
                     </a>
                 @empty
                 @endforelse
@@ -348,9 +348,9 @@
             nav:true,
             dots:true,
             autoplay:true,
-            autoplayTimeout:1500,
+            autoplayTimeout:4000,
             autoplayHoverPause:true,
-            items: 2
+            items: 3
           });
         });
     })

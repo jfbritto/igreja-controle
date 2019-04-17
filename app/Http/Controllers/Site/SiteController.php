@@ -15,4 +15,13 @@ class SiteController extends Controller
 
         return view('site.index', ['churches' => $churches]);
     }
+
+
+    public function site_church(Church $church)
+    {
+
+        return view('site.church', ['church' => $church]);
+    }
+
+    
 }

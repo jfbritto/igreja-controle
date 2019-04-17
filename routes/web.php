@@ -13,6 +13,7 @@ Route::post('/login', 'Auth\LoginController@post_autenticar')->name('login.post'
 * SITE *
 ********/
 $this->get('/', 'Site\SiteController@index')->name('login');
+$this->get('/{church}', 'Site\SiteController@site_church')->name('church.site');
 
 
 //Auth::routes();

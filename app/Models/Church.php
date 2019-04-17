@@ -50,6 +50,11 @@ class Church extends Model
         return $this->hasMany(\App\Models\Event::class, 'idChurch_fk', 'id');
     }
 
+    public function cells()
+    {
+        return $this->hasMany(\App\Models\Cell::class, 'idChurch_fk', 'id');
+    }
+
     public function events_registration()
     {
         return $this->hasMany(\App\Models\EventRegistration::class, 'idChurch_fk', 'id');
