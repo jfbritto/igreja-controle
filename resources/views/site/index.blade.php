@@ -215,7 +215,8 @@
 
             <div class="owl-carousel" style="padding-bottom: 50px">
                 @forelse($churches as $key => $church)
-                    <a target="_blank" href="https://www.google.com/maps?q=loc:{{ $church->lat }},{{ $church->long }}" class="text-center">
+                    <!-- <a target="_blank" href="https://www.google.com/maps?q=loc:{{ $church->lat }},{{ $church->long }}" class="text-center"> -->
+                      <a target="_blank" href="{{ env('APP_URL').'/'.$church->id }}" class="text-center">  
                         <img style="border-radius: 50%; cursor: pointer;" src="@if(!is_null($church->avatar)){{ url('storage/churches/'.$church->avatar) }} @else {{ url('storage/churches/default.jpg') }} @endif" alt="{{$church->name}}" >
                         <span style="color: white">{{$church->name}}</span>
                     </a>
@@ -348,9 +349,9 @@
             nav:true,
             dots:true,
             autoplay:true,
-            autoplayTimeout:1500,
+            autoplayTimeout:2000,
             autoplayHoverPause:true,
-            items: 2
+            items: 3
           });
         });
     })

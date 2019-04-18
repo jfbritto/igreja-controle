@@ -14,6 +14,7 @@ use App\Models\Church;
 use Arisharyanto\Laracrop\Laracrop;
 use DB;
 use Exception;
+use Intervention\Image\Facades\Image;
 
 class MemberController extends Controller
 {
@@ -94,7 +95,8 @@ class MemberController extends Controller
             $nameFile = null;
             if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
                 $nameFile = Laracrop::cropImage($request->input('avatar'));
-                File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/members/{$nameFile}"));
+                Image::make(public_path("filetmp/{$nameFile}"))->resize(200, 200)->save(storage_path("app/public/members/{$nameFile}"));
+                // File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/members/{$nameFile}"));
             }
 
             $request_address = [
@@ -233,7 +235,8 @@ class MemberController extends Controller
             if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
                 $nameFile = Laracrop::cropImage($request->input('avatar'));
                 Storage::delete("members/{$user->avatar}");
-                File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/members/{$nameFile}"));
+                Image::make(public_path("filetmp/{$nameFile}"))->resize(200, 200)->save(storage_path("app/public/members/{$nameFile}"));
+                // File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/members/{$nameFile}"));
             }
 
             $request_address = [
@@ -487,7 +490,8 @@ class MemberController extends Controller
             $nameFile = null;
             if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
                 $nameFile = Laracrop::cropImage($request->input('avatar'));
-                File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/members/{$nameFile}"));
+                Image::make(public_path("filetmp/{$nameFile}"))->resize(200, 200)->save(storage_path("app/public/members/{$nameFile}"));
+                // File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/members/{$nameFile}"));
             }
 
             $request_address = [
@@ -618,7 +622,8 @@ class MemberController extends Controller
             if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
                 $nameFile = Laracrop::cropImage($request->input('avatar'));
                 Storage::delete("members/{$user->avatar}");
-                File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/members/{$nameFile}"));
+                Image::make(public_path("filetmp/{$nameFile}"))->resize(200, 200)->save(storage_path("app/public/members/{$nameFile}"));
+                // File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/members/{$nameFile}"));
             }
 
 

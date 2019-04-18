@@ -17,6 +17,8 @@ use App\Models\Cell;
 use Arisharyanto\Laracrop\Laracrop;
 use DB;
 use Exception;
+use Intervention\Image\Facades\Image;
+
 
 class ChurchController extends Controller
 {
@@ -112,7 +114,8 @@ class ChurchController extends Controller
             $nameFile = null;
             if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
                 $nameFile = Laracrop::cropImage($request->input('avatar'));
-                File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/churches/{$nameFile}"));
+                Image::make(public_path("filetmp/{$nameFile}"))->resize(200, 200)->save(storage_path("app/public/churches/{$nameFile}"));
+                // File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/churches/{$nameFile}"));
             }
 
             $request_address = [
@@ -222,7 +225,8 @@ class ChurchController extends Controller
             if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
                 $nameFile = Laracrop::cropImage($request->input('avatar'));
                 Storage::delete("churches/{$church->avatar}");
-                File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/churches/{$nameFile}"));
+                Image::make(public_path("filetmp/{$nameFile}"))->resize(200, 200)->save(storage_path("app/public/churches/{$nameFile}"));
+                // File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/churches/{$nameFile}"));
             }
 
             $request_address = [
@@ -386,8 +390,10 @@ class ChurchController extends Controller
         return view('church.config.home', compact('church'));
     }
 
-    public function update_avatar(Request $request)
+    public function update_avatar(Request $request, Church $church)
     {
+
+        if($church->id != auth()->user()->idChurch_fk) abort('401');
 
         $validator = validator($request->all(), [
 
@@ -411,7 +417,8 @@ class ChurchController extends Controller
             if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
                 $nameFile = Laracrop::cropImage($request->input('avatar'));
                 Storage::delete("churches/{auth()->user()->church()}");
-                File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/churches/{$nameFile}"));
+                Image::make(public_path("filetmp/{$nameFile}"))->resize(200, 200)->save(storage_path("app/public/churches/{$nameFile}"));
+                // File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/churches/{$nameFile}"));
             }
 
             $request_church = [
@@ -425,6 +432,8 @@ class ChurchController extends Controller
             DB::commit();
         }catch(Exception $e){
             DB::rollBack();
+
+            throw new Exception($e->getMessage());
 
             $result = null;
             
