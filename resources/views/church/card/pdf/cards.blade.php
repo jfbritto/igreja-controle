@@ -72,7 +72,11 @@
                     <div class="church-name">Igreja {{$member->church->name}}</div>
                     <div class="member-name">{{$member->name}}</div>
 
-                    <img class="member-avatar" src="@if(!is_null($member->church->avatar)){{ url('storage/churches/'.$member->church->avatar) }} @else {{ url('storage/churches/default.jpg') }} @endif" width='100'>
+                        @if($member->church->avatar != null)
+                        <img class="member-avatar" src="{{ url('storage/churches/'.$member->church->avatar) }}" width='100'>
+                        @else 
+                        <img class="member-avatar" src="{{ url('storage/churches/default.jpg') }}" width='100'>
+                        @endif
 
                 </div>
 
