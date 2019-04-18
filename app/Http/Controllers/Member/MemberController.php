@@ -922,8 +922,19 @@ class MemberController extends Controller
                         ->with('error', 'Erro ao cadastrar membro!');
         else
             return redirect()
-                        ->back()
+                        ->route('member.invite.success', $hash)
                         ->with('success', 'Membro cadastrado com sucesso!');
     }
+
+    public function success_invite($hash)
+    {
+        // dd($hash);
+        $church = Church::where('hash', $hash)->first();
+        // if(!$event) abort('404');
+
+        return view('church.member.invite.success', ['church' => $church]);
+    }
+
+
 }
 

@@ -153,6 +153,8 @@ class InscriptionController extends Controller
     {
         $event = Event::where('hash', $hash)->first();
 
+        if(!$event) abort('404');
+
         $church = $event->church;
 
         $states = State::get();
@@ -163,11 +165,20 @@ class InscriptionController extends Controller
     public function store_invite(Request $request, $hash)
     {
         $event = Event::where('hash', $hash)->first();
+        
+        if(!$event) abort('404');
 
-        if(!$event)
+        $verify_exists = EventRegistration::where('email', $request->email)
+                                                                ->where('idChurch_fk', $event->idChurch_fk)
+                                                                ->where('isDeleted', false)
+                                                                ->count();                
+
+        if($verify_exists)
             return redirect()
                         ->back()
-                        ->with('error', 'Evento não encontrado!');
+                        ->withInput()
+                        ->with('error', 'Email já está sendo usado por outro inscrito!');
+        
         
         $request['idEvent_fk'] = $event->id;
         $request['idChurch_fk'] = $event->church->id;
@@ -181,8 +192,17 @@ class InscriptionController extends Controller
                         ->with('error', 'Erro na inscrição!');
         else
             return redirect()
-                        ->back()
+                        ->route('inscription.invite.success', $hash)
                         ->with('success', 'Participante cadastrado com sucesso!');
+    }
+
+    public function success_invite($hash)
+    {
+        // dd($hash);
+        $event = Event::where('hash', $hash)->first();
+        // if(!$event) abort('404');
+
+        return view('church.inscription.invite.success', ['event' => $event]);
     }
 
 

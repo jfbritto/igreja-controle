@@ -160,9 +160,11 @@ $this->get('/search/description/{description}', 'Search\SearchController@search_
 
 $this->get('/invite/{hash}', 'Member\MemberController@create_invite')->name('member.invite.create');
 $this->post('/invite/{hash}', 'Member\MemberController@store_invite')->name('member.invite.store');
+$this->get('/invite/success/{hash}', 'Member\MemberController@success_invite')->name('member.invite.success');
 
 
 //CADASTRO EVENTO EXTERNO
 
 $this->get('/event/invite/{hash}', 'Inscription\InscriptionController@create_invite')->name('inscription.invite.create');
 $this->post('/event/invite/{hash}', 'Inscription\InscriptionController@store_invite')->name('inscription.invite.store');
+$this->get('/event/invite/success/{hash}', 'Inscription\InscriptionController@success_invite')->name('inscription.invite.success');

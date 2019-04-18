@@ -78,7 +78,7 @@
             @endforelse
             </tbody>
         </table>
-        <input class="form-control" id="btn-link-txt" value="{{ env('APP_URL').'/invite/'.$church->hash }}" readonly="">
+        <input style="opacity: 0; height: 0" class="form-control" id="btn-link-txt" value="{{ env('APP_URL').'/invite/'.$church->hash }}" readonly="">
     </div>
 
 </div>

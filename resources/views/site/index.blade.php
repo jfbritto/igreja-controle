@@ -65,7 +65,7 @@
             <a class="nav-link js-scroll-trigger" href="#projects">Serviços</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#clients">Clientes</a>
+            <a class="nav-link js-scroll-trigger" href="#clients">Igrejas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#login">Login</a>
@@ -249,7 +249,7 @@
 
         <div class="col-md-10 col-lg-8 mx-auto text-center">
 
-        <h2 class="text-white-50 mx-auto mt-2 mb-5">Clientes</h2>
+        <h2 class="text-white-50 mx-auto mt-2 mb-5">Igrejas</h2>
 
             <div class="owl-carousel" style="padding-bottom: 50px">
                 @forelse($churches as $key => $church)

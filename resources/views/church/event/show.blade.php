@@ -226,7 +226,7 @@
 
 
                 @if($event->endDate > date('Y-m-d'))
-                    <input class="form-control" id="btn-link-txt" value="{{ env('APP_URL').'/event/invite/'.$event->hash }}" readonly="">
+                    <input style="opacity: 0; height: 0" class="form-control" id="btn-link-txt" value="{{ env('APP_URL').'/event/invite/'.$event->hash }}" readonly="">
                 @endif
 
             </div>
