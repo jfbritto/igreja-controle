@@ -1,7 +1,11 @@
 vendor/
 .vscode/
-
+public/filetmp
+public/storage
+public/error_log
+.ftpquota
+composer.lock
 .env
-
+.htaccess
 
 !resources/views/vendor
