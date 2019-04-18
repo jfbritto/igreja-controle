@@ -7,7 +7,7 @@
 
     <ol class="breadcrumb">
         <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a href="{{route('config')}}">Configurações</a></li>
+        <li><a href="{{route('config')}}"><i class="fa fa-cog"></i> Configurações</a></li>
     </ol>
 @stop
 
@@ -19,7 +19,7 @@
 </div>
 
 
-<form role="form" method="POST" action="{{ route('config.update') }}" enctype="multipart/form-data">
+<form role="form" method="POST" action="{{ route('config.update', $church->id) }}" enctype="multipart/form-data">
 @csrf
 
 <div class="row">

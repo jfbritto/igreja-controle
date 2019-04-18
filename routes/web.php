@@ -128,7 +128,7 @@ $this->group(['middleware' => 'auth'], function(){
         $this->get('/finance/show/{movimentation}', 'Finance\FinanceController@show')->name('finance.show');
 
         //CONFIG
-        $this->post('/config/edit', 'Church\ChurchController@update_avatar')->name('config.update');
+        $this->post('/config/edit/{church}', 'Church\ChurchController@update_avatar')->name('config.update');
 
         //PASTA
         $this->get('/doc/add', 'Doc\FolderController@create')->name('doc.create');

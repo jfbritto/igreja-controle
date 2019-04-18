@@ -10,6 +10,7 @@ use App\Models\Cell;
 use Arisharyanto\Laracrop\Laracrop;
 use DB;
 use Exception;
+use Intervention\Image\Facades\Image;
 
 class CellController extends Controller
 {
@@ -68,7 +69,8 @@ class CellController extends Controller
         	$nameFile = null;
             if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
                 $nameFile = Laracrop::cropImage($request->input('avatar'));
-                File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/cells/{$nameFile}"));
+                Image::make(public_path("filetmp/{$nameFile}"))->resize(200, 200)->save(storage_path("app/public/cells/{$nameFile}"));
+                // File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/cells/{$nameFile}"));
             }
 
             $request_user = [
@@ -164,7 +166,8 @@ class CellController extends Controller
             if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
                 $nameFile = Laracrop::cropImage($request->input('avatar'));
                 Storage::delete("cells/{$cell->avatar}");
-                File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/cells/{$nameFile}"));
+                Image::make(public_path("filetmp/{$nameFile}"))->resize(200, 200)->save(storage_path("app/public/cells/{$nameFile}"));
+                // File::move(public_path("filetmp/{$nameFile}"), storage_path("app/public/cells/{$nameFile}"));
             }
 
             $request_user = [
