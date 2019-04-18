@@ -39,6 +39,8 @@
   <link href="css/grayscale.min.css" rel="stylesheet">
 
   <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
+
+  <link rel="stylesheet" href="{{ asset('css/flipclock.css') }}">
   
   <!-- Site css -->
   <link href="css/site.css" rel="stylesheet">
@@ -66,6 +68,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#clients">Igrejas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#plans">Planos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#login">Login</a>
@@ -272,6 +277,31 @@
 
 
   <!-- Login Section -->
+  <section id="plans" class="plans-section d-flex bg-light">
+    <div class="container my-auto">
+
+      <div class="text-center">
+
+        <div class="col-md-10 col-lg-8 mx-auto text-center">
+
+        <h2 class="text-black-50 mx-auto mt-2 mb-5">Nos contate até o contador chegar à 0, temos uma oportunidade para você!</h2>
+
+            <div class="clock" style="display: flex; justify-content: center;"></div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+  </section>
+
+
+
+  
+
+
+  <!-- Login Section -->
   <section id="login" class="signup-section d-flex">
     <div class="container my-auto">
       <div class="row">
@@ -377,11 +407,13 @@
 
   <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
 
+  <script src="{{ asset('js/flipclock.min.js') }}"></script>
+
   <script type="text/javascript">
       
     $(document).ready(function(){
-        $(document).ready(function(){
-          $(".owl-carousel").owlCarousel({
+          
+        $(".owl-carousel").owlCarousel({
             loop:true,
             margin:50,
             nav:true,
@@ -390,8 +422,18 @@
             autoplayTimeout:2000,
             autoplayHoverPause:true,
             items: 3
-          });
         });
+
+        var clock;
+        
+        // Instantiate a counter
+        clock = new FlipClock($('.clock'), 120, {
+            clockFace: 'MinuteCounter',
+            autoStart: true,
+            countdown: true,
+            language: 'pt-br'
+        });
+
     })
 
   </script>
@@ -399,3 +441,8 @@
 </body>
 
 </html>
+clock = $('.clock').FlipClock({
+    clockFace: 'MinuteCounter'
+});
+
+clock.setTime(60*100-5);
