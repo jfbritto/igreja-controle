@@ -22,7 +22,8 @@ class Church extends Model
         'hash',
         'idAddress_fk',
         'lat',
-        'long'
+        'long',
+        'site_url'
     ];
 
     public function members()
@@ -71,7 +72,8 @@ class Church extends Model
 
         Church::created(function($church){
             $church->update([
-                'hash' => md5($church->id),
+                'hash'      => md5($church->id),
+                'site_url' => kebab_case($church->name.' '.$church->address->city->nome)
             ]);
         });
     }

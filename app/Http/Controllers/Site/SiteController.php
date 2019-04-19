@@ -17,8 +17,12 @@ class SiteController extends Controller
     }
 
 
-    public function site_church(Church $church)
+    public function site_church($url)
     {
+
+    	$church = Church::where('site_url', 'like', $url)->get()->first();
+
+    	if (!$church) abort('404');
 
         return view('site.church', ['church' => $church]);
     }

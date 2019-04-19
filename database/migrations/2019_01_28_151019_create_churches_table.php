@@ -29,6 +29,7 @@ class CreateChurchesTable extends Migration
             $table->string('hash', 100)->nullable();
             $table->string('lat', 20)->nullable();
             $table->string('long', 20)->nullable();
+            $table->text('site_url')->nullable();
 
             $table->timestamps();
         });
