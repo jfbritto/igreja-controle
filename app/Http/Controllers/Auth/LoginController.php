@@ -60,7 +60,6 @@ class LoginController extends Controller
             // dd($church->isActive);
         }
 
-
         if (!$user->isEmpty()) {
 
             if (!$user->first()->isAdmin) {
@@ -89,8 +88,11 @@ class LoginController extends Controller
                 if(auth()->user()->isAdmin)
                     return redirect()->route('admindash');
 
-                if(!is_null(auth()->user()->idChurch_fk))
+                if(!is_null(auth()->user()->idChurch_fk) && (auth()->user()->isMember == false))
                     return redirect()->route('dashboard');
+
+                if(!is_null(auth()->user()->idChurch_fk) && (auth()->user()->isMember == true) )
+                    return redirect()->route('home');
                 
                 
             }

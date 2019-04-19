@@ -208,6 +208,75 @@ return [
             'can'  => 'church',
         ],
 
+
+
+
+
+
+
+
+
+        //CHURCH
+        [
+            'text'        => 'Dashboard',
+            'url'         => 'church/dashboard',
+            'icon'        => 'dashboard',
+            'label_color' => 'success',
+            'can'  => 'member',
+        ],
+        [
+            'text'        => 'Carteirinhas',
+            'url'         => 'church/card',
+            'icon'        => 'id-card-o',
+            'label_color' => 'success',
+            'can'  => 'member',
+        ],
+        [
+            'text'        => 'Eventos',
+            'url'         => 'church/event',
+            'icon'        => 'calendar',
+            'label_color' => 'success',
+            'can'  => 'member',
+        ],
+        [
+            'text'        => 'Inscrições',
+            'url'         => 'church/inscription',
+            'icon'        => 'check-square-o',
+            'label_color' => 'success',
+            'can'  => 'member',
+        ],
+        [
+            'text'        => 'Células',
+            'url'         => 'church/cell',
+            'icon'        => 'puzzle-piece',
+            'label_color' => 'success',
+            'can'  => 'member',
+        ],
+        [
+            'text'        => 'Documentos',
+            'url'         => 'church/doc',
+            'icon'        => 'file',
+            'label_color' => 'success',
+            'can'  => 'member',
+        ],
+        [
+            'text'        => 'Finanças',
+            'url'         => 'church/finance',
+            'icon'        => 'money',
+            'label_color' => 'success',
+            'can'  => 'member',
+        ],
+        [
+            'text'        => 'Suporte',
+            'url'         => 'church/support',
+            'icon'        => 'life-ring',
+            'label_color' => 'success',
+            'can'  => 'member',
+        ],
+
+
+
+
         /*
         [
             'text'        => 'Pages',

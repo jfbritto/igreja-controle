@@ -936,5 +936,14 @@ class MemberController extends Controller
     }
 
 
+
+
+
+    public function index_member()
+    {
+        
+        return view('member.home');
+    }
+
 }
 

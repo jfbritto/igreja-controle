@@ -441,8 +441,3 @@
 </body>
 
 </html>
-clock = $('.clock').FlipClock({
-    clockFace: 'MinuteCounter'
-});
-
-clock.setTime(60*100-5);

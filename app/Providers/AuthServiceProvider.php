@@ -37,7 +37,17 @@ class AuthServiceProvider extends ServiceProvider
  
          Gate::define('church', function ($user) {
  
-            if(!is_null(auth()->user()->idChurch_fk))
+            if(!is_null(auth()->user()->idChurch_fk) && (auth()->user()->isMember == false))
+                return true;
+            
+ 
+            return false;
+ 
+         });
+
+         Gate::define('member', function ($user) {
+ 
+            if(!is_null(auth()->user()->idChurch_fk) && (auth()->user()->isMember == true))
                 return true;
             
  

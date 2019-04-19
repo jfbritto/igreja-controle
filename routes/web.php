@@ -143,6 +143,18 @@ $this->group(['middleware' => 'auth'], function(){
         $this->get('/file/destroy/{file}', 'Doc\FileController@destroy')->name('doc.file.destroy');
     });
 
+    
+    //MEMBRO
+    $this->group(['middleware' => 'member', 'prefix' => 'member'], function(){
+
+        $this->get('/home', 'Member\MemberController@index_member')->name('home');
+
+        //MENU LATERAL
+        // $this->get('/dashboard', 'Admin\AdminController@index')->name('admindash');
+        // $this->get('/church', 'Church\ChurchController@index')->name('church');
+
+    });
+
 
 });
 
