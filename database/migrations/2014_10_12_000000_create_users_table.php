@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->date('birth')->nullable();
             $table->string('sex', 20)->nullable();
             $table->string('email', 50);
-            $table->string('password', 60)->default('$2y$10$1OYGSQJWOw9ORQUVQL0ZGu/JML3G/f6wLVad6NC0ylG7B3OsP4YkO');
+            $table->string('password', 60)->default('$2y$12$pgHZ6uBdKd0DfodY1gt.5.sMrtztf1IPk/pGU/d6i2osE3P/BErw6');
             $table->string('cpf', 20);
             $table->string('phone', 50)->nullable();
             $table->string('avatar', 100)->nullable();

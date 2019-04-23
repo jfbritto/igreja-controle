@@ -93,7 +93,6 @@ class CellController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         if(!$result)
@@ -191,7 +190,6 @@ class CellController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
 
@@ -226,7 +224,6 @@ class CellController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
 

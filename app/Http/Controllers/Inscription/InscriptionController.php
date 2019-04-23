@@ -60,7 +60,6 @@ class InscriptionController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         
@@ -124,7 +123,6 @@ class InscriptionController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
 

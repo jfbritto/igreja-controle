@@ -153,7 +153,6 @@ class ChurchController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         if(!$result)
@@ -262,7 +261,6 @@ class ChurchController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         if(!$result)
@@ -294,7 +292,6 @@ class ChurchController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         if(!$result)
@@ -325,7 +322,6 @@ class ChurchController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
 
@@ -355,7 +351,6 @@ class ChurchController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         if(!$result)
@@ -437,7 +432,6 @@ class ChurchController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         if(!$result)

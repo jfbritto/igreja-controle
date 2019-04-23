@@ -20,7 +20,9 @@ class FolderController extends Controller
     {
         $folders = auth()->user()->church->folders()->where('isDeleted', '=', false)->get();
 
-        return view('church.doc.home', ['folders' => $folders]);
+        $size = auth()->user()->church()->join('doc_folders', 'doc_folders.idChurch_fk', '=', 'churches.id')->join('doc_files', 'doc_files.idFolder_fk', '=', 'doc_folders.id')->sum('file_size');
+
+        return view('church.doc.home', ['folders' => $folders, 'size' => $size]);
     }
 
     /**
@@ -76,7 +78,6 @@ class FolderController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         if(!$result)
@@ -98,6 +99,8 @@ class FolderController extends Controller
     public function show(DocFolder $folder)
     {
         if($folder->church->id != auth()->user()->idChurch_fk) abort('401');
+
+        
 
         return view('church.doc.show', ['folder' => $folder]);
     }
@@ -157,7 +160,6 @@ class FolderController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         if(!$result)
@@ -197,7 +199,6 @@ class FolderController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
 

@@ -24,6 +24,7 @@ class CreateDocFilesTable extends Migration
             $table->string('name', 50);
             $table->text('description')->nullable();
             $table->string('file_name', 100)->nullable();
+            $table->string('file_size', 50)->nullable();
 
             $table->timestamps();
         });

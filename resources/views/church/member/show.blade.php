@@ -28,6 +28,7 @@
             <div class="box-header with-border text-right">
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <a href="{{ url()->previous() }}" class='btn btn-default' title="Voltar"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+                    <a data-member="{{$member->id}}" href="#" class='btn btn-primary resetPassword' title="Resetar senha"><i class="fa fa-unlock-alt" aria-hidden="true"></i></a>
                     <a href="{{ url('church/member/edit', $member->id) }}" class='btn btn-warning' title="Editar membro"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                     <a data-member="{{$member->id}}" class='btn btn-danger deletMember' title="Deletar membro"><i class="fa fa-trash" aria-hidden="true"></i></a>
                 </div>
@@ -380,6 +381,26 @@
                 }).then((result) => {
                   if (result.value) {
                         window.location = '/church/member/destroy/'+member;
+                  }
+                })
+            })
+
+            $(".resetPassword").on('click', function(){
+
+                var member = $(this).attr('data-member');
+
+                Swal.fire({
+                  title: 'Tem certeza?',
+                  text: "A senha será resetada para 'igreja123456'",
+                  type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Sim, resetar!',
+                  cancelButtonText: 'não',
+                }).then((result) => {
+                  if (result.value) {
+                        window.location = '/church/member/reset-password/'+member;
                   }
                 })
             })

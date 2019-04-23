@@ -18,7 +18,8 @@ class DocFile extends Model
         'isDeleted',
         'name',
         'description',
-        'file_name'
+        'file_name',
+        'file_size'
     ];
 
     public function folder()

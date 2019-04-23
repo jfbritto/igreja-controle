@@ -105,6 +105,7 @@ $this->group(['middleware' => 'auth'], function(){
         $this->post('/member/edit/{user}', 'Member\MemberController@update')->name('member.update');
         $this->get('/member/pdf', 'Member\MemberController@member_pdf')->name('member.pdf');
         $this->get('/member/destroy/{user}', 'Member\MemberController@destroy')->name('member.destroy');
+        $this->get('/member/reset-password/{user}', 'Member\MemberController@reset_password')->name('member.reset_password');
         $this->get('/member/inactivate/{user}', 'Member\MemberController@inactivate')->name('member.inactivate');
         $this->get('/member/activate/{user}', 'Member\MemberController@activate')->name('member.activate');
         $this->get('/member/validate/{user}', 'Member\MemberController@validate_member')->name('member.validate');

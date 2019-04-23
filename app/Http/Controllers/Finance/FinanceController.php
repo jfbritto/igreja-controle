@@ -159,7 +159,6 @@ class FinanceController extends Controller
 
             $result = null;
             
-            abort('500');
         }
         
 

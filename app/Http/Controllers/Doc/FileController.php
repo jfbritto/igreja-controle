@@ -76,6 +76,8 @@ class FileController extends Controller
      
             // Define finalmente o nome
             $nameFile = "{$name}.{$extension}";
+
+            $file_size = $request->doc->getsize();
      
             // Faz o upload:
             $upload = $request->doc->storeAs('docs', $nameFile);
@@ -85,6 +87,7 @@ class FileController extends Controller
 
             $request_file['idFolder_fk'] = $folder->id;
             $request_file['file_name'] = $nameFile;
+            $request_file['file_size'] = $file_size;
 
             $result = DocFile::create($request_file);
 
@@ -100,7 +103,6 @@ class FileController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         if(!$result)
@@ -173,7 +175,6 @@ class FileController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         if(!$result)

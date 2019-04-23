@@ -32,7 +32,8 @@ class User extends Authenticatable
         'isPendent',
         'info',
         'baptismDate',
-        'memberSince'
+        'memberSince',
+        'password'
     ];
 
     /**

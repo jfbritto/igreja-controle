@@ -61,6 +61,7 @@
             </tbody>
         </table>
 
+
 <!-- 
         <ul class="list-group">
             
@@ -97,6 +98,12 @@
 
     </div>
 
+</div>
+
+<div class="box box-primary">
+    <div class="box-body">
+        <span>{{$size}}</span>
+    </div>
 </div>
 
 @endsection

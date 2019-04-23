@@ -116,7 +116,6 @@ class EventController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         if(!$result)
@@ -200,7 +199,6 @@ class EventController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
 
@@ -235,7 +233,6 @@ class EventController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
 

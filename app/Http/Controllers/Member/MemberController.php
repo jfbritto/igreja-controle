@@ -140,7 +140,6 @@ class MemberController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         if(!$result)
@@ -196,6 +195,7 @@ class MemberController extends Controller
             'phone'         => 'required',
             'info'          => 'nullable',
             'avatar'        => 'nullable | file | mimes:jpg,png,jpeg,bmp | max:3072',
+            'password'      => 'sometimes|required|confirmed',
 
             'cep'           => 'required | max:9',
             'idState_fk'    => 'required | exists:states,id',
@@ -216,6 +216,7 @@ class MemberController extends Controller
                     'number' => 'número',
                     'neighborhood' => 'bairro',
                     'complement' => 'complemento',
+                    'password'  => 'nova senha'
                 ]);
 
         if($validator->fails())
@@ -262,6 +263,9 @@ class MemberController extends Controller
                 'memberSince'   => $request->memberSince,
             ];
 
+            if ( ($user->id == auth()->user()->id) and ($request->password != null) ) {
+                $request_user['password'] = bcrypt($request->password);
+            }
 
             $address->update($request_address);
             $result = $user->update($request_user);
@@ -273,7 +277,6 @@ class MemberController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         if(!$result)
@@ -305,7 +308,6 @@ class MemberController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         if(!$result)
@@ -318,6 +320,40 @@ class MemberController extends Controller
                         ->with('success', 'Membro deletado com sucesso!');
 
     }
+
+
+    public function reset_password(User $user)
+    {
+
+        if($user->church->id != auth()->user()->idChurch_fk) abort('401');
+
+        $result = null;
+
+        DB::beginTransaction();
+        try{
+
+            $updates = ['password' => bcrypt('igreja123456')];
+            $result = $user->update($updates);
+         
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+
+            $result = null;
+            
+        }
+
+        if(!$result)
+            return redirect()
+                        ->back()
+                        ->with('error', 'Erro ao resetar senha!');
+        else
+            return redirect()
+                        ->route('member.show', $user->id)
+                        ->with('success', 'Senha resetada com sucesso!');
+
+    }
+
 
     public function inactivate(User $user)
     {
@@ -337,7 +373,6 @@ class MemberController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         if(!$result)
@@ -368,7 +403,6 @@ class MemberController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         if(!$result)
@@ -400,7 +434,6 @@ class MemberController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         if(!$result)
@@ -535,7 +568,6 @@ class MemberController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         if(!$result)
@@ -661,7 +693,6 @@ class MemberController extends Controller
 
             $result = null;
             
-            abort('500');
         }   
 
         if(!$result)
@@ -693,7 +724,6 @@ class MemberController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         if(!$result)
@@ -723,7 +753,6 @@ class MemberController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         if(!$result)
@@ -754,7 +783,6 @@ class MemberController extends Controller
 
             $result = null;
             
-            abort('500');
         }
 
         if(!$result)

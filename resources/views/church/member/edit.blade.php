@@ -212,32 +212,46 @@
     </div>    
 </div>
 
-@if(!$member->isMember)
+@if($member->id == auth()->user()->id)
 
-<!-- <div class="row">
+<div class="row">
     <div class="col-md-12">
         <div class="box box-primary">
               <div class="box-body">
                 <div class='row'>
-                    <div class='col-md-12'>
+                    <div class='col-md-6'>
 
                         <div class="form-group">
-                            <label for="info">Informações adicionais</label>
+                            <label for='password'>Nova senha</label>  
 
                             <div class="input-group">
                                 <div class="input-group-addon">
-                                    <i class="fa fa-align-center"></i>
+                                    <i class="fa fa-lock"></i>
                                 </div>
-                                <textarea id='info' name='info' class="form-control">{{$member->info}}</textarea>
+                                <input id='password' name='password' minlength="6" type="password" class="form-control">
                             </div>
-
                         </div>
+
+                    </div>
+                    <div class='col-md-6'>
+
+                        <div class="form-group">
+                            <label for='password_confirmation'>Confirmar nova senha</label>  
+
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-lock"></i>
+                                </div>
+                                <input id="password_confirmation" name='password_confirmation' minlength="6" type="password" class="form-control">
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>    
-</div> -->
+</div>
 
 @endif
 
