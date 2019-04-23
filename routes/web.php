@@ -31,6 +31,7 @@ $this->group(['middleware' => 'auth'], function(){
         //MENU LATERAL
         $this->get('/dashboard', 'Admin\AdminController@index')->name('admindash');
         $this->get('/church', 'Church\ChurchController@index')->name('church');
+        $this->get('/support', 'Support\SupportController@admin_index')->name('support');
 
         //IGREJA
         $this->get('/church/add', 'Church\ChurchController@create')->name('church.create');
@@ -54,6 +55,9 @@ $this->group(['middleware' => 'auth'], function(){
         $this->get('/church/user/inactivate/{user}', 'Member\MemberController@inactivate_admin')->name('church.user.inactivate');
         $this->get('/church/user/activate/{user}', 'Member\MemberController@activate_admin')->name('church.user.activate');
         $this->get('/church/user/destroy/{user}', 'Member\MemberController@destroy_admin')->name('church.user.destroy');
+
+        //SUPORTE
+
     });
 
     //IGREJA

@@ -32,6 +32,8 @@
                 <tr>
                     <th>Pasta</th>
                     <th class="hidden-xs hidden-sm">Descrição</th>
+                    <th class="hidden-xs hidden-sm">Arquivos</th>
+                    <th class="hidden-xs hidden-sm">Tamanho</th>
                     <th></th>
                 </tr>
             </thead>
@@ -40,6 +42,8 @@
                 <tr>
                     <td style='vertical-align:middle'>{{ $folder->name }}</td>
                     <td class='hidden-xs hidden-sm' style='vertical-align:middle'>{{ $folder->description }}</td>
+                    <td class='hidden-xs hidden-sm' style='vertical-align:middle'>{{ $folder->files()->count() }}</td>
+                    <td class='hidden-xs hidden-sm' style='vertical-align:middle'>{{ number_format(($folder->files()->sum('file_size')/24)/24, 2, ',', '.') }} MB</td>
                     <td style='vertical-align:middle; width: 150px' class='text-right'>
                         <div class="btn-group" role="group" aria-label="Basic example">
 
@@ -101,8 +105,11 @@
 </div>
 
 <div class="box box-primary">
+    <div class="box-header">
+        Total de arquivos em MB
+    </div>
     <div class="box-body">
-        <span>{{$size}}</span>
+        <span>{{ number_format(($size/24)/24, 2, ',', '.') }} MB</span>
     </div>
 </div>
 

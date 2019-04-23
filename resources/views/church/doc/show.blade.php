@@ -66,14 +66,17 @@
 							@endif
 
 					</div>
-					<div class="col-md-4 col-xs-3" style="height: 34px; line-height: 34px;">
+					<div class="col-md-3 col-xs-4" style="height: 34px; line-height: 34px;">
 						{{$file->name}}
 					</div>
-					<div class="col-md-5 col-xs-3" style="height: 34px; line-height: 34px;">
+					<div class="col-md-3 hidden-xs" style="height: 34px; line-height: 34px;">
 						{{$file->description}}
 					</div>
+					<div class="col-md-3 hidden-xs" style="height: 34px; line-height: 34px;">
+						{{number_format(($file->file_size/24)/24, 2, ',', '.')}} MB
+					</div>
 					
-					<div class="col-md-2 col-xs-4 text-right">
+					<div class="col-md-2 col-xs-5 text-right">
 						<a target="_blank" href="{{ url('storage/docs/'.$file->file_name) }}" class="btn btn-primary" title="Baixar arquivo"><i class="fa fa-download" aria-hidden="true"></i></a>
 						<a data-file='{{$file->id}}' href="#" class="btn btn-danger deletFile" title="Deletar arquivo"><i class="fa fa-trash" aria-hidden="true"></i></a>
 					</div>

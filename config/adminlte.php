@@ -125,6 +125,13 @@ return [
             'label_color' => 'success',
             'can'  => 'admin',
         ],
+        [
+            'text'        => 'Suporte',
+            'url'         => 'admin/support',
+            'icon'        => 'life-ring',
+            'label_color' => 'success',
+            'can'  => 'admin',
+        ],
 
 
 

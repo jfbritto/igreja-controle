@@ -76,4 +76,22 @@ class SupportController extends Controller
     {
         //
     }
+
+
+
+
+
+
+
+
+
+    public function admin_index()
+    {
+        $messages_open = Support::where('isOpen', '=', true)->get();
+
+        $messages_close = Support::where('isOpen', '=', false)->get();
+
+        return view('admin.support.home', ['messages_open' => $messages_open, 'messages_close' => $messages_close]);
+    }
+
 }
