@@ -15,6 +15,7 @@ class Support extends Model
         'idChurch_fk',
         'idUser_fk',
         'isOpen',
+        'isRead',
         'subject',
         'message',
         'type',

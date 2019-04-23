@@ -92,39 +92,44 @@
                         </ul>
                     </li> -->
                     <!-- /.messages-menu -->
-                    @if( count(auth()->user()->supports()->where('isOpen', '=', true)->get()) > 0 )
-                
-                        <!-- Notifications Menu -->
-                        <li class="dropdown notifications-menu">
+                    @if( auth()->user()->isAdmin == false )
 
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-bell-o"></i>
-                            <span class="label label-warning">{{count(auth()->user()->supports)}}</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                            <li class="header">Você tem {{count(auth()->user()->supports)}} notificações</li>
-                            <li>
+                        @if( count(auth()->user()->supports()->where('answer', '!=', null)->get()) > 0 )
+                    
+                            <!-- Notifications Menu -->
+                            <li class="dropdown notifications-menu">
 
-                                <ul class="menu">
-                                    @foreach(auth()->user()->supports as $sup)
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-envelope text-aqua"></i> {{$sup->subject}}
-                                            </a>
-                                        </li>
-                                    @endforeach
-<!--                                 <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-bell-o"></i>
+                                <span class="label label-warning">{{count(auth()->user()->supports()->where('answer', '!=', null)->get())}}</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                <li class="header">Você tem {{count(auth()->user()->supports()->where('answer', '!=', null)->get())}} notificações</li>
+                                <li>
 
-                                    <a href="#">
-                                    <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                    </a>
-                                </li> -->
+                                    <ul class="menu">
+                                        @foreach(auth()->user()->supports()->where('answer', '!=', null)->get() as $sup)
+                                            <li>
+                                                <a href="{{route('support.show', $sup->id)}}">
+                                                    <i class="fa fa-envelope text-aqua"></i> {{$sup->subject}}
+                                                </a>
+                                            </li>
+                                        @endforeach
+    <!--                                 <li>
 
+                                        <a href="#">
+                                        <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                        </a>
+                                    </li> -->
+
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#">View all</a></li>
                                 </ul>
                             </li>
-                            <li class="footer"><a href="#">View all</a></li>
-                            </ul>
-                        </li>
+
+                        @endif
+
 
                     @endif
                     <!-- Tasks Menu -->

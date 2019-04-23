@@ -19,6 +19,7 @@ class CreateSupportsTable extends Migration
             $table->integer('idChurch_fk');
             $table->integer('idUser_fk');
             $table->integer('isOpen')->default(true);
+            $table->integer('isRead')->default(false);
             
             $table->string('subject', 100)->nullable();
             $table->text('message')->nullable();
