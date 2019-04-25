@@ -894,6 +894,19 @@ class MemberController extends Controller
 
         // if($validator->fails())
 
+        $church = Church::where('hash', $hash)->first();
+
+
+        $verify_exists = User::where('email', $request->email)
+                                                        ->where('idChurch_fk', $church->id)
+                                                        ->where('isDeleted', false)
+                                                        ->count();                
+
+        if($verify_exists)
+            return redirect()
+                        ->back()
+                        ->withInput()
+                        ->with('error', 'Email já está sendo usado por outro membro desta igreja!');
 
         $nameFile = null;
         if ( $request->hasfile('avatar') && $request->file('avatar')->isValid() ) {
@@ -908,7 +921,6 @@ class MemberController extends Controller
 
 
 
-        $church = Church::where('hash', $hash)->first();
 
         $request_address = [
             'cep'           => $request->cep,
