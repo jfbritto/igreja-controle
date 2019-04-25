@@ -9,10 +9,12 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-    @laracropCss(true)
-    
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+    <!-- Laracrop -->
+    <link rel="stylesheet" href="{{ asset('vendor/laracrop/jCrop/css/Jcrop.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/laracrop/jCrop/css/Jcrop.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/laracrop/jCrop/css/demos.css') }}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/font-awesome/css/font-awesome.min.css') }}">
     <!-- Ionicons -->
@@ -38,7 +40,7 @@
     @endif
 
     <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
-    
+
     @yield('adminlte_css')
 
     <!--[if lt IE 9]>
@@ -49,7 +51,7 @@
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-    
+
 
 </head>
 <body class="hold-transition @yield('body_class')">
@@ -61,7 +63,9 @@
 
 <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
 
-@laracropJs(true)
+<script src="{{ asset('vendor/laracrop/jQuery/jquery-2.2.3.min.js') }}"></script>
+<script src="{{ asset('vendor/laracrop/jCrop/js/Jcrop.js') }}"></script>
+<script src="{{ asset('vendor/laracrop/laracrop.js') }}"></script>
 
 <!-- <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script> -->
 <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.slimscroll.min.js') }}"></script>
