@@ -142,7 +142,7 @@ class InscriptionController extends Controller
     {
         $inscriptions = $event->inscriptions()->where('idChurch_fk', '=', auth()->user()->idChurch_fk)->get();
     
-        return \PDF::loadView('church.inscription.pdf.inscriptions', ['inscripts' => $inscriptions])->setPaper('a4', 'landscape')->stream();
+        return \PDF::loadView('church.inscription.pdf.inscriptions', ['inscriptions' => $inscriptions])->setPaper('a4', 'landscape')->stream();
     }
 
 
