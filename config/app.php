@@ -178,8 +178,8 @@ return [
         JeroenNoten\LaravelAdminLte\ServiceProvider::class,
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        Arisharyanto\Laracrop\LaracropServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
+        // Arisharyanto\Laracrop\LaracropServiceProvider::class,
+        // Intervention\Image\ImageServiceProvider::class,
 
     ],
 
