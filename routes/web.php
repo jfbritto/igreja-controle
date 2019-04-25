@@ -6,6 +6,7 @@
 ******************/
 // Route::get('/login', 'Site\SiteController@index')->name('login');
 Route::post('/login', 'Auth\LoginController@post_autenticar')->name('login.post');
+Route::post('/login/{church}', 'Auth\LoginController@post_autenticar_member')->name('login.member.post');
 
 
 

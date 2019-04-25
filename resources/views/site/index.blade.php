@@ -69,9 +69,9 @@
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#clients">Igrejas</a>
           </li>
-          <li class="nav-item">
+<!--           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#plans">Planos</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#login">Login</a>
           </li>
@@ -277,7 +277,7 @@
 
 
   <!-- Login Section -->
-  <section id="plans" class="plans-section d-flex bg-light">
+<!--   <section id="plans" class="plans-section d-flex bg-light">
     <div class="container my-auto">
 
       <div class="text-center">
@@ -297,7 +297,7 @@
   </section>
 
 
-
+ -->
   
 
 
@@ -307,7 +307,7 @@
       <div class="row">
         <div class="col-md-10 col-lg-8 mx-auto text-center">
 
-            <h2 class="text-white-50 mx-auto mt-2 mb-5">Login</h2>
+            <h2 class="text-white-50 mx-auto mt-2 mb-5">Login <br> Administração da igreja</h2>
 
             <div class="messages">
                 @include('includes.alerts')

@@ -48,7 +48,7 @@ class LoginController extends Controller
     public function post_autenticar(Request $request)
     {
 
-        $user = User::where(['email'=>$request->email],['senha'=>bcrypt($request->password)])->get();
+        $user = User::where(['email'=>$request->email],['senha'=>bcrypt($request->password)],['isMember', false])->get();
 
 
         if(!$user->first())
@@ -91,8 +91,8 @@ class LoginController extends Controller
                 if(!is_null(auth()->user()->idChurch_fk) && (auth()->user()->isMember == false))
                     return redirect()->route('dashboard');
 
-                if(!is_null(auth()->user()->idChurch_fk) && (auth()->user()->isMember == true) )
-                    return redirect()->route('home');
+                // if(!is_null(auth()->user()->idChurch_fk) && (auth()->user()->isMember == true) )
+                //     return redirect()->route('home');
                 
                 
             }
@@ -100,6 +100,45 @@ class LoginController extends Controller
         }
 
         return redirect(route('login').'#login')->with('error', 'E-mail ou senha incorretos!');
+
+        
+    }
+
+
+    public function post_autenticar_member(Request $request, Church $church)
+    {
+
+        $user = User::where(['email'=>$request->email],['senha'=>bcrypt($request->password)],['idChurch_fk'=>$church->id])->get();
+
+
+        if (!$user->isEmpty()) {
+
+            if(!$user->first()->isMember)
+               return redirect(route('login').'/'.$church->site_url.'#login')->with('error', 'Usuário não é membro!');   
+
+            if(!$user->first())
+               return redirect(route('login').'/'.$church->site_url.'#login')->with('error', 'E-mail ou senha incorretos!');     
+
+
+            if ($user->first()->isDeleted == true)
+                return redirect(route('login').'/'.$church->site_url.'#login')->with('error', 'Membro deletado! verifique sua situação cadastral com a administração da igreja.');
+
+            if ($user->first()->isActive == false)
+                return redirect(route('login').'/'.$church->site_url.'#login')->with('error', 'Membro inativo! verifique sua situação cadastral com a administração da igreja.');
+            
+
+            $credentials = $request->only(['email', 'password']);
+            if(auth()->attempt($credentials))
+            {
+
+                if(!is_null(auth()->user()->idChurch_fk) && (auth()->user()->isMember == true) )
+                    return redirect()->route('home');
+                
+            }
+
+        }
+
+        return redirect(route('login').'/'.$church->site_url.'#login')->with('error', 'E-mail ou senha incorretos!');
 
         
     }

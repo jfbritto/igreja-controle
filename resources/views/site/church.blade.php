@@ -58,12 +58,12 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
+<!--           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#about">Sobre</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#projects">Serviços</a>
-          </li>
+          </li> -->
+<!--           <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#projects">Localização</a>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#clients">Células</a>
           </li>
@@ -83,14 +83,14 @@
     <div class="container d-flex h-100 align-items-center">
       <div class="mx-auto text-center">
         <h1 class="mx-auto my-0 text-uppercase">{{$church->name}}</h1>
-        <h2 class="text-white-50 mx-auto mt-2 mb-5">Não apenas um sistema, mas sim um novo conceito de organização.</h2>
-        <a href="#login" class="btn btn-primary js-scroll-trigger">Efetuar login</a>
+        <!-- <h2 class="text-white-50 mx-auto mt-2 mb-5">Não apenas um sistema, mas sim um novo conceito de organização.</h2> -->
+        <!-- <a href="#login" class="btn btn-primary js-scroll-trigger">Efetuar login</a> -->
       </div>
     </div>
   </header>
 
   <!-- About Section -->
-  <section id="about" class="about-section text-center d-flex">
+<!--   <section id="about" class="about-section text-center d-flex">
     <div class="container my-auto">
       <div class="row">
         <div class="col-lg-8 mx-auto mx-auto">
@@ -100,107 +100,24 @@
                                     Assim surgiu nosso sistema, onde tudo fica mais fácil e transparente.</p>
         </div>
       </div>
-      <!-- <img src="img/ipad.png" class="img-fluid" alt=""> -->
+      <img src="img/ipad.png" class="img-fluid" alt="">
     </div>
   </section>
-
+ -->
   <!-- Projects Section -->
-  <section id="projects" class="projects-section bg-light">
+<!--   <section id="projects" class="projects-section bg-light">
     <div class="container">
 
-      <!-- Featured Project Row -->
-<!--       <div class="row align-items-center no-gutters mb-4 mb-lg-5">
-        <div class="col-xl-8 col-lg-7">
-          <img class="img-fluid mb-3 mb-lg-0" src="img/aegee.jpg" alt="">
-        </div>
-        <div class="col-xl-4 col-lg-5">
-          <div class="featured-text text-center text-lg-left">
-            <h4>Controle de membros</h4>
-            <p class="text-black-50 mb-0">Cadastre ou simplesmente envie o link para os próprios membros preencherem seus dados, tornando todo o controle muito mais fácil!</p>
-          </div>
-        </div>
-      </div> -->
+      <h2 class="text-black-50 mx-auto mt-2 mb-5 text-center">Localização</h2>
 
-      <h2 class="text-black-50 mx-auto mt-2 mb-5 text-center">Serviços</h2>
-
-      <!-- Project One Row -->
-      <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
-        <div class="col-lg-6">
-          <img class="img-fluid" src="img/aegee.jpg" alt="">
-        </div>
-        <div class="col-lg-6">
-          <div class="bg-black text-center h-100 project">
-            <div class="d-flex h-100">
-              <div class="project-text w-100 my-auto text-center text-lg-left">
-                <h4 class="text-white">Controle de membros</h4>
-                <p class="mb-0 text-white-50 text-justify">Cadastre ou simplesmente envie o link para os próprios membros preencherem seus dados, tornando todo o controle muito mais fácil!</p>
-                <hr class="d-none d-lg-block mb-0 ml-0">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project Two Row -->
-      <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
-        <div class="col-lg-6">
-          <img class="img-fluid" src="img/event.jpg" alt="">
-        </div>
-        <div class="col-lg-6 order-lg-first">
-          <div class="bg-black text-center h-100 project">
-            <div class="d-flex h-100">
-              <div class="project-text w-100 my-auto text-center text-lg-right">
-                <h4 class="text-white">Agenda</h4>
-                <p class="mb-0 text-white-50 text-justify">Saiba quando, onde e em qual horário serão os próximos compromissos!</p>
-                <hr class="d-none d-lg-block mb-0 mr-0">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project One Row -->
-      <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
-        <div class="col-lg-6">
-          <img class="img-fluid" src="img/retiro.jpg" alt="">
-        </div>
-        <div class="col-lg-6">
-          <div class="bg-black text-center h-100 project">
-            <div class="d-flex h-100">
-              <div class="project-text w-100 my-auto text-center text-lg-left">
-                <h4 class="text-white">Eventos</h4>
-                <p class="mb-0 text-white-50 text-justify">Abandone o papel e caneta! com apenas um link todos os participantes poderão realizar suas inscrições nos retiros e caravanas!</p>
-                <hr class="d-none d-lg-block mb-0 ml-0">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <!-- Project Four Rows -->
-      <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
-        <div class="col-lg-6">
-          <img class="img-fluid" src="img/financa.jpg" alt="">
-        </div>
-        <div class="col-lg-6 order-lg-first">
-          <div class="bg-black text-center h-100 project">
-            <div class="d-flex h-100">
-              <div class="project-text w-100 my-auto text-center text-lg-right">
-                <h4 class="text-white">Controle de caixa</h4>
-                <p class="mb-0 text-white-50 text-justify">Organize as finanças de sua igreja mais facilmente. Deixe que a gente te mostre o quanto pode ser simples!</p>
-                <hr class="d-none d-lg-block mb-0 mr-0">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+ 
+      <img src="https://maps.googleapis.com/maps/api/staticmap?center=-22.912869, -43.228963&zoom=15&size=250x250">
 
     </div>
   </section>
 
 
-
+ -->
 
 
   <!-- Login Section -->
@@ -238,12 +155,12 @@
       <div class="row">
         <div class="col-md-10 col-lg-8 mx-auto text-center">
 
-            <h2 class="text-white-50 mx-auto mt-2 mb-5">Login</h2>
+            <h2 class="text-white-50 mx-auto mt-2 mb-5">Login <br> Área do membro</h2>
 
             <div class="messages">
                 @include('includes.alerts')
             </div>
-            <form method="POST" action="{{ route('login.post') }}" class="form-inline d-flex">
+            <form method="POST" action="{{ route('login.member.post', $church->id) }}" class="form-inline d-flex">
                 @csrf
                 <input type="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" name="email" placeholder="Informe seu email" style="text-transform: none;">
                 <input type="password" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" name="password" placeholder="Informe a senha" style="text-transform: none;">
