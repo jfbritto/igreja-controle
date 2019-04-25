@@ -86,7 +86,7 @@
         
 
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3" style="display: none;">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="box box-default box-solid">
@@ -96,7 +96,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-12">
                 
                 <div class="row">
 
