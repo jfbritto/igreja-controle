@@ -168,6 +168,7 @@ class InscriptionController extends Controller
 
         $verify_exists = EventRegistration::where('email', $request->email)
                                                                 ->where('idChurch_fk', $event->idChurch_fk)
+                                                                ->where('idEvent_fk', $event->id)
                                                                 ->where('isDeleted', false)
                                                                 ->count();                
 
@@ -175,7 +176,7 @@ class InscriptionController extends Controller
             return redirect()
                         ->back()
                         ->withInput()
-                        ->with('error', 'Email já está sendo usado por outro inscrito!');
+                        ->with('error', 'Email já está cadastrado para este evento!');
         
         
         $request['idEvent_fk'] = $event->id;
