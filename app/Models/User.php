@@ -59,4 +59,18 @@ class User extends Authenticatable
     {
         return $this->hasMany(\App\Models\Support::class, 'idUser_fk', 'id');
     }
+
+    public function accesses()
+    {
+        return $this->hasMany(\App\Models\AccessLog::Class, 'idUser_fk', 'id');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        User::created(function($access){
+            logger()->stack(['slack'])->info('Usuário ' . $access->user->name . ' cadastrado!');
+        });
+    }
 }

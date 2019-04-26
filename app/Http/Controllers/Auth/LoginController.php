@@ -52,10 +52,10 @@ class LoginController extends Controller
 
 
         if(!$user->first())
-           return redirect(route('login').'#login')->with('error', 'E-mail ou senha incorretos!');     
+           return redirect(route('login').'#login')->with('error', 'E-mail ou senha incorretos!');
 
         if (!$user->first()->isAdmin) {
-            
+
             $church = Church::find($user->first()->idChurch_fk);
             // dd($church->isActive);
         }
@@ -76,15 +76,19 @@ class LoginController extends Controller
 
             if ($user->first()->isActive == false)
                 return redirect(route('login').'#login')->with('error', 'Usuário inativo! verifique sua situação cadastral com a administração do sistema');
-            
+
             // if ($user->first()->isMember == true)
-            //     return redirect()->with('error', 'Para acessar as inforações da sua igreja acesse esse link');    
+            //     return redirect()->with('error', 'Para acessar as inforações da sua igreja acesse esse link');
 
 
 
             $credentials = $request->only(['email', 'password']);
             if(auth()->attempt($credentials))
             {
+                auth()->user()->accesses()->create([
+                    'date_log' => now()
+                ]);
+
                 if(auth()->user()->isAdmin)
                     return redirect()->route('admindash');
 
@@ -93,15 +97,15 @@ class LoginController extends Controller
 
                 // if(!is_null(auth()->user()->idChurch_fk) && (auth()->user()->isMember == true) )
                 //     return redirect()->route('home');
-                
-                
+
+
             }
 
         }
 
         return redirect(route('login').'#login')->with('error', 'E-mail ou senha incorretos!');
 
-        
+
     }
 
 
@@ -114,10 +118,10 @@ class LoginController extends Controller
         if (!$user->isEmpty()) {
 
             if(!$user->first()->isMember)
-               return redirect(route('login').'/'.$church->site_url.'#login')->with('error', 'Usuário não é membro!');   
+               return redirect(route('login').'/'.$church->site_url.'#login')->with('error', 'Usuário não é membro!');
 
             if(!$user->first())
-               return redirect(route('login').'/'.$church->site_url.'#login')->with('error', 'E-mail ou senha incorretos!');     
+               return redirect(route('login').'/'.$church->site_url.'#login')->with('error', 'E-mail ou senha incorretos!');
 
 
             if ($user->first()->isDeleted == true)
@@ -125,7 +129,7 @@ class LoginController extends Controller
 
             if ($user->first()->isActive == false)
                 return redirect(route('login').'/'.$church->site_url.'#login')->with('error', 'Membro inativo! verifique sua situação cadastral com a administração da igreja.');
-            
+
 
             $credentials = $request->only(['email', 'password']);
             if(auth()->attempt($credentials))
@@ -133,14 +137,14 @@ class LoginController extends Controller
 
                 if(!is_null(auth()->user()->idChurch_fk) && (auth()->user()->isMember == true) )
                     return redirect()->route('home');
-                
+
             }
 
         }
 
         return redirect(route('login').'/'.$church->site_url.'#login')->with('error', 'E-mail ou senha incorretos!');
 
-        
+
     }
 
     public function logout()
