@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Igreja Controle - {{$church->name}}')
+@section('title', 'Igreja Controle - '. $church->name)
 
 @section('content_header')
     <h1><i class="fa fa-home" aria-hidden="true"></i> {{$church->name}}</h1>
@@ -13,8 +13,8 @@
 @stop
 
 @section('content')
-    
-    
+
+
 <div class="messages">
     @include('includes.alerts')
 </div>
@@ -31,10 +31,10 @@
                     <a href="{{ route('church.edit', $church->id) }}" class='btn btn-warning' title="Editar membro"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                     <a data-church='{{$church->id}}' class='btn btn-danger deletChurch' title="Deletar membro"><i class="fa fa-trash" aria-hidden="true"></i></a>
                 </div>
-            </div>    
+            </div>
         </div>
     </div>
-</div> 
+</div>
 
 
 <div class="row">
@@ -48,16 +48,16 @@
                 </div>
             </div>
         </div>
-                    
+
     </div>
     <div class="col-md-9">
 
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-primary">
-         
-                    <div class="box-body">        
-                        
+
+                    <div class="box-body">
+
                         <div class="row">
 
                             <div class="col-md-12">
@@ -66,7 +66,7 @@
                                     <div class='col-md-6'>
 
                                         <div class="form-group">
-                                            <label for='name'>Nome</label> 
+                                            <label for='name'>Nome</label>
 
                                             <div class="input-group">
                                                 <div class="input-group-addon">
@@ -78,9 +78,9 @@
 
                                     </div>
                                     <div class='col-md-6'>
-                                
+
                                         <div class="form-group">
-                                            <label for='email'>E-mail</label> 
+                                            <label for='email'>E-mail</label>
 
                                             <div class="input-group">
                                                 <div class="input-group-addon">
@@ -98,7 +98,7 @@
                                     <div class='col-md-6'>
 
                                         <div class="form-group">
-                                            <label for='cnpj'>CNPJ</label> 
+                                            <label for='cnpj'>CNPJ</label>
 
                                             <div class="input-group">
                                                 <div class="input-group-addon">
@@ -110,11 +110,11 @@
 
                                     </div>
 
-                                    
+
                                     <div class='col-md-6'>
-                                    
+
                                         <div class="form-group">
-                                            <label for='phone'>Telefone</label> 
+                                            <label for='phone'>Telefone</label>
 
                                             <div class="input-group">
                                                 <div class="input-group-addon">
@@ -125,7 +125,7 @@
                                         </div>
 
                                     </div>
-                                    
+
                                 </div>
 
                             </div>
@@ -133,16 +133,16 @@
                         </div>
 
                     </div>
-                      
+
                 </div>
 
-            </div>    
+            </div>
 
         </div>
 
     </div>
-</div> 
-            
+</div>
+
 
 
 <div class="row">
@@ -172,7 +172,7 @@
                     <div class='col-md-4'>
 
                         <div class="form-group">
-                            <label for="idState_fk">Estado</label> 
+                            <label for="idState_fk">Estado</label>
 
                             <div class="input-group">
                                 <div class="input-group-addon">
@@ -254,9 +254,9 @@
                         </div>
 
                     </div>
-                    
+
                     <div class='col-md-3'>
-                    
+
                         <div class="form-group">
                             <label for="complement">Complemento</label>
 
@@ -267,7 +267,7 @@
                                 <input type='text' name="complement" id="complement" class="form-control" disabled value="{{$church->address->complement}}">
                             </div>
                         </div>
-                    
+
                     </div>
                 </div>
 
@@ -278,7 +278,7 @@
 
           </div>
 
-    </div>    
+    </div>
 
 </div>
 
@@ -294,7 +294,7 @@
                     <a href="{{ route('church.user.create', $church->id) }}" class='btn btn-success' title="Novo usuário"><i class="fa fa-plus" aria-hidden="true"></i></a>
                 </div>
             </div>
-            
+
             <div class="box-body">
                 <table class='table table-hover table-striped table-condensed' id='table'>
                     <thead>
@@ -319,21 +319,21 @@
                             </td>
                             <td style='vertical-align:middle; width: 160px' class='text-right'>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                
+
                                     @if($user->isDeleted)
                                         Deletado
-                                    @else 
+                                    @else
 
-                                        @if($user->isActive) 
+                                        @if($user->isActive)
                                             <a data-user='{{$user->id}}' class='btn btn-danger inactiveUser' title="Inativar usuário"><i class="fa fa-power-off" aria-hidden="true"></i></a>
-                                        @else 
+                                        @else
                                             <a href="{{ url('admin/church/user/activate', $user->id) }}" class='btn btn-success' title="Ativar usuário"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                                         @endif
 
                                         <a data-user='{{$user->id}}' class='btn btn-danger deletUser' title="Deletar usuário"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                         <a href="{{ url('admin/church/user/edit', $user->id) }}" class='btn btn-warning' title="Editar usuário"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         <a href="{{ url('admin/church/user/show', $user->id) }}" class='btn btn-primary' title="Visualizar usuário"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                
+
                                     @endif
                                 </div>
                             </td>
@@ -349,7 +349,7 @@
 
         </div>
 
-    </div>    
+    </div>
 
 </div>
 
@@ -391,7 +391,7 @@
                     html = '';
 
                     html += '<option value="">Selecione a cidade</option>';
-                    
+
                     for (var i in json) {
                         html += '<option value="'+json[i].id+'">'+json[i].value+'</option>';
                     }
@@ -462,6 +462,6 @@
                 })
             })
         })
-        
-    </script>    
+
+    </script>
 @stop
