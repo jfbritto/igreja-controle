@@ -133,7 +133,7 @@
             <div class="owl-carousel" style="padding-bottom: 50px">
                 @forelse($church->cells as $cell)
                     <a target="_blank" href="https://www.google.com/maps?q=loc:{{ $cell->lat }},{{ $cell->long }}" class="text-center">
-                        <img style="border-radius: 50%; cursor: pointer;" src="@if(!is_null($cell->avatar)){{ url('storage/cells/'.$cell->avatar) }} @else {{ url('storage/cell/default.jpg') }} @endif" alt="{{$cell->title}}" >
+                        <img style="border-radius: 50%; cursor: pointer;" src="@if(!is_null($cell->avatar)){{ url('storage/cells/'.$cell->avatar) }} @else {{ url('storage/cells/default.jpg') }} @endif" alt="{{$cell->title}}" >
                         <span style="color: white">{{$cell->title}}</span>
                     </a>
                 @empty
