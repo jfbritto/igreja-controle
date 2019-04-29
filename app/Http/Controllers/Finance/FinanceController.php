@@ -168,7 +168,7 @@ class FinanceController extends Controller
                         ->with('error', 'Erro ao cadastrar movimentação!');
         else
             return redirect()
-                        ->route('finance')
+                        ->route('finance.create')
                         ->with('success', 'Movimentação cadastrada com sucesso!'); 
     }
 
