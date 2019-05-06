@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <meta name=”keywords” content="igrejacontrole, igreja, igrejas, gestão, gerenciamento, controle, church" />
     <meta property="og:url" content="http://www.igrejacontrole.com.br/" />
     <meta property="type" content="website" />
     <meta property="og:title" content="IGREJA CONTROLE">
@@ -41,7 +41,7 @@
   <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
 
   <link rel="stylesheet" href="{{ asset('css/flipclock.css') }}">
-  
+
   <!-- Site css -->
   <link href="css/site.css" rel="stylesheet">
 
@@ -100,7 +100,7 @@
       <div class="row">
         <div class="col-lg-8 mx-auto mx-auto">
           <h2 class="text-white mb-4">FAÇA TUDO EM UM ÚNICO LUGAR</h2>
-          <p class="text-white-50 text-justify">O IGREJA CONTROLE foi criado a partir da necessidade de ter as informações mais organizadas, 
+          <p class="text-white-50 text-justify">O IGREJA CONTROLE foi criado a partir da necessidade de ter as informações mais organizadas,
                                     de ter o controle necessário sem ser preciso que os dados ficassem salvos em apenas um computador, limitando a mobilidade e o acesso às informações.
                                     Assim surgiu nosso sistema, onde tudo fica mais fácil e transparente.</p>
         </div>
@@ -259,7 +259,7 @@
             <div class="owl-carousel" style="padding-bottom: 50px">
                 @forelse($churches as $key => $church)
                     <!-- <a target="_blank" href="https://www.google.com/maps?q=loc:{{ $church->lat }},{{ $church->long }}" class="text-center"> -->
-                      <a target="_blank" href="{{ env('APP_URL').'/'.$church->site_url }}" class="text-center">  
+                      <a target="_blank" href="{{ env('APP_URL').'/'.$church->site_url }}" class="text-center">
                         <img style="border-radius: 50%; cursor: pointer;" src="@if(!is_null($church->avatar)){{ url('storage/churches/'.$church->avatar) }} @else {{ url('storage/churches/default.jpg') }} @endif" alt="{{$church->name}}" >
                         <span style="color: white">{{$church->name}}</span>
                     </a>
@@ -298,7 +298,7 @@
 
 
  -->
-  
+
 
 
   <!-- Login Section -->
@@ -410,9 +410,9 @@
   <script src="{{ asset('js/flipclock.min.js') }}"></script>
 
   <script type="text/javascript">
-      
+
     $(document).ready(function(){
-          
+
         $(".owl-carousel").owlCarousel({
             loop:true,
             margin:50,
@@ -425,7 +425,7 @@
         });
 
         var clock;
-        
+
         // Instantiate a counter
         clock = new FlipClock($('.clock'), 120, {
             clockFace: 'MinuteCounter',
