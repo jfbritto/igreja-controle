@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name=”keywords” content="igrejacontrole, igreja, igrejas, gestão, gerenciamento, controle, church" />
+    <meta name=”keywords” content="igrejacontrole, igreja, igrejas, gestão, gerenciamento, controle, church, louvor, adoração, culto, jesus, deus, sistema, sisigreja, atos6, sistemadeigreja, management, sistemchurch" />
     <meta property="og:url" content="http://www.igrejacontrole.com.br/" />
     <meta property="type" content="website" />
     <meta property="og:title" content="IGREJA CONTROLE">
@@ -23,7 +23,7 @@
 
     <link rel="icon" href="img/cross.png">
 
-  <title>Igreja Controle</title>
+  <title>Igreja Controle - Sitema de gestão e controle de igrejas</title>
 
 
   <!-- Bootstrap core CSS -->
