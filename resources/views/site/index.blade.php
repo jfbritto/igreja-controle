@@ -23,7 +23,7 @@
 
     <link rel="icon" href="img/cross.png">
 
-  <title>Igreja Controle - Sitema de gestão e controle de igrejas</title>
+  <title>Igreja Controle - Sistema de gestão e controle de igrejas</title>
 
 
   <!-- Bootstrap core CSS -->
