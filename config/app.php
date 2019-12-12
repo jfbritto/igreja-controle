@@ -181,6 +181,8 @@ return [
         Arisharyanto\Laracrop\LaracropServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
 
+        JeroenNoten\LaravelAdminLte\ServiceProvider::class,
+
     ],
 
     /*

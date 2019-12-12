@@ -14,8 +14,8 @@
 @stop
 
 @section('content')
-    
-    
+
+
 <div class="messages">
     @include('includes.alerts')
 </div>
@@ -35,16 +35,16 @@
                 </div>
             </div>
         </div>
-                    
+
     </div>
     <div class="col-md-9">
 
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-primary">
-         
-                    <div class="box-body">        
-                        
+
+                    <div class="box-body">
+
                         <div class="row">
 
                             <div class="col-md-12">
@@ -53,7 +53,7 @@
                                     <div class='col-md-4'>
 
                                         <div class="form-group">
-                                            <label for='name'>Nome</label> 
+                                            <label for='name'>Nome</label>
 
                                             <div class="input-group">
                                                 <div class="input-group-addon">
@@ -65,9 +65,9 @@
 
                                     </div>
                                     <div class='col-md-4'>
-                                
+
                                         <div class="form-group">
-                                            <label for='email'>E-mail</label> 
+                                            <label for='email'>E-mail</label>
 
                                             <div class="input-group">
                                                 <div class="input-group-addon">
@@ -83,7 +83,7 @@
                                     <div class='col-md-4'>
 
                                         <div class="form-group">
-                                            <label for='cnpj'>CNPJ</label> 
+                                            <label for='cnpj'>CNPJ</label>
 
                                             <div class="input-group">
                                                 <div class="input-group-addon">
@@ -97,11 +97,11 @@
 
                                 </div>
                                 <div class='row'>
-                                    
+
                                     <div class='col-md-4'>
-                                    
+
                                         <div class="form-group">
-                                            <label for='phone'>Telefone</label> 
+                                            <label for='phone'>Telefone</label>
 
                                             <div class="input-group">
                                                 <div class="input-group-addon">
@@ -116,7 +116,7 @@
                                     <div class='col-md-4'>
 
                                         <div class="form-group">
-                                            <label for='lat'>Latitude</label> 
+                                            <label for='lat'>Latitude</label>
 
                                             <div class="input-group">
                                                 <div class="input-group-addon">
@@ -131,7 +131,7 @@
                                     <div class='col-md-4'>
 
                                         <div class="form-group">
-                                            <label for='long'>Longitude</label> 
+                                            <label for='long'>Longitude</label>
 
                                             <div class="input-group">
                                                 <div class="input-group-addon">
@@ -142,7 +142,7 @@
                                         </div>
 
                                     </div>
-                                    
+
                                 </div>
 
                             </div>
@@ -150,15 +150,15 @@
                         </div>
 
                     </div>
-                      
+
                 </div>
 
-            </div>    
+            </div>
 
         </div>
 
     </div>
-</div> 
+</div>
 
 
 <div class="box box-primary">
@@ -167,7 +167,7 @@
             <div class='col-md-6'>
 
                 <div class="form-group">
-                    <label for='lat'>Latitude</label> 
+                    <label for='lat'>Latitude</label>
 
                     <div class="input-group">
                         <div class="input-group-addon">
@@ -181,7 +181,7 @@
             <div class='col-md-6'>
 
                 <div class="form-group">
-                    <label for='long'>Longitude</label> 
+                    <label for='long'>Longitude</label>
 
                     <div class="input-group">
                         <div class="input-group-addon">
@@ -223,7 +223,7 @@
         </div>
     </div>
 </div>
-  
+
 
 
 <div class="row">
@@ -253,7 +253,7 @@
                     <div class='col-md-4'>
 
                         <div class="form-group">
-                            <label for="idState_fk">Estado</label> 
+                            <label for="idState_fk">Estado</label>
 
                             <div class="input-group">
                                 <div class="input-group-addon">
@@ -335,9 +335,9 @@
                         </div>
 
                     </div>
-                    
+
                     <div class='col-md-3'>
-                    
+
                         <div class="form-group">
                             <label for="complement">Complemento</label>
 
@@ -348,7 +348,7 @@
                                 <input type='text' name="complement" id="complement" value="{{ $church->address->complement }}" class="form-control">
                             </div>
                         </div>
-                    
+
                     </div>
                 </div>
 
@@ -363,7 +363,7 @@
               </div>
           </div>
 
-    </div>    
+    </div>
 
 </div>
 
@@ -407,7 +407,7 @@
                     html = '';
 
                     html += '<option value="">Selecione a cidade</option>';
-                    
+
                     for (var i in json) {
                         html += '<option value="'+json[i].id+'">'+json[i].value+'</option>';
                     }
@@ -420,6 +420,6 @@
         function openModalPhoto(){
             $("#myModal").modal('show');
         }
-        
-    </script>    
+
+    </script>
 @stop
